@@ -1,7 +1,7 @@
 import { useCH5Boolean } from "../hooks/useCH5Boolean";
 
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
-export type ButtonShape = 'rounded' | 'square' | 'pill';
+export type ButtonShape = 'rectangle' | 'rounded-rectangle' | 'square' | 'rounded-square' | 'pill' | 'circle';
 export type ButtonVariant = 'toggle' | 'momentary';
 
 export interface ButtonProps {
@@ -37,25 +37,48 @@ export interface ButtonProps {
   disabled?: boolean;
 }
 
-const SIZE_CLASSES: Record<ButtonSize, string> = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg',
-  xl: 'px-10 py-5 text-xl'
+// Size classes for rectangular buttons (width auto, padding based)
+const RECT_SIZE_CLASSES: Record<ButtonSize, string> = {
+  sm: 'px-4 py-2 text-sm min-w-[80px]',
+  md: 'px-6 py-3 text-base min-w-[120px]',
+  lg: 'px-8 py-4 text-lg min-w-[160px]',
+  xl: 'px-10 py-5 text-xl min-w-[200px]'
+};
+
+// Size classes for square buttons (equal width and height)
+const SQUARE_SIZE_CLASSES: Record<ButtonSize, string> = {
+  sm: 'w-16 h-16 text-sm',
+  md: 'w-20 h-20 text-base',
+  lg: 'w-24 h-24 text-lg',
+  xl: 'w-32 h-32 text-xl'
+};
+
+// Size classes for circle buttons (equal width and height, rounded-full)
+const CIRCLE_SIZE_CLASSES: Record<ButtonSize, string> = {
+  sm: 'w-16 h-16 text-sm',
+  md: 'w-20 h-20 text-base',
+  lg: 'w-24 h-24 text-lg',
+  xl: 'w-32 h-32 text-xl'
 };
 
 const SHAPE_CLASSES: Record<ButtonShape, string> = {
-  rounded: 'rounded-lg',
-  square: 'rounded-none',
-  pill: 'rounded-full'
+  'rectangle': 'rounded-none',
+  'rounded-rectangle': 'rounded-lg',
+  'square': 'rounded-none',
+  'rounded-square': 'rounded-lg',
+  'pill': 'rounded-full',
+  'circle': 'rounded-full'
 };
+
+// Helper to check if a color is a hex code
+const isHexColor = (color: string) => color.startsWith('#');
 
 export const Button = ({
   commandSignal,
   feedbackSignal,
   variant='toggle',
   size='md',
-  shape='rounded',
+  shape='rounded-rectangle',
   label,
   onLabel="ON",
   offLabel="OFF",
@@ -82,19 +105,50 @@ export const Button = ({
     }
   };
 
-  const colorClass = isOn ? activeClass : inactiveClass;
-  const textColorClass = isOn ? activeTextClass : inactiveTextClass;
+  const bgColor = isOn ? activeClass : inactiveClass;
+  const textColor = isOn ? activeTextClass : inactiveTextClass;
   
-  // Use custom glow color if provided, otherwise default
+  // Build inline styles for all hex colors
+  const buttonStyle: React.CSSProperties = {};
+  
+  // Background color
+  if (isHexColor(bgColor)) {
+    buttonStyle.backgroundColor = bgColor;
+  }
+  
+  // Text color
+  if (isHexColor(textColor)) {
+    buttonStyle.color = textColor;
+  }
+  
+  // Glow/shadow
+  if (glow && isOn) {
+    if (glowColor && isHexColor(glowColor)) {
+      // Custom hex glow color
+      buttonStyle.boxShadow = `0 10px 15px -3px ${glowColor}66, 0 4px 6px -2px ${glowColor}66`;
+    } else if (glowColor && !isHexColor(glowColor)) {
+      // Glowcolor is a CSS color name or rgb/rgba
+      buttonStyle.boxShadow = `0 10px 15px -3px ${glowColor}, 0 4px 6px -2px ${glowColor}`;
+    }
+    // else: use Tailwind shadow class below
+  }
+
+  // Determine which size classes to use based on shape
+  const getSizeClasses = () => {
+    if (shape === 'circle') {
+      return CIRCLE_SIZE_CLASSES[size];
+    } else if (shape === 'square' || shape === 'rounded-square') {
+      return SQUARE_SIZE_CLASSES[size];
+    } else {
+      // rectangle, rounded-rectangle, pill
+      return RECT_SIZE_CLASSES[size];
+    }
+  };
+
+  // Build className with only non-hex Tailwind classes
   const glowClass = glow && isOn 
-    ? glowColor 
-      ? `shadow-lg` 
-      : 'shadow-lg shadow-indigo-500/40' 
+    ? (glowColor ? 'shadow-lg' : 'shadow-lg shadow-indigo-500/40')
     : 'shadow-md';
-  
-  const glowStyle = glow && isOn && glowColor 
-    ? { boxShadow: `0 10px 15px -3px ${glowColor}40, 0 4px 6px -2px ${glowColor}40` }
-    : undefined;
 
   // Determine icon layout based on iconPosition
   const getIconLayout = () => {
@@ -108,18 +162,21 @@ export const Button = ({
       </span>
     );
 
+    // For circle and square, prefer vertical or center layout
+    const isCompact = shape === 'circle' || shape === 'square' || shape === 'rounded-square';
+
     switch (iconPosition) {
       case 'left':
         return (
           <span className="flex items-center justify-center gap-2">
             {iconElement}
-            {displayText}
+            {!isCompact && displayText}
           </span>
         );
       case 'right':
         return (
           <span className="flex items-center justify-center gap-2">
-            {displayText}
+            {!isCompact && displayText}
             {iconElement}
           </span>
         );
@@ -127,18 +184,22 @@ export const Button = ({
         return (
           <span className="flex flex-col items-center justify-center gap-1">
             {iconElement}
-            {displayText}
+            <span className="text-xs leading-tight">{displayText}</span>
           </span>
         );
       case 'bottom':
         return (
           <span className="flex flex-col items-center justify-center gap-1">
-            {displayText}
+            <span className="text-xs leading-tight">{displayText}</span>
             {iconElement}
           </span>
         );
       case 'center':
       default:
+        if (isCompact && icon && !displayText) {
+          // Icon only for compact shapes
+          return iconElement;
+        }
         return (
           <span className="flex items-center justify-center gap-2">
             {iconElement}
@@ -152,16 +213,18 @@ export const Button = ({
     <button
       onClick={handleClick}
       disabled={disabled}
-      style={glowStyle}
+      style={buttonStyle}
       className={`
-        w-full 
-        ${SIZE_CLASSES[size]} 
+        ${getSizeClasses()}
         ${SHAPE_CLASSES[shape]} 
-        ${colorClass} 
-        ${textColorClass} 
-        ${glowClass}
+        ${!isHexColor(bgColor) ? bgColor : ''}
+        ${!isHexColor(textColor) ? textColor : ''}
+        ${!glowColor || !isHexColor(glowColor) ? glowClass : ''}
         transition-all 
         duration-200
+        flex
+        items-center
+        justify-center
         ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:opacity-90'}
       `}
     >

@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { fn } from 'storybook/test';
+import React from 'react';
 import { Button } from './Button';
 import { CH5Provider } from '../contexts/CH5Context';
 import '../index.css';
 
 const meta = {
-  title: 'Example/Button',
+  title: 'Components/Button',
   component: Button,
   decorators: [
     (Story) => (
@@ -22,22 +24,43 @@ const meta = {
     variant: {
       control: 'select',
       options: ['toggle', 'momentary'],
+      description: 'Button behavior type',
     },
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg', 'xl'],
+      description: 'Button size',
     },
     shape: {
       control: 'select',
-      options: ['rounded', 'square', 'pill'],
+      options: ['rectangle', 'rounded-rectangle', 'square', 'rounded-square', 'pill', 'circle'],
+      description: 'Button shape',
     },
     iconPosition: {
       control: 'select',
       options: ['left', 'right', 'top', 'bottom', 'center'],
+      description: 'Icon position relative to text',
     },
-    activeClass: { control: 'text' },
-    inactiveClass: { control: 'text' },
-    glowColor: { control: 'color' },
+    activeClass: { 
+      control: 'color',
+      description: 'Background color when active (Tailwind class or hex)',
+    },
+    inactiveClass: { 
+      control: 'color',
+      description: 'Background color when inactive (Tailwind class or hex)',
+    },
+    activeTextClass: { 
+      control: 'color',
+      description: 'Text color when active (Tailwind class or hex)',
+    },
+    inactiveTextClass: { 
+      control: 'color',
+      description: 'Text color when inactive (Tailwind class or hex)',
+    },
+    glowColor: { 
+      control: 'color',
+      description: 'Custom glow color (hex or CSS color)',
+    },
   },
   args: {
     commandSignal: 'button_press',
@@ -50,7 +73,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    label: 'Button',
     onLabel: 'ON',
     offLabel: 'OFF',
   },
@@ -59,7 +81,6 @@ export const Default: Story = {
 export const Toggle: Story = {
   args: {
     variant: 'toggle',
-    label: 'Toggle Button',
     onLabel: 'Active',
     offLabel: 'Inactive',
   },
@@ -68,45 +89,50 @@ export const Toggle: Story = {
 export const Momentary: Story = {
   args: {
     variant: 'momentary',
-    label: 'Press Me',
     onLabel: 'Pressed',
     offLabel: 'Press',
   },
 };
 
-export const Small: Story = {
+// Rectangle Shape Variations
+export const Rectangle: Story = {
   args: {
-    size: 'sm',
-    onLabel: 'Small',
-    offLabel: 'Small',
+    shape: 'rectangle',
+    onLabel: 'Rectangle',
+    offLabel: 'Rectangle',
   },
 };
 
-export const Medium: Story = {
+export const RoundedRectangle: Story = {
   args: {
-    size: 'md',
-    onLabel: 'Medium',
-    offLabel: 'Medium',
+    shape: 'rounded-rectangle',
+    onLabel: 'Rounded Rectangle',
+    offLabel: 'Rounded Rectangle',
   },
 };
 
-export const Large: Story = {
+// Square Shape Variations
+export const Square: Story = {
   args: {
+    shape: 'square',
     size: 'lg',
-    onLabel: 'Large',
-    offLabel: 'Large',
+    icon: '⏹',
+    onLabel: '',
+    offLabel: '',
   },
 };
 
-export const ExtraLarge: Story = {
+export const RoundedSquare: Story = {
   args: {
-    size: 'xl',
-    onLabel: 'Extra Large',
-    offLabel: 'Extra Large',
+    shape: 'rounded-square',
+    size: 'lg',
+    icon: '⏹',
+    onLabel: '',
+    offLabel: '',
   },
 };
 
-export const Pill: Story = {
+export const PillButton: Story = {
   args: {
     shape: 'pill',
     onLabel: 'Pill Shape',
@@ -114,46 +140,12 @@ export const Pill: Story = {
   },
 };
 
-export const Square: Story = {
+export const CircleButton: Story = {
   args: {
-    shape: 'square',
-    onLabel: 'Square',
-    offLabel: 'Square',
-  },
-};
-
-export const WithIcon: Story = {
-  args: {
-    icon: '🔔',
-    iconPosition: 'left',
-    onLabel: 'Notifications On',
-    offLabel: 'Notifications Off',
-  },
-};
-
-export const CustomColors: Story = {
-  args: {
-    activeClass: 'bg-green-600',
-    inactiveClass: 'bg-red-600',
-    activeTextClass: 'text-white',
-    inactiveTextClass: 'text-white',
-    onLabel: 'Active',
-    offLabel: 'Inactive',
-  },
-};
-
-export const NoGlow: Story = {
-  args: {
-    glow: false,
-    onLabel: 'No Glow',
-    offLabel: 'No Glow',
-  },
-};
-
-export const Disabled: Story = {
-  args: {
-    disabled: true,
-    onLabel: 'Disabled',
-    offLabel: 'Disabled',
+    shape: 'circle',
+    size: 'lg',
+    icon: '▶️',
+    onLabel: '',
+    offLabel: '',
   },
 };
