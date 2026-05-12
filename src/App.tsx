@@ -4,14 +4,15 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import { Button } from './components/lib/Button'
+import { CH5Provider } from './contexts/CH5Context'
 
 function App() {
 
 
   return (
-    <div>
-      <Button label="Click me" onClick={() => setCount(count + 1)} />
-    </div>
+    <CH5Provider>
+      
+    </CH5Provider>
   )
 }
 

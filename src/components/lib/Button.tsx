@@ -1,8 +1,10 @@
+import { useCH5Boolean } from "../../hooks/useCH5Boolean";
+
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 export type ButtonShape = 'rounded' | 'square' | 'pill';
 export type ButtonVariant = 'toggle' | 'momentary';
 
-interface ButtonProps {
+export interface ButtonProps {
   // Sends the command
   commandSignal: string;
   // Gets the current state for feedback
@@ -14,15 +16,23 @@ interface ButtonProps {
 
   // Optional Label for the Button
   label?: string;
+  onLabel?: string;
+  offLabel?: string;
 
   // Icon Settings
   icon?: string;
-  iconPosition?: 'left' | 'right' | 'top' | 'bottom';
+  iconPosition?: 'left' | 'right' | 'top' | 'bottom'| 'center';
   iconSize?: number;
 
   // Colored ring around the button when active
   glow?: boolean;
   glowColor?: string;
+
+  // Custom CSS classes for active/inactive states
+  activeClass?: string;
+  inactiveClass?: string;
+  activeTextClass?: string;
+  inactiveTextClass?: string;
 
   disabled?: boolean;
 }
@@ -47,14 +57,44 @@ export function Button({
   size='md',
   shape='rounded',
   label,
+  onLabel="ON",
+  offLabel="OFF",
   icon,
-  iconPosition,
+  iconPosition='center',
   iconSize,
   glow=true,
   glowColor,
-  disabled = false
+  activeClass = 'bg-indigo-600',
+  inactiveClass = 'bg-gray-600',
+  activeTextClass = 'text-white',
+  inactiveTextClass = 'text-gray-200',
+  disabled = false,
 }: ButtonProps) {
+  const [isOn, setIsOn] = useCH5Boolean(commandSignal, feedbackSignal, false);
+  
+  const handleClick = () => {
+    if (disabled) return;
+    if (variant === 'toggle') {
+      setIsOn(!isOn);
+    } else if (variant === 'momentary') {
+      setIsOn(true);
+      setTimeout(() => setIsOn(false), 200); 
+    }
+  };
+
+  const colorClass = isOn ? activeClass : inactiveClass;
+  const textColorClass = isOn ? activeTextClass : inactiveTextClass;
+  const glowClass = glow && isOn ? 'shadow-lg shadow-indigo-500/40' : 'shadow-md';
+
   return (
- 
+    <div>
+      <button
+      className={`w-full ${SIZE_CLASSES[size]} ${SHAPE_CLASSES[shape]} ${colorClass} ${textColorClass} ${glowClass}`}>
+         <span className="flex items-center justify-center gap-2">
+          {icon && <span className="shrink-0">{icon}</span>}
+          {isOn ? onLabel : offLabel}
+        </span>
+      </button>
+    </div>
   );
 }
