@@ -1,4 +1,5 @@
 import { useCH5Boolean } from "../../hooks/useCH5Boolean";
+import {Button} from "../ui/button";
 
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl';
 export type ButtonShape = 'rounded' | 'square' | 'pill';
@@ -50,7 +51,7 @@ const SHAPE_CLASSES: Record<ButtonShape, string> = {
   pill: 'rounded-full'
 };
 
-export function Button({
+export function ButtonItem({
   commandSignal,
   feedbackSignal,
   variant='toggle',
@@ -88,13 +89,21 @@ export function Button({
 
   return (
     <div>
-      <button
-      className={`w-full ${SIZE_CLASSES[size]} ${SHAPE_CLASSES[shape]} ${colorClass} ${textColorClass} ${glowClass}`}>
-         <span className="flex items-center justify-center gap-2">
-          {icon && <span className="shrink-0">{icon}</span>}
-          {isOn ? onLabel : offLabel}
-        </span>
-      </button>
+      <Button
+        onClick={handleClick}
+        className={`${SIZE_CLASSES[size]} ${SHAPE_CLASSES[shape]} ${colorClass} ${textColorClass} ${glowClass} flex items-center justify-center gap-2 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed`}
+        disabled={disabled}
+      >
+        {icon && iconPosition === 'left' && <img src={icon} alt="icon" style={{ width: iconSize, height: iconSize }} />}
+        {label && (variant === 'toggle' ? (isOn ? onLabel : offLabel) : label)}
+        {icon && iconPosition === 'right' && <img src={icon} alt="icon" style={{ width: iconSize, height: iconSize }} />}
+        {icon && (iconPosition === 'top' || iconPosition === 'bottom') && (
+          <div className={`flex flex-col items-center ${iconPosition === 'top' ? 'mb-1' : 'mt-1'}`}>
+            <img src={icon} alt="icon" style={{ width: iconSize, height: iconSize }} />
+            {label && (variant === 'toggle' ? (isOn ? onLabel : offLabel) : label)}
+          </div>
+        )}
+      </Button>
     </div>
   );
 }
