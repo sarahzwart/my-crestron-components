@@ -1,59 +1,37 @@
 import { useCH5Boolean } from "../../hooks/useCH5Boolean";
 import { Button } from "../ui/button";
+import { COLOR_CLASSES, TEXT_COLOR_CLASSES, GLOW_CLASSES } from "@/lib/colors";
 
 export type ButtonSize = "sm" | "md" | "lg" | "xl";
 export type ButtonShape = "rounded" | "square" | "pill";
 export type ButtonVariant = "toggle" | "momentary";
 
 export interface ButtonProps {
-  // Sends the command
   commandSignal: string;
-  // Gets the current state for feedback
   feedbackSignal: string;
-
-  // Disable the button (non-interactive)
   disabled?: boolean;
-
-  // Behaviour - toggle or momentary
   variant?: ButtonVariant;
-
-  // Preset Size (Controls padding + font size)
   size?: ButtonSize;
-
-  // 'Rounded', 'Square', or 'Pill' shape options
   shape?: ButtonShape;
-
-  // Custom dimensions (overrides size presets)
-  width?: number | string; // e.g. 200 | '50%' | '8rem'
+  width?: number | string;
   height?: number | string;
   minWidth?: number | string;
   minHeight?: number | string;
   maxWidth?: number | string;
   maxHeight?: number | string;
-
-  // Static Label for Momentary Button
+  textSize?: number;
   label?: string;
-
-  // On/Off Labels for Toggle Button
   onLabel?: string;
   offLabel?: string;
-
-  // Icon Settings
   icon?: string;
   iconPosition?: "left" | "right" | "top" | "bottom";
   iconSize?: number;
-
-  // default to true - shadow ring when active
   glow?: boolean;
-  // Tailwind Shadow Class
   glowColor?: string;
-
-  // Custom CSS classes for active/inactive states
   activeClass?: string;
   inactiveClass?: string;
   activeTextClass?: string;
   inactiveTextClass?: string;
-
   className?: string;
   style?: React.CSSProperties;
 }
@@ -76,7 +54,6 @@ const ICON_POSITION_CLASSES: Record<string, string> = {
   right: "flex-row-reverse",
   top: "flex-col",
   bottom: "flex-col-reverse",
-  center: "flex-row",
 };
 
 export function CH5Button({
@@ -91,6 +68,7 @@ export function CH5Button({
   minHeight,
   maxWidth,
   maxHeight,
+  textSize,
   label,
   onLabel = "ON",
   offLabel = "OFF",
@@ -98,11 +76,11 @@ export function CH5Button({
   iconPosition = "left",
   iconSize = 20,
   glow = true,
-  glowColor = "shadow-indigo-500/40",
-  activeClass = "bg-indigo-600 hover:bg-indigo-700",
-  inactiveClass = "bg-gray-600 hover:bg-gray-700",
-  activeTextClass = "text-white",
-  inactiveTextClass = "text-gray-200",
+  glowColor = "indigo",
+  activeClass = "indigo",
+  inactiveClass = "gray",
+  activeTextClass = "white",
+  inactiveTextClass = "white",
   disabled = false,
   className = "",
   style = {},
@@ -124,49 +102,48 @@ export function CH5Button({
   const customStyle: React.CSSProperties = {
     ...style,
     ...(width && { width: typeof width === "number" ? `${width}px` : width }),
-    ...(height && {
-      height: typeof height === "number" ? `${height}px` : height,
-    }),
-    ...(minWidth && {
-      minWidth: typeof minWidth === "number" ? `${minWidth}px` : minWidth,
-    }),
-    ...(minHeight && {
-      minHeight: typeof minHeight === "number" ? `${minHeight}px` : minHeight,
-    }),
-    ...(maxWidth && {
-      maxWidth: typeof maxWidth === "number" ? `${maxWidth}px` : maxWidth,
-    }),
-    ...(maxHeight && {
-      maxHeight: typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
-    }),
+    ...(height && { height: typeof height === "number" ? `${height}px` : height }),
+    ...(minWidth && { minWidth: typeof minWidth === "number" ? `${minWidth}px` : minWidth }),
+    ...(minHeight && { minHeight: typeof minHeight === "number" ? `${minHeight}px` : minHeight }),
+    ...(maxWidth && { maxWidth: typeof maxWidth === "number" ? `${maxWidth}px` : maxWidth }),
+    ...(maxHeight && { maxHeight: typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight }),
+    ...(textSize && { fontSize: `${textSize}px` }),
   };
 
-  const colorClass = isOn ? activeClass : inactiveClass;
-  const textColorClass = isOn ? activeTextClass : inactiveTextClass;
-  const glowClass = glow && isOn ? `shadow-lg ${glowColor}` : "shadow-md";
+  const colorClass = isOn 
+    ? COLOR_CLASSES[activeClass] || COLOR_CLASSES.indigo
+    : COLOR_CLASSES[inactiveClass] || COLOR_CLASSES.gray;
+  
+  const textColorClass = isOn 
+    ? TEXT_COLOR_CLASSES[activeTextClass] || TEXT_COLOR_CLASSES.white
+    : TEXT_COLOR_CLASSES[inactiveTextClass] || TEXT_COLOR_CLASSES.white;
+
+  const glowClass = glow && isOn 
+    ? `shadow-lg ${GLOW_CLASSES[glowColor] || GLOW_CLASSES.indigo}` 
+    : "shadow-md";
 
   const hasText = Boolean(buttonText);
   const layoutClass = hasText ? ICON_POSITION_CLASSES[iconPosition] : '';
+
+  const sizeClass = textSize 
+    ? SIZE_CLASSES[size].replace(/text-\w+/, '').trim()
+    : SIZE_CLASSES[size];
 
   return (
     <Button
       onClick={handleClick}
       disabled={disabled}
-      className={`${SIZE_CLASSES[size]} 
+      className={`${sizeClass} 
                   ${SHAPE_CLASSES[shape]} 
                   ${colorClass} ${textColorClass} 
                   ${glowClass} ${className} ${layoutClass}
                   flex items-center justify-center 
                   gap-2 transition-all duration-200 
-                  disabled:opacity-50 disabled:cursor-not-allowed`
-                }
+                  disabled:opacity-50 disabled:cursor-not-allowed`}
       style={customStyle}
     >
       {icon && (
-        <span 
-          className="flex-shrink-0"
-          style={{ fontSize: iconSize }}
-        >
+        <span className="flex-shrink-0" style={{ fontSize: iconSize }}>
           {icon}
         </span>
       )}
