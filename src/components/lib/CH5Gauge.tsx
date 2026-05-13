@@ -64,6 +64,12 @@ const SIZE_CLASSES: Record<GaugeSize, { circular: string; linear: string; text: 
   }
 };
 
-export function CH5Gauge({ commandSignal, feedbackSignal }: GaugeProps) {
+export function CH5Gauge({ 
+    commandSignal, 
+    feedbackSignal 
+    orientation = "circular"
+
+}: GaugeProps) {
+    const [value] = useCH5Numeric(commandSignal, feedbackSignal, min);
 
 }
