@@ -32,14 +32,12 @@ function App() {
         <CH5Gauge
           commandSignal="temp.analog"
           feedbackSignal="temp.feedback"
-          min={60}
-          max={85}
           formatValue={(pct) => {
-            const temp = 60 + (pct / 100) * 25; // Convert back to temp
-            return Math.round(temp) + "°F";
+            const temp = 60 + (pct / 100) * 25;
+            return Math.round(temp) + "%";
           }}
           gaugeColor="red"
-          orientation="linear"
+          size="xl"
         />
       </div>
     </CH5Provider>

@@ -121,7 +121,7 @@ export function CH5Slider({
                 step={step}
                 disabled={disabled || !touchSettable}
                 className={cn(
-                    "relative flex w-full touch-none select-none items-center data-[disabled]:opacity-50",
+                    "relative flex w-full touch-none select-none items-center data-disabled:opacity-50",
                     orientation === "vertical" && "h-full flex-col"
                 )}
             >
