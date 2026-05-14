@@ -1,6 +1,6 @@
 import { useCH5Boolean } from "../../hooks/useCH5Boolean";
 import { Button } from "../ui/button";
-import { COLOR_CLASSES, TEXT_COLOR_CLASSES, GLOW_CLASSES } from "@/lib/colors";
+import { SOLID_COLOR_CLASSES, TEXT_COLOR_CLASSES, GLOW_CLASSES } from "@/lib/colors";
 
 export type ButtonSize = "sm" | "md" | "lg" | "xl";
 export type ButtonShape = "rounded" | "square" | "pill";
@@ -111,8 +111,8 @@ export function CH5Button({
   };
 
   const colorClass = isOn 
-    ? COLOR_CLASSES[activeClass] || COLOR_CLASSES.indigo
-    : COLOR_CLASSES[inactiveClass] || COLOR_CLASSES.gray;
+    ? SOLID_COLOR_CLASSES[activeClass] || SOLID_COLOR_CLASSES.indigo
+    : SOLID_COLOR_CLASSES[inactiveClass] || SOLID_COLOR_CLASSES.gray;
   
   const textColorClass = isOn 
     ? TEXT_COLOR_CLASSES[activeTextClass] || TEXT_COLOR_CLASSES.white

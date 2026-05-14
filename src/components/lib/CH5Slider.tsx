@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import { useCH5Numeric } from "../../hooks/useCH5Numeric";
 import * as SliderPrimitive from "@radix-ui/react-slider";
+import { SOLID_COLOR_CLASSES, GRADIENT_COLOR_CLASSES } from "@/lib/colors";
 
 export type SliderOrientation = "horizontal" | "vertical";
 export type SliderSize = "sm" | "md" | "lg" | "xl";
@@ -57,59 +58,6 @@ const BUTTON_SHAPE_CLASSES: Record<SliderButtonType, string> = {
     icon: "rounded-full"
 };
 
-const SOLID_COLOR_CLASSES: Record<string, string> = {
-    black: "bg-black",
-    white: "bg-white",
-    slate: "bg-slate-500",
-    gray: "bg-gray-500",
-    zinc: "bg-zinc-500",
-    neutral: "bg-neutral-500",
-    stone: "bg-stone-500",
-    red: "bg-red-500",
-    orange: "bg-orange-500",
-    amber: "bg-amber-500",
-    yellow: "bg-yellow-500",
-    lime: "bg-lime-500",
-    green: "bg-green-500",
-    emerald: "bg-emerald-500",
-    teal: "bg-teal-500",
-    cyan: "bg-cyan-500",
-    sky: "bg-sky-500",
-    blue: "bg-blue-500",
-    indigo: "bg-indigo-500",
-    violet: "bg-violet-500",
-    purple: "bg-purple-500",
-    fuchsia: "bg-fuchsia-500",
-    pink: "bg-pink-500",
-    rose: "bg-rose-500",
-};
-
-const GRADIENT_COLOR_CLASSES: Record<string, string> = {
-    black: "bg-gradient-to-r from-gray-700 via-gray-900 to-black",
-    white: "bg-gradient-to-r from-gray-100 via-gray-300 to-gray-500",
-    slate: "bg-gradient-to-r from-slate-300 via-slate-500 to-slate-700",
-    gray: "bg-gradient-to-r from-gray-300 via-gray-500 to-gray-700",
-    zinc: "bg-gradient-to-r from-zinc-300 via-zinc-500 to-zinc-700",
-    neutral: "bg-gradient-to-r from-neutral-300 via-neutral-500 to-neutral-700",
-    stone: "bg-gradient-to-r from-stone-300 via-stone-500 to-stone-700",
-    red: "bg-gradient-to-r from-red-300 via-red-500 to-red-700",
-    orange: "bg-gradient-to-r from-orange-300 via-orange-500 to-orange-700",
-    amber: "bg-gradient-to-r from-amber-300 via-amber-500 to-amber-700",
-    yellow: "bg-gradient-to-r from-yellow-300 via-yellow-500 to-yellow-700",
-    lime: "bg-gradient-to-r from-lime-300 via-lime-500 to-lime-700",
-    green: "bg-gradient-to-r from-green-300 via-green-500 to-green-700",
-    emerald: "bg-gradient-to-r from-emerald-300 via-emerald-500 to-emerald-700",
-    teal: "bg-gradient-to-r from-teal-300 via-teal-500 to-teal-700",
-    cyan: "bg-gradient-to-r from-cyan-300 via-cyan-500 to-cyan-700",
-    sky: "bg-gradient-to-r from-sky-300 via-sky-500 to-sky-700",
-    blue: "bg-gradient-to-r from-blue-300 via-blue-500 to-blue-700",
-    indigo: "bg-gradient-to-r from-indigo-300 via-indigo-500 to-indigo-700",
-    violet: "bg-gradient-to-r from-violet-300 via-violet-500 to-violet-700",
-    purple: "bg-gradient-to-r from-purple-300 via-purple-500 to-purple-700",
-    fuchsia: "bg-gradient-to-r from-fuchsia-300 via-fuchsia-500 to-fuchsia-700",
-    pink: "bg-gradient-to-r from-pink-300 via-pink-500 to-pink-700",
-    rose: "bg-gradient-to-r from-rose-300 via-rose-500 to-rose-700",
-};
 
 export function CH5Slider({ 
     commandSignal, 
