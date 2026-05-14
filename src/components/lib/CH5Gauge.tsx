@@ -114,8 +114,22 @@ export function CH5Gauge({
   const linearHeight = thickness ? `${thickness}px` : undefined;
 
   return (
-    <div>
-      
+    <div className={`flex flex-col gap-2 ${className}`} style={style}>
+      {showValue && valuePosition === "start" && (
+        <div className={``}>
+
+        </div>
+      )}
+      {showValue && valuePosition === "end" && (
+        <div className={``}>
+          
+        </div>
+      )}
+      {showValue && valuePosition === "center" && (
+        <div className={``}>
+          
+        </div>
+      )}
     </div>
   )
 }
