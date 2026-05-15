@@ -3,6 +3,7 @@ import { CH5Button } from "./components/lib/CH5Button";
 import { CH5Provider } from "./contexts/CH5Context";
 import { CH5Slider } from "./components/lib/CH5Slider";
 import { CH5Gauge } from "./components/lib/CH5Gauge";
+import { CH5Keypad } from "./components/lib/CH5Keypad";
 
 function App() {
   return (
@@ -38,6 +39,18 @@ function App() {
           }}
           gaugeColor="red"
           size="xl"
+        />
+
+        <CH5Keypad
+          commandSignal="keypad.command"
+          feedbackSignal="keypad.feedback"
+          buttonColor="pink"
+          glowColor="pastel-pink"
+          buttonShape="pill"
+          width={300}
+          height={300}
+          textSize={30}
+          
         />
       </div>
     </CH5Provider>
