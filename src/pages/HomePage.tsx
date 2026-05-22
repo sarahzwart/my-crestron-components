@@ -1,17 +1,15 @@
-export interface RoutingPageProps {
+export interface HomePageProps {
     // Page Content
   children: React.ReactNode;
-
   // Page Styling
   backgroundColor?: string;
   backgroundImage?:string;
   className?: string;
   style?: React.CSSProperties;
-
 }
 
-export function RoutingPage ({}: RoutingPageProps){
+export function HomePage ({}: HomePageProps){
   <div>
-    
+
   </div>
 }
