@@ -15,7 +15,6 @@ export function LightsPage({
       
       {children}
       
-      {/* Your lighting controls here */}
     </div>
   );
 }

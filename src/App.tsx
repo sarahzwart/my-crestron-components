@@ -1,66 +1,101 @@
 import { CH5Provider } from "./contexts/CH5Context";
+import { ThemeProvider, useTheme } from "./lib/theme";
 import { CH5Header } from "./components/layout/Header";
 import { CH5Footer } from "./components/layout/Footer";
 import { CH5Button } from "./components/lib/CH5Button";
-import { LightsPage } from "./pages/LightsPage";
-import { Home, Lightbulb, Settings, Volume2, VolumeX, Wifi, Power } from "lucide-react";
+import { CH5MuteButton } from "./components/lib/CH5MuteButton";
+import { AudioPage } from "./pages/AudioPage";
+import { AUDIO_CONTROLS } from "./config/audio.config";
+import { Home, Settings, Power } from "lucide-react";
+
+function AppContent() {
+  const { theme } = useTheme();
+
+  return (
+    <div className={`flex flex-col h-screen ${theme.pageBackground}`}>
+      <CH5Header
+        leftButtons={
+          <CH5Button
+            commandSignal="nav.settings"
+            variant="momentary"
+            shape="circle"
+            width={54}
+            height={54}
+            icon={<Settings size={24} />}
+            className={theme.buttonBackground}
+            iconColorClass={theme.iconColor}
+            glow={false}
+          />
+        }
+        backgroundColor={theme.headerBackground}
+        textColor={theme.primaryText}
+        className={`backdrop-blur-xl border-b ${theme.headerBorder}`}
+      />
+
+      <main className="flex-1 overflow-auto">
+        <AudioPage volumeControls={AUDIO_CONTROLS} />
+      </main>
+
+      <CH5Footer
+        volumeWidth={500}
+        volumePosition="center"
+        volumeColor={theme.sliderTrackColor}
+        backgroundColor={theme.footerBackground}
+        bubbleBackground={theme.footerBubbleBackground}
+        height={90}
+        
+        muteButton={
+          <CH5MuteButton
+            commandSignal="audio.mute"
+            feedbackSignal="audio.mute.fb"
+            width={40}
+            height={40}
+            iconSize={20}
+          />
+        }
+        mutePosition="left"
+
+        leftButtons={
+          <CH5Button
+            commandSignal="system.power"
+            variant="momentary"
+            shape="circle"
+            width={48}
+            height={48}
+            icon={<Power />}
+            iconSize={20}
+            className={theme.buttonBackground}
+            iconColorClass={theme.iconColor}
+            glow={false}
+          />
+        }
+
+        rightButtons={
+          <CH5Button
+            commandSignal="nav.home"
+            variant="momentary"
+            shape="circle"
+            width={56}
+            height={56}
+            icon={<Home />}
+            iconSize={32}
+            className={theme.buttonBackground}
+            iconColorClass={theme.iconColor}
+            glow={false}
+          />
+        }
+        className="backdrop-blur-xl"
+      />
+    </div>
+  );
+}
 
 function App() {
   return (
     <CH5Provider>
-      <div className="flex flex-col h-screen bg-linear-to-br from-slate-700 via-slate-800 to-slate-700">
-        <CH5Header
-          leftButtons={
-            <>
-              <button className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all flex items-center justify-center text-white">
-                <Home size={20} />
-              </button>
-              <button className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all flex items-center justify-center text-white">
-                <Wifi size={20} />
-              </button>
-              <button className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md hover:bg-white/20 transition-all flex items-center justify-center text-white">
-                <Settings size={20} />
-              </button>
-            </>
-          }
-          backgroundColor="bg-black/20"
-          textColor="text-white"
-          className="backdrop-blur-xl border-b border-white/10"
-        />
-
-        {/* Main Content */}
-        <main className="flex-1 overflow-auto">
-          <LightsPage />
-        </main>
-
-        <CH5Footer
-          volumeWidth={500}
-          volumePosition="center"
-          volumeColor="blue"
-          backgroundColor="bg-slate-900/50"
-          bubbleBackground="bg-transparent"
-          muteButton={
-            <button className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center text-white">
-              <VolumeX size={24} />
-            </button>
-          }
-          mutePosition="left" 
-          leftButtons={
-            <>
-              <button className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center text-white">
-                <Power size={20} />
-              </button>
-            </>
-          }
-          rightButtons={
-            <>
-              <button className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 transition-all flex items-center justify-center text-white">
-                <Home size={20} />
-              </button>
-            </>
-          }
-        />
-      </div>
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
     </CH5Provider>
   );
 }
