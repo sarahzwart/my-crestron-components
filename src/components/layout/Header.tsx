@@ -75,7 +75,7 @@ export function CH5Header({
             iconSize={32}
             variant="momentary"
             size="md"
-            shape="rounded"
+            shape="pill"
             inactiveClass="slate"
             activeClass="blue"
             glow={false}
