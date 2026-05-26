@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useCH5Numeric } from "../../hooks/useCH5Numeric";
+import { useCH5Numeric } from "../../../hooks/useCH5Numeric";
 import * as SliderPrimitive from "@radix-ui/react-slider";
 import { SOLID_COLOR_CLASSES, GRADIENT_COLOR_CLASSES } from "@/lib/colors";
 

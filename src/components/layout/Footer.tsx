@@ -1,5 +1,5 @@
 import React from "react";
-import { CH5Slider } from "../lib/CH5Slider";
+import { CH5Slider } from "../lib/common/CH5Slider";
 
 export interface FooterProps {
   // Volume

@@ -1,6 +1,6 @@
-import { CH5Slider } from "./CH5Slider";
+import { CH5Slider } from "../common/CH5Slider";
 import { CH5MuteButton } from "./CH5MuteButton";
-import { useTheme } from "../../lib/theme";
+import { useTheme } from "../../../lib/theme";
 
 export interface CH5VolumeSliderProps {
   id?: string;

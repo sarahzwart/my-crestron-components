@@ -2,11 +2,13 @@ import { CH5Provider } from "./contexts/CH5Context";
 import { ThemeProvider, useTheme } from "./lib/theme";
 import { CH5Header } from "./components/layout/Header";
 import { CH5Footer } from "./components/layout/Footer";
-import { CH5Button } from "./components/lib/CH5Button";
-import { CH5MuteButton } from "./components/lib/CH5MuteButton";
+import { CH5Button } from "./components/lib/common/CH5Button";
+import { CH5MuteButton } from "./components/lib/volume/CH5MuteButton";
 import { AudioPage } from "./pages/AudioPage";
 import { AUDIO_CONTROLS } from "./config/audio.config";
 import { Home, Settings, Power } from "lucide-react";
+import { RoutingPage } from "./pages/RoutingPage";
+import { DESTINATIONS, SOURCES } from "./config/routing.config";
 
 function AppContent() {
   const { theme } = useTheme();
@@ -33,7 +35,14 @@ function AppContent() {
       />
 
       <main className="flex-1 overflow-auto">
-        <AudioPage volumeControls={AUDIO_CONTROLS} />
+        <RoutingPage 
+    sources={SOURCES}
+    destinations={DESTINATIONS}
+    sourceColumns={3}
+    destinationColumns={3}
+    title="Audio/Video Routing"
+    subtitle="Choose what to play and where to send it"
+  />
       </main>
 
       <CH5Footer

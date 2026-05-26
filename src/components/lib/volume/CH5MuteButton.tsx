@@ -1,6 +1,6 @@
 import { Volume2, VolumeX } from "lucide-react";
-import { CH5Button } from "./CH5Button";
-import { useTheme } from "../../lib/theme";
+import { CH5Button } from "../common/CH5Button";
+import { useTheme } from "../../../lib/theme";
 
 export interface CH5MuteButtonProps {
   commandSignal: string;

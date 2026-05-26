@@ -1,4 +1,4 @@
-import { useCH5Numeric } from "../../hooks/useCH5Numeric";
+import { useCH5Numeric } from "../../../hooks/useCH5Numeric";
 import * as Progress from "@radix-ui/react-progress";
 import { SOLID_COLOR_CLASSES, GRADIENT_COLOR_CLASSES } from "@/lib/colors";
 

@@ -1,4 +1,4 @@
-import { type CH5VolumeSliderProps } from "@/components/lib/CH5Volume";
+import { type CH5VolumeSliderProps } from "@/components/lib/volume/CH5Volume";
 import { 
   Volume2, Music, Tv, Mic, Speaker, Headphones, Radio, Gamepad2, Film 
 } from "lucide-react";

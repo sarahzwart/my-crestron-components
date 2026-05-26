@@ -1,4 +1,4 @@
-import { CH5VolumeSlider, type CH5VolumeSliderProps } from "@/components/lib/CH5Volume";
+import { CH5VolumeSlider, type CH5VolumeSliderProps } from "@/components/lib/volume/CH5Volume";
 import { useTheme } from "../lib/theme";
 
 export interface AudioPageProps {

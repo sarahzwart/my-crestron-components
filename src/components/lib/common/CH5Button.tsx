@@ -1,4 +1,4 @@
-import { useCH5Boolean } from "../../hooks/useCH5Boolean";
+import { useCH5Boolean } from "../../../hooks/useCH5Boolean";
 import {
   SOLID_COLOR_CLASSES,
   TEXT_COLOR_CLASSES,

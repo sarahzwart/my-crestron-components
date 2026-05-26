@@ -1,5 +1,5 @@
 import React from "react";
-import { CH5Button } from "../lib/CH5Button";
+import { CH5Button } from "../lib/common/CH5Button";
 
 export interface HeaderProps {
   // Logo
