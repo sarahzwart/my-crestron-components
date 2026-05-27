@@ -5,8 +5,6 @@ import { CH5Footer } from "./components/layout/Footer";
 import { CH5Button } from "./components/lib/common/CH5Button";
 import { CH5MuteButton } from "./components/lib/volume/CH5MuteButton";
 import { Home, Settings, Power } from "lucide-react";
-import { RoutingPage } from "./pages/RoutingPage";
-import { DESTINATIONS, SOURCES } from "./config/routing.config";
 import { AudioCallPage } from "./pages/AudioCallPage";
 
 function AppContent() {
@@ -47,6 +45,7 @@ function AppContent() {
         volumeWidth={500}
         volumePosition="center"
         volumeColor={theme.sliderTrackColor}
+        volumeBackgroundColor={theme.sliderBackgroundColor}
         backgroundColor={theme.footerBackground}
         bubbleBackground={theme.footerBubbleBackground}
         height={90}
@@ -71,6 +70,7 @@ function AppContent() {
             iconSize={20}
             className={theme.buttonBackground}
             iconColorClass={theme.iconColor}
+            activeClass={theme.buttonActiveColor}
             glow={false}
           />
         }
@@ -85,6 +85,7 @@ function AppContent() {
             iconSize={32}
             className={theme.buttonBackground}
             iconColorClass={theme.iconColor}
+            activeClass={theme.buttonActiveColor}
             glow={false}
           />
         }
@@ -97,7 +98,7 @@ function AppContent() {
 function App() {
   return (
     <CH5Provider>
-      <ThemeProvider>
+      <ThemeProvider defaultTheme="sunset">
         <AppContent />
       </ThemeProvider>
     </CH5Provider>

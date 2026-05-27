@@ -10,25 +10,20 @@ import {
 } from "lucide-react";
 
 export interface CH5CallControlsProps {
-  // Hangup
   hangupCommandSignal: string;
   hangupFeedbackSignal: string;
   onHangup?: () => void;
   
-  // Privacy (Mute)
   privacyCommandSignal: string;
   privacyFeedbackSignal: string;
   
-  // Hold
   holdCommandSignal?: string;
   holdFeedbackSignal?: string;
   showHold?: boolean;
   
-  // Keypad toggle
   showKeypadButton?: boolean;
   onKeypadToggle?: () => void;
   isKeypadVisible?: boolean;
-  
   className?: string;
 }
 

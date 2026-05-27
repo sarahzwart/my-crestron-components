@@ -34,6 +34,7 @@ export function CH5MuteButton({
       offLabel=""
       className={theme.buttonBackground}
       iconColorClass={theme.iconColor}
+      activeClass={theme.buttonActiveColor}
       glow={false}
     />
   );

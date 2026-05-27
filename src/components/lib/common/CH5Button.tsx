@@ -5,6 +5,7 @@ import {
   GLOW_CLASSES,
 } from "@/lib/colors";
 import React from "react";
+import { useTheme } from "@/lib/theme";
 
 export type ButtonSize = "sm" | "md" | "lg" | "xl";
 export type ButtonShape = "rounded" | "square" | "pill" | "circle";
@@ -98,6 +99,8 @@ export function CH5Button({
   className = "",
   style = {},
 }: ButtonProps) {
+  const { theme } = useTheme();
+  
   const [isOn, setIsOn] = useCH5Boolean(
     commandSignal,
     feedbackSignal || commandSignal + ".fb",

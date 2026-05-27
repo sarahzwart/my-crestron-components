@@ -26,6 +26,7 @@ export interface AppTheme {
   
   // Slider styling
   sliderTrackColor: string;
+  sliderBackgroundColor: string;
   sliderColorSettings: "gradient" | "solid";
   sliderThumbType: "circle" | "square" | "diamond";
   sliderSize: "sm" | "md" | "lg" | "xl";
@@ -56,6 +57,7 @@ export const APP_THEMES = {
     primaryText: "text-white",
     secondaryText: "text-white/60",
     sliderTrackColor: "blue",
+    sliderBackgroundColor: "rgba(255,255,255,0.12)",
     sliderColorSettings: "gradient",
     sliderThumbType: "circle",
     sliderSize: "md",
@@ -77,6 +79,7 @@ export const APP_THEMES = {
     primaryText: "text-white",
     secondaryText: "text-purple-200/70",
     sliderTrackColor: "purple",
+    sliderBackgroundColor: "rgba(168,85,247,0.18)",
     sliderColorSettings: "gradient",
     sliderThumbType: "circle",
     sliderSize: "md",
@@ -98,6 +101,7 @@ export const APP_THEMES = {
     primaryText: "text-slate-900",
     secondaryText: "text-slate-500",
     sliderTrackColor: "slate",
+    sliderBackgroundColor: "#ffffff",
     sliderColorSettings: "solid",
     sliderThumbType: "circle",
     sliderSize: "md",
@@ -119,6 +123,7 @@ export const APP_THEMES = {
     primaryText: "text-white",
     secondaryText: "text-cyan-200/70",
     sliderTrackColor: "cyan",
+    sliderBackgroundColor: "rgba(34,211,238,0.16)",
     sliderColorSettings: "gradient",
     sliderThumbType: "circle",
     sliderSize: "md",
@@ -140,6 +145,7 @@ export const APP_THEMES = {
     primaryText: "text-white",
     secondaryText: "text-orange-200/70",
     sliderTrackColor: "orange",
+    sliderBackgroundColor: "rgba(249,115,22,0.18)",
     sliderColorSettings: "gradient",
     sliderThumbType: "circle",
     sliderSize: "md",
@@ -161,6 +167,7 @@ export const APP_THEMES = {
     primaryText: "text-white",
     secondaryText: "text-emerald-200/70",
     sliderTrackColor: "emerald",
+    sliderBackgroundColor: "rgba(16,185,129,0.18)",
     sliderColorSettings: "gradient",
     sliderThumbType: "circle",
     sliderSize: "md",

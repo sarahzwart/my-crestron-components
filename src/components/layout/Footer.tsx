@@ -6,6 +6,7 @@ export interface FooterProps {
   volumeCommandSignal?: string;
   volumeFeedbackSignal?: string;
   volumeColor?: string;
+  volumeBackgroundColor?:string;
   
   // Volume positioning & sizing
   volumeWidth?: string | number; // e.g., "400px", "50%", 400
@@ -33,6 +34,7 @@ export function CH5Footer({
   volumeCommandSignal = "audio.volume",
   volumeFeedbackSignal = "audio.volume.fb",
   volumeColor = "blue",
+  volumeBackgroundColor = "white",
   volumeWidth = "auto", // defaults to flex-1 behavior
   volumePosition = "center",
   volumeMarginX = 12, // Reduced default from 24 to 12
@@ -118,6 +120,7 @@ export function CH5Footer({
             commandSignal={volumeCommandSignal}
             feedbackSignal={volumeFeedbackSignal}
             trackColor={volumeColor}
+            backgroundColor={volumeBackgroundColor}
             colorSettings="gradient"
             size="md"
             thumbType="circle"
