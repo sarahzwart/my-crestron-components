@@ -17,7 +17,6 @@ export function SettingsPage() {
       </div>
 
       <div className="max-w-4xl mx-auto w-full space-y-10">
-        {/* Theme Selection */}
         <section>
           <div className="flex items-center gap-3 mb-5 px-1">
             <div className="w-1.5 h-10 rounded-full bg-blue-500" />
@@ -73,9 +72,9 @@ export function SettingsPage() {
   );
 }
 
-// ============================================
+
 // THEME CARD
-// ============================================
+
 interface ThemeCardProps {
   themeName: ThemeName;
   isSelected: boolean;
@@ -88,7 +87,7 @@ const THEME_LABELS: Record<ThemeName, string> = {
   minimal: "Minimal",
   oceanBlue: "Ocean Blue",
   sunset: "Sunset",
-  forestGreen: "Forest Green",
+  charcoal: "Charcoal",
 };
 
 const THEME_PREVIEWS: Record<ThemeName, { bg: string; card: string; accent: string }> = {
@@ -117,10 +116,10 @@ const THEME_PREVIEWS: Record<ThemeName, { bg: string; card: string; accent: stri
     card: "bg-orange-500/20",
     accent: "bg-orange-400",
   },
-  forestGreen: {
-    bg: "bg-gradient-to-br from-emerald-950 via-green-950 to-slate-900",
-    card: "bg-emerald-500/20",
-    accent: "bg-emerald-400",
+  charcoal: {
+    bg: "bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900",
+    card: "bg-zinc-700/40",
+    accent: "bg-zinc-500",
   },
 };
 
@@ -174,9 +173,8 @@ function ThemeCard({ themeName, isSelected, onSelect }: ThemeCardProps) {
   );
 }
 
-// ============================================
 // FONT CARD
-// ============================================
+
 interface FontCardProps {
   fontName: FontName;
   isSelected: boolean;
