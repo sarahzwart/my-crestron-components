@@ -7,6 +7,7 @@ import { CH5MuteButton } from "./components/lib/volume/CH5MuteButton";
 import { Home, Settings, Power } from "lucide-react";
 import { RoutingPage } from "./pages/RoutingPage";
 import { DESTINATIONS, SOURCES } from "./config/routing.config";
+import { AudioCallPage } from "./pages/AudioCallPage";
 
 function AppContent() {
   const { theme } = useTheme();
@@ -33,13 +34,12 @@ function AppContent() {
       />
 
       <main className="flex-1 overflow-auto">
-        <RoutingPage
-          sources={SOURCES}
-          destinations={DESTINATIONS}
-          sourceColumns={3}
-          destinationColumns={3}
-          title="Audio/Video Routing"
-          subtitle="Choose what to play and where to send it"
+        <AudioCallPage
+          title="Audio Call"
+          subtitle="Make a call"
+          onCall={(number) => {
+            console.log("Calling:", number);
+          }}
         />
       </main>
 
