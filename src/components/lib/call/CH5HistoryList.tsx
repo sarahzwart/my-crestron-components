@@ -1,5 +1,5 @@
 import { useTheme } from "@/lib/theme";
-import { X } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 export interface HistoryItem {
   value: string;
@@ -10,133 +10,150 @@ export interface HistoryItem {
 export interface CH5HistoryListProps {
   items: HistoryItem[];
   title?: string;
-  subtitle?: string;
-  itemIcon: React.ReactNode;
-  emptyIcon: React.ReactNode;
+  itemIcon?: React.ReactNode;
+  emptyIcon?: React.ReactNode;
   emptyText?: string;
-  accentColor?: string;
   formatValue?: (value: string) => string;
   onItemClick?: (value: string) => void;
   onClear?: () => void;
   showClearButton?: boolean;
-  actionText?: string;
   className?: string;
 }
 
 export function CH5HistoryList({
   items,
-  title = "Recent",
-  subtitle,
+  title = "Recents",
   itemIcon,
   emptyIcon,
-  emptyText = "No recent entries",
-  accentColor = "bg-purple-500",
+  emptyText = "No recent calls",
   formatValue,
   onItemClick,
   onClear,
   showClearButton = true,
-  actionText = "Tap to use",
   className = "",
 }: CH5HistoryListProps) {
   const { theme } = useTheme();
 
-  const defaultFormatter = (val: string) => val;
+  const defaultFormatter = (val: string) => {
+    if (!val) return "";
+    if (val.length === 10) {
+      return val.replace(/(\d{3})(\d{3})(\d+)/, "($1) $2-$3");
+    }
+    if (val.length > 6) {
+      return val.replace(/(\d{3})(\d{3})(\d+)/, "$1 $2 $3");
+    } else if (val.length > 3) {
+      return val.replace(/(\d{3})(\d+)/, "$1 $2");
+    }
+    return val;
+  };
+
   const formatter = formatValue || defaultFormatter;
 
-  const displaySubtitle = subtitle || `${items.length} ${items.length === 1 ? "entry" : "entries"}`;
+  const formatTime = (date?: Date) => {
+    if (!date) return "";
+    const now = new Date();
+    const diff = now.getTime() - date.getTime();
+    const minutes = Math.floor(diff / 60000);
+    const hours = Math.floor(diff / 3600000);
+    
+    if (minutes < 1) return "Just now";
+    if (minutes < 60) return `${minutes}m ago`;
+    if (hours < 24) return `${hours}h ago`;
+    return date.toLocaleDateString();
+  };
 
   return (
-    <div className={`
-      ${theme.cardBackground}
-      rounded-3xl p-6
-      flex-1 min-h-0
-      flex flex-col
-      ${className}
-    `}>
+    <div className={`flex flex-col min-h-0 ${className}`}>
       {/* Header */}
-      <div className="flex items-center justify-between mb-4 shrink-0">
-        <div className="flex items-center gap-3">
-          <div className={`w-1.5 h-7 rounded-full ${accentColor}`} />
-          <div>
-            <h2 className={`${theme.primaryText} text-lg font-bold leading-tight`}>
-              {title}
-            </h2>
-            <p className={`${theme.secondaryText} text-xs mt-0.5`}>
-              {displaySubtitle}
-            </p>
-          </div>
-        </div>
-
+      <div className="flex items-center justify-between px-2 mb-3 shrink-0">
+        <h2 className={`${theme.primaryText} text-xl font-semibold`}>
+          {title}
+        </h2>
+        
         {showClearButton && items.length > 0 && onClear && (
           <button
             onClick={onClear}
             className={`
-              px-3 py-1.5 rounded-full
-              ${theme.buttonBackground}
-              flex items-center gap-1.5
-              active:scale-95 transition-all duration-150
+              ${theme.secondaryText} text-sm font-medium
+              active:opacity-50 transition-opacity duration-150
             `}
           >
-            <X size={14} className={theme.iconColor} />
-            <span className={`${theme.primaryText} text-xs font-medium`}>
-              Clear
-            </span>
+            Clear
           </button>
         )}
       </div>
 
       {/* List */}
-      <div className="flex-1 min-h-0 overflow-y-auto space-y-2">
+      <div className="flex-1 min-h-0 overflow-y-auto">
         {items.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-full opacity-40">
-            <div className={`
-              w-16 h-16 rounded-2xl ${theme.iconBackground}
-              flex items-center justify-center mb-3 ${theme.iconColor}
-            `}>
-              {emptyIcon}
-            </div>
-            <p className={`${theme.secondaryText} text-sm`}>
+          <div className="flex flex-col items-center justify-center h-full py-12 opacity-30">
+            {emptyIcon && (
+              <div className={`${theme.iconColor} mb-4`}>
+                {emptyIcon}
+              </div>
+            )}
+            <p className={`${theme.secondaryText} text-base`}>
               {emptyText}
             </p>
           </div>
         ) : (
-          items.map((item, index) => (
-            <button
-              key={index}
-              onClick={() => onItemClick?.(item.value)}
-              className={`
-                w-full ${theme.cardBackground}
-                ${theme.cardActiveBackground}
-                rounded-2xl p-4
-                flex items-center justify-between
-                active:scale-[0.98] transition-all duration-150
-              `}
-            >
-              <div className="flex items-center gap-3">
-                <div className={`
-                  w-10 h-10 rounded-xl ${theme.iconBackground}
-                  flex items-center justify-center ${theme.iconColor}
-                `}>
-                  {itemIcon}
+          <div className="px-2">
+            {items.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => onItemClick?.(item.value)}
+                className={`
+                  w-full
+                  flex items-center justify-between
+                  py-4 px-2
+                  active:opacity-50 transition-opacity duration-150
+                  ${index !== items.length - 1 ? `border-b ${theme.headerBorder}` : ""}
+                `}
+              >
+                <div className="flex items-center gap-4 min-w-0 flex-1">
+                  {/* Icon */}
+                  {itemIcon && (
+                    <div className={`
+                      ${theme.iconColor} 
+                      shrink-0
+                      ${item.label === "Missed" ? "text-red-400" : ""}
+                    `}>
+                      {itemIcon}
+                    </div>
+                  )}
+                  
+                  {/* Number & Label */}
+                  <div className="text-left min-w-0 flex-1">
+                    <p className={`
+                      ${theme.primaryText} 
+                      font-medium text-base
+                      truncate
+                    `}>
+                      {formatter(item.value)}
+                    </p>
+                    {item.label && (
+                      <p className={`${theme.secondaryText} text-sm mt-0.5`}>
+                        {item.label}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <div className="text-left">
-                  <span className={`${theme.primaryText} font-mono text-lg font-semibold block`}>
-                    {formatter(item.value)}
-                  </span>
-                  {item.label && (
-                    <span className={`${theme.secondaryText} text-xs`}>
-                      {item.label}
+
+                {/* Time & Chevron */}
+                <div className="flex items-center gap-2 shrink-0">
+                  {item.timestamp && (
+                    <span className={`${theme.secondaryText} text-sm`}>
+                      {formatTime(item.timestamp)}
                     </span>
                   )}
+                  <ChevronRight 
+                    size={18} 
+                    className={`${theme.secondaryText} opacity-50`} 
+                  />
                 </div>
-              </div>
-              {actionText && (
-                <span className={`${theme.secondaryText} text-xs`}>
-                  {actionText}
-                </span>
-              )}
-            </button>
-          ))
+              </button>
+            ))}
+          </div>
         )}
       </div>
     </div>

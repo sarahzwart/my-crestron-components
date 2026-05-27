@@ -3,7 +3,6 @@ import { useTheme } from "@/lib/theme";
 export interface CH5DisplayScreenProps {
   value: string;
   placeholder?: string;
-  maxLength?: number;
   formatValue?: (value: string) => string;
   className?: string;
 }
@@ -11,7 +10,6 @@ export interface CH5DisplayScreenProps {
 export function CH5DisplayScreen({
   value,
   placeholder = "Enter a number",
-  maxLength,
   formatValue,
   className = "",
 }: CH5DisplayScreenProps) {
