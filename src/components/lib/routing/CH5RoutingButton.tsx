@@ -38,47 +38,47 @@ export function CH5RoutingButton({
         ${isSelected ? theme.masterCardBackground : theme.cardBackground}
         ${theme.cardActiveBackground}
         ${isSelected ? selectedStyles : ""}
-        rounded-3xl p-6
-        flex flex-col items-center justify-center gap-4
+        rounded-2xl p-4
+        flex flex-col items-center justify-center gap-3
         transition-all duration-200
         active:scale-[0.95]
         relative
         overflow-hidden
-        aspect-square
+        min-h-0
+        w-full h-full
       `}
     >
       {/* Selection Indicator */}
       {isSelected && (
         <div className={`
-          absolute top-3 right-3 
-          w-7 h-7 rounded-full 
+          absolute top-2 right-2 
+          w-6 h-6 rounded-full 
           flex items-center justify-center
           ${selectionBadgeColor}
         `}>
-          <Check size={16} className="text-white" strokeWidth={3} />
+          <Check size={14} className="text-white" strokeWidth={3} />
         </div>
       )}
 
       {/* Icon */}
       <div className={`
-        w-16 h-16 rounded-2xl
+        w-12 h-12 rounded-xl
         flex items-center justify-center
         ${theme.iconBackground} ${theme.iconColor}
         transition-transform duration-200
         ${isSelected ? "scale-110" : ""}
+        shrink-0
       `}>
-        <div className="scale-125">
-          {item.icon}
-        </div>
+        {item.icon}
       </div>
 
       {/* Label */}
-      <div className="text-center">
-        <h3 className={`${theme.primaryText} font-semibold text-base leading-tight`}>
+      <div className="text-center min-w-0">
+        <h3 className={`${theme.primaryText} font-semibold text-sm leading-tight truncate`}>
           {item.label}
         </h3>
         {item.description && (
-          <p className={`${theme.secondaryText} text-xs mt-1 leading-tight`}>
+          <p className={`${theme.secondaryText} text-xs mt-0.5 leading-tight truncate`}>
             {item.description}
           </p>
         )}

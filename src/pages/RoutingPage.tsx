@@ -52,7 +52,6 @@ export function RoutingPage({
 
   return (
     <div className="h-full flex flex-col p-8 overflow-hidden">
-      {/* Header */}
       <div className="mb-8 px-2 shrink-0">
         <h1 className={`${theme.primaryText} text-4xl font-bold mb-2`}>
           {title}
@@ -62,7 +61,6 @@ export function RoutingPage({
         </p>
       </div>
 
-      {/* Main Content - Side by Side */}
       <div className="flex-1 grid grid-cols-[1fr_auto_1fr] gap-8 min-h-0">
         <CH5RoutingSection
           label="Sources"
@@ -85,7 +83,6 @@ export function RoutingPage({
         />
       </div>
 
-      {/* Action Bar */}
       <CH5RoutingActionBar
         canRoute={canRoute}
         destinationCount={selectedDestinations.length}
@@ -95,5 +92,4 @@ export function RoutingPage({
   );
 }
 
-// Re-export RoutingItem for convenience
 export type { RoutingItem };

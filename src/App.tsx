@@ -4,8 +4,6 @@ import { CH5Header } from "./components/layout/Header";
 import { CH5Footer } from "./components/layout/Footer";
 import { CH5Button } from "./components/lib/common/CH5Button";
 import { CH5MuteButton } from "./components/lib/volume/CH5MuteButton";
-import { AudioPage } from "./pages/AudioPage";
-import { AUDIO_CONTROLS } from "./config/audio.config";
 import { Home, Settings, Power } from "lucide-react";
 import { RoutingPage } from "./pages/RoutingPage";
 import { DESTINATIONS, SOURCES } from "./config/routing.config";
@@ -35,14 +33,14 @@ function AppContent() {
       />
 
       <main className="flex-1 overflow-auto">
-        <RoutingPage 
-    sources={SOURCES}
-    destinations={DESTINATIONS}
-    sourceColumns={3}
-    destinationColumns={3}
-    title="Audio/Video Routing"
-    subtitle="Choose what to play and where to send it"
-  />
+        <RoutingPage
+          sources={SOURCES}
+          destinations={DESTINATIONS}
+          sourceColumns={3}
+          destinationColumns={3}
+          title="Audio/Video Routing"
+          subtitle="Choose what to play and where to send it"
+        />
       </main>
 
       <CH5Footer
@@ -52,7 +50,6 @@ function AppContent() {
         backgroundColor={theme.footerBackground}
         bubbleBackground={theme.footerBubbleBackground}
         height={90}
-        
         muteButton={
           <CH5MuteButton
             commandSignal="audio.mute"
@@ -63,7 +60,6 @@ function AppContent() {
           />
         }
         mutePosition="left"
-
         leftButtons={
           <CH5Button
             commandSignal="system.power"
@@ -78,7 +74,6 @@ function AppContent() {
             glow={false}
           />
         }
-
         rightButtons={
           <CH5Button
             commandSignal="nav.home"

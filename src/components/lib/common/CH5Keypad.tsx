@@ -21,6 +21,7 @@ export interface KeypadProps {
   enterLabel?: string;
   className?: string;
   style?: React.CSSProperties;
+  onKeyPress?: (key: string) => void;
 }
 
 export function CH5Keypad({
@@ -43,6 +44,7 @@ export function CH5Keypad({
   enterLabel = "✓",
   className = "",
   style = {},
+  onKeyPress,
 }: KeypadProps) {
   const keys = [
     "1", "2", "3",
@@ -59,29 +61,30 @@ export function CH5Keypad({
 
   return (
     <div 
-      className={`grid grid-cols-3 gap-${gap} ${className}`} 
+      className={`grid grid-cols-3 grid-rows-4 gap-${gap} w-full h-full ${className}`} 
       style={keypadStyle}
     >
       {keys.map((key, index) => (
         key ? (
-          <CH5Button
-            key={index}
-            commandSignal={`${commandSignal}.${key}`}
-            feedbackSignal={`${feedbackSignal}.${key}`}
-            label={key}
-            variant="momentary"
-            size={size}
-            shape={buttonShape}
-            width="100%"
-            height="100%"
-            textSize={textSize}
-            inactiveClass={buttonColor}
-            activeClass={buttonColor}
-            activeTextClass={activeTextClass}
-            inactiveTextClass={inactiveTextClass}
-            glow={glow}
-            glowColor={glowColor}
-          />
+          <div key={index} onClick={() => onKeyPress?.(key)} className="w-full h-full">
+            <CH5Button
+              commandSignal={`${commandSignal}.${key}`}
+              feedbackSignal={`${feedbackSignal}.${key}`}
+              label={key}
+              variant="momentary"
+              size={size}
+              shape={buttonShape}
+              width="100%"
+              height="100%"
+              textSize={textSize}
+              inactiveClass={buttonColor}
+              activeClass={buttonColor}
+              activeTextClass={activeTextClass}
+              inactiveTextClass={inactiveTextClass}
+              glow={glow}
+              glowColor={glowColor}
+            />
+          </div>
         ) : (
           <div key={index} />
         )

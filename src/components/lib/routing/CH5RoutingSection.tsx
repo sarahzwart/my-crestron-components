@@ -22,7 +22,6 @@ export function CH5RoutingSection({
 }: CH5RoutingSectionProps) {
   const { theme } = useTheme();
 
-  // Default accent colors based on type
   const defaultAccent = type === "source" ? "bg-blue-500" : "bg-green-500";
   const sectionAccent = accentColor || defaultAccent;
 
@@ -33,6 +32,9 @@ export function CH5RoutingSection({
   };
 
   const selectedCount = selectedIds.length;
+
+  // Calculate rows needed based on items and columns
+  const rows = Math.ceil(items.length / columns);
 
   return (
     <section className="flex flex-col min-h-0">
@@ -64,14 +66,19 @@ export function CH5RoutingSection({
         )}
       </div>
 
-      {/* Scrollable Box */}
+      {/* Auto-fit Container - No Scrolling */}
       <div className={`
         flex-1 min-h-0
         ${theme.cardBackground}
         rounded-3xl p-6
-        overflow-y-auto
+        flex
       `}>
-        <div className={`grid gap-5 ${gridColumns[columns]}`}>
+        <div 
+          className={`grid gap-4 ${gridColumns[columns]} w-full h-full`}
+          style={{
+            gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
+          }}
+        >
           {items.map((item) => (
             <CH5RoutingButton
               key={item.id}
