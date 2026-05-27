@@ -23,6 +23,7 @@ function AppContent() {
             icon={<Settings size={24} />}
             className={theme.buttonBackground}
             iconColorClass={theme.iconColor}
+            activeClass={theme.buttonActiveColor}
             glow={false}
           />
         }
