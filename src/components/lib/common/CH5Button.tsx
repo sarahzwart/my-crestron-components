@@ -41,7 +41,7 @@ export interface ButtonProps {
 
   iconOn?: React.ReactNode; // Icon when toggle is ON
   iconOff?: React.ReactNode; // Icon when toggle is OFF
-
+  onClick?: () => void; // NEW
   className?: string;
   style?: React.CSSProperties;
 }
@@ -97,6 +97,7 @@ export function CH5Button({
   iconOff,
   disabled = false,
   className = "",
+  onClick,
   style = {},
 }: ButtonProps) {
   const { theme } = useTheme();
@@ -115,6 +116,7 @@ export function CH5Button({
       setIsOn(true);
       setTimeout(() => setIsOn(false), 200);
     }
+    onClick?.(); // Call the optional onClick after CH5 signal
   };
 
   const buttonText = variant === "toggle" ? (isOn ? onLabel : offLabel) : label;

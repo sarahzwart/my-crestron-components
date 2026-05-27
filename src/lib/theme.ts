@@ -1,49 +1,62 @@
 import { createContext, useContext, useState, createElement, type ReactNode } from "react";
 
 // ============================================
+// FONT CONFIGURATION
+// ============================================
+export interface AppFont {
+  name: string;
+  label: string;
+  variable: string;
+}
+
+export const APP_FONTS: Record<string, AppFont> = {
+  quicksand: {
+    name: "Quicksand",
+    label: "Quicksand",
+    variable: "var(--font-quicksand)",
+  },
+  roboto: {
+    name: "Roboto Flex",
+    label: "Roboto Flex",
+    variable: "var(--font-roboto)",
+  },
+  system: {
+    name: "system-ui",
+    label: "System Default",
+    variable: "system-ui, sans-serif",
+  },
+};
+
+export type FontName = keyof typeof APP_FONTS;
+
+// ============================================
 // GLOBAL THEME INTERFACE
 // ============================================
 export interface AppTheme {
-  // Page styling
   pageBackground: string;
-  
-  // Header styling
   headerBackground: string;
   headerBorder: string;
-  
-  // Footer styling
   footerBackground: string;
   footerBubbleBackground: string;
-  
-  // Card styling
   cardBackground: string;
   cardActiveBackground: string;
   masterCardBackground: string;
-  
-  // Text colors
   primaryText: string;
   secondaryText: string;
-  
-  // Slider styling
   sliderTrackColor: string;
-  sliderBackgroundColor: string;
   sliderColorSettings: "gradient" | "solid";
   sliderThumbType: "circle" | "square" | "diamond";
   sliderSize: "sm" | "md" | "lg" | "xl";
-  
-  // Button styling
   buttonBackground: string;
   buttonActiveColor: string;
-  
-  // Icon styling
   iconBackground: string;
   iconColor: string;
-  
-  // Accent colors
   accentColor: string;
 }
 
-
+// ============================================
+// PRE-BUILT THEMES
+// ============================================
 export const APP_THEMES = {
   glassDark: {
     pageBackground: "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900",
@@ -57,7 +70,6 @@ export const APP_THEMES = {
     primaryText: "text-white",
     secondaryText: "text-white/60",
     sliderTrackColor: "blue",
-    sliderBackgroundColor: "rgba(255,255,255,0.12)",
     sliderColorSettings: "gradient",
     sliderThumbType: "circle",
     sliderSize: "md",
@@ -79,7 +91,6 @@ export const APP_THEMES = {
     primaryText: "text-white",
     secondaryText: "text-purple-200/70",
     sliderTrackColor: "purple",
-    sliderBackgroundColor: "rgba(168,85,247,0.18)",
     sliderColorSettings: "gradient",
     sliderThumbType: "circle",
     sliderSize: "md",
@@ -101,13 +112,12 @@ export const APP_THEMES = {
     primaryText: "text-slate-900",
     secondaryText: "text-slate-500",
     sliderTrackColor: "slate",
-    sliderBackgroundColor: "#ffffff",
     sliderColorSettings: "solid",
     sliderThumbType: "circle",
     sliderSize: "md",
-    buttonBackground: "bg-slate-200",
+    buttonBackground: "bg-slate-100",
     buttonActiveColor: "blue",
-    iconBackground: "bg-slate-300",
+    iconBackground: "bg-slate-100",
     iconColor: "text-slate-700",
     accentColor: "blue",
   },
@@ -123,7 +133,6 @@ export const APP_THEMES = {
     primaryText: "text-white",
     secondaryText: "text-cyan-200/70",
     sliderTrackColor: "cyan",
-    sliderBackgroundColor: "rgba(34,211,238,0.16)",
     sliderColorSettings: "gradient",
     sliderThumbType: "circle",
     sliderSize: "md",
@@ -145,7 +154,6 @@ export const APP_THEMES = {
     primaryText: "text-white",
     secondaryText: "text-orange-200/70",
     sliderTrackColor: "orange",
-    sliderBackgroundColor: "rgba(249,115,22,0.18)",
     sliderColorSettings: "gradient",
     sliderThumbType: "circle",
     sliderSize: "md",
@@ -167,7 +175,6 @@ export const APP_THEMES = {
     primaryText: "text-white",
     secondaryText: "text-emerald-200/70",
     sliderTrackColor: "emerald",
-    sliderBackgroundColor: "rgba(16,185,129,0.18)",
     sliderColorSettings: "gradient",
     sliderThumbType: "circle",
     sliderSize: "md",
@@ -189,6 +196,9 @@ interface ThemeContextValue {
   themeName: ThemeName;
   setTheme: (themeName: ThemeName) => void;
   setCustomTheme: (theme: AppTheme) => void;
+  font: AppFont;
+  fontName: FontName;
+  setFont: (fontName: FontName) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
@@ -199,16 +209,20 @@ const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 interface ThemeProviderProps {
   children: ReactNode;
   defaultTheme?: ThemeName;
+  defaultFont?: FontName;
 }
 
 export function ThemeProvider({
   children,
-  defaultTheme = "minimal",
+  defaultTheme = "glassDark",
+  defaultFont = "quicksand",
 }: ThemeProviderProps) {
   const [themeName, setThemeName] = useState<ThemeName>(defaultTheme);
   const [customTheme, setCustomThemeState] = useState<AppTheme | null>(null);
+  const [fontName, setFontName] = useState<FontName>(defaultFont);
 
   const theme = customTheme || APP_THEMES[themeName];
+  const font = APP_FONTS[fontName];
 
   const setTheme = (newThemeName: ThemeName) => {
     setThemeName(newThemeName);
@@ -219,9 +233,20 @@ export function ThemeProvider({
     setCustomThemeState(newTheme);
   };
 
+  const setFont = (newFontName: FontName) => {
+    setFontName(newFontName);
+    // Apply font to document root so it cascades everywhere
+    document.body.style.fontFamily = APP_FONTS[newFontName].variable;
+  };
+
+  // Apply initial font on mount
+  useState(() => {
+    document.body.style.fontFamily = font.variable;
+  });
+
   return createElement(
     ThemeContext.Provider,
-    { value: { theme, themeName, setTheme, setCustomTheme } },
+    { value: { theme, themeName, setTheme, setCustomTheme, font, fontName, setFont } },
     children
   );
 }
