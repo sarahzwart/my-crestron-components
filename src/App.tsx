@@ -10,11 +10,11 @@ import { AudioPage } from "./pages/AudioPage";
 import { AudioCallPage } from "./pages/AudioCallPage";
 import { RoutingPage } from "./pages/RoutingPage";
 import { SettingsPage } from "./pages/SettingsPage";
+import { LightsPage } from "./pages/LightsPage";
 import { AUDIO_CONTROLS } from "./config/audio.config";
 import { SOURCES, DESTINATIONS } from "./config/routing.config";
 import { APPS } from "./config/apps.config";
 import { Home, Settings, Power } from "lucide-react";
-import { LightsPage } from "./pages/LightsPage";
 
 type Page = "home" | "audio" | "call" | "routing" | "settings" | "lights";
 
@@ -51,23 +51,24 @@ function AppContent() {
 
   return (
     <div className={`flex flex-col h-screen ${theme.pageBackground}`}>
-      {/* Header - Home button top left only */}
+      {/* Header */}
       <CH5Header
         leftButtons={
-          <button
+          <CH5Button
+            commandSignal="nav.home"
+            feedbackSignal="nav.home.fb"
+            variant="momentary"
+            shape="circle"
+            width={48}
+            height={48}
+            icon={<Home />}
+            iconSize={20}
+            className={theme.buttonBackground}
+            iconColorClass={theme.iconColor}
+            glow={true}
+            glowColor={theme.accentColor}
             onClick={() => setCurrentPage("home")}
-            className={`
-              w-13.5 h-13.5 rounded-full
-              ${currentPage === "home" 
-                ? theme.masterCardBackground 
-                : theme.buttonBackground}
-              ${theme.iconColor}
-              flex items-center justify-center
-              active:scale-90 transition-all duration-150
-            `}
-          >
-            <Home size={24} />
-          </button>
+          />
         }
         backgroundColor={theme.headerBackground}
         textColor={theme.primaryText}
@@ -79,7 +80,7 @@ function AppContent() {
         {renderPage()}
       </main>
 
-      {/* Footer - Volume center, Power & Settings bottom right */}
+      {/* Footer */}
       <CH5Footer
         volumeWidth={500}
         volumePosition="left"
@@ -91,17 +92,17 @@ function AppContent() {
           <CH5MuteButton
             commandSignal="audio.mute"
             feedbackSignal="audio.mute.fb"
-            width={40}
-            height={40}
+            width={48}
+            height={48}
             iconSize={20}
           />
         }
         mutePosition="left"
         rightButtons={
           <div className="flex items-center gap-3">
-            {/* Power Button */}
             <CH5Button
               commandSignal="system.power"
+              feedbackSignal="system.power.fb"
               variant="momentary"
               shape="circle"
               width={48}
@@ -110,26 +111,27 @@ function AppContent() {
               iconSize={20}
               className={theme.buttonBackground}
               iconColorClass={theme.iconColor}
-              glow={false}
+              glow={true}
+              glowColor={theme.accentColor}
             />
 
-            {/* Settings Button */}
-            <button
+            <CH5Button
+              commandSignal="nav.settings"
+              feedbackSignal="nav.settings.fb"
+              variant="momentary"
+              shape="circle"
+              width={48}
+              height={48}
+              icon={<Settings />}
+              iconSize={20}
+              className={theme.buttonBackground}
+              iconColorClass={theme.iconColor}
+              glow={true}
+              glowColor={theme.accentColor}
               onClick={() => setCurrentPage(
                 currentPage === "settings" ? "home" : "settings"
               )}
-              className={`
-                w-12 h-12 rounded-full
-                ${currentPage === "settings"
-                  ? theme.masterCardBackground
-                  : theme.buttonBackground}
-                ${theme.iconColor}
-                flex items-center justify-center
-                active:scale-90 transition-all duration-150
-              `}
-            >
-              <Settings size={20} />
-            </button>
+            />
           </div>
         }
         className="backdrop-blur-xl"

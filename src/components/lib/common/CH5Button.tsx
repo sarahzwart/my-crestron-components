@@ -1,9 +1,4 @@
 import { useCH5Boolean } from "../../../hooks/useCH5Boolean";
-import {
-  SOLID_COLOR_CLASSES,
-  TEXT_COLOR_CLASSES,
-  GLOW_CLASSES,
-} from "@/lib/colors";
 import React from "react";
 import { useTheme } from "@/lib/theme";
 
@@ -31,17 +26,13 @@ export interface ButtonProps {
   icon?: React.ReactNode;
   iconPosition?: "left" | "right" | "top" | "bottom";
   iconSize?: number;
-  iconColorClass?: string; // NEW: Direct override for icon/text color
+  iconColorClass?: string;
   glow?: boolean;
-  glowColor?: string;
-  activeClass?: string;
-  inactiveClass?: string;
-  activeTextClass?: string;
-  inactiveTextClass?: string;
-
-  iconOn?: React.ReactNode; // Icon when toggle is ON
-  iconOff?: React.ReactNode; // Icon when toggle is OFF
-  onClick?: () => void; // NEW
+  activeClassName?: string;   // Direct Tailwind classes when ON
+  inactiveClassName?: string; // Direct Tailwind classes when OFF
+  iconOn?: React.ReactNode;
+  iconOff?: React.ReactNode;
+  onClick?: () => void;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -81,18 +72,15 @@ export function CH5Button({
   maxHeight,
   textSize,
   label,
-  onLabel = "ON",
-  offLabel = "OFF",
+  onLabel,
+  offLabel,
   icon,
   iconPosition = "left",
   iconSize,
   iconColorClass,
   glow = true,
-  glowColor = "indigo",
-  activeClass = "indigo",
-  inactiveClass = "gray",
-  activeTextClass = "white",
-  inactiveTextClass = "white",
+  activeClassName,
+  inactiveClassName,
   iconOn,
   iconOff,
   disabled = false,
@@ -101,7 +89,7 @@ export function CH5Button({
   style = {},
 }: ButtonProps) {
   const { theme } = useTheme();
-  
+
   const [isOn, setIsOn] = useCH5Boolean(
     commandSignal,
     feedbackSignal || commandSignal + ".fb",
@@ -116,90 +104,52 @@ export function CH5Button({
       setIsOn(true);
       setTimeout(() => setIsOn(false), 200);
     }
-    onClick?.(); // Call the optional onClick after CH5 signal
+    onClick?.();
   };
 
-  const buttonText = variant === "toggle" ? (isOn ? onLabel : offLabel) : label;
+  const buttonText = onLabel || offLabel
+    ? (variant === "toggle" ? (isOn ? onLabel : offLabel) : label)
+    : label;
 
   const customStyle: React.CSSProperties = {
     ...style,
-    width: width
-      ? typeof width === "number"
-        ? `${width}px`
-        : width
-      : undefined,
-    height: height
-      ? typeof height === "number"
-        ? `${height}px`
-        : height
-      : undefined,
-    minWidth: minWidth
-      ? typeof minWidth === "number"
-        ? `${minWidth}px`
-        : minWidth
-      : undefined,
-    minHeight: minHeight
-      ? typeof minHeight === "number"
-        ? `${minHeight}px`
-        : minHeight
-      : undefined,
-    maxWidth: maxWidth
-      ? typeof maxWidth === "number"
-        ? `${maxWidth}px`
-        : maxWidth
-      : undefined,
-    maxHeight: maxHeight
-      ? typeof maxHeight === "number"
-        ? `${maxHeight}px`
-        : maxHeight
-      : undefined,
+    width: width ? (typeof width === "number" ? `${width}px` : width) : undefined,
+    height: height ? (typeof height === "number" ? `${height}px` : height) : undefined,
+    minWidth: minWidth ? (typeof minWidth === "number" ? `${minWidth}px` : minWidth) : undefined,
+    minHeight: minHeight ? (typeof minHeight === "number" ? `${minHeight}px` : minHeight) : undefined,
+    maxWidth: maxWidth ? (typeof maxWidth === "number" ? `${maxWidth}px` : maxWidth) : undefined,
+    maxHeight: maxHeight ? (typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight) : undefined,
     fontSize: textSize ? `${textSize}px` : undefined,
     padding: width || height ? "0" : undefined,
   };
 
   const getColorClass = () => {
     if (variant === "glass") {
-      return "bg-white/10 hover:bg-white/20 backdrop-blur-md";
+      return "bg-white/10 backdrop-blur-md";
     }
-    return isOn
-      ? SOLID_COLOR_CLASSES[activeClass] || SOLID_COLOR_CLASSES.indigo
-      : SOLID_COLOR_CLASSES[inactiveClass] || SOLID_COLOR_CLASSES.gray;
+    if (isOn && activeClassName) return activeClassName;
+    if (!isOn && inactiveClassName) return inactiveClassName;
+    // Default fallback using theme
+    return theme.buttonBackground;
   };
 
-  const colorClass = getColorClass();
-
-  // Use iconColorClass if provided, otherwise fall back to default behavior
-  const textColorClass = iconColorClass
-    ? iconColorClass
-    : isOn
-      ? TEXT_COLOR_CLASSES[activeTextClass] || TEXT_COLOR_CLASSES.white
-      : TEXT_COLOR_CLASSES[inactiveTextClass] || TEXT_COLOR_CLASSES.white;
-
-  const glowClass =
-    glow && isOn && variant !== "glass"
-      ? `shadow-lg ${GLOW_CLASSES[glowColor] || GLOW_CLASSES.indigo}`
-      : "shadow-md";
+  const getGlowClass = () => {
+    if (!glow || !isOn || variant === "glass") return "";
+    // Simple glow using the button's current color
+    return "shadow-lg shadow-white/20";
+  };
 
   const hasText = Boolean(buttonText);
   const layoutClass = hasText ? ICON_POSITION_CLASSES[iconPosition] : "";
 
   const getSizeClass = () => {
-    if (width || height) {
-      return "";
-    }
-    if (shape === "circle" && !hasText) {
-      return "w-12 h-12 p-0";
-    }
-    if (textSize) {
-      return SIZE_CLASSES[size].replace(/text-\w+/, "").trim();
-    }
+    if (width || height) return "";
+    if (shape === "circle" && !hasText) return "w-12 h-12 p-0";
+    if (textSize) return SIZE_CLASSES[size].replace(/text-\w+/, "").trim();
     return SIZE_CLASSES[size];
   };
 
-  const sizeClass = getSizeClass();
-
   const renderIcon = () => {
-    // Choose icon based on state
     let iconToRender = icon;
     if (variant === "toggle" && (iconOn || iconOff)) {
       iconToRender = isOn ? iconOn || icon : iconOff || icon;
@@ -210,23 +160,13 @@ export function CH5Button({
     if (iconSize && React.isValidElement(iconToRender)) {
       const clonedIcon = React.cloneElement(
         iconToRender as React.ReactElement<any>,
-        {
-          size: iconSize,
-          width: iconSize,
-          height: iconSize,
-          strokeWidth: 2,
-        },
+        { size: iconSize, width: iconSize, height: iconSize, strokeWidth: 2 },
       );
 
       return (
         <span
           className="inline-flex items-center justify-center shrink-0"
-          style={{
-            width: `${iconSize}px`,
-            height: `${iconSize}px`,
-            overflow: "hidden",
-            flexShrink: 0,
-          }}
+          style={{ width: `${iconSize}px`, height: `${iconSize}px`, overflow: "hidden", flexShrink: 0 }}
         >
           {clonedIcon}
         </span>
@@ -240,13 +180,18 @@ export function CH5Button({
     <button
       onClick={handleClick}
       disabled={disabled}
-      className={`${sizeClass} 
-                  ${SHAPE_CLASSES[shape]} 
-                  ${colorClass} ${textColorClass} 
-                  ${glowClass} ${className} ${layoutClass}
-                  flex items-center justify-center 
-                  transition-all duration-200 
-                  disabled:opacity-50 disabled:cursor-not-allowed`}
+      className={`
+        ${getSizeClass()}
+        ${SHAPE_CLASSES[shape]}
+        ${getColorClass()}
+        ${iconColorClass || theme.iconColor}
+        ${getGlowClass()}
+        ${className}
+        ${layoutClass}
+        flex items-center justify-center
+        transition-all duration-200
+        disabled:opacity-50 disabled:cursor-not-allowed
+      `}
       style={customStyle}
     >
       {(icon || iconOn || iconOff) ? renderIcon() : null}

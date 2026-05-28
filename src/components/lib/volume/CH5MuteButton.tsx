@@ -8,6 +8,7 @@ export interface CH5MuteButtonProps {
   width?: number;
   height?: number;
   iconSize?: number;
+  onClick?: () => void;
 }
 
 export function CH5MuteButton({
@@ -16,6 +17,7 @@ export function CH5MuteButton({
   width = 40,
   height = 40,
   iconSize = 20,
+  onClick,
 }: CH5MuteButtonProps) {
   const { theme } = useTheme();
 
@@ -27,15 +29,15 @@ export function CH5MuteButton({
       shape="circle"
       width={width}
       height={height}
-      iconOn={<VolumeX />}      // Show X when muted (ON state)
-      iconOff={<Volume2 />}     // Show regular when not muted (OFF state)
+      iconOn={<VolumeX />}
+      iconOff={<Volume2 />}
       iconSize={iconSize}
       onLabel=""
       offLabel=""
-      className={theme.buttonBackground}
-      iconColorClass={theme.iconColor}
-      activeClass={theme.buttonActiveColor}
+      activeClassName={`${theme.buttonActiveBg} ${theme.buttonActiveText}`}
+      inactiveClassName={`${theme.buttonBackground} ${theme.iconColor}`}
       glow={false}
+      onClick={onClick}
     />
   );
 }
