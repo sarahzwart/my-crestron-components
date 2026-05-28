@@ -35,7 +35,6 @@ export function CH5RoutingActionBar({
         `}
       >
         <div className="flex items-center gap-4">
-          {/* Icon */}
           <div className={`
             w-14 h-14 rounded-2xl 
             ${canRoute ? "bg-green-500/30" : theme.iconBackground} 
@@ -46,8 +45,6 @@ export function CH5RoutingActionBar({
               className={canRoute ? "text-green-300" : theme.iconColor} 
             />
           </div>
-          
-          {/* Text */}
           <div className="text-left">
             <p className={`${theme.primaryText} font-semibold text-lg`}>
               {canRoute ? routeLabel : emptyLabel}
@@ -59,8 +56,6 @@ export function CH5RoutingActionBar({
             </p>
           </div>
         </div>
-        
-        {/* Arrow */}
         {canRoute && <ArrowRight className={theme.primaryText} size={28} />}
       </button>
     </div>
