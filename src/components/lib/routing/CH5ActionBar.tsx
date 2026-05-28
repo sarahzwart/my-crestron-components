@@ -28,7 +28,7 @@ export function CH5RoutingActionBar({
         onClick={onRoute}
         disabled={!canRoute}
         className={`
-          w-full ${canRoute ? theme.masterCardBackground : theme.cardBackground}
+          w-full ${canRoute ? theme.cardHighlightBackground : theme.cardBackground}
           rounded-3xl p-5
           flex items-center justify-between
           active:scale-[0.99] transition-all duration-150

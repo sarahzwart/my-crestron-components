@@ -32,7 +32,7 @@ export function CH5RoutingSection({
 
   return (
     <section className="flex flex-col min-h-0">
-      {/* Header */}
+
       <div className="flex items-center justify-between mb-5 px-2 shrink-0">
         <div className="flex items-center gap-3">
           <div className={`w-1.5 h-10 rounded-full ${sectionAccent}`} />
@@ -56,7 +56,6 @@ export function CH5RoutingSection({
         )}
       </div>
 
-      {/* Grid */}
       <div className={`flex-1 min-h-0 ${theme.cardBackground} rounded-3xl p-6 flex`}>
         <div
           className={`grid gap-4 ${gridColumns[columns]} w-full h-full`}

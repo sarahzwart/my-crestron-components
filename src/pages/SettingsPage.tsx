@@ -14,7 +14,6 @@ export function SettingsPage() {
       </div>
 
       <div className="max-w-4xl mx-auto w-full space-y-10">
-        {/* Theme Selection */}
         <section>
           <SectionHeader color="bg-blue-500" title="Theme" subtitle="Choose a colour scheme" theme={theme} />
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
@@ -29,7 +28,6 @@ export function SettingsPage() {
           </div>
         </section>
 
-        {/* Font Selection */}
         <section>
           <SectionHeader color="bg-purple-500" title="Font" subtitle="Choose a typeface" theme={theme} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -48,7 +46,6 @@ export function SettingsPage() {
   );
 }
 
-// ─── Shared Section Header ─────────────────────────────────────────────────
 function SectionHeader({
   color,
   title,
@@ -58,7 +55,6 @@ function SectionHeader({
   color: string;
   title: string;
   subtitle: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   theme: any;
 }) {
   return (
@@ -72,7 +68,6 @@ function SectionHeader({
   );
 }
 
-// ─── Theme Card ────────────────────────────────────────────────────────────
 const THEME_LABELS: Record<ThemeName, string> = {
   glassDark:   "Glass Dark",
   neonPurple:  "Neon Purple",
@@ -116,7 +111,6 @@ function ThemeCard({ themeName, isSelected, onSelect }: {
         </div>
       )}
 
-      {/* Mini preview */}
       <div className={`${preview.bg} rounded-xl h-20 p-3 flex flex-col justify-between`}>
         <div className="flex items-center gap-1.5">
           <div className="w-8 h-1.5 rounded-full bg-white/30" />
@@ -136,7 +130,7 @@ function ThemeCard({ themeName, isSelected, onSelect }: {
   );
 }
 
-// ─── Font Card ─────────────────────────────────────────────────────────────
+
 function FontCard({ fontName, isSelected, onSelect }: {
   fontName: FontName;
   isSelected: boolean;

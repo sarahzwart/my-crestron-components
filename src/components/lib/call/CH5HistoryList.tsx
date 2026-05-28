@@ -64,7 +64,6 @@ export function CH5HistoryList({
 
   return (
     <div className={`flex flex-col min-h-0 ${className}`}>
-      {/* Header */}
       <div className="flex items-center justify-between px-2 mb-3 shrink-0">
         <h2 className={`${theme.primaryText} text-xl font-semibold`}>
           {title}
@@ -83,7 +82,6 @@ export function CH5HistoryList({
         )}
       </div>
 
-      {/* List */}
       <div className="flex-1 min-h-0 overflow-y-auto">
         {items.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full py-12 opacity-30">
@@ -111,7 +109,6 @@ export function CH5HistoryList({
                 `}
               >
                 <div className="flex items-center gap-4 min-w-0 flex-1">
-                  {/* Icon */}
                   {itemIcon && (
                     <div className={`
                       ${theme.iconColor} 
@@ -122,7 +119,6 @@ export function CH5HistoryList({
                     </div>
                   )}
                   
-                  {/* Number & Label */}
                   <div className="text-left min-w-0 flex-1">
                     <p className={`
                       ${theme.primaryText} 
@@ -139,7 +135,6 @@ export function CH5HistoryList({
                   </div>
                 </div>
 
-                {/* Time & Chevron */}
                 <div className="flex items-center gap-2 shrink-0">
                   {item.timestamp && (
                     <span className={`${theme.secondaryText} text-sm`}>

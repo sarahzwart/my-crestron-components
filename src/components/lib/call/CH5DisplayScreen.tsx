@@ -14,11 +14,8 @@ export function CH5DisplayScreen({
   className = "",
 }: CH5DisplayScreenProps) {
   const { theme } = useTheme();
-
-  // Default phone-style formatter
   const defaultFormatter = (val: string) => {
     if (!val) return "";
-    // International format
     if (val.length > 10) {
       return val.replace(/(\d{1,3})(\d{3})(\d{3})(\d+)/, "+$1 $2 $3 $4");
     }
@@ -35,7 +32,6 @@ export function CH5DisplayScreen({
 
   const formatter = formatValue || defaultFormatter;
 
-  // Dynamically size the text based on length
   const getTextSize = () => {
     if (!value) return "text-4xl";
     if (value.length > 14) return "text-3xl";

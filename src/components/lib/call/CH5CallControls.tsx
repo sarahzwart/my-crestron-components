@@ -27,9 +27,7 @@ export interface CH5CallControlsProps {
   className?: string;
 }
 
-// ============================================
-// INDIVIDUAL CONTROL BUTTON
-// ============================================
+
 interface ControlButtonProps {
   icon: React.ReactNode;
   label: string;
@@ -86,9 +84,6 @@ function ControlButton({
   );
 }
 
-// ============================================
-// MAIN COMPONENT
-// ============================================
 export function CH5CallControls({
   hangupCommandSignal,
   hangupFeedbackSignal,
@@ -103,21 +98,20 @@ export function CH5CallControls({
   isKeypadVisible = false,
   className = "",
 }: CH5CallControlsProps) {
-  // Privacy/Mute state via CH5
+
   const [isPrivacyOn, setPrivacyOn] = useCH5Boolean(
     privacyCommandSignal,
     privacyFeedbackSignal,
     false
   );
 
-  // Hold state via CH5
+
   const [isOnHold, setOnHold] = useCH5Boolean(
     holdCommandSignal || "",
     holdFeedbackSignal || "",
     false
   );
 
-  // Hangup signal
   const [, sendHangup] = useCH5Boolean(
     hangupCommandSignal,
     hangupFeedbackSignal,
@@ -135,17 +129,13 @@ export function CH5CallControls({
 
   return (
     <div className={`flex flex-col items-center gap-8 ${className}`}>
-      {/* Row of Controls */}
       <div className="grid grid-cols-3 gap-6 w-full max-w-xs">
-        {/* Mute / Privacy */}
         <ControlButton
           icon={isPrivacyOn ? <MicOff size={28} /> : <Mic size={28} />}
           label="mute"
           isActive={isPrivacyOn}
           onClick={togglePrivacy}
         />
-
-        {/* Keypad Toggle */}
         {showKeypadButton && onKeypadToggle && (
           <ControlButton
             icon={<Grid3x3 size={28} />}
@@ -155,7 +145,6 @@ export function CH5CallControls({
           />
         )}
 
-        {/* Hold */}
         {showHold && (
           <ControlButton
             icon={isOnHold ? <Play size={28} fill="currentColor" /> : <Pause size={28} fill="currentColor" />}
@@ -166,7 +155,6 @@ export function CH5CallControls({
         )}
       </div>
 
-      {/* Hangup Button */}
       <button
         onClick={handleHangup}
         className={`

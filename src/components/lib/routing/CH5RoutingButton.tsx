@@ -41,14 +41,13 @@ export function CH5RoutingButton({
         relative overflow-hidden w-full h-full
       `}
     >
-      {/* Selection badge */}
+
       {isSelected && (
         <div className={`absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center ${badgeColor}`}>
           <Check size={14} className="text-white" strokeWidth={3} />
         </div>
       )}
 
-      {/* Icon */}
       <div className={`
         w-12 h-12 rounded-xl flex items-center justify-center
         ${theme.iconBackground} ${theme.iconColor}
@@ -59,7 +58,6 @@ export function CH5RoutingButton({
         {item.icon}
       </div>
 
-      {/* Label */}
       <div className="text-center min-w-0">
         <h3 className={`${theme.primaryText} font-semibold text-sm leading-tight truncate`}>
           {item.label}

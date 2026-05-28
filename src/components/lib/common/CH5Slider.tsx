@@ -163,14 +163,12 @@ export function CH5Slider({
             "block border-2 border-primary bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
             thumbSize ? "" : sizeConfig.thumb,
             BUTTON_SHAPE_CLASSES[thumbType],
-            // Hide original thumb when using icon
             thumbType === "icon" && "opacity-0",
           )}
           style={thumbStyle}
         />
       </SliderPrimitive.Root>
 
-      {/* Custom icon thumb overlay */}
       {thumbType === "icon" && icon && (
         <div
           className="absolute pointer-events-none flex items-center justify-center z-10"

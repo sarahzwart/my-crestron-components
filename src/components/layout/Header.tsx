@@ -49,15 +49,10 @@ export function CH5Header({
       className={`flex items-center justify-between px-6 ${backgroundColor} ${textColor} shadow-lg ${className}`}
       style={headerStyle}
     >
-      {/* Left: nav buttons */}
-      <div className="flex items-center gap-3">
-        {leftButtons}
-      </div>
+      <div className="flex items-center gap-3">{leftButtons}</div>
 
-      {/* Centre: intentionally empty (logo removed — add back via leftButtons if needed) */}
       <div />
 
-      {/* Right: clock */}
       <div className="flex flex-col items-end">
         <div className="text-xl font-semibold">{formatTime(currentTime)}</div>
         <div className="text-sm opacity-75">{formatDate(currentTime)}</div>

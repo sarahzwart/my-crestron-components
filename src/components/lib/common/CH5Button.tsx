@@ -25,7 +25,7 @@ export interface ButtonProps {
   iconOn?: React.ReactNode;
   iconOff?: React.ReactNode;
   onClick?: () => void;
-  /** Override resting background + text classes (single string, e.g. "bg-red-500 text-white") */
+
   className?: string;
   style?: React.CSSProperties;
 }
@@ -104,7 +104,6 @@ export function CH5Button({
     padding:  (width || height) ? "0" : undefined,
   };
 
-  // Colour classes — theme-driven, className can override
   const colorClasses = className || (
     variant === "glass"
       ? "bg-white/10 backdrop-blur-md text-white"

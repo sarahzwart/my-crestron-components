@@ -111,15 +111,11 @@ export function AudioCallPage({
 
   const clearHistory = () => setHistory([]);
 
-  // ============================================
-  // IN-CALL VIEW
-  // ============================================
   if (isInCall) {
     return (
       <div className="h-full flex flex-col overflow-hidden">
         <div className="flex-1 flex flex-col items-center justify-between max-w-md mx-auto w-full px-8 py-12">
-          
-          {/* Caller Info */}
+
           <div className="flex flex-col items-center gap-2 mt-8">
             <p className={`${theme.primaryText} text-4xl font-light tracking-tight`}>
               {formatNumber(displayValue)}
@@ -129,7 +125,6 @@ export function AudioCallPage({
             </p>
           </div>
 
-          {/* Center - Keypad or Avatar */}
           <div className="flex-1 flex items-center justify-center w-full">
             {showKeypadInCall ? (
               <CH5Keypad
@@ -150,7 +145,6 @@ export function AudioCallPage({
             )}
           </div>
 
-          {/* Call Controls */}
           <CH5CallControls
             hangupCommandSignal={hangupCommandSignal}
             hangupFeedbackSignal={hangupFeedbackSignal}
@@ -167,9 +161,6 @@ export function AudioCallPage({
     );
   }
 
-  // ============================================
-  // PRE-CALL VIEW
-  // ============================================
   return (
     <div className="h-full flex flex-col p-8 overflow-hidden">
       {/* Header */}
@@ -182,9 +173,7 @@ export function AudioCallPage({
         </p>
       </div>
 
-      {/* Main Content */}
       <div className="flex-1 grid grid-cols-[1fr_1fr] gap-8 min-h-0 max-w-6xl mx-auto w-full">
-        {/* Left Side - Display & History */}
         <div className="flex flex-col gap-4 min-h-0">
           <CH5DisplayScreen
             value={displayValue}
@@ -209,7 +198,6 @@ export function AudioCallPage({
           )}
         </div>
 
-        {/* Right Side - Keypad */}
         <div className="flex flex-col items-center justify-center min-h-0 py-4">
           <CH5Keypad
             commandSignal={commandSignal}
