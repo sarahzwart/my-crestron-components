@@ -17,53 +17,40 @@ export interface CH5RoutingButtonProps {
   type: "source" | "destination";
 }
 
-export function CH5RoutingButton({ 
-  item, 
-  isSelected, 
-  onClick, 
-  type 
+export function CH5RoutingButton({
+  item,
+  isSelected,
+  onClick,
+  type,
 }: CH5RoutingButtonProps) {
   const { theme } = useTheme();
-  
-  const selectedStyles = type === "source"
-    ? "ring-2 ring-blue-400"
-    : "ring-2 ring-green-400";
 
-  const selectionBadgeColor = type === "source" ? "bg-blue-500" : "bg-green-500";
+  const ringColor = type === "source" ? "ring-blue-400" : "ring-green-400";
+  const badgeColor = type === "source" ? "bg-blue-500" : "bg-green-500";
 
   return (
     <button
       onClick={onClick}
       className={`
-        ${isSelected ? theme.masterCardBackground : theme.cardBackground}
+        ${isSelected ? theme.cardHighlightBackground : theme.cardBackground}
         ${theme.cardActiveBackground}
-        ${isSelected ? selectedStyles : ""}
+        ${isSelected ? `ring-2 ${ringColor}` : ""}
         rounded-2xl p-4
         flex flex-col items-center justify-center gap-3
-        transition-all duration-200
-        active:scale-[0.95]
-        relative
-        overflow-hidden
-        min-h-0
-        w-full h-full
+        transition-all duration-200 active:scale-[0.95]
+        relative overflow-hidden w-full h-full
       `}
     >
-      {/* Selection Indicator */}
+      {/* Selection badge */}
       {isSelected && (
-        <div className={`
-          absolute top-2 right-2 
-          w-6 h-6 rounded-full 
-          flex items-center justify-center
-          ${selectionBadgeColor}
-        `}>
+        <div className={`absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center ${badgeColor}`}>
           <Check size={14} className="text-white" strokeWidth={3} />
         </div>
       )}
 
       {/* Icon */}
       <div className={`
-        w-12 h-12 rounded-xl
-        flex items-center justify-center
+        w-12 h-12 rounded-xl flex items-center justify-center
         ${theme.iconBackground} ${theme.iconColor}
         transition-transform duration-200
         ${isSelected ? "scale-110" : ""}

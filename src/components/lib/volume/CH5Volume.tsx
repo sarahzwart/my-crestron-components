@@ -32,13 +32,13 @@ export function CH5VolumeSlider({
 }: CH5VolumeSliderProps) {
   const { theme } = useTheme();
 
-  const cardBg = isMaster ? theme.masterCardBackground : theme.cardBackground;
+  const cardBg = isMaster ? theme.cardHighlightBackground : theme.cardBackground;
   const sliderColor = trackColor || theme.sliderTrackColor;
 
   return (
     <div
       className={`
-        ${cardBg} 
+        ${cardBg}
         ${theme.cardActiveBackground}
         ${customClassName}
         rounded-2xl p-6 transition-all duration-150
@@ -50,8 +50,8 @@ export function CH5VolumeSlider({
         <div className="flex items-center gap-3">
           <div
             className={`
-              ${isMaster ? "w-14 h-14" : "w-12 h-12"} 
-              rounded-xl ${theme.iconBackground} 
+              ${isMaster ? "w-14 h-14" : "w-12 h-12"}
+              rounded-xl ${theme.iconBackground}
               flex items-center justify-center
               ${theme.iconColor}
             `}
@@ -78,7 +78,6 @@ export function CH5VolumeSlider({
           </div>
         </div>
 
-        {/* Use the new CH5MuteButton */}
         <CH5MuteButton
           commandSignal={muteCommandSignal}
           feedbackSignal={muteFeedbackSignal}

@@ -1,5 +1,4 @@
 import { useTheme } from "../lib/theme";
-import { Music, Phone, Shuffle, Lightbulb } from "lucide-react";
 
 export interface AppItem {
   id: string;
@@ -19,17 +18,11 @@ export function HomePage({ apps, onNavigate, title = "Home" }: HomePageProps) {
 
   return (
     <div className="h-full flex flex-col p-8 overflow-hidden">
-      {/* Header */}
       <div className="mb-8 px-2 shrink-0">
-        <h1 className={`${theme.primaryText} text-4xl font-bold mb-2`}>
-          {title}
-        </h1>
-        <p className={`${theme.secondaryText} text-base`}>
-          Select an app to get started
-        </p>
+        <h1 className={`${theme.primaryText} text-4xl font-bold mb-2`}>{title}</h1>
+        <p className={`${theme.secondaryText} text-base`}>Select an app to get started</p>
       </div>
 
-      {/* App Grid */}
       <div className="flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr min-h-0">
         {apps.map((app) => (
           <button
@@ -40,30 +33,20 @@ export function HomePage({ apps, onNavigate, title = "Home" }: HomePageProps) {
               ${theme.cardActiveBackground}
               rounded-3xl p-6
               flex flex-col items-center justify-center gap-4
-              transition-all duration-200
-              active:scale-[0.95]
+              transition-all duration-200 active:scale-[0.95]
             `}
           >
-            {/* Icon */}
             <div className={`
-              w-20 h-20 rounded-2xl
-              flex items-center justify-center
+              w-20 h-20 rounded-2xl flex items-center justify-center
               ${theme.iconBackground} ${theme.iconColor}
             `}>
-              <div className="scale-150">
-                {app.icon}
-              </div>
+              <div className="scale-150">{app.icon}</div>
             </div>
 
-            {/* Label */}
             <div className="text-center">
-              <h3 className={`${theme.primaryText} font-semibold text-lg`}>
-                {app.label}
-              </h3>
+              <h3 className={`${theme.primaryText} font-semibold text-lg`}>{app.label}</h3>
               {app.description && (
-                <p className={`${theme.secondaryText} text-sm mt-1`}>
-                  {app.description}
-                </p>
+                <p className={`${theme.secondaryText} text-sm mt-1`}>{app.description}</p>
               )}
             </div>
           </button>

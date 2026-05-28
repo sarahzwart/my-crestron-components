@@ -1,6 +1,7 @@
 import { Volume2, VolumeX } from "lucide-react";
-import { CH5Button } from "../common/CH5Button";
 import { useTheme } from "../../../lib/theme";
+import { useCH5Boolean } from "../../../hooks/useCH5Boolean";
+import React from "react";
 
 export interface CH5MuteButtonProps {
   commandSignal: string;
@@ -20,24 +21,36 @@ export function CH5MuteButton({
   onClick,
 }: CH5MuteButtonProps) {
   const { theme } = useTheme();
+  const [isMuted, setIsMuted] = useCH5Boolean(commandSignal, feedbackSignal, false);
+
+  const handleClick = () => {
+    setIsMuted(!isMuted);
+    onClick?.();
+  };
+
+  const Icon = isMuted ? VolumeX : Volume2;
+
+  const colorClasses = isMuted
+    ? `${theme.buttonActiveBackground} ${theme.buttonActiveText}`
+    : `${theme.buttonBackground} ${theme.buttonText}`;
+
+  const sizeStyle: React.CSSProperties = {
+    width:  `${width}px`,
+    height: `${height}px`,
+    padding: 0,
+  };
 
   return (
-    <CH5Button
-      commandSignal={commandSignal}
-      feedbackSignal={feedbackSignal}
-      variant="toggle"
-      shape="circle"
-      width={width}
-      height={height}
-      iconOn={<VolumeX />}
-      iconOff={<Volume2 />}
-      iconSize={iconSize}
-      onLabel=""
-      offLabel=""
-      activeClassName={`${theme.buttonActiveBg} ${theme.buttonActiveText}`}
-      inactiveClassName={`${theme.buttonBackground} ${theme.iconColor}`}
-      glow={false}
-      onClick={onClick}
-    />
+    <button
+      onClick={handleClick}
+      className={`
+        rounded-full flex items-center justify-center
+        transition-all duration-200 active:scale-95 shrink-0
+        ${colorClasses}
+      `}
+      style={sizeStyle}
+    >
+      <Icon size={iconSize} strokeWidth={2} />
+    </button>
   );
 }

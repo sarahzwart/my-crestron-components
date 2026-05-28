@@ -35,9 +35,6 @@ const KEYS: KeypadKey[] = [
   { number: "#", letters: "" },
 ];
 
-// ============================================
-// INDIVIDUAL KEY BUTTON
-// ============================================
 interface KeypadKeyButtonProps {
   number: string;
   letters?: string;
@@ -46,18 +43,11 @@ interface KeypadKeyButtonProps {
   onPress: () => void;
 }
 
-function KeypadKeyButton({ 
-  number, 
-  letters, 
-  commandSignal, 
-  feedbackSignal, 
-  onPress 
-}: KeypadKeyButtonProps) {
+function KeypadKeyButton({ number, letters, commandSignal, feedbackSignal, onPress }: KeypadKeyButtonProps) {
   const { theme } = useTheme();
   const [, setIsPressed] = useCH5Boolean(commandSignal, feedbackSignal, false);
 
   const handleClick = () => {
-    // Send momentary signal
     setIsPressed(true);
     setTimeout(() => setIsPressed(false), 200);
     onPress();
@@ -67,23 +57,16 @@ function KeypadKeyButton({
     <button
       onClick={handleClick}
       className={`
-        ${theme.buttonBackground}
-        rounded-full
-        aspect-square
+        ${theme.buttonBackground} ${theme.buttonText}
+        rounded-full aspect-square
         flex flex-col items-center justify-center
-        active:scale-90 active:brightness-150
-        transition-all duration-100
-        select-none
+        active:scale-90 active:${theme.buttonActiveBackground}
+        transition-all duration-100 select-none
       `}
     >
-      <span className={`${theme.primaryText} text-4xl font-light leading-none`}>
-        {number}
-      </span>
+      <span className={`${theme.primaryText} text-4xl font-light leading-none`}>{number}</span>
       {letters && (
-        <span className={`
-          ${theme.secondaryText} 
-          text-[9px] font-bold tracking-[0.15em] mt-1.5 leading-none
-        `}>
+        <span className={`${theme.secondaryText} text-[9px] font-bold tracking-[0.15em] mt-1.5 leading-none`}>
           {letters}
         </span>
       )}
@@ -91,9 +74,6 @@ function KeypadKeyButton({
   );
 }
 
-// ============================================
-// MAIN KEYPAD COMPONENT
-// ============================================
 export function CH5Keypad({
   commandSignal,
   feedbackSignal,
@@ -110,11 +90,7 @@ export function CH5Keypad({
 
   return (
     <div className={`flex flex-col items-center justify-center gap-5 w-full ${className}`}>
-      {/* Keypad Grid */}
-      <div 
-        className="grid grid-cols-3 w-full max-w-xs"
-        style={{ gap: `${gap * 4}px` }}
-      >
+      <div className="grid grid-cols-3 w-full max-w-xs" style={{ gap: `${gap * 4}px` }}>
         {KEYS.map((key) => (
           <KeypadKeyButton
             key={key.number}
@@ -127,59 +103,34 @@ export function CH5Keypad({
         ))}
       </div>
 
-      {/* Call Button & Backspace Row */}
       {(showCallButton || showBackspace) && (
-        <div 
-          className="grid grid-cols-3 w-full max-w-xs items-center"
-          style={{ gap: `${gap * 4}px` }}
-        >
-          {/* Empty space for alignment */}
+        <div className="grid grid-cols-3 w-full max-w-xs items-center" style={{ gap: `${gap * 4}px` }}>
           <div />
-          
-          {/* Call Button */}
+
           {showCallButton ? (
             <button
               onClick={onCall}
               disabled={callButtonDisabled}
               className={`
-                aspect-square rounded-full
-                flex items-center justify-center
-                transition-all duration-200
-                active:scale-90
-                ${callButtonDisabled 
-                  ? "bg-green-500/30 cursor-not-allowed" 
+                aspect-square rounded-full flex items-center justify-center
+                transition-all duration-200 active:scale-90
+                ${callButtonDisabled
+                  ? "bg-green-500/30 cursor-not-allowed"
                   : "bg-green-500 active:bg-green-600 shadow-lg shadow-green-500/30"}
               `}
             >
-              <Phone 
-                size={32} 
-                className={callButtonDisabled ? "text-white/40" : "text-white"}
-                fill="currentColor"
-              />
+              <Phone size={32} className={callButtonDisabled ? "text-white/40" : "text-white"} fill="currentColor" />
             </button>
-          ) : (
-            <div />
-          )}
+          ) : <div />}
 
-          {/* Backspace Button */}
           {showBackspace ? (
             <button
               onClick={onBackspace}
-              className={`
-                flex items-center justify-center
-                w-full aspect-square
-                transition-all duration-200
-                active:scale-90 active:opacity-50
-              `}
+              className="flex items-center justify-center w-full aspect-square transition-all duration-200 active:scale-90 active:opacity-50"
             >
-              <Delete 
-                size={32} 
-                className={`${theme.iconColor} opacity-60`} 
-              />
+              <Delete size={32} className={`${theme.iconColor} opacity-60`} />
             </button>
-          ) : (
-            <div />
-          )}
+          ) : <div />}
         </div>
       )}
     </div>

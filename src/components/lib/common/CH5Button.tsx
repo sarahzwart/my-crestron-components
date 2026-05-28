@@ -15,10 +15,6 @@ export interface ButtonProps {
   shape?: ButtonShape;
   width?: number | string;
   height?: number | string;
-  minWidth?: number | string;
-  minHeight?: number | string;
-  maxWidth?: number | string;
-  maxHeight?: number | string;
   textSize?: number;
   label?: string;
   onLabel?: string;
@@ -26,13 +22,10 @@ export interface ButtonProps {
   icon?: React.ReactNode;
   iconPosition?: "left" | "right" | "top" | "bottom";
   iconSize?: number;
-  iconColorClass?: string;
-  glow?: boolean;
-  activeClassName?: string;   // Direct Tailwind classes when ON
-  inactiveClassName?: string; // Direct Tailwind classes when OFF
   iconOn?: React.ReactNode;
   iconOff?: React.ReactNode;
   onClick?: () => void;
+  /** Override resting background + text classes (single string, e.g. "bg-red-500 text-white") */
   className?: string;
   style?: React.CSSProperties;
 }
@@ -46,15 +39,15 @@ const SIZE_CLASSES: Record<ButtonSize, string> = {
 
 const SHAPE_CLASSES: Record<ButtonShape, string> = {
   rounded: "rounded-lg",
-  square: "rounded-none",
-  pill: "rounded-full",
-  circle: "rounded-full",
+  square:  "rounded-none",
+  pill:    "rounded-full",
+  circle:  "rounded-full",
 };
 
 const ICON_POSITION_CLASSES: Record<string, string> = {
-  left: "flex-row",
-  right: "flex-row-reverse",
-  top: "flex-col",
+  left:   "flex-row",
+  right:  "flex-row-reverse",
+  top:    "flex-col",
   bottom: "flex-col-reverse",
 };
 
@@ -66,10 +59,6 @@ export function CH5Button({
   shape = "rounded",
   width,
   height,
-  minWidth,
-  minHeight,
-  maxWidth,
-  maxHeight,
   textSize,
   label,
   onLabel,
@@ -77,10 +66,6 @@ export function CH5Button({
   icon,
   iconPosition = "left",
   iconSize,
-  iconColorClass,
-  glow = true,
-  activeClassName,
-  inactiveClassName,
   iconOn,
   iconOff,
   disabled = false,
@@ -100,79 +85,64 @@ export function CH5Button({
     if (disabled) return;
     if (variant === "toggle") {
       setIsOn(!isOn);
-    } else if (variant === "momentary" || variant === "glass") {
+    } else {
       setIsOn(true);
       setTimeout(() => setIsOn(false), 200);
     }
     onClick?.();
   };
 
-  const buttonText = onLabel || offLabel
+  const buttonText = (onLabel || offLabel)
     ? (variant === "toggle" ? (isOn ? onLabel : offLabel) : label)
     : label;
 
   const customStyle: React.CSSProperties = {
     ...style,
-    width: width ? (typeof width === "number" ? `${width}px` : width) : undefined,
-    height: height ? (typeof height === "number" ? `${height}px` : height) : undefined,
-    minWidth: minWidth ? (typeof minWidth === "number" ? `${minWidth}px` : minWidth) : undefined,
-    minHeight: minHeight ? (typeof minHeight === "number" ? `${minHeight}px` : minHeight) : undefined,
-    maxWidth: maxWidth ? (typeof maxWidth === "number" ? `${maxWidth}px` : maxWidth) : undefined,
-    maxHeight: maxHeight ? (typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight) : undefined,
+    width:    width  ? (typeof width  === "number" ? `${width}px`  : width)  : undefined,
+    height:   height ? (typeof height === "number" ? `${height}px` : height) : undefined,
     fontSize: textSize ? `${textSize}px` : undefined,
-    padding: width || height ? "0" : undefined,
+    padding:  (width || height) ? "0" : undefined,
   };
 
-  const getColorClass = () => {
-    if (variant === "glass") {
-      return "bg-white/10 backdrop-blur-md";
-    }
-    if (isOn && activeClassName) return activeClassName;
-    if (!isOn && inactiveClassName) return inactiveClassName;
-    // Default fallback using theme
-    return theme.buttonBackground;
-  };
-
-  const getGlowClass = () => {
-    if (!glow || !isOn || variant === "glass") return "";
-    // Simple glow using the button's current color
-    return "shadow-lg shadow-white/20";
-  };
+  // Colour classes — theme-driven, className can override
+  const colorClasses = className || (
+    variant === "glass"
+      ? "bg-white/10 backdrop-blur-md text-white"
+      : isOn
+        ? `${theme.buttonActiveBackground} ${theme.buttonActiveText}`
+        : `${theme.buttonBackground} ${theme.buttonText}`
+  );
 
   const hasText = Boolean(buttonText);
   const layoutClass = hasText ? ICON_POSITION_CLASSES[iconPosition] : "";
 
   const getSizeClass = () => {
     if (width || height) return "";
-    if (shape === "circle" && !hasText) return "w-12 h-12 p-0";
-    if (textSize) return SIZE_CLASSES[size].replace(/text-\w+/, "").trim();
+    if (shape === "circle" && !hasText) return "";
     return SIZE_CLASSES[size];
   };
 
   const renderIcon = () => {
     let iconToRender = icon;
     if (variant === "toggle" && (iconOn || iconOff)) {
-      iconToRender = isOn ? iconOn || icon : iconOff || icon;
+      iconToRender = isOn ? (iconOn || icon) : (iconOff || icon);
     }
-
     if (!iconToRender) return null;
 
     if (iconSize && React.isValidElement(iconToRender)) {
-      const clonedIcon = React.cloneElement(
-        iconToRender as React.ReactElement<any>,
+      const cloned = React.cloneElement(
+        iconToRender as React.ReactElement<{ size?: number; width?: number; height?: number; strokeWidth?: number }>,
         { size: iconSize, width: iconSize, height: iconSize, strokeWidth: 2 },
       );
-
       return (
         <span
           className="inline-flex items-center justify-center shrink-0"
-          style={{ width: `${iconSize}px`, height: `${iconSize}px`, overflow: "hidden", flexShrink: 0 }}
+          style={{ width: `${iconSize}px`, height: `${iconSize}px`, overflow: "hidden" }}
         >
-          {clonedIcon}
+          {cloned}
         </span>
       );
     }
-
     return iconToRender;
   };
 
@@ -183,13 +153,11 @@ export function CH5Button({
       className={`
         ${getSizeClass()}
         ${SHAPE_CLASSES[shape]}
-        ${getColorClass()}
-        ${iconColorClass || theme.iconColor}
-        ${getGlowClass()}
-        ${className}
+        ${colorClasses}
         ${layoutClass}
         flex items-center justify-center
         transition-all duration-200
+        active:scale-95
         disabled:opacity-50 disabled:cursor-not-allowed
       `}
       style={customStyle}

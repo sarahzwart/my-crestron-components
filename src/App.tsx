@@ -63,10 +63,6 @@ function AppContent() {
             height={48}
             icon={<Home />}
             iconSize={20}
-            className={theme.buttonBackground}
-            iconColorClass={theme.iconColor}
-            glow={true}
-            glowColor={theme.accentColor}
             onClick={() => setCurrentPage("home")}
           />
         }
@@ -109,12 +105,7 @@ function AppContent() {
               height={48}
               icon={<Power />}
               iconSize={20}
-              className={theme.buttonBackground}
-              iconColorClass={theme.iconColor}
-              glow={true}
-              glowColor={theme.accentColor}
             />
-
             <CH5Button
               commandSignal="nav.settings"
               feedbackSignal="nav.settings.fb"
@@ -124,10 +115,6 @@ function AppContent() {
               height={48}
               icon={<Settings />}
               iconSize={20}
-              className={theme.buttonBackground}
-              iconColorClass={theme.iconColor}
-              glow={true}
-              glowColor={theme.accentColor}
               onClick={() => setCurrentPage(
                 currentPage === "settings" ? "home" : "settings"
               )}

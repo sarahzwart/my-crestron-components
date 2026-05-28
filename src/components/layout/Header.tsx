@@ -1,16 +1,8 @@
 import React from "react";
-import { CH5Button } from "../lib/common/CH5Button";
 
 export interface HeaderProps {
-  // Logo
   logo?: string;
-  logoCommandSignal?: string;
-  logoFeedbackSignal?: string;
-  
-  // Left buttons
   leftButtons?: React.ReactNode;
-  
-  // Styling
   backgroundColor?: string;
   textColor?: string;
   height?: number | string;
@@ -19,9 +11,6 @@ export interface HeaderProps {
 }
 
 export function CH5Header({
-  logo,
-  logoCommandSignal = "nav.logo",
-  logoFeedbackSignal = "nav.logo.fb",
   leftButtons,
   backgroundColor = "bg-slate-800",
   textColor = "text-white",
@@ -36,21 +25,19 @@ export function CH5Header({
     return () => clearInterval(timer);
   }, []);
 
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString('en-US', { 
-      hour: 'numeric', 
-      minute: '2-digit',
-      hour12: true 
+  const formatTime = (date: Date) =>
+    date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
     });
-  };
 
-  const formatDate = (date: Date) => {
-    return date.toLocaleDateString('en-US', { 
-      weekday: 'short',
-      month: 'short', 
-      day: 'numeric' 
+  const formatDate = (date: Date) =>
+    date.toLocaleDateString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
     });
-  };
 
   const headerStyle: React.CSSProperties = {
     ...style,
@@ -58,40 +45,22 @@ export function CH5Header({
   };
 
   return (
-    <header 
+    <header
       className={`flex items-center justify-between px-6 ${backgroundColor} ${textColor} shadow-lg ${className}`}
       style={headerStyle}
     >
+      {/* Left: nav buttons */}
       <div className="flex items-center gap-3">
         {leftButtons}
       </div>
 
-      <div className="flex items-center justify-center">
-        {logo && (
-          <CH5Button
-            commandSignal={logoCommandSignal}
-            feedbackSignal={logoFeedbackSignal}
-            icon={logo}
-            iconSize={32}
-            variant="momentary"
-            size="md"
-            shape="pill"
-            inactiveClass="slate"
-            activeClass="blue"
-            glow={false}
-            width={70}
-            height={70}
-          />
-        )}
-      </div>
+      {/* Centre: intentionally empty (logo removed — add back via leftButtons if needed) */}
+      <div />
 
+      {/* Right: clock */}
       <div className="flex flex-col items-end">
-        <div className="text-xl font-semibold">
-          {formatTime(currentTime)}
-        </div>
-        <div className="text-sm opacity-75">
-          {formatDate(currentTime)}
-        </div>
+        <div className="text-xl font-semibold">{formatTime(currentTime)}</div>
+        <div className="text-sm opacity-75">{formatDate(currentTime)}</div>
       </div>
     </header>
   );
