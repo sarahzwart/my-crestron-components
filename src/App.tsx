@@ -16,8 +16,9 @@ import { SOURCES, DESTINATIONS } from "./config/routing.config";
 import { APPS } from "./config/apps.config";
 import { Home, Settings, Power } from "lucide-react";
 import { CameraPage } from "./pages/CameraPage";
+import { AppleTVPage } from "./pages/AppleTVPage";
 
-type Page = "home" | "audio" | "call" | "routing" | "settings" | "lights" | "camera";
+type Page = "home" | "audio" | "call" | "routing" | "settings" | "lights" | "camera" | "appleTV";
 
 function AppContent() {
   const { theme } = useTheme();
@@ -49,6 +50,8 @@ function AppContent() {
         return <LightsPage />;
       case "camera":
         return <CameraPage />;
+      case "appleTV":
+        return <AppleTVPage />;
     }
   };
 

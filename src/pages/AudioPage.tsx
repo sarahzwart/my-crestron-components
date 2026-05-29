@@ -31,7 +31,7 @@ export function AudioPage({
   return (
     <div className="min-h-full p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
+
         <div className="mb-8">
           <h1 className={`${theme.primaryText} text-3xl lg:text-4xl font-bold mb-2`}>
             {title}
@@ -41,14 +41,12 @@ export function AudioPage({
           </p>
         </div>
 
-        {/* Master Volume */}
         {masterControl && (
           <div className="mb-6">
             <CH5VolumeSlider {...masterControl} isMaster={true} />
           </div>
         )}
 
-        {/* Other Volume Controls */}
         <div className={`grid gap-4 lg:gap-6 ${gridColumns[columns]}`}>
           {otherControls.map((control) => (
             <CH5VolumeSlider key={control.id} {...control} />

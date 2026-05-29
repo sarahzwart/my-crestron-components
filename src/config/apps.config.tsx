@@ -1,5 +1,5 @@
 import { type AppItem } from "../pages/HomePage";
-import { Music, Phone, Shuffle, Lightbulb, Camera } from "lucide-react";
+import { Music, Phone, Shuffle, Lightbulb, Camera, Apple } from "lucide-react";
 
 export const APPS: AppItem[] = [
   {
@@ -31,5 +31,12 @@ export const APPS: AppItem[] = [
     label: "Camera",
     icon: <Camera />,
     description: "Camera control",
+  },
+  {
+    id: "appleTV",
+    label: "Apple TV",
+    icon: <Apple />,
+    description: "Apple TV control",
   }
+
 ];
