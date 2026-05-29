@@ -17,7 +17,10 @@ export interface CameraPageProps {
   presetCount?: number;
 }
 
-export function CameraPage({ cameraCount = 3, presetCount = 3 }: CameraPageProps) {
+export function CameraPage({
+  cameraCount = 2,
+  presetCount = 3,
+}: CameraPageProps) {
   const { theme } = useTheme();
   const [activeCamera, setActiveCamera] = useState(1);
   const [autoFocus, setAutoFocus] = useState(true);
@@ -73,16 +76,20 @@ export function CameraPage({ cameraCount = 3, presetCount = 3 }: CameraPageProps
       </div>
 
       <div className="flex flex-col items-center mb-5">
-        <span className={`text-4xl font-light tracking-tight ${theme.primaryText}`}>
+        <span
+          className={`text-4xl font-light tracking-tight ${theme.primaryText}`}
+        >
           Camera {activeCamera}
         </span>
-        <span className={`text-xs font-mono uppercase tracking-widest ${theme.secondaryText}`}>
+        <span
+          className={`text-xs font-mono uppercase tracking-widest ${theme.secondaryText}`}
+        >
           PTZ Control
         </span>
       </div>
 
-      <div className="flex-1 flex flex-col items-center justify-center gap-5">
-        <div className="grid grid-cols-3 grid-rows-3 gap-3 w-[min(70%,70vh)] h-[min(50%,50vw)] max-w-[min(70vw,70vh)] max-h-[min(50vw,50vh)]">
+      <div className="mx-auto w-[50%] h-[70%] flex flex-col gap-6">
+        <div className="grid grid-cols-3 grid-rows-3 gap-3 flex-3 min-h-0">
           <CH5Button variant="momentary" icon={<ZoomIn />}      commandSignal={`camera.${activeCamera}.zoom.in`}   className={cell} />
           <CH5Button variant="momentary" icon={<ChevronUp />}   commandSignal={`camera.${activeCamera}.tilt.up`}   className={cell} />
           <CH5Button variant="momentary" icon={<ZoomOut />}     commandSignal={`camera.${activeCamera}.zoom.out`}  className={cell} />
@@ -96,17 +103,14 @@ export function CameraPage({ cameraCount = 3, presetCount = 3 }: CameraPageProps
           <span />
         </div>
 
-        <div
-          className="grid gap-3 w-[min(70%,70vh)] max-w-[min(70vw,70vh)]"
-          style={{ gridTemplateColumns: `repeat(${presetCount}, minmax(0, 1fr))` }}
-        >
+        <div className="grid grid-cols-3 gap-3 flex-1 min-h-0">
           {Array.from({ length: presetCount }, (_, i) => i + 1).map((p) => (
             <CH5Button
               key={p}
               variant="momentary"
               label={`Preset ${p}`}
               commandSignal={`camera.${activeCamera}.preset.${p}`}
-              className={`rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
+              className={cell}
             />
           ))}
         </div>
