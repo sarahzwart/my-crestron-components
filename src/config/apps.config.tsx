@@ -1,5 +1,5 @@
 import { type AppItem } from "../pages/HomePage";
-import { Music, Phone, Shuffle, Lightbulb } from "lucide-react";
+import { Music, Phone, Shuffle, Lightbulb, Camera } from "lucide-react";
 
 export const APPS: AppItem[] = [
   {
@@ -26,4 +26,10 @@ export const APPS: AppItem[] = [
     icon: <Lightbulb />,
     description: "Lighting control",
   },
+  {
+    id: "camera",
+    label: "Camera",
+    icon: <Camera />,
+    description: "Camera control",
+  }
 ];

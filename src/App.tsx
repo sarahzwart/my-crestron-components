@@ -15,8 +15,9 @@ import { AUDIO_CONTROLS } from "./config/audio.config";
 import { SOURCES, DESTINATIONS } from "./config/routing.config";
 import { APPS } from "./config/apps.config";
 import { Home, Settings, Power } from "lucide-react";
+import { CameraPage } from "./pages/CameraPage";
 
-type Page = "home" | "audio" | "call" | "routing" | "settings" | "lights";
+type Page = "home" | "audio" | "call" | "routing" | "settings" | "lights" | "camera";
 
 function AppContent() {
   const { theme } = useTheme();
@@ -46,6 +47,8 @@ function AppContent() {
         return <SettingsPage />;
       case "lights":
         return <LightsPage />;
+      case "camera":
+        return <CameraPage />;
     }
   };
 
