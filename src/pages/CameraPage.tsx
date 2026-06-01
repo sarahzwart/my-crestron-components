@@ -71,8 +71,8 @@ export function CameraPage({
           onClick={() => setAutoFocus((v) => !v)}
           className={`flex items-center gap-2 px-5 py-3 rounded-lg text-base font-mono uppercase tracking-widest ${
             autoFocus
-              ? `${theme.buttonActiveBackground} ${theme.buttonActiveText}`
-              : `${theme.buttonBackground} ${theme.secondaryText}`
+              ? `${theme.buttonBackground} ${theme.secondaryText}`
+              : `${theme.buttonActiveBackground} ${theme.buttonActiveText}`
           }`}
         />
       </div>
