@@ -11,145 +11,73 @@ import {
 } from "lucide-react";
 
 export interface AppleTVPageProps {
-  signalUp?: string;
-  signalDown?: string;
-  signalLeft?: string;
-  signalRight?: string;
-  signalEnter?: string;
-  signalMenu?: string;
-  signalPlay?: string;
-  signalPause?: string;
+  signalUp?:        string;
+  signalDown?:      string;
+  signalLeft?:      string;
+  signalRight?:     string;
+  signalEnter?:     string;
+  signalMenu?:      string;
+  signalPlayPause?: string;
 }
 
 export function AppleTVPage({
-  signalUp = "appletv.up",
-  signalDown = "appletv.down",
-  signalLeft = "appletv.left",
-  signalRight = "appletv.right",
-  signalEnter = "appletv.enter",
-  signalMenu = "appletv.menu",
-  signalPlay = "appletv.play",
-  signalPause = "appletv.pause",
+  signalUp        = "appletv.up",
+  signalDown      = "appletv.down",
+  signalLeft      = "appletv.left",
+  signalRight     = "appletv.right",
+  signalEnter     = "appletv.enter",
+  signalMenu      = "appletv.menu",
+  signalPlayPause = "appletv.playpause",
 }: AppleTVPageProps) {
   const { theme } = useTheme();
-  const ICON_SIZE = 22;
-  const NAV_PX = 64; // px width & height for nav arrow buttons
-  const ENTER_PX = 64; // circular OK button
+
+  const PlayPauseIcon = (
+    <span className="flex items-center gap-1.5">
+      <Play  size={20} />
+      <Pause size={20} />
+    </span>
+  );
+
+  const navClass    = `w-full h-full ${theme.buttonBackground} ${theme.buttonText} ${theme.buttonActiveBackground}`;
+  const enterClass  = `w-full h-full ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground} tracking-widest font-mono`;
+  const actionClass = `w-full h-full ${theme.buttonBackground} ${theme.buttonText} ${theme.buttonActiveBackground} tracking-widest font-mono gap-1.5`;
+
   return (
-    <div
-      className={`h-full w-full flex items-center justify-center overflow-hidden ${theme.pageBackground}`}
-    >
-      <div className="flex flex-col gap-4 items-center">
-        <div>
-          <div
-            className="grid grid-cols-3 grid-rows-3 gap-1.5"
-            style={{ width: NAV_PX * 3 + 12, height: NAV_PX * 3 + 12 }}
-          >
-            {/* row 1 */}
-            <span />
-            <CH5Button
-              variant="momentary"
-              shape="circle"
-              icon={<ChevronUp />}
-              iconSize={ICON_SIZE}
-              commandSignal={signalUp}
-              width={NAV_PX}
-              height={NAV_PX}
-            />
-            <span />
+    <div className={`h-full w-full flex items-center justify-center overflow-hidden ${theme.pageBackground}`}>
+      <div className="flex flex-col gap-3 min-h-9/12 min-w-5/12" >
+        <div className="flex-3 grid grid-cols-3 grid-rows-3 gap-2">
+          <span />
+          <CH5Button variant="momentary" shape="rounded" icon={<ChevronUp />}    iconSize={24} commandSignal={signalUp}    className={navClass} />
+          <span />
 
-            {/* row 2 */}
-            <CH5Button
-              variant="momentary"
-              shape="circle"
-              icon={<ChevronLeft />}
-              iconSize={ICON_SIZE}
-              commandSignal={signalLeft}
-              width={NAV_PX}
-              height={NAV_PX}
-            />
+          <CH5Button variant="momentary" shape="rounded" icon={<ChevronLeft />}  iconSize={24} commandSignal={signalLeft}  className={navClass} />
+          <CH5Button variant="momentary" shape="circle"  label="OK" textSize={32} commandSignal={signalEnter} className={enterClass} />
+          <CH5Button variant="momentary" shape="rounded" icon={<ChevronRight />} iconSize={24} commandSignal={signalRight} className={navClass} />
 
-            {/* Enter — circle, uses cardBackground to stand out */}
-            <CH5Button
-              variant="momentary"
-              shape="circle"
-              label="OK"
-              commandSignal={signalEnter}
-              width={ENTER_PX}
-              height={ENTER_PX}
-              textSize={10}
-              className={`${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground} tracking-widest font-mono`}
-            />
-
-            <CH5Button
-              variant="momentary"
-              shape="circle"
-              icon={<ChevronRight />}
-              iconSize={ICON_SIZE}
-              commandSignal={signalRight}
-              width={NAV_PX}
-              height={NAV_PX}
-            />
-
-            {/* row 3 */}
-            <span />
-            <CH5Button
-              variant="momentary"
-              shape="circle"
-              icon={<ChevronDown />}
-              iconSize={ICON_SIZE}
-              commandSignal={signalDown}
-              width={NAV_PX}
-              height={NAV_PX}
-            />
-            <span />
-          </div>
+          <span />
+          <CH5Button variant="momentary" shape="rounded" icon={<ChevronDown />}  iconSize={24} commandSignal={signalDown}  className={navClass} />
+          <span />
         </div>
 
-        <div
-          className={`w-full h-px opacity-10 ${theme.secondaryText}`}
-          style={{ width: NAV_PX * 3 + 12 }}
-        />
+        <div className={`w-full h-px opacity-10 ${theme.secondaryText}`} />
 
-        <div style={{ width: NAV_PX * 3 + 12 }}>
-          <p
-            className={`text-[9px] tracking-[.12em] font-mono mb-2 ${theme.secondaryText} opacity-50`}
-          >
-            CONTROLS
-          </p>
-
-          <div className="grid grid-cols-2 gap-1.5">
-            <CH5Button
-              variant="momentary"
-              shape="rounded"
-              icon={<Menu />}
-              iconSize={20}
-              iconPosition="top"
-              label="MENU"
-              textSize={9}
-              commandSignal={signalMenu}
-              height={56}
-              className={`${theme.buttonBackground} ${theme.buttonText} ${theme.buttonActiveBackground} tracking-widest font-mono gap-1`}
-            />
-
-            {/* Play/Pause — toggle variant swaps icon + label via isOn state */}
-            <CH5Button
-              variant="toggle"
-              shape="rounded"
-              iconOn={<Pause />}
-              iconOff={<Play />}
-              iconSize={20}
-              iconPosition="top"
-              onLabel="PAUSE"
-              offLabel="PLAY"
-              textSize={9}
-              commandSignal={signalPlay}
-              feedbackSignal={signalPause}
-              height={56}
-              className={`${theme.buttonBackground} ${theme.buttonText} ${theme.buttonActiveBackground} tracking-widest font-mono gap-1`}
-            />
-          </div>
+        <div className="flex-1 grid grid-cols-2 gap-2">
+          <CH5Button
+            variant="momentary" shape="rounded"
+            icon={<Menu />} iconSize={20}
+            iconPosition="top" label="MENU" textSize={9}
+            commandSignal={signalMenu}
+            className={actionClass}
+          />
+          <CH5Button
+            variant="momentary" shape="rounded"
+            icon={PlayPauseIcon}
+            iconPosition="top" label="PLAY / PAUSE" textSize={9}
+            commandSignal={signalPlayPause}
+            className={actionClass}
+          />
         </div>
+
       </div>
     </div>
   );
