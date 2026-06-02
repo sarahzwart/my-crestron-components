@@ -35,57 +35,55 @@ export function AppleTVPage({
 }: AppleTVPageProps) {
   const { theme } = useTheme();
 
-  // transparent so the ring shows through; just the glyph
   const ringDir = `w-full h-full !p-0 bg-transparent ${theme.primaryText}`;
   const roundBtn = `w-full h-full ${theme.buttonBackground} ${theme.buttonText} ${theme.buttonActiveBackground}`;
 
   return (
     <div className={`h-full w-full flex items-center justify-center overflow-hidden ${theme.pageBackground}`}>
-      {/* Remote slab */}
+
       <div
-        className={`flex flex-col items-center gap-6 px-6 py-7 rounded-[40px] ${theme.cardBackground} w-[60%] max-w-55`}
+        className={`flex flex-col items-center gap-6 px-6 py-7 rounded-[40px] ${theme.cardBackground} w-[60%] max-w-90`}
       >
 
         <div className={`relative w-full aspect-square rounded-full ${theme.buttonBackground}`}>
-          {/* Directional taps — fill wrapper, zero padding, glyph centers */}
+
           <div className="absolute top-0.5 left-1/2 -translate-x-1/2 w-12 h-12">
-            <CH5Button variant="momentary" shape="circle" icon={<ChevronUp />}    iconSize={28} commandSignal={signalUp}    className={ringDir} />
+            <CH5Button variant="momentary" shape="circle" icon={<ChevronUp />}    iconSize={40} commandSignal={signalUp}    className={ringDir} />
           </div>
           <div className="absolute bottom-0.5 left-1/2 -translate-x-1/2 w-12 h-12">
-            <CH5Button variant="momentary" shape="circle" icon={<ChevronDown />}  iconSize={28} commandSignal={signalDown}  className={ringDir} />
+            <CH5Button variant="momentary" shape="circle" icon={<ChevronDown />}  iconSize={40} commandSignal={signalDown}  className={ringDir} />
           </div>
           <div className="absolute left-0.5 top-1/2 -translate-y-1/2 w-12 h-12">
-            <CH5Button variant="momentary" shape="circle" icon={<ChevronLeft />}  iconSize={28} commandSignal={signalLeft}  className={ringDir} />
+            <CH5Button variant="momentary" shape="circle" icon={<ChevronLeft />}  iconSize={40} commandSignal={signalLeft}  className={ringDir} />
           </div>
           <div className="absolute right-0.5 top-1/2 -translate-y-1/2 w-12 h-12">
-            <CH5Button variant="momentary" shape="circle" icon={<ChevronRight />} iconSize={28} commandSignal={signalRight} className={ringDir} />
+            <CH5Button variant="momentary" shape="circle" icon={<ChevronRight />} iconSize={40} commandSignal={signalRight} className={ringDir} />
           </div>
 
-          {/* Center OK */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45%] h-[45%]">
             <CH5Button
               variant="momentary"
               shape="circle"
               label="OK"
-              textSize={18}
+              textSize={40}
               commandSignal={signalEnter}
               className={`w-full h-full p-0! ${theme.cardActiveBackground} ${theme.primaryText} tracking-widest font-mono ${theme.buttonActiveBackground}`}
             />
           </div>
         </div>
-        {/* Round button rows */}
+  
         <div className="grid grid-cols-2 gap-5 w-full">
           <div className="aspect-square">
-            <CH5Button variant="momentary" shape="circle" icon={<ChevronLeft />} iconSize={22} commandSignal={signalBack} className={roundBtn} />
+            <CH5Button variant="momentary" shape="circle" icon={<ChevronLeft />} iconSize={40} commandSignal={signalBack} className={roundBtn} />
           </div>
           <div className="aspect-square">
-            <CH5Button variant="momentary" shape="circle" icon={<Home />}        iconSize={22} commandSignal={signalHome} className={roundBtn} />
+            <CH5Button variant="momentary" shape="circle" icon={<Home />}        iconSize={40} commandSignal={signalHome} className={roundBtn} />
           </div>
           <div className="aspect-square">
-            <CH5Button variant="momentary" shape="circle" icon={<Menu />}        iconSize={22} commandSignal={signalMenu} className={roundBtn} />
+            <CH5Button variant="momentary" shape="circle" icon={<Menu />}        iconSize={40} commandSignal={signalMenu} className={roundBtn} />
           </div>
           <div className="aspect-square">
-            <CH5Button variant="momentary" shape="circle" icon={<Play />}        iconSize={22} commandSignal={signalPlayPause} className={roundBtn} />
+            <CH5Button variant="momentary" shape="circle" icon={<Play />}        iconSize={40} commandSignal={signalPlayPause} className={roundBtn} />
           </div>
         </div>
       </div>
