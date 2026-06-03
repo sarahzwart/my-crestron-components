@@ -1,7 +1,7 @@
 import { type RoutingItem } from "../pages/RoutingPage";
 import { 
   Tv, Gamepad2, Laptop, Smartphone, Disc, MonitorPlay,
-  Speaker, Headphones, Radio, Cast
+  Speaker, Headphones, Radio, 
 } from "lucide-react";
 
 export const SOURCES: RoutingItem[] = [

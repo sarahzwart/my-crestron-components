@@ -1,6 +1,6 @@
 import { type CH5VolumeSliderProps } from "@/components/lib/volume/CH5Volume";
 import { 
-  Volume2, Music, Tv, Mic, Speaker, Headphones, Radio, Gamepad2, Film 
+  Volume2, Music, Tv, Mic, Speaker, Headphones,
 } from "lucide-react";
 
 export const AUDIO_CONTROLS: CH5VolumeSliderProps[] = [
