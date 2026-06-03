@@ -25,7 +25,9 @@ export interface ButtonProps {
   iconOn?: React.ReactNode;
   iconOff?: React.ReactNode;
   onClick?: () => void;
-
+  onClassName?: string;
+  offClassName?: string;
+  useThemeColors?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -72,6 +74,9 @@ export function CH5Button({
   className = "",
   onClick,
   style = {},
+  onClassName,
+  offClassName,
+  useThemeColors = false,
 }: ButtonProps) {
   const { theme } = useTheme();
 
@@ -103,14 +108,18 @@ export function CH5Button({
     fontSize: textSize ? `${textSize}px` : undefined,
     padding:  (width || height) ? "0" : undefined,
   };
-
-  const colorClasses = className || (
+  const stateColor =
     variant === "glass"
       ? "bg-white/10 backdrop-blur-md text-white"
       : isOn
-        ? `${theme.buttonActiveBackground} ${theme.buttonActiveText}`
-        : `${theme.buttonBackground} ${theme.buttonText}`
-  );
+        ? (onClassName ?? `${theme.buttonActiveBackground} ${theme.buttonActiveText}`)
+        : (offClassName ?? `${theme.buttonBackground} ${theme.buttonText}`);
+
+  const stateDriven =
+    useThemeColors || onClassName !== undefined || offClassName !== undefined;
+
+  const colorClasses = stateDriven ? stateColor : (className || stateColor);
+  const extraClasses = stateDriven ? className : "";
 
   const hasText = Boolean(buttonText);
   const layoutClass = hasText ? ICON_POSITION_CLASSES[iconPosition] : "";
@@ -153,6 +162,7 @@ export function CH5Button({
         ${getSizeClass()}
         ${SHAPE_CLASSES[shape]}
         ${colorClasses}
+        ${extraClasses}
         ${layoutClass}
         flex items-center justify-center
         transition-all duration-200
