@@ -33,11 +33,11 @@ export function CH5RoutingSection({
   return (
     <section className="flex flex-col min-h-0">
 
-      <div className="flex items-center justify-between mb-5 px-2 shrink-0">
+      <div className="flex items-center justify-between mb-3 px-2 shrink-0">
         <div className="flex items-center gap-3">
           <div className={`w-1.5 h-10 rounded-full ${sectionAccent}`} />
           <div>
-            <h2 className={`${theme.primaryText} text-2xl font-bold leading-tight`}>
+            <h2 className={`${theme.primaryText} text-xl font-bold leading-tight`}>
               {label}
             </h2>
             <p className={`${theme.secondaryText} text-sm mt-0.5`}>
@@ -56,9 +56,9 @@ export function CH5RoutingSection({
         )}
       </div>
 
-      <div className={`flex-1 min-h-0 ${theme.cardBackground} rounded-3xl p-6 flex`}>
+      <div className={`flex-1 min-h-0 ${theme.cardBackground} rounded-3xl p-2 flex`}>
         <div
-          className={`grid gap-4 ${gridColumns[columns]} w-full h-full`}
+          className={`grid gap-2 ${gridColumns[columns]} w-full h-full`}
           style={{ gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))` }}
         >
           {items.map((item) => (

@@ -24,11 +24,9 @@ export function RoutingPage({
 }: RoutingPageProps) {
   const { theme } = useTheme();
   
-  // State
   const [selectedSource, setSelectedSource] = useState<string | null>(null);
   const [selectedDestinations, setSelectedDestinations] = useState<string[]>([]);
 
-  // Handlers
   const handleSourceSelect = (id: string) => {
     setSelectedSource(selectedSource === id ? null : id);
   };
@@ -44,16 +42,15 @@ export function RoutingPage({
   const handleRoute = () => {
     if (selectedSource && selectedDestinations.length > 0) {
       console.log(`Routing ${selectedSource} to:`, selectedDestinations);
-      // TODO: Trigger CH5 routing signals here
     }
   };
 
   const canRoute = selectedSource !== null && selectedDestinations.length > 0;
 
   return (
-    <div className="h-full flex flex-col p-8 overflow-hidden">
-      <div className="mb-8 px-2 shrink-0">
-        <h1 className={`${theme.primaryText} text-4xl font-bold mb-2`}>
+    <div className="h-full flex flex-col p-4 overflow-hidden">
+      <div className="mb-4 px-2 shrink-0">
+        <h1 className={`${theme.primaryText} text-2xl font-bold mb-1`}>
           {title}
         </h1>
         <p className={`${theme.secondaryText} text-base`}>
@@ -61,7 +58,7 @@ export function RoutingPage({
         </p>
       </div>
 
-      <div className="flex-1 grid grid-cols-[1fr_auto_1fr] gap-8 min-h-0">
+      <div className="flex-1 grid grid-cols-[1fr_auto_1fr] gap-6 min-h-0 ">
         <CH5RoutingSection
           label="Sources"
           items={sources}

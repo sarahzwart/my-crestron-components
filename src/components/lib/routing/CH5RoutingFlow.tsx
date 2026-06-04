@@ -9,11 +9,11 @@ export function CH5RoutingFlow({ isActive }: CH5RoutingFlowProps) {
   const { theme } = useTheme();
 
   return (
-    <div className="flex flex-col items-center justify-center px-2">
+    <div className="flex flex-col items-center justify-center mt-14">
       <div className={`
         ${theme.cardBackground}
-        rounded-full p-5
-        flex flex-col items-center gap-3
+        rounded-full p-6
+        flex flex-col items-center gap-4
         ${isActive ? "opacity-100" : "opacity-40"}
         transition-opacity duration-300
       `}>
