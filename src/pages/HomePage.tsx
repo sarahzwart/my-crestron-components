@@ -1,10 +1,13 @@
 import { useTheme } from "../lib/theme";
+import { CH5Button } from "@/components/lib/common/CH5Button";
 
 export interface AppItem {
   id: string;
   label: string;
   icon: React.ReactNode;
   description?: string;
+  commandSignal: string;
+  feedbackSignal: string;
 }
 
 export interface HomePageProps {
@@ -25,31 +28,30 @@ export function HomePage({ apps, onNavigate, title = "Home" }: HomePageProps) {
 
       <div className="flex-1 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-fr min-h-0">
         {apps.map((app) => (
-          <button
+          <CH5Button
             key={app.id}
+            commandSignal={app.commandSignal}
+            feedbackSignal={app.feedbackSignal}
+            variant="momentary"
+            shape="rounded"
             onClick={() => onNavigate(app.id)}
-            className={`
-              ${theme.cardBackground}
-              ${theme.cardActiveBackground}
-              rounded-3xl p-6
-              flex flex-col items-center justify-center gap-4
-              transition-all duration-200 active:scale-[0.95]
-            `}
-          >
-            <div className={`
-              w-20 h-20 rounded-2xl flex items-center justify-center
-              ${theme.iconBackground} ${theme.iconColor}
-            `}>
-              <div className="scale-150">{app.icon}</div>
-            </div>
-
-            <div className="text-center">
-              <h3 className={`${theme.primaryText} font-semibold text-lg`}>{app.label}</h3>
-              {app.description && (
-                <p className={`${theme.secondaryText} text-sm mt-1`}>{app.description}</p>
-              )}
-            </div>
-          </button>
+            offClassName={`${theme.cardBackground} ${theme.cardActiveBackground}`}
+            onClassName={`${theme.cardHighlightBackground}`}
+            className="rounded-3xl p-6 flex flex-col items-center justify-center gap-4 transition-all duration-200 active:scale-[0.95] h-full w-full"
+            icon={
+              <div className="flex flex-col items-center gap-4">
+                <div className={`w-20 h-20 rounded-2xl flex items-center justify-center ${theme.iconBackground} ${theme.iconColor}`}>
+                  <div className="scale-150">{app.icon}</div>
+                </div>
+                <div className="text-center">
+                  <h3 className={`${theme.primaryText} font-semibold text-lg`}>{app.label}</h3>
+                  {app.description && (
+                    <p className={`${theme.secondaryText} text-sm mt-1`}>{app.description}</p>
+                  )}
+                </div>
+              </div>
+            }
+          />
         ))}
       </div>
     </div>

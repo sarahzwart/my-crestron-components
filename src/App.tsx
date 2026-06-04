@@ -66,7 +66,6 @@ function AppContent() {
             feedbackSignal="nav.home.fb"
             variant="momentary"
             shape="circle"
-            // rem strings scale with the fluid root font-size
             width="3rem"
             height="3rem"
             icon={<Home />}
@@ -79,7 +78,6 @@ function AppContent() {
         className={`backdrop-blur-xl border-b ${theme.headerBorder}`}
       />
 
-      {/* Main Content */}
       <main className="flex-1 overflow-hidden min-h-0">
         {renderPage()}
       </main>

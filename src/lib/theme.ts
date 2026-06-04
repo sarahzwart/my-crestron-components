@@ -1,8 +1,5 @@
 import { createContext, useContext, useState, createElement, type ReactNode, useEffect } from "react";
 
-// ============================================
-// FONT CONFIGURATION
-// ============================================
 export interface AppFont {
   name: string;
   label: string;
@@ -29,10 +26,6 @@ export const APP_FONTS: Record<string, AppFont> = {
 
 export type FontName = keyof typeof APP_FONTS;
 
-// ============================================
-// GLOBAL THEME INTERFACE — single source of truth
-// Every property here MUST exist in every theme object below.
-// ============================================
 export interface AppTheme {
   // Page
   pageBackground: string;
@@ -172,8 +165,8 @@ export const APP_THEMES = {
     sliderThumbType:         "circle",
     sliderSize:              "md",
     accentColor:             "cyan",
-    okBackground:            "bg-cyan-[#007B8A]",
-    okBackgroundActive:      "bg-cyan-400/50",
+    okBackground:            "bg-cyan-700",
+    okBackgroundActive:      "bg-cyan-400/60",
   },
 
   sunset: {
@@ -229,9 +222,6 @@ export const APP_THEMES = {
 
 export type ThemeName = keyof typeof APP_THEMES;
 
-// ============================================
-// CONTEXT
-// ============================================
 interface ThemeContextValue {
   theme: AppTheme;
   themeName: ThemeName;
@@ -244,9 +234,6 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
-// ============================================
-// PROVIDER
-// ============================================
 interface ThemeProviderProps {
   children: ReactNode;
   defaultTheme?: ThemeName;
@@ -290,9 +277,6 @@ export function ThemeProvider({
   );
 }
 
-// ============================================
-// HOOK
-// ============================================
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (!context) {
