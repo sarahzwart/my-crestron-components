@@ -45,19 +45,19 @@ export interface AppTheme {
   // Cards
   cardBackground: string;
   cardActiveBackground: string;
-  cardHighlightBackground: string; // master/featured card
+  cardHighlightBackground: string;
 
   // Text
   primaryText: string;
   secondaryText: string;
 
   // Buttons
-  buttonBackground: string;       // resting
-  buttonActiveBackground: string; // pressed / toggled on
-  buttonText: string;             // text + icon colour in resting state
-  buttonActiveText: string;       // text + icon colour when active/on
+  buttonBackground: string;
+  buttonActiveBackground: string;
+  buttonText: string;
+  buttonActiveText: string;
 
-  // Icons (standalone, not inside a button)
+  // Icons
   iconColor: string;
   iconBackground: string;
 
@@ -67,13 +67,14 @@ export interface AppTheme {
   sliderThumbType: "circle" | "square" | "diamond";
   sliderSize: "sm" | "md" | "lg" | "xl";
 
-  // Accent (used for glows, rings, highlights)
+  // Accent
   accentColor: string;
+
+  // OK button (AppleTV page)
+  okBackground: string;
+  okBackgroundActive: string;
 }
 
-// ============================================
-// PRE-BUILT THEMES — every key from AppTheme present
-// ============================================
 export const APP_THEMES = {
   glassDark: {
     pageBackground:          "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900",
@@ -96,6 +97,8 @@ export const APP_THEMES = {
     sliderThumbType:         "circle",
     sliderSize:              "md",
     accentColor:             "blue",
+    okBackground:            "bg-slate-800",
+    okBackgroundActive:      "bg-white/30",
   },
 
   neonPurple: {
@@ -119,6 +122,8 @@ export const APP_THEMES = {
     sliderThumbType:         "circle",
     sliderSize:              "md",
     accentColor:             "purple",
+    okBackground:            "bg-purple-900",
+    okBackgroundActive:      "bg-purple-400/50",
   },
 
   minimal: {
@@ -142,6 +147,8 @@ export const APP_THEMES = {
     sliderThumbType:         "circle",
     sliderSize:              "md",
     accentColor:             "blue",
+    okBackground:            "bg-slate-300",
+    okBackgroundActive:      "bg-slate-600",
   },
 
   oceanBlue: {
@@ -165,6 +172,8 @@ export const APP_THEMES = {
     sliderThumbType:         "circle",
     sliderSize:              "md",
     accentColor:             "cyan",
+    okBackground:            "bg-cyan-[#007B8A]",
+    okBackgroundActive:      "bg-cyan-400/50",
   },
 
   sunset: {
@@ -188,6 +197,8 @@ export const APP_THEMES = {
     sliderThumbType:         "circle",
     sliderSize:              "md",
     accentColor:             "orange",
+    okBackground:            "bg-red-950",
+    okBackgroundActive:      "bg-orange-400/50",
   },
 
   charcoal: {
@@ -211,6 +222,8 @@ export const APP_THEMES = {
     sliderThumbType:         "circle",
     sliderSize:              "md",
     accentColor:             "zinc",
+    okBackground:            "bg-zinc-700",
+    okBackgroundActive:      "bg-zinc-500/60",
   },
 } satisfies Record<string, AppTheme>;
 

@@ -35,7 +35,7 @@ export function CH5RoutingButton({
         ${isSelected ? theme.cardHighlightBackground : theme.cardBackground}
         ${theme.cardActiveBackground}
         ${isSelected ? `ring-2 ${ringColor}` : ""}
-        rounded-2xl p-4 h-64
+        rounded-2xl p-4 h-34
         flex flex-col items-center justify-center gap-3
         transition-all duration-200 active:scale-[0.95]
         relative overflow-hidden w-full

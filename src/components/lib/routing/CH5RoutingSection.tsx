@@ -1,4 +1,5 @@
 import { useTheme } from "@/lib/theme";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { CH5RoutingButton, type RoutingItem } from "./CH5RoutingButton";
 
 export interface CH5RoutingSectionProps {
@@ -53,20 +54,27 @@ export function CH5RoutingSection({
       </div>
 
       <div className={`
-        flex-1 min-h-0 ${theme.cardBackground} rounded-3xl p-4
-        ${needsScroll ? `overflow-y-auto  scrollbar-track-transparent scrollbar-thumb-white` : "overflow-hidden "}
+        ${needsScroll ? "flex-1 min-h-0" : ""}
+        ${theme.cardBackground} rounded-3xl p-4
       `}>
-        <div className="grid grid-cols-3 gap-4">
-          {items.map((item) => (
-            <CH5RoutingButton
-              key={item.id}
-              item={item}
-              isSelected={selectedIds.includes(item.id)}
-              onClick={() => onItemClick(item.id)}
-              type={type}
+        <ScrollArea className={needsScroll ? "h-full" : undefined}>
+          <div className="grid grid-cols-3 gap-4">
+            {items.map((item) => (
+              <CH5RoutingButton
+                key={item.id}
+                item={item}
+                isSelected={selectedIds.includes(item.id)}
+                onClick={() => onItemClick(item.id)}
+                type={type}
+              />
+            ))}
+          </div>
+          {needsScroll && (
+            <ScrollBar
+              className={`[&>[data-slot=scroll-area-thumb]]:${theme.buttonBackground}`}
             />
-          ))}
-        </div>
+          )}
+        </ScrollArea>
       </div>
 
     </section>
