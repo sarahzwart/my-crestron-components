@@ -35,13 +35,12 @@ export function CH5RoutingButton({
         ${isSelected ? theme.cardHighlightBackground : theme.cardBackground}
         ${theme.cardActiveBackground}
         ${isSelected ? `ring-2 ${ringColor}` : ""}
-        rounded-2xl p-4
+        rounded-2xl p-4 h-64
         flex flex-col items-center justify-center gap-3
         transition-all duration-200 active:scale-[0.95]
-        relative overflow-hidden w-full h-full
+        relative overflow-hidden w-full
       `}
     >
-
       {isSelected && (
         <div className={`absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center ${badgeColor}`}>
           <Check size={14} className="text-white" strokeWidth={3} />
@@ -58,7 +57,7 @@ export function CH5RoutingButton({
         {item.icon}
       </div>
 
-      <div className="text-center min-w-0">
+      <div className="text-center min-w-0 w-full">
         <h3 className={`${theme.primaryText} font-semibold text-sm leading-tight truncate`}>
           {item.label}
         </h3>

@@ -7,7 +7,6 @@ export interface CH5RoutingSectionProps {
   selectedIds: string[];
   onItemClick: (id: string) => void;
   type: "source" | "destination";
-  columns?: 2 | 3 | 4;
   accentColor?: string;
 }
 
@@ -17,7 +16,6 @@ export function CH5RoutingSection({
   selectedIds,
   onItemClick,
   type,
-  columns = 3,
   accentColor,
 }: CH5RoutingSectionProps) {
   const { theme } = useTheme();
@@ -26,18 +24,16 @@ export function CH5RoutingSection({
   const defaultAccentMuted = type === "source" ? "bg-blue-500/20" : "bg-green-500/20";
   const sectionAccent = accentColor || defaultAccent;
   const selectedCount = selectedIds.length;
-  const rows = Math.ceil(items.length / columns);
-
-  const gridColumns = { 2: "grid-cols-2", 3: "grid-cols-3", 4: "grid-cols-4" } as const;
+  const needsScroll = items.length > 6;
 
   return (
     <section className="flex flex-col min-h-0">
 
-      <div className="flex items-center justify-between mb-3 px-2 shrink-0">
+      <div className="flex items-center justify-between mb-5 px-2 shrink-0">
         <div className="flex items-center gap-3">
           <div className={`w-1.5 h-10 rounded-full ${sectionAccent}`} />
           <div>
-            <h2 className={`${theme.primaryText} text-xl font-bold leading-tight`}>
+            <h2 className={`${theme.primaryText} text-2xl font-bold leading-tight`}>
               {label}
             </h2>
             <p className={`${theme.secondaryText} text-sm mt-0.5`}>
@@ -56,11 +52,11 @@ export function CH5RoutingSection({
         )}
       </div>
 
-      <div className={`flex-1 min-h-0 ${theme.cardBackground} rounded-3xl p-2 flex`}>
-        <div
-          className={`grid gap-2 ${gridColumns[columns]} w-full h-full`}
-          style={{ gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))` }}
-        >
+      <div className={`
+        flex-1 min-h-0 ${theme.cardBackground} rounded-3xl p-4
+        ${needsScroll ? `overflow-y-auto  scrollbar-track-transparent scrollbar-thumb-white` : "overflow-hidden "}
+      `}>
+        <div className="grid grid-cols-3 gap-4">
           {items.map((item) => (
             <CH5RoutingButton
               key={item.id}
@@ -72,6 +68,7 @@ export function CH5RoutingSection({
           ))}
         </div>
       </div>
+
     </section>
   );
 }

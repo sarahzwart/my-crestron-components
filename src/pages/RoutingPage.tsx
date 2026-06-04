@@ -65,7 +65,6 @@ export function RoutingPage({
           selectedIds={selectedSource ? [selectedSource] : []}
           onItemClick={handleSourceSelect}
           type="source"
-          columns={sourceColumns}
         />
 
         <CH5RoutingFlow isActive={canRoute} />
@@ -76,7 +75,6 @@ export function RoutingPage({
           selectedIds={selectedDestinations}
           onItemClick={handleDestinationToggle}
           type="destination"
-          columns={destinationColumns}
         />
       </div>
 
