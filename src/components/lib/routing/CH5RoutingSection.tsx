@@ -58,7 +58,7 @@ export function CH5RoutingSection({
         ${theme.cardBackground} rounded-3xl p-4
       `}>
         <ScrollArea className={needsScroll ? "h-full" : undefined}>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-4 p-1">
             {items.map((item) => (
               <CH5RoutingButton
                 key={item.id}
