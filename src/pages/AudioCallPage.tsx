@@ -142,14 +142,14 @@ export function AudioCallPage({
   }
 
   return (
-    <div className="h-full flex flex-col p-4 overflow-hidden gap-3">
+    <div className="h-full flex px-10 py-5 overflow-hidden ">
 
       <div className="shrink-0 px-1">
         <h1 className={`${theme.primaryText} text-2xl font-bold leading-tight`}>{title}</h1>
         <p className={`${theme.secondaryText} text-sm`}>{subtitle}</p>
       </div>
 
-      <div className="flex-1 grid grid-cols-[1fr_1fr] gap-4 min-h-0">
+      <div className="flex-1 grid grid-cols-[1fr_1fr] min-h-0 mt-8">
 
         <div className="flex flex-col gap-3 min-h-0">
           <div className="shrink-0">
@@ -179,8 +179,7 @@ export function AudioCallPage({
           )}
         </div>
 
-        <div className="flex items-center justify-center min-h-0 py-2">
-          <div className="w-full max-w-[16rem]">
+        <div className="w-full max-w-[18rem] flex items-center justify-center min-h-0 p-2 ">
             <CH5Keypad
               commandSignal={commandSignal}
               feedbackSignal={feedbackSignal}
@@ -190,7 +189,6 @@ export function AudioCallPage({
               callButtonDisabled={displayValue.length === 0}
               gap={3}
             />
-          </div>
         </div>
 
       </div>
