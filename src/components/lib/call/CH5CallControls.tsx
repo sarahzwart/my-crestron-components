@@ -1,9 +1,9 @@
 import { useTheme } from "@/lib/theme";
-import { useCH5Boolean } from "@/hooks/useCH5Boolean";
-import { 
-  PhoneOff, 
-  MicOff, 
-  Mic, 
+import { CH5Button } from "@/components/lib/common/CH5Button";
+import {
+  PhoneOff,
+  MicOff,
+  Mic,
   Pause,
   Play,
   Grid3x3,
@@ -13,73 +13,60 @@ export interface CH5CallControlsProps {
   hangupCommandSignal: string;
   hangupFeedbackSignal: string;
   onHangup?: () => void;
-  
+
   privacyCommandSignal: string;
   privacyFeedbackSignal: string;
-  
+
   holdCommandSignal?: string;
   holdFeedbackSignal?: string;
   showHold?: boolean;
-  
+
   showKeypadButton?: boolean;
   onKeypadToggle?: () => void;
   isKeypadVisible?: boolean;
   className?: string;
 }
 
-
 interface ControlButtonProps {
-  icon: React.ReactNode;
+  commandSignal: string;
+  feedbackSignal: string;
+  iconOff: React.ReactNode;
+  iconOn?: React.ReactNode;
   label: string;
-  isActive?: boolean;
-  onClick: () => void;
-  variant?: "default" | "danger";
+  variant?: "toggle" | "momentary";
+  onClick?: () => void;
+  dangerStyle?: boolean;
 }
 
-function ControlButton({ 
-  icon, 
-  label, 
-  isActive = false, 
-  onClick, 
-  variant = "default" 
+function ControlButton({
+  commandSignal,
+  feedbackSignal,
+  iconOff,
+  iconOn,
+  label,
+  variant = "toggle",
+  onClick,
 }: ControlButtonProps) {
   const { theme } = useTheme();
 
-  const getButtonStyles = () => {
-    if (variant === "danger") {
-      return "bg-red-500 active:bg-red-600 shadow-lg shadow-red-500/30";
-    }
-    if (isActive) {
-      return "bg-white text-black";
-    }
-    return theme.buttonBackground;
-  };
-
-  const getIconColor = () => {
-    if (variant === "danger") return "text-white";
-    if (isActive) return "text-black";
-    return theme.iconColor;
-  };
-
   return (
     <div className="flex flex-col items-center gap-2">
-      <button
+      <CH5Button
+        commandSignal={commandSignal}
+        feedbackSignal={feedbackSignal}
+        variant={variant}
+        shape="circle"
+        width={80}
+        height={80}
+        icon={iconOff}
+        iconOn={iconOn}
+        iconOff={iconOff}
+        iconSize={28}
         onClick={onClick}
-        className={`
-          w-20 h-20 rounded-full
-          flex items-center justify-center
-          transition-all duration-200
-          active:scale-90
-          ${getButtonStyles()}
-        `}
-      >
-        <div className={getIconColor()}>
-          {icon}
-        </div>
-      </button>
-      <span className={`${theme.primaryText} text-xs font-medium`}>
-        {label}
-      </span>
+        offClassName={`${theme.buttonBackground} ${theme.iconColor}`}
+        onClassName="bg-white text-black"
+      />
+      <span className={`${theme.primaryText} text-xs font-medium`}>{label}</span>
     </div>
   );
 }
@@ -90,84 +77,59 @@ export function CH5CallControls({
   onHangup,
   privacyCommandSignal,
   privacyFeedbackSignal,
-  holdCommandSignal,
-  holdFeedbackSignal,
+  holdCommandSignal = "phone.hold",
+  holdFeedbackSignal = "phone.hold.fb",
   showHold = true,
   showKeypadButton = true,
   onKeypadToggle,
   isKeypadVisible = false,
   className = "",
 }: CH5CallControlsProps) {
-
-  const [isPrivacyOn, setPrivacyOn] = useCH5Boolean(
-    privacyCommandSignal,
-    privacyFeedbackSignal,
-    false
-  );
-
-
-  const [isOnHold, setOnHold] = useCH5Boolean(
-    holdCommandSignal || "",
-    holdFeedbackSignal || "",
-    false
-  );
-
-  const [, sendHangup] = useCH5Boolean(
-    hangupCommandSignal,
-    hangupFeedbackSignal,
-    false
-  );
-
-  const handleHangup = () => {
-    sendHangup(true);
-    setTimeout(() => sendHangup(false), 200);
-    if (onHangup) onHangup();
-  };
-
-  const togglePrivacy = () => setPrivacyOn(!isPrivacyOn);
-  const toggleHold = () => setOnHold(!isOnHold);
-
   return (
     <div className={`flex flex-col items-center gap-8 ${className}`}>
       <div className="grid grid-cols-3 gap-6 w-full max-w-xs">
         <ControlButton
-          icon={isPrivacyOn ? <MicOff size={28} /> : <Mic size={28} />}
+          commandSignal={privacyCommandSignal}
+          feedbackSignal={privacyFeedbackSignal}
+          iconOff={<Mic size={28} />}
+          iconOn={<MicOff size={28} />}
           label="mute"
-          isActive={isPrivacyOn}
-          onClick={togglePrivacy}
         />
-        {showKeypadButton && onKeypadToggle && (
+
+        {showKeypadButton && onKeypadToggle ? (
           <ControlButton
-            icon={<Grid3x3 size={28} />}
+            commandSignal="phone.keypad.toggle"
+            feedbackSignal="phone.keypad.toggle.fb"
+            iconOff={<Grid3x3 size={28} />}
             label="keypad"
-            isActive={isKeypadVisible}
             onClick={onKeypadToggle}
           />
-        )}
+        ) : <div />}
 
-        {showHold && (
+        {showHold ? (
           <ControlButton
-            icon={isOnHold ? <Play size={28} fill="currentColor" /> : <Pause size={28} fill="currentColor" />}
-            label={isOnHold ? "resume" : "hold"}
-            isActive={isOnHold}
-            onClick={toggleHold}
+            commandSignal={holdCommandSignal}
+            feedbackSignal={holdFeedbackSignal}
+            iconOff={<Pause size={28} fill="currentColor" />}
+            iconOn={<Play size={28} fill="currentColor" />}
+            label="hold"
           />
-        )}
+        ) : <div />}
       </div>
 
-      <button
-        onClick={handleHangup}
-        className={`
-          w-20 h-20 rounded-full
-          bg-red-500 active:bg-red-600
-          flex items-center justify-center
-          transition-all duration-200
-          active:scale-90
-          shadow-lg shadow-red-500/30
-        `}
-      >
-        <PhoneOff size={32} className="text-white" fill="currentColor" />
-      </button>
+      <CH5Button
+        commandSignal={hangupCommandSignal}
+        feedbackSignal={hangupFeedbackSignal}
+        variant="momentary"
+        shape="circle"
+        width={80}
+        height={80}
+        icon={<PhoneOff size={32} fill="currentColor" />}
+        iconSize={32}
+        onClick={onHangup}
+        offClassName="bg-red-500 text-white shadow-lg shadow-red-500/30"
+        onClassName="bg-red-600 text-white"
+      />
     </div>
   );
 }

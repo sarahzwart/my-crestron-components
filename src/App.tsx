@@ -56,7 +56,8 @@ function AppContent() {
   };
 
   return (
-    <div className={`flex flex-col h-screen ${theme.pageBackground}`}>
+    // w-screen h-screen overflow-hidden — fills the panel exactly, no scrollbars
+    <div className={`flex flex-col w-screen h-screen overflow-hidden ${theme.pageBackground}`}>
       {/* Header */}
       <CH5Header
         leftButtons={
@@ -65,8 +66,9 @@ function AppContent() {
             feedbackSignal="nav.home.fb"
             variant="momentary"
             shape="circle"
-            width={48}
-            height={48}
+            // rem strings scale with the fluid root font-size
+            width="3rem"
+            height="3rem"
             icon={<Home />}
             iconSize={20}
             onClick={() => setCurrentPage("home")}
@@ -78,7 +80,7 @@ function AppContent() {
       />
 
       {/* Main Content */}
-      <main className="flex-1 overflow-hidden">
+      <main className="flex-1 overflow-hidden min-h-0">
         {renderPage()}
       </main>
 
@@ -89,7 +91,8 @@ function AppContent() {
         volumeColor={theme.sliderTrackColor}
         backgroundColor="bg-transparent"
         bubbleBackground={theme.footerBubbleBackground}
-        height={90}
+        // rem string so footer height scales with the panel
+        height="5.625rem"
         muteButton={
           <CH5MuteButton
             commandSignal="audio.mute"
@@ -107,8 +110,8 @@ function AppContent() {
               feedbackSignal="system.power.fb"
               variant="momentary"
               shape="circle"
-              width={48}
-              height={48}
+              width="3rem"
+              height="3rem"
               icon={<Power />}
               iconSize={20}
             />
@@ -117,8 +120,8 @@ function AppContent() {
               feedbackSignal="nav.settings.fb"
               variant="momentary"
               shape="circle"
-              width={48}
-              height={48}
+              width="3rem"
+              height="3rem"
               icon={<Settings />}
               iconSize={20}
               onClick={() => setCurrentPage(

@@ -1,6 +1,6 @@
-import { useCH5Boolean } from "@/hooks/useCH5Boolean";
 import { useTheme } from "@/lib/theme";
 import { Delete, Phone } from "lucide-react";
+import { CH5Button } from "./CH5Button";
 
 export interface KeypadKey {
   number: string;
@@ -45,32 +45,30 @@ interface KeypadKeyButtonProps {
 
 function KeypadKeyButton({ number, letters, commandSignal, feedbackSignal, onPress }: KeypadKeyButtonProps) {
   const { theme } = useTheme();
-  const [, setIsPressed] = useCH5Boolean(commandSignal, feedbackSignal, false);
 
-  const handleClick = () => {
-    setIsPressed(true);
-    setTimeout(() => setIsPressed(false), 200);
-    onPress();
-  };
-
-  return (
-    <button
-      onClick={handleClick}
-      className={`
-        ${theme.buttonBackground} ${theme.buttonText}
-        rounded-full aspect-square
-        flex flex-col items-center justify-center
-        active:scale-90 active:${theme.buttonActiveBackground}
-        transition-all duration-100 select-none
-      `}
-    >
+  const keyContent = (
+    <span className="flex flex-col items-center justify-center leading-none select-none">
       <span className={`${theme.primaryText} text-4xl font-light leading-none`}>{number}</span>
       {letters && (
         <span className={`${theme.secondaryText} text-[9px] font-bold tracking-[0.15em] mt-1.5 leading-none`}>
           {letters}
         </span>
       )}
-    </button>
+    </span>
+  );
+
+  return (
+    <CH5Button
+      commandSignal={commandSignal}
+      feedbackSignal={feedbackSignal}
+      variant="momentary"
+      shape="circle"
+      icon={keyContent}
+      onClick={onPress}
+      offClassName={`${theme.buttonBackground} ${theme.buttonText}`}
+      onClassName={`${theme.buttonActiveBackground} ${theme.buttonActiveText}`}
+      className="aspect-square w-full transition-all duration-100"
+    />
   );
 }
 
@@ -108,28 +106,35 @@ export function CH5Keypad({
           <div />
 
           {showCallButton ? (
-            <button
+            <CH5Button
+              commandSignal={`${commandSignal}.call`}
+              feedbackSignal={`${feedbackSignal}.call`}
+              variant="momentary"
+              shape="circle"
+              icon={<Phone size={32} fill="currentColor" />}
+              iconSize={32}
               onClick={onCall}
               disabled={callButtonDisabled}
-              className={`
-                aspect-square rounded-full flex items-center justify-center
-                transition-all duration-200 active:scale-90
-                ${callButtonDisabled
-                  ? "bg-green-500/30 cursor-not-allowed"
-                  : "bg-green-500 active:bg-green-600 shadow-lg shadow-green-500/30"}
-              `}
-            >
-              <Phone size={32} className={callButtonDisabled ? "text-white/40" : "text-white"} fill="currentColor" />
-            </button>
+              offClassName={callButtonDisabled
+                ? "bg-green-500/30 text-white/40 cursor-not-allowed"
+                : "bg-green-500 text-white shadow-lg shadow-green-500/30"}
+              onClassName="bg-green-600 text-white"
+              className="aspect-square w-full"
+            />
           ) : <div />}
 
           {showBackspace ? (
-            <button
+            <CH5Button
+              commandSignal={`${commandSignal}.backspace`}
+              feedbackSignal={`${feedbackSignal}.backspace`}
+              variant="momentary"
+              shape="circle"
+              icon={<Delete size={32} className={`${theme.iconColor} opacity-60`} />}
               onClick={onBackspace}
-              className="flex items-center justify-center w-full aspect-square transition-all duration-200 active:scale-90 active:opacity-50"
-            >
-              <Delete size={32} className={`${theme.iconColor} opacity-60`} />
-            </button>
+              offClassName="bg-transparent"
+              onClassName="bg-transparent opacity-50"
+              className="aspect-square w-full"
+            />
           ) : <div />}
         </div>
       )}

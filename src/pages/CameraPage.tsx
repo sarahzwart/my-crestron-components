@@ -18,7 +18,7 @@ export interface CameraPageProps {
 }
 
 export function CameraPage({
-  cameraCount = 2,
+  cameraCount = 3,
   presetCount = 3,
 }: CameraPageProps) {
   const { theme } = useTheme();
@@ -37,7 +37,7 @@ export function CameraPage({
       >
         <div className="flex items-center gap-3">
           <span
-            className={`text-lg font-mono font-bold uppercase tracking-widest mr-1 ${theme.secondaryText}`}
+            className={`text-xl font-mono font-bold uppercase tracking-widest mr-1 ${theme.secondaryText}`}
           >
             Cam
           </span>
@@ -50,7 +50,7 @@ export function CameraPage({
               label={pad(cam)}
               onClick={() => setActiveCamera(cam)}
               className={`
-                w-16 h-10 rounded-lg text-base font-mono font-semibold transition-all duration-150
+                w-20 h-12 rounded-lg text-base font-mono font-semibold transition-all duration-150
                 ${
                   activeCamera === cam
                     ? `${theme.buttonActiveBackground} ${theme.buttonActiveText}`

@@ -12,9 +12,9 @@ export interface AudioPageProps {
 export function AudioPage({
   volumeControls,
   showMaster = true,
-  title = "Audio Page",
+  title = "Audio",
   subtitle = "Adjust volume levels for each zone",
-  columns = 2,
+  columns = 3,
 }: AudioPageProps) {
   const { theme } = useTheme();
 
@@ -23,36 +23,30 @@ export function AudioPage({
 
   const gridColumns = {
     1: "grid-cols-1",
-    2: "grid-cols-1 md:grid-cols-2",
-    3: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3",
-    4: "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+    2: "grid-cols-2",
+    3: "grid-cols-3",
+    4: "grid-cols-4",
   };
 
   return (
-    <div className="min-h-full p-6 lg:p-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="h-full flex flex-col p-4 overflow-hidden gap-3">
 
-        <div className="mb-8">
-          <h1 className={`${theme.primaryText} text-3xl lg:text-4xl font-bold mb-2`}>
-            {title}
-          </h1>
-          <p className={`${theme.secondaryText} text-base lg:text-lg`}>
-            {subtitle}
-          </p>
-        </div>
-
-        {masterControl && (
-          <div className="mb-6">
-            <CH5VolumeSlider {...masterControl} isMaster={true} />
-          </div>
-        )}
-
-        <div className={`grid gap-4 lg:gap-6 ${gridColumns[columns]}`}>
-          {otherControls.map((control) => (
-            <CH5VolumeSlider key={control.id} {...control} />
-          ))}
-        </div>
+      <div className="shrink-0 px-1">
+        <h1 className={`${theme.primaryText} text-2xl font-bold leading-tight`}>{title}</h1>
+        <p className={`${theme.secondaryText} text-sm`}>{subtitle}</p>
       </div>
+      {masterControl && (
+        <div className="shrink-0">
+          <CH5VolumeSlider {...masterControl} isMaster={true} />
+        </div>
+      )}
+
+      <div className={`flex-1 grid ${gridColumns[columns]} gap-3 min-h-0 overflow-auto`}>
+        {otherControls.map((control) => (
+          <CH5VolumeSlider key={control.id} {...control} />
+        ))}
+      </div>
+
     </div>
   );
 }

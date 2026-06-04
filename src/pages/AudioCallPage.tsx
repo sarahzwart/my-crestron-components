@@ -23,7 +23,7 @@ export interface AudioCallPageProps {
 }
 
 export function AudioCallPage({
-  title = "Audio Call",
+  title = "Phone",
   subtitle = "Enter a number to call",
   commandSignal = "phone.keypad",
   feedbackSignal = "phone.keypad.fb",
@@ -45,12 +45,9 @@ export function AudioCallPage({
   const [callDuration, setCallDuration] = useState<number>(0);
   const [callStartTime, setCallStartTime] = useState<Date | null>(null);
 
-  // Call timer
   useEffect(() => {
     if (!isInCall) return;
-    const interval = setInterval(() => {
-      setCallDuration(prev => prev + 1);
-    }, 1000);
+    const interval = setInterval(() => setCallDuration(prev => prev + 1), 1000);
     return () => clearInterval(interval);
   }, [isInCall]);
 
@@ -69,14 +66,12 @@ export function AudioCallPage({
   };
 
   const handleKeyPress = (key: string) => {
-    if (displayValue.length < maxDigits) {
-      setDisplayValue(prev => prev + key);
-    }
+    if (displayValue.length < maxDigits) setDisplayValue(prev => prev + key);
   };
 
   const handleCall = () => {
     if (displayValue) {
-      if (onCall) onCall(displayValue);
+      onCall?.(displayValue);
       setIsInCall(true);
       setCallStartTime(new Date());
       setCallDuration(0);
@@ -85,15 +80,11 @@ export function AudioCallPage({
   };
 
   const handleHangup = () => {
-    setHistory(prev => [
-      { 
-        value: displayValue, 
-        timestamp: callStartTime || new Date(), 
-        label: `Outgoing • ${formatDuration(callDuration)}` 
-      },
-      ...prev
-    ].slice(0, 10));
-
+    setHistory(prev => [{
+      value: displayValue,
+      timestamp: callStartTime || new Date(),
+      label: `Outgoing • ${formatDuration(callDuration)}`,
+    }, ...prev].slice(0, 10));
     setIsInCall(false);
     setCallDuration(0);
     setCallStartTime(null);
@@ -101,114 +92,107 @@ export function AudioCallPage({
     setDisplayValue("");
   };
 
-  const handleBackspace = () => {
-    setDisplayValue(prev => prev.slice(0, -1));
-  };
-
-  const handleHistoryClick = (value: string) => {
-    if (!isInCall) setDisplayValue(value);
-  };
-
+  const handleBackspace = () => setDisplayValue(prev => prev.slice(0, -1));
+  const handleHistoryClick = (value: string) => { if (!isInCall) setDisplayValue(value); };
   const clearHistory = () => setHistory([]);
 
   if (isInCall) {
     return (
-      <div className="h-full flex flex-col overflow-hidden">
-        <div className="flex-1 flex flex-col items-center justify-between max-w-md mx-auto w-full px-8 py-12">
+      <div className="h-full flex flex-col items-center justify-between overflow-hidden px-6 py-6">
 
-          <div className="flex flex-col items-center gap-2 mt-8">
-            <p className={`${theme.primaryText} text-4xl font-light tracking-tight`}>
-              {formatNumber(displayValue)}
-            </p>
-            <p className={`${theme.secondaryText} text-base`}>
-              {formatDuration(callDuration)}
-            </p>
-          </div>
-
-          <div className="flex-1 flex items-center justify-center w-full">
-            {showKeypadInCall ? (
-              <CH5Keypad
-                commandSignal={commandSignal}
-                feedbackSignal={feedbackSignal}
-                onKeyPress={handleKeyPress}
-                showCallButton={false}
-                showBackspace={false}
-                gap={3}
-              />
-            ) : (
-              <div className={`
-                w-32 h-32 rounded-full ${theme.buttonBackground}
-                flex items-center justify-center
-              `}>
-                <Phone size={48} className={theme.iconColor} />
-              </div>
-            )}
-          </div>
-
-          <CH5CallControls
-            hangupCommandSignal={hangupCommandSignal}
-            hangupFeedbackSignal={hangupFeedbackSignal}
-            onHangup={handleHangup}
-            privacyCommandSignal={privacyCommandSignal}
-            privacyFeedbackSignal={privacyFeedbackSignal}
-            holdCommandSignal={holdCommandSignal}
-            holdFeedbackSignal={holdFeedbackSignal}
-            isKeypadVisible={showKeypadInCall}
-            onKeypadToggle={() => setShowKeypadInCall(prev => !prev)}
-          />
+        <div className="flex flex-col items-center gap-1 mt-4">
+          <p className={`${theme.primaryText} text-3xl font-light tracking-tight`}>
+            {formatNumber(displayValue)}
+          </p>
+          <p className={`${theme.secondaryText} text-sm`}>
+            {formatDuration(callDuration)}
+          </p>
         </div>
+
+        <div className="flex items-center justify-center w-full max-w-xs">
+          {showKeypadInCall ? (
+            <CH5Keypad
+              commandSignal={commandSignal}
+              feedbackSignal={feedbackSignal}
+              onKeyPress={handleKeyPress}
+              showCallButton={false}
+              showBackspace={false}
+              gap={3}
+            />
+          ) : (
+            <div className={`w-24 h-24 rounded-full ${theme.buttonBackground} flex items-center justify-center`}>
+              <Phone size={36} className={theme.iconColor} />
+            </div>
+          )}
+        </div>
+
+        <CH5CallControls
+          hangupCommandSignal={hangupCommandSignal}
+          hangupFeedbackSignal={hangupFeedbackSignal}
+          onHangup={handleHangup}
+          privacyCommandSignal={privacyCommandSignal}
+          privacyFeedbackSignal={privacyFeedbackSignal}
+          holdCommandSignal={holdCommandSignal}
+          holdFeedbackSignal={holdFeedbackSignal}
+          isKeypadVisible={showKeypadInCall}
+          onKeypadToggle={() => setShowKeypadInCall(prev => !prev)}
+        />
       </div>
     );
   }
 
   return (
-    <div className="h-full flex flex-col p-8 overflow-hidden">
-      {/* Header */}
-      <div className="mb-6 px-2 shrink-0">
-        <h1 className={`${theme.primaryText} text-4xl font-bold mb-2`}>
-          {title}
-        </h1>
-        <p className={`${theme.secondaryText} text-base`}>
-          {subtitle}
-        </p>
+    <div className="h-full flex flex-col p-4 overflow-hidden gap-3">
+
+      <div className="shrink-0 px-1">
+        <h1 className={`${theme.primaryText} text-2xl font-bold leading-tight`}>{title}</h1>
+        <p className={`${theme.secondaryText} text-sm`}>{subtitle}</p>
       </div>
 
-      <div className="flex-1 grid grid-cols-[1fr_1fr] gap-8 min-h-0 max-w-6xl mx-auto w-full">
-        <div className="flex flex-col gap-4 min-h-0">
-          <CH5DisplayScreen
-            value={displayValue}
-            placeholder="Enter a number"
-          />
+      <div className="flex-1 grid grid-cols-[1fr_1fr] gap-4 min-h-0">
+
+        <div className="flex flex-col gap-3 min-h-0">
+          <div className="shrink-0">
+            <CH5DisplayScreen
+              value={displayValue}
+              placeholder="Enter a number"
+            />
+          </div>
 
           {showHistory && (
-            <CH5HistoryList
-              items={history}
-              title="Recent Calls"
-              itemIcon={<Phone size={18} />}
-              emptyIcon={<Phone size={28} />}
-              emptyText="No recent calls"
-              onItemClick={handleHistoryClick}
-              onClear={clearHistory}
-              formatValue={(val) => {
-                if (val.length > 6) return val.replace(/(\d{3})(\d{3})(\d+)/, "$1 $2 $3");
-                if (val.length > 3) return val.replace(/(\d{3})(\d+)/, "$1 $2");
-                return val;
-              }}
-            />
+            <div className="flex-1 min-h-0">
+              <CH5HistoryList
+                items={history}
+                title="Recent Calls"
+                itemIcon={<Phone size={16} />}
+                emptyIcon={<Phone size={24} />}
+                emptyText="No recent calls"
+                onItemClick={handleHistoryClick}
+                onClear={clearHistory}
+                formatValue={(val) => {
+                  if (val.length > 6) return val.replace(/(\d{3})(\d{3})(\d+)/, "$1 $2 $3");
+                  if (val.length > 3) return val.replace(/(\d{3})(\d+)/, "$1 $2");
+                  return val;
+                }}
+              />
+            </div>
           )}
         </div>
 
-        <div className="flex flex-col items-center justify-center min-h-0 py-4">
-          <CH5Keypad
-            commandSignal={commandSignal}
-            feedbackSignal={feedbackSignal}
-            onKeyPress={handleKeyPress}
-            onCall={handleCall}
-            onBackspace={handleBackspace}
-            callButtonDisabled={displayValue.length === 0}
-            gap={4}
-          />
+        <div className="flex items-center justify-center min-h-0 py-2">
+          <div className="w-full max-w-[16rem]">
+            <CH5Keypad
+              commandSignal={commandSignal}
+              feedbackSignal={feedbackSignal}
+              onKeyPress={handleKeyPress}
+              onCall={handleCall}
+              onBackspace={handleBackspace}
+              callButtonDisabled={displayValue.length === 0}
+              gap={3}
+            />
+          </div>
         </div>
+
       </div>
     </div>
   );
