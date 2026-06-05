@@ -23,15 +23,15 @@ export interface AppleTVPageProps {
 }
 
 export function AppleTVPage({
-  signalUp = "appletv.up",
-  signalDown = "appletv.down",
-  signalLeft = "appletv.left",
-  signalRight = "appletv.right",
-  signalEnter = "appletv.enter",
-  signalMenu = "appletv.menu",
-  signalHome = "appletv.home",
-  signalBack = "appletv.back",
-  signalPlayPause = "appletv.playpause",
+  signalUp = "AppleTV.Up",
+  signalDown = "AppleTV.Down",
+  signalLeft = "AppleTV.Left",
+  signalRight = "AppleTV.Right",
+  signalEnter = "AppleTV.Enter",
+  signalMenu = "AppleTV.Menu",
+  signalHome = "AppleTV.Home",
+  signalBack = "AppleTV.Back",
+  signalPlayPause = "AppleTV.PlayPause",
 }: AppleTVPageProps) {
   const { theme } = useTheme();
 

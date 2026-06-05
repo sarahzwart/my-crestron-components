@@ -32,15 +32,15 @@ type Page =
 
 // One feedback signal per page — processor sets exactly one true at a time
 const PAGE_FEEDBACK_SIGNALS: Record<Page, string> = {
-  home: "nav.page.home.fb",
-  audio: "nav.page.audio.fb",
-  call: "nav.page.call.fb",
-  routing: "nav.page.routing.fb",
-  settings: "nav.page.settings.fb",
-  lights: "nav.page.lights.fb",
-  camera: "nav.page.camera.fb",
-  appleTV: "nav.page.appleTV.fb",
-  overview: "nav.page.overview.fb",
+  home: "Navpage.Home_FB",
+  audio: "Navpage.Audio_FB",
+  call: "Navpage.Call_FB",
+  routing: "Navpage.Routing_FB",
+  settings: "Navpage.Settings_FB",
+  lights: "Navpage.Lights_FB",
+  camera: "Navpage.Camera_FB",
+  appleTV: "Navpage.AppleTV_FB",
+  overview: "Navpage.Overview_FB",
 };
 
 function useActivePage(): Page {
@@ -98,8 +98,8 @@ function AppContent() {
       <CH5Header
         leftButtons={
           <CH5Button
-            commandSignal="nav.home"
-            feedbackSignal="nav.page.home.fb"
+            commandSignal="Navpage.Home_Press"
+            feedbackSignal="Navpage.Home_FB"
             variant="momentary"
             shape="circle"
             width={48}
@@ -125,8 +125,8 @@ function AppContent() {
         page={currentPage}
         muteButton={
           <CH5MuteButton
-            commandSignal="audio.mute"
-            feedbackSignal="audio.mute.fb"
+            commandSignal="Audio.Mute_Press"
+            feedbackSignal="Audio.Mute_FB"
             width={48}
             height={48}
             iconSize={20}
@@ -136,8 +136,8 @@ function AppContent() {
         rightButtons={
           <div className="flex items-center gap-3">
             <CH5Button
-              commandSignal="system.power"
-              feedbackSignal="system.power.fb"
+              commandSignal="System.Power"
+              feedbackSignal="System.Power_FB"
               variant="momentary"
               shape="circle"
               width={48}
@@ -146,8 +146,8 @@ function AppContent() {
               iconSize={20}
             />
             <CH5Button
-              commandSignal="nav.settings"
-              feedbackSignal="nav.page.settings.fb"
+              commandSignal="Navpage.Settings_Press"
+              feedbackSignal="Navpage.Settings_FB"
               variant="momentary"
               shape="circle"
               width={48}

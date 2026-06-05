@@ -45,8 +45,8 @@ export function CameraPage({
             <CH5Button
               key={cam}
               variant="toggle"
-              commandSignal={`camera.${cam}.select`}
-              feedbackSignal={`camera.${cam}.select.fb`}
+              commandSignal={`Camera.${cam}_Press`}
+              feedbackSignal={`Camera.${cam}_FB`}
               label={pad(cam)}
               onClick={() => setActiveCamera(cam)}
               className={`
@@ -63,8 +63,8 @@ export function CameraPage({
 
         <CH5Button
           variant="toggle"
-          commandSignal={`camera.${activeCamera}.autofocus`}
-          feedbackSignal={`camera.${activeCamera}.autofocus.fb`}
+          commandSignal={`Camera.${activeCamera}_AutoFocus_Press`}
+          feedbackSignal={`Camera.${activeCamera}_AutoFocus_FB`}
           icon={<Focus size={24} />}
           onLabel="AF On"
           offLabel="AF Off"
@@ -92,16 +92,16 @@ export function CameraPage({
 
       <div className="mx-auto w-[50%] h-[70%] flex flex-col gap-6">
         <div className="grid grid-cols-3 grid-rows-3 gap-3 flex-3 min-h-0">
-          <CH5Button variant="momentary" icon={<ZoomIn />}    iconSize={32}  commandSignal={`camera.${activeCamera}.zoom.in`}   className={cell} />
-          <CH5Button variant="momentary" icon={<ChevronUp />} iconSize={32}   commandSignal={`camera.${activeCamera}.tilt.up`}   className={cell} />
-          <CH5Button variant="momentary" icon={<ZoomOut />}   iconSize={32}   commandSignal={`camera.${activeCamera}.zoom.out`}  className={cell} />
+          <CH5Button variant="momentary" icon={<ZoomIn />}    iconSize={32}  commandSignal={`Camera.${activeCamera}_Zoom_In_Press`}   className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronUp />} iconSize={32}   commandSignal={`Camera.${activeCamera}_Tilt_Up_Press`}   className={cell} />
+          <CH5Button variant="momentary" icon={<ZoomOut />}   iconSize={32}   commandSignal={`Camera.${activeCamera}_Zoom_Out_Press`}  className={cell} />
 
-          <CH5Button variant="momentary" icon={<ChevronLeft />} iconSize={32}  commandSignal={`camera.${activeCamera}.pan.left`}  className={cell} />
-          <CH5Button variant="momentary" icon={<House />}        iconSize={32}  commandSignal={`camera.${activeCamera}.home`}      className={cell} />
-          <CH5Button variant="momentary" icon={<ChevronRight />} iconSize={32}  commandSignal={`camera.${activeCamera}.pan.right`} className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronLeft />} iconSize={32}  commandSignal={`Camera.${activeCamera}_Pan_Left_Press`}  className={cell} />
+          <CH5Button variant="momentary" icon={<House />}        iconSize={32}  commandSignal={`Camera.${activeCamera}_Home_Press`}      className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronRight />} iconSize={32}  commandSignal={`Camera.${activeCamera}_Pan_Right_Press`} className={cell} />
 
           <span />
-          <CH5Button variant="momentary" icon={<ChevronDown />}  iconSize={32}  commandSignal={`camera.${activeCamera}.tilt.down`} className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronDown />}  iconSize={32}  commandSignal={`Camera.${activeCamera}_Tilt_Down_Press`} className={cell} />
           <span />
         </div>
 
@@ -111,7 +111,7 @@ export function CameraPage({
               key={p}
               variant="momentary"
               label={`PRESET ${p}`}
-              commandSignal={`camera.${activeCamera}.preset.${p}`}
+              commandSignal={`Camera.${activeCamera}_Preset_${p}`}
               textSize={22}
               className={cell}
             />

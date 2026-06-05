@@ -17,16 +17,16 @@ export function SettingsPage() {
   const [activeTab, setActiveTab] = useState<SettingsTab>("theme");
 
   useEffect(() => {
-    ch5Service.subscribeBool("settings.tab.theme.fb", (isActive: boolean) => {
+    ch5Service.subscribeBool("Settings_Tab.Theme_fb", (isActive: boolean) => {
       if (isActive) setActiveTab("theme");
     });
-    ch5Service.subscribeBool("settings.tab.font.fb", (isActive: boolean) => {
+    ch5Service.subscribeBool("Settings_Tab.Font_fb", (isActive: boolean) => {
       if (isActive) setActiveTab("font");
     });
 
     return () => {
-      ch5Service.unsubscribe("settings.tab.theme.fb");
-      ch5Service.unsubscribe("settings.tab.font.fb");
+      ch5Service.unsubscribe("Settings_Tab.Theme_fb");
+      ch5Service.unsubscribe("Settings_Tab.Font_fb");
     };
   }, []);
 
@@ -43,8 +43,8 @@ export function SettingsPage() {
         </div>
         <div className={`flex gap-1 p-1 rounded-2xl ${theme.cardBackground}`}>
           <CH5Button
-            commandSignal="settings.tab.theme"
-            feedbackSignal="settings.tab.theme.fb"
+            commandSignal="Settings_Tab.Theme"
+            feedbackSignal="Settings_Tab.Theme_FB"
             variant="momentary"
             shape="rounded"
             onClick={() => setActiveTab("theme")}
@@ -74,8 +74,8 @@ export function SettingsPage() {
             }
           />
           <CH5Button
-            commandSignal="settings.tab.font"
-            feedbackSignal="settings.tab.font.fb"
+            commandSignal="Settings_Tab.Font"
+            feedbackSignal="Settings_Tab.Font_FB"
             variant="momentary"
             shape="rounded"
             onClick={() => setActiveTab("font")}
@@ -246,8 +246,8 @@ function ThemeCard({
 
   return (
     <CH5Button
-      commandSignal={`settings.theme.${themeName}`}
-      feedbackSignal={`settings.theme.${themeName}.fb`}
+      commandSignal={`Theme.${themeName}`}
+      feedbackSignal={`Theme.${themeName}_FB`}
       variant="momentary"
       shape="rounded"
       onClick={onSelect}
@@ -297,8 +297,8 @@ function FontCard({
 
   return (
     <CH5Button
-      commandSignal={`settings.font.${fontName}`}
-      feedbackSignal={`settings.font.${fontName}.fb`}
+      commandSignal={`Font.${fontName}`}
+      feedbackSignal={`Font.${fontName}_FB`}
       variant="momentary"
       shape="rounded"
       onClick={onSelect}

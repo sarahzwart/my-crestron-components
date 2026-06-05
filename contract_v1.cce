@@ -1,0 +1,26 @@
+{
+	"Errors": [],
+	"id": "_87w9k34ss",
+	"name": "contract_v1",
+	"description": "",
+	"company": "",
+	"client": "",
+	"author": "Sarah Zwart",
+	"version": "1.0.0.0",
+	"schemaVersion": 1,
+	"subContractLinks": [],
+	"subContracts": [],
+	"specifications": [],
+	"components": [
+		{
+			"Errors": [],
+			"parentId": "_87w9k34ss",
+			"id": "_o1dltrh40",
+			"name": "nav",
+			"commands": [],
+			"feedbacks": [],
+			"specifications": []
+		}
+	],
+	"allComponentsForAllContracts": []
+}

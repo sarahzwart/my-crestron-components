@@ -57,8 +57,8 @@ export function CH5CallControls({
   onHangup,
   privacyCommandSignal,
   privacyFeedbackSignal,
-  holdCommandSignal = "phone.hold",
-  holdFeedbackSignal = "phone.hold.fb",
+  holdCommandSignal = "Phone.Hold",
+  holdFeedbackSignal = "Phone.Hold_FB",
   showHold = true,
   showKeypadButton = true,
   onKeypadToggle,
@@ -77,8 +77,8 @@ export function CH5CallControls({
         />
         {showKeypadButton && onKeypadToggle ? (
           <ControlButton
-            commandSignal="phone.keypad.toggle"
-            feedbackSignal="phone.keypad.toggle.fb"
+            commandSignal="Phone.Keypad_Toggle"
+            feedbackSignal="Phone.Keypad_Toggle_FB"
             iconOff={<Grid3x3 size={28} />}
             iconOn={<Grid3x3 size={28} />}
             label="keypad"
