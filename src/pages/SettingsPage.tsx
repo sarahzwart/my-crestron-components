@@ -70,21 +70,25 @@ function SectionHeader({
 }
 
 const THEME_LABELS: Record<ThemeName, string> = {
-  glassDark:  "Glass Dark",
-  neonPurple: "Neon Purple",
-  minimal:    "Minimal",
-  oceanBlue:  "Ocean Blue",
-  sunset:     "Sunset",
-  charcoal:   "Charcoal",
+  glassDark:   "Glass Dark",
+  neonPurple:  "Neon Purple",
+  minimal:     "Minimal",
+  oceanBlue:   "Ocean Blue",
+  sunset:      "Sunset",
+  charcoal:    "Charcoal",
+  crimsonDark: "Crimson Dark",
+  studioLight: "Studio Light",
 };
 
 const THEME_PREVIEWS: Record<ThemeName, { bg: string; card: string; accent: string }> = {
-  glassDark:  { bg: "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900", card: "bg-white/10",                      accent: "bg-blue-500"   },
-  neonPurple: { bg: "bg-gradient-to-br from-purple-950 via-slate-900 to-pink-950", card: "bg-purple-500/20",                  accent: "bg-pink-500"   },
-  minimal:    { bg: "bg-gradient-to-br from-slate-50 to-slate-200",                card: "bg-white border border-slate-200",  accent: "bg-blue-500"   },
-  oceanBlue:  { bg: "bg-gradient-to-br from-cyan-950 via-blue-950 to-slate-900",   card: "bg-cyan-500/20",                    accent: "bg-cyan-400"   },
-  sunset:     { bg: "bg-gradient-to-br from-orange-950 via-red-950 to-purple-950", card: "bg-orange-500/20",                  accent: "bg-orange-400" },
-  charcoal:   { bg: "bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900",    card: "bg-zinc-700/40",                    accent: "bg-zinc-500"   },
+  glassDark:   { bg: "bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900",    card: "bg-white/10",                     accent: "bg-blue-500"   },
+  neonPurple:  { bg: "bg-gradient-to-br from-purple-950 via-slate-900 to-pink-950",    card: "bg-purple-500/20",                accent: "bg-pink-500"   },
+  minimal:     { bg: "bg-gradient-to-br from-slate-50 to-slate-200",                   card: "bg-white border border-slate-200", accent: "bg-blue-500"  },
+  oceanBlue:   { bg: "bg-gradient-to-br from-cyan-950 via-blue-950 to-slate-900",      card: "bg-cyan-500/20",                  accent: "bg-cyan-400"   },
+  sunset:      { bg: "bg-gradient-to-br from-orange-950 via-red-950 to-purple-950",    card: "bg-orange-500/20",                accent: "bg-orange-400" },
+  charcoal:    { bg: "bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-900",       card: "bg-zinc-700/40",                  accent: "bg-zinc-500"   },
+  crimsonDark: { bg: "bg-gradient-to-br from-neutral-950 via-red-950 to-neutral-950",  card: "bg-red-900/40",                   accent: "bg-red-600"    },
+  studioLight: { bg: "bg-gradient-to-br from-white via-gray-50 to-red-50",             card: "bg-white border border-gray-200", accent: "bg-red-500"    },
 };
 
 function ThemeCard({ themeName, isSelected, onSelect }: {

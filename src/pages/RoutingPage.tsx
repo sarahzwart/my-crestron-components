@@ -19,8 +19,7 @@ export function RoutingPage({
   destinations,
   title = "Routing",
   subtitle = "Select a source and choose where to send it",
-  sourceColumns = 3,
-  destinationColumns = 3,
+
 }: RoutingPageProps) {
   const { theme } = useTheme();
   
@@ -48,9 +47,9 @@ export function RoutingPage({
   const canRoute = selectedSource !== null && selectedDestinations.length > 0;
 
   return (
-    <div className="h-full flex flex-col p-4 overflow-hidden">
-      <div className="mb-4 px-2 shrink-0">
-        <h1 className={`${theme.primaryText} text-2xl font-bold mb-1`}>
+    <div className="h-full flex flex-col py-4 px-4 overflow-hidden">
+      <div className="px-2 shrink-0">
+        <h1 className={`${theme.primaryText} text-2xl font-bold `}>
           {title}
         </h1>
         <p className={`${theme.secondaryText} text-base`}>
