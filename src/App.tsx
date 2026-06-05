@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CH5Provider } from "./contexts/CH5Context";
 import { ThemeProvider, useTheme } from "./lib/theme";
 import { CH5Header } from "./components/layout/Header";
@@ -11,66 +11,80 @@ import { AudioCallPage } from "./pages/AudioCallPage";
 import { RoutingPage } from "./pages/RoutingPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { LightsPage } from "./pages/LightsPage";
+import { CameraPage } from "./pages/CameraPage";
+import { AppleTVPage } from "./pages/AppleTVPage";
 import { AUDIO_CONTROLS } from "./config/audio.config";
 import { SOURCES, DESTINATIONS } from "./config/routing.config";
 import { APPS } from "./config/apps.config";
 import { Home, Settings, Power } from "lucide-react";
-import { CameraPage } from "./pages/CameraPage";
-import { AppleTVPage } from "./pages/AppleTVPage";
+import ch5Service from "./services/ch5Service";
 
 type Page = "home" | "audio" | "call" | "routing" | "settings" | "lights" | "camera" | "appleTV";
 
+// One feedback signal per page — processor sets exactly one true at a time
+const PAGE_FEEDBACK_SIGNALS: Record<Page, string> = {
+  home:     "nav.page.home.fb",
+  audio:    "nav.page.audio.fb",
+  call:     "nav.page.call.fb",
+  routing:  "nav.page.routing.fb",
+  settings: "nav.page.settings.fb",
+  lights:   "nav.page.lights.fb",
+  camera:   "nav.page.camera.fb",
+  appleTV:  "nav.page.appleTV.fb",
+};
+
+function useActivePage(): Page {
+  const [activePage, setActivePage] = useState<Page>("home");
+
+  useEffect(() => {
+    const pages = Object.keys(PAGE_FEEDBACK_SIGNALS) as Page[];
+
+    pages.forEach((page) => {
+      ch5Service.subscribeBool(PAGE_FEEDBACK_SIGNALS[page], (isActive: boolean) => {
+        if (isActive) setActivePage(page);
+      });
+    });
+
+    return () => {
+      pages.forEach((page) => {
+        ch5Service.unsubscribe(PAGE_FEEDBACK_SIGNALS[page]);
+      });
+    };
+  }, []);
+
+  return activePage;
+}
+
 function AppContent() {
   const { theme } = useTheme();
-  const [currentPage, setCurrentPage] = useState<Page>("home");
+  const currentPage = useActivePage();
 
   const renderPage = () => {
     switch (currentPage) {
-      case "home":
-        return (
-          <HomePage
-            apps={APPS}
-            onNavigate={(id) => setCurrentPage(id as Page)}
-          />
-        );
-      case "audio":
-        return <AudioPage volumeControls={AUDIO_CONTROLS} />;
-      case "call":
-        return <AudioCallPage />;
-      case "routing":
-        return (
-          <RoutingPage
-            sources={SOURCES}
-            destinations={DESTINATIONS}
-          />
-        );
-      case "settings":
-        return <SettingsPage />;
-      case "lights":
-        return <LightsPage />;
-      case "camera":
-        return <CameraPage />;
-      case "appleTV":
-        return <AppleTVPage />;
+      case "home":     return <HomePage apps={APPS} onNavigate={() => {}} />;
+      case "audio":    return <AudioPage volumeControls={AUDIO_CONTROLS} />;
+      case "call":     return <AudioCallPage />;
+      case "routing":  return <RoutingPage sources={SOURCES} destinations={DESTINATIONS} />;
+      case "settings": return <SettingsPage />;
+      case "lights":   return <LightsPage />;
+      case "camera":   return <CameraPage />;
+      case "appleTV":  return <AppleTVPage />;
     }
   };
 
   return (
-    // w-screen h-screen overflow-hidden — fills the panel exactly, no scrollbars
-    <div className={`flex flex-col w-screen h-screen overflow-hidden ${theme.pageBackground}`}>
-      {/* Header */}
+    <div className={`flex flex-col h-screen ${theme.pageBackground}`}>
       <CH5Header
         leftButtons={
           <CH5Button
             commandSignal="nav.home"
-            feedbackSignal="nav.home.fb"
+            feedbackSignal="nav.page.home.fb"
             variant="momentary"
             shape="circle"
-            width="3rem"
-            height="3rem"
+            width={48}
+            height={48}
             icon={<Home />}
             iconSize={20}
-            onClick={() => setCurrentPage("home")}
           />
         }
         backgroundColor={theme.headerBackground}
@@ -78,19 +92,17 @@ function AppContent() {
         className={`backdrop-blur-xl border-b ${theme.headerBorder}`}
       />
 
-      <main className="flex-1 overflow-hidden min-h-0">
+      <main className="flex-1 overflow-hidden">
         {renderPage()}
       </main>
 
-      {/* Footer */}
       <CH5Footer
         volumeWidth={500}
         volumePosition="left"
         volumeColor={theme.sliderTrackColor}
         backgroundColor="bg-transparent"
         bubbleBackground={theme.footerBubbleBackground}
-        // rem string so footer height scales with the panel
-        height="5.625rem"
+        height={90}
         muteButton={
           <CH5MuteButton
             commandSignal="audio.mute"
@@ -108,23 +120,20 @@ function AppContent() {
               feedbackSignal="system.power.fb"
               variant="momentary"
               shape="circle"
-              width="3rem"
-              height="3rem"
+              width={48}
+              height={48}
               icon={<Power />}
               iconSize={20}
             />
             <CH5Button
               commandSignal="nav.settings"
-              feedbackSignal="nav.settings.fb"
+              feedbackSignal="nav.page.settings.fb"
               variant="momentary"
               shape="circle"
-              width="3rem"
-              height="3rem"
+              width={48}
+              height={48}
               icon={<Settings />}
               iconSize={20}
-              onClick={() => setCurrentPage(
-                currentPage === "settings" ? "home" : "settings"
-              )}
             />
           </div>
         }
