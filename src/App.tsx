@@ -19,30 +19,43 @@ import { APPS } from "./config/apps.config";
 import { Home, Settings, Power } from "lucide-react";
 import ch5Service from "./services/ch5Service";
 
-type Page = "home" | "audio" | "call" | "routing" | "settings" | "lights" | "camera" | "appleTV";
+type Page =
+  | "home"
+  | "overview"
+  | "audio"
+  | "call"
+  | "routing"
+  | "settings"
+  | "lights"
+  | "camera"
+  | "appleTV";
 
 // One feedback signal per page — processor sets exactly one true at a time
 const PAGE_FEEDBACK_SIGNALS: Record<Page, string> = {
-  home:     "nav.page.home.fb",
-  audio:    "nav.page.audio.fb",
-  call:     "nav.page.call.fb",
-  routing:  "nav.page.routing.fb",
+  home: "nav.page.home.fb",
+  audio: "nav.page.audio.fb",
+  call: "nav.page.call.fb",
+  routing: "nav.page.routing.fb",
   settings: "nav.page.settings.fb",
-  lights:   "nav.page.lights.fb",
-  camera:   "nav.page.camera.fb",
-  appleTV:  "nav.page.appleTV.fb",
+  lights: "nav.page.lights.fb",
+  camera: "nav.page.camera.fb",
+  appleTV: "nav.page.appleTV.fb",
+  overview: "nav.page.overview.fb",
 };
 
 function useActivePage(): Page {
-  const [activePage, setActivePage] = useState<Page>("settings");
+  const [activePage, setActivePage] = useState<Page>("home");
 
   useEffect(() => {
     const pages = Object.keys(PAGE_FEEDBACK_SIGNALS) as Page[];
 
     pages.forEach((page) => {
-      ch5Service.subscribeBool(PAGE_FEEDBACK_SIGNALS[page], (isActive: boolean) => {
-        if (isActive) setActivePage(page);
-      });
+      ch5Service.subscribeBool(
+        PAGE_FEEDBACK_SIGNALS[page],
+        (isActive: boolean) => {
+          if (isActive) setActivePage(page);
+        },
+      );
     });
 
     return () => {
@@ -61,14 +74,22 @@ function AppContent() {
 
   const renderPage = () => {
     switch (currentPage) {
-      case "home":     return <HomePage apps={APPS} onNavigate={() => {}} />;
-      case "audio":    return <AudioPage volumeControls={AUDIO_CONTROLS} />;
-      case "call":     return <AudioCallPage />;
-      case "routing":  return <RoutingPage sources={SOURCES} destinations={DESTINATIONS} />;
-      case "settings": return <SettingsPage />;
-      case "lights":   return <LightsPage />;
-      case "camera":   return <CameraPage />;
-      case "appleTV":  return <AppleTVPage />;
+      case "home":
+        return <HomePage apps={APPS} onNavigate={() => {}} />;
+      case "audio":
+        return <AudioPage volumeControls={AUDIO_CONTROLS} />;
+      case "call":
+        return <AudioCallPage />;
+      case "routing":
+        return <RoutingPage sources={SOURCES} destinations={DESTINATIONS} />;
+      case "settings":
+        return <SettingsPage />;
+      case "lights":
+        return <LightsPage />;
+      case "camera":
+        return <CameraPage />;
+      case "appleTV":
+        return <AppleTVPage />;
     }
   };
 
@@ -92,9 +113,7 @@ function AppContent() {
         className={`backdrop-blur-xl border-b ${theme.headerBorder}`}
       />
 
-      <main className="flex-1 overflow-hidden">
-        {renderPage()}
-      </main>
+      <main className="flex-1 overflow-hidden">{renderPage()}</main>
 
       <CH5Footer
         volumeWidth={500}
@@ -103,6 +122,7 @@ function AppContent() {
         backgroundColor="bg-transparent"
         bubbleBackground={theme.footerBubbleBackground}
         height={90}
+        page={currentPage}
         muteButton={
           <CH5MuteButton
             commandSignal="audio.mute"

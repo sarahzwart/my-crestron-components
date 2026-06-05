@@ -1,5 +1,13 @@
 import { type AppItem } from "../pages/HomePage";
-import { Music, Phone, Shuffle, Lightbulb, Camera, Apple } from "lucide-react";
+import {
+  Music,
+  Phone,
+  Shuffle,
+  Lightbulb,
+  Camera,
+  Apple,
+  LayoutGrid,
+} from "lucide-react";
 
 export const APPS: AppItem[] = [
   {
@@ -49,5 +57,13 @@ export const APPS: AppItem[] = [
     description: "Apple TV control",
     commandSignal: "nav.page.appleTV",
     feedbackSignal: "nav.page.appleTV.fb",
+  },
+  {
+    id: "overview",
+    label: "Overview",
+    icon: <LayoutGrid />,
+    description: "All pages",
+    commandSignal: "nav.page.overview",
+    feedbackSignal: "nav.page.overview.fb",
   },
 ];

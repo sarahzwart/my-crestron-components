@@ -26,6 +26,8 @@ export interface FooterProps {
   backgroundColor?: string;
   bubbleBackground?: string;
   height?: number | string;
+
+  page?: string; // for potential page-specific styling or behavior
   className?: string;
   style?: React.CSSProperties;
 }
@@ -47,6 +49,7 @@ export function CH5Footer({
   bubbleBackground = "bg-slate-800/90",
   height = 80,
   className = "",
+  page, 
   style = {},
 }: FooterProps) {
   const footerStyle: React.CSSProperties = {
@@ -98,7 +101,7 @@ export function CH5Footer({
           {centerButtons}
         </div>
       )}
-
+      {page !== "audio" && (
       <div 
         className={`${getVolumeContainerClass()} ${bubbleBackground} backdrop-blur-sm rounded-full px-6 py-3 shadow-lg flex items-center gap-4`}
         style={volumeContainerStyle}
@@ -128,9 +131,10 @@ export function CH5Footer({
           </div>
         )}
       </div>
+      )}
 
       {rightButtons && (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 ml-auto">
           {rightButtons}
         </div>
       )}
