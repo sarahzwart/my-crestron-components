@@ -94,8 +94,8 @@ export function CH5Keypad({
             key={key.number}
             number={key.number}
             letters={key.letters}
-            commandSignal={`${commandSignal}.${key.number}`}
-            feedbackSignal={`${feedbackSignal}.${key.number}`}
+            commandSignal={`${commandSignal}_${key.number}`}
+            feedbackSignal={`${feedbackSignal}_${key.number}`}
             onPress={() => onKeyPress?.(key.number)}
           />
         ))}
@@ -107,8 +107,8 @@ export function CH5Keypad({
 
           {showCallButton ? (
             <CH5Button
-              commandSignal={`${commandSignal}.call`}
-              feedbackSignal={`${feedbackSignal}.call`}
+              commandSignal={`${commandSignal}_Dial`}
+              feedbackSignal={`${feedbackSignal}_Dial`}
               variant="momentary"
               shape="circle"
               icon={<Phone size={32} fill="currentColor" />}
@@ -125,8 +125,8 @@ export function CH5Keypad({
 
           {showBackspace ? (
             <CH5Button
-              commandSignal={`${commandSignal}.backspace`}
-              feedbackSignal={`${feedbackSignal}.backspace`}
+              commandSignal={`${commandSignal}_Backspace`}
+              feedbackSignal={`${feedbackSignal}_Backspace`}
               variant="momentary"
               shape="circle"
               icon={<Delete size={32} className={`${theme.iconColor} opacity-60`} />}
