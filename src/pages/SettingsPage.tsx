@@ -17,16 +17,16 @@ export function SettingsPage() {
   const [activeTab, setActiveTab] = useState<SettingsTab>("theme");
 
   useEffect(() => {
-    ch5Service.subscribeBool("Settings_Tab.Theme_fb", (isActive: boolean) => {
+    ch5Service.subscribeBool("Settings_Tab.Theme_FB", (isActive: boolean) => {
       if (isActive) setActiveTab("theme");
     });
-    ch5Service.subscribeBool("Settings_Tab.Font_fb", (isActive: boolean) => {
+    ch5Service.subscribeBool("Settings_Tab.Font_FB", (isActive: boolean) => {
       if (isActive) setActiveTab("font");
     });
 
     return () => {
-      ch5Service.unsubscribe("Settings_Tab.Theme_fb");
-      ch5Service.unsubscribe("Settings_Tab.Font_fb");
+      ch5Service.unsubscribe("Settings_Tab.Theme_FB");
+      ch5Service.unsubscribe("Settings_Tab.Font_FB");
     };
   }, []);
 
@@ -316,14 +316,6 @@ function FontCard({
             </div>
           )}
           <p className={`${theme.primaryText} text-4xl font-light`}>Aa</p>
-          <div>
-            <p className={`${theme.primaryText} font-semibold text-sm`}>
-              {fontInfo.label}
-            </p>
-            <p className={`${theme.secondaryText} text-xs mt-0.5`}>
-              The quick brown fox
-            </p>
-          </div>
         </div>
       }
     />
