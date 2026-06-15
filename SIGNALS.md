@@ -1,54 +1,37 @@
 # Signal Reference
 
-All signals follow the format `Category.SignalName` (one dot). Command signals are sent **to** the processor; feedback signals are received **from** the processor. Feedback signals are suffixed with `_FB` (pages/components) or `_fb` (config-driven controls).
+All signals follow the format `Category.SignalName` with both sides capitalized. Command signals are sent **to** the processor; feedback signals are received **from** the processor and use the `_FB` suffix.
 
 ---
 
-## Navigation — Page Routing
+## Navigation
 
-Used in `App.tsx` to track and switch the active page.
+Used by both the app tile buttons (home page) and the page display logic in `App.tsx`. The processor sets exactly one feedback signal high at a time to indicate the active page.
 
 | Signal | Type | Direction |
 |---|---|---|
 | `Navpage.Home_Press` | Digital | → Processor |
 | `Navpage.Home_FB` | Digital | ← Processor |
+| `Navpage.Audio` | Digital | → Processor |
 | `Navpage.Audio_FB` | Digital | ← Processor |
+| `Navpage.Call` | Digital | → Processor |
 | `Navpage.Call_FB` | Digital | ← Processor |
+| `Navpage.Routing` | Digital | → Processor |
 | `Navpage.Routing_FB` | Digital | ← Processor |
-| `Navpage.Settings_FB` | Digital | ← Processor |
+| `Navpage.Lights` | Digital | → Processor |
 | `Navpage.Lights_FB` | Digital | ← Processor |
+| `Navpage.Camera` | Digital | → Processor |
 | `Navpage.Camera_FB` | Digital | ← Processor |
+| `Navpage.AppleTV` | Digital | → Processor |
 | `Navpage.AppleTV_FB` | Digital | ← Processor |
+| `Navpage.Overview` | Digital | → Processor |
 | `Navpage.Overview_FB` | Digital | ← Processor |
 | `Navpage.Settings_Press` | Digital | → Processor |
 | `Navpage.Settings_FB` | Digital | ← Processor |
 
 ---
 
-## Navigation — App Tiles (Home Page)
-
-Used by app tile buttons on the home page (`apps.config.tsx`).
-
-| Signal | Type | Direction |
-|---|---|---|
-| `nav.audio` | Digital | → Processor |
-| `nav.audio_fb` | Digital | ← Processor |
-| `nav.call` | Digital | → Processor |
-| `nav.call_fb` | Digital | ← Processor |
-| `nav.routing` | Digital | → Processor |
-| `nav.routing_fb` | Digital | ← Processor |
-| `nav.lights` | Digital | → Processor |
-| `nav.lights_fb` | Digital | ← Processor |
-| `nav.camera` | Digital | → Processor |
-| `nav.camera_fb` | Digital | ← Processor |
-| `nav.appleTV` | Digital | → Processor |
-| `nav.appleTV_fb` | Digital | ← Processor |
-| `nav.overview` | Digital | → Processor |
-| `nav.overview_fb` | Digital | ← Processor |
-
----
-
-## Audio — Master Volume & Mute (Footer)
+## Audio — Footer
 
 Global volume slider and mute button shown in the footer.
 
@@ -67,30 +50,30 @@ Per-zone volume sliders and mute buttons on the Audio page (`audio.config.tsx`).
 
 | Signal | Type | Direction |
 |---|---|---|
-| `audio.masterVolume` | Analog | → Processor |
-| `audio.masterVolume_fb` | Analog | ← Processor |
-| `audio.masterMute` | Digital | → Processor |
-| `audio.masterMute_fb` | Digital | ← Processor |
-| `audio.tvVolume` | Analog | → Processor |
-| `audio.tvVolume_fb` | Analog | ← Processor |
-| `audio.tvMute` | Digital | → Processor |
-| `audio.tvMute_fb` | Digital | ← Processor |
-| `audio.musicVolume` | Analog | → Processor |
-| `audio.musicVolume_fb` | Analog | ← Processor |
-| `audio.musicMute` | Digital | → Processor |
-| `audio.musicMute_fb` | Digital | ← Processor |
-| `audio.speakersVolume` | Analog | → Processor |
-| `audio.speakersVolume_fb` | Analog | ← Processor |
-| `audio.speakersMute` | Digital | → Processor |
-| `audio.speakersMute_fb` | Digital | ← Processor |
-| `audio.headphonesVolume` | Analog | → Processor |
-| `audio.headphonesVolume_fb` | Analog | ← Processor |
-| `audio.headphonesMute` | Digital | → Processor |
-| `audio.headphonesMute_fb` | Digital | ← Processor |
-| `audio.micVolume` | Analog | → Processor |
-| `audio.micVolume_fb` | Analog | ← Processor |
-| `audio.micMute` | Digital | → Processor |
-| `audio.micMute_fb` | Digital | ← Processor |
+| `Audio.MasterVolume` | Analog | → Processor |
+| `Audio.MasterVolume_FB` | Analog | ← Processor |
+| `Audio.MasterMute` | Digital | → Processor |
+| `Audio.MasterMute_FB` | Digital | ← Processor |
+| `Audio.TvVolume` | Analog | → Processor |
+| `Audio.TvVolume_FB` | Analog | ← Processor |
+| `Audio.TvMute` | Digital | → Processor |
+| `Audio.TvMute_FB` | Digital | ← Processor |
+| `Audio.MusicVolume` | Analog | → Processor |
+| `Audio.MusicVolume_FB` | Analog | ← Processor |
+| `Audio.MusicMute` | Digital | → Processor |
+| `Audio.MusicMute_FB` | Digital | ← Processor |
+| `Audio.SpeakersVolume` | Analog | → Processor |
+| `Audio.SpeakersVolume_FB` | Analog | ← Processor |
+| `Audio.SpeakersMute` | Digital | → Processor |
+| `Audio.SpeakersMute_FB` | Digital | ← Processor |
+| `Audio.HeadphonesVolume` | Analog | → Processor |
+| `Audio.HeadphonesVolume_FB` | Analog | ← Processor |
+| `Audio.HeadphonesMute` | Digital | → Processor |
+| `Audio.HeadphonesMute_FB` | Digital | ← Processor |
+| `Audio.MicVolume` | Analog | → Processor |
+| `Audio.MicVolume_FB` | Analog | ← Processor |
+| `Audio.MicMute` | Digital | → Processor |
+| `Audio.MicMute_FB` | Digital | ← Processor |
 
 ---
 
@@ -119,20 +102,20 @@ Source selection buttons on the Routing page (`routing.config.tsx`).
 
 | Signal | Type | Direction |
 |---|---|---|
-| `routing.source1` | Digital | → Processor |
-| `routing.source1_fb` | Digital | ← Processor |
-| `routing.source2` | Digital | → Processor |
-| `routing.source2_fb` | Digital | ← Processor |
-| `routing.source3` | Digital | → Processor |
-| `routing.source3_fb` | Digital | ← Processor |
-| `routing.source4` | Digital | → Processor |
-| `routing.source4_fb` | Digital | ← Processor |
-| `routing.source5` | Digital | → Processor |
-| `routing.source5_fb` | Digital | ← Processor |
-| `routing.source6` | Digital | → Processor |
-| `routing.source6_fb` | Digital | ← Processor |
-| `routing.source7` | Digital | → Processor |
-| `routing.source7_fb` | Digital | ← Processor |
+| `Routing.Source1` | Digital | → Processor |
+| `Routing.Source1_FB` | Digital | ← Processor |
+| `Routing.Source2` | Digital | → Processor |
+| `Routing.Source2_FB` | Digital | ← Processor |
+| `Routing.Source3` | Digital | → Processor |
+| `Routing.Source3_FB` | Digital | ← Processor |
+| `Routing.Source4` | Digital | → Processor |
+| `Routing.Source4_FB` | Digital | ← Processor |
+| `Routing.Source5` | Digital | → Processor |
+| `Routing.Source5_FB` | Digital | ← Processor |
+| `Routing.Source6` | Digital | → Processor |
+| `Routing.Source6_FB` | Digital | ← Processor |
+| `Routing.Source7` | Digital | → Processor |
+| `Routing.Source7_FB` | Digital | ← Processor |
 
 ---
 
@@ -142,18 +125,18 @@ Destination selection buttons on the Routing page (`routing.config.tsx`).
 
 | Signal | Type | Direction |
 |---|---|---|
-| `routing.dest1` | Digital | → Processor |
-| `routing.dest1_fb` | Digital | ← Processor |
-| `routing.dest2` | Digital | → Processor |
-| `routing.dest2_fb` | Digital | ← Processor |
-| `routing.dest3` | Digital | → Processor |
-| `routing.dest3_fb` | Digital | ← Processor |
-| `routing.dest4` | Digital | → Processor |
-| `routing.dest4_fb` | Digital | ← Processor |
-| `routing.dest5` | Digital | → Processor |
-| `routing.dest5_fb` | Digital | ← Processor |
-| `routing.dest6` | Digital | → Processor |
-| `routing.dest6_fb` | Digital | ← Processor |
+| `Routing.Dest1` | Digital | → Processor |
+| `Routing.Dest1_FB` | Digital | ← Processor |
+| `Routing.Dest2` | Digital | → Processor |
+| `Routing.Dest2_FB` | Digital | ← Processor |
+| `Routing.Dest3` | Digital | → Processor |
+| `Routing.Dest3_FB` | Digital | ← Processor |
+| `Routing.Dest4` | Digital | → Processor |
+| `Routing.Dest4_FB` | Digital | ← Processor |
+| `Routing.Dest5` | Digital | → Processor |
+| `Routing.Dest5_FB` | Digital | ← Processor |
+| `Routing.Dest6` | Digital | → Processor |
+| `Routing.Dest6_FB` | Digital | ← Processor |
 
 ---
 
@@ -163,8 +146,8 @@ Confirm/execute the route (`CH5ActionBar.tsx`).
 
 | Signal | Type | Direction |
 |---|---|---|
-| `routing.route` | Digital | → Processor |
-| `routing.route_fb` | Digital | ← Processor |
+| `Routing.Route` | Digital | → Processor |
+| `Routing.Route_FB` | Digital | ← Processor |
 
 ---
 
