@@ -27,18 +27,18 @@ export function CameraPage({
   const [autoFocus, setAutoFocus] = useState(true);
 
   useEffect(() => {
-    ch5Service.subscribeNumeric("Camera.Select_FB", (value: number) => {
+    ch5Service.subscribeNumeric("Camera.Selected_FB", (value: number) => {
       if (value >= 1) setActiveCamera(value);
     });
 
     return () => {
-      ch5Service.unsubscribe("Camera.Select_FB");
+      ch5Service.unsubscribe("Camera.Selected_FB");
     };
   }, []);
 
   const selectCamera = (cam: number) => {
     setActiveCamera(cam);
-    ch5Service.publishNumeric("Camera.Select", cam);
+    ch5Service.publishNumeric("Camera.Selected", cam);
   };
 
   const pad = (n: number) => n.toString().padStart(2, "0");
@@ -77,8 +77,8 @@ export function CameraPage({
 
         <CH5Button
           variant="toggle"
-          commandSignal="Camera.AutoFocus_Press"
-          feedbackSignal="Camera.AutoFocus_FB"
+          commandSignal="Camera.Autofocus_Press"
+          feedbackSignal="Camera.Autofocus_FB"
           icon={<Focus size={24} />}
           onLabel="AF On"
           offLabel="AF Off"
@@ -106,16 +106,16 @@ export function CameraPage({
 
       <div className="mx-auto w-[50%] h-[70%] flex flex-col gap-6">
         <div className="grid grid-cols-3 grid-rows-3 gap-3 flex-3 min-h-0">
-          <CH5Button variant="momentary" icon={<ZoomIn />}      iconSize={32} commandSignal="Camera.ZoomIn_Press"   className={cell} />
-          <CH5Button variant="momentary" icon={<ChevronUp />}   iconSize={32} commandSignal="Camera.TiltUp_Press"   className={cell} />
+          <CH5Button variant="momentary" icon={<ZoomIn />}      iconSize={32} commandSignal="Camera.Zoom_In_Press"   className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronUp />}   iconSize={32} commandSignal="Camera.Tilt_Up_Press"   className={cell} />
           <CH5Button variant="momentary" icon={<ZoomOut />}     iconSize={32} commandSignal="Camera.ZoomOut_Press"  className={cell} />
 
-          <CH5Button variant="momentary" icon={<ChevronLeft />}  iconSize={32} commandSignal="Camera.PanLeft_Press"  className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronLeft />}  iconSize={32} commandSignal="Camera.Pan_Left_Press"  className={cell} />
           <CH5Button variant="momentary" icon={<House />}         iconSize={32} commandSignal="Camera.Home_Press"     className={cell} />
-          <CH5Button variant="momentary" icon={<ChevronRight />}  iconSize={32} commandSignal="Camera.PanRight_Press" className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronRight />}  iconSize={32} commandSignal="Camera.Pan_Right_Press" className={cell} />
 
           <span />
-          <CH5Button variant="momentary" icon={<ChevronDown />}  iconSize={32} commandSignal="Camera.TiltDown_Press" className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronDown />}  iconSize={32} commandSignal="Camera.Tilt_Down_Press" className={cell} />
           <span />
         </div>
 
@@ -123,9 +123,10 @@ export function CameraPage({
           {Array.from({ length: presetCount }, (_, i) => i + 1).map((p) => (
             <CH5Button
               key={p}
-              variant="momentary"
+              variant="toggle"
               label={`PRESET ${p}`}
               commandSignal={`Camera.Preset_${p}`}
+              feedbackSignal={`Camera.Preset_${p}_FB`}
               textSize={22}
               className={cell}
             />
