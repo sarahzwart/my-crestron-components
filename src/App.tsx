@@ -125,8 +125,8 @@ function AppContent() {
         page={currentPage}
         muteButton={
           <CH5MuteButton
-            commandSignal="Audio.Mute_Press"
-            feedbackSignal="Audio.Mute_FB"
+            commandSignal="Audio.Footer_Mute_Press"
+            feedbackSignal="Audio.Footer_Mute_FB"
             width={48}
             height={48}
             iconSize={20}

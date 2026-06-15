@@ -33,8 +33,8 @@ export interface FooterProps {
 }
 
 export function CH5Footer({
-  volumeCommandSignal = "Audio.Volume",
-  volumeFeedbackSignal = "Audio.Volume_FB",
+  volumeCommandSignal = "Audio.Footer_Volume",
+  volumeFeedbackSignal = "Audio.Footer_Volume_FB",
   volumeColor = "blue",
   volumeBackgroundColor = "white",
   volumeWidth = "auto", // defaults to flex-1 behavior
