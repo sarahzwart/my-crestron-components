@@ -50,30 +50,34 @@ Per-zone volume sliders and mute buttons on the Audio page (`audio.config.tsx`).
 
 | Signal | Type | Direction |
 |---|---|---|
-| `Audio.MasterVolume` | Analog | → Processor |
-| `Audio.MasterVolume_FB` | Analog | ← Processor |
-| `Audio.MasterMute` | Digital | → Processor |
-| `Audio.MasterMute_FB` | Digital | ← Processor |
-| `Audio.TvVolume` | Analog | → Processor |
-| `Audio.TvVolume_FB` | Analog | ← Processor |
-| `Audio.TvMute` | Digital | → Processor |
-| `Audio.TvMute_FB` | Digital | ← Processor |
-| `Audio.MusicVolume` | Analog | → Processor |
-| `Audio.MusicVolume_FB` | Analog | ← Processor |
-| `Audio.MusicMute` | Digital | → Processor |
-| `Audio.MusicMute_FB` | Digital | ← Processor |
-| `Audio.SpeakersVolume` | Analog | → Processor |
-| `Audio.SpeakersVolume_FB` | Analog | ← Processor |
-| `Audio.SpeakersMute` | Digital | → Processor |
-| `Audio.SpeakersMute_FB` | Digital | ← Processor |
-| `Audio.HeadphonesVolume` | Analog | → Processor |
-| `Audio.HeadphonesVolume_FB` | Analog | ← Processor |
-| `Audio.HeadphonesMute` | Digital | → Processor |
-| `Audio.HeadphonesMute_FB` | Digital | ← Processor |
-| `Audio.MicVolume` | Analog | → Processor |
-| `Audio.MicVolume_FB` | Analog | ← Processor |
-| `Audio.MicMute` | Digital | → Processor |
-| `Audio.MicMute_FB` | Digital | ← Processor |
+| `Audio.Master_Volume` | Analog | → Processor |
+| `Audio.Master_Volume_FB` | Analog | ← Processor |
+| `Audio.Master_Mute` | Digital | → Processor |
+| `Audio.Master_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume1` | Analog | → Processor |
+| `Audio.Volume1_FB` | Analog | ← Processor |
+| `Audio.Volume1_Mute` | Digital | → Processor |
+| `Audio.Volume1_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume2` | Analog | → Processor |
+| `Audio.Volume2_FB` | Analog | ← Processor |
+| `Audio.Volume2_Mute` | Digital | → Processor |
+| `Audio.Volume2_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume3` | Analog | → Processor |
+| `Audio.Volume3_FB` | Analog | ← Processor |
+| `Audio.Volume3_Mute` | Digital | → Processor |
+| `Audio.Volume3_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume4` | Analog | → Processor |
+| `Audio.Volume4_FB` | Analog | ← Processor |
+| `Audio.Volume4_Mute` | Digital | → Processor |
+| `Audio.Volume4_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume5` | Analog | → Processor |
+| `Audio.Volume5_FB` | Analog | ← Processor |
+| `Audio.Volume5_Mute` | Digital | → Processor |
+| `Audio.Volume5_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume6` | Analog | → Processor |
+| `Audio.Volume6_FB` | Analog | ← Processor |
+| `Audio.Volume6_Mute` | Digital | → Processor |
+| `Audio.Volume6_Mute_FB` | Digital | ← Processor |
 
 ---
 
