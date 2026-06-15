@@ -56,7 +56,7 @@ Per-zone volume sliders and mute buttons on the Audio page (`audio.config.tsx`).
 | `Audio.Master_Mute_FB` | Digital | ← Processor |
 | `Audio.Volume1` | Analog | → Processor |
 | `Audio.Volume1_FB` | Analog | ← Processor |
-| `Audio.Volume1Mute` | Digital | → Processor |
+| `Audio.Volume1_Mute` | Digital | → Processor |
 | `Audio.Volume1_FB` | Digital | ← Processor |
 | `Audio.Volume2` | Analog | → Processor |
 | `Audio.Volume2_FB` | Analog | ← Processor |

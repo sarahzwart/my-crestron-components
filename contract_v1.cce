@@ -98,6 +98,86 @@
 					"id": "_4whbs86e2",
 					"parentId": "_6rz8x1664",
 					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Footer_Mute_Press",
+					"siblingId": "_brzm0gxih",
+					"dataType": 1,
+					"notes": "",
+					"id": "_75vssqd4g",
+					"parentId": "_6rz8x1664",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Master_Mute",
+					"siblingId": "_pnfbrexdp",
+					"dataType": 1,
+					"notes": "",
+					"id": "_7d5h8wawv",
+					"parentId": "_6rz8x1664",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Volume1_Mute",
+					"siblingId": "_oixxn1ov1",
+					"dataType": 1,
+					"notes": "",
+					"id": "_23ihw2fub",
+					"parentId": "_6rz8x1664",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Volume2_Mute",
+					"siblingId": "_hc3fa1qae",
+					"dataType": 1,
+					"notes": "",
+					"id": "_t2k12f7aj",
+					"parentId": "_6rz8x1664",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Volume3_Mute",
+					"siblingId": "_fieo6c0uc",
+					"dataType": 1,
+					"notes": "",
+					"id": "_pzfryt7gl",
+					"parentId": "_6rz8x1664",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Volume4_Mute",
+					"siblingId": "_9tpvz7s7t",
+					"dataType": 1,
+					"notes": "",
+					"id": "_iojgjajn3",
+					"parentId": "_6rz8x1664",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Volume5_Mute",
+					"siblingId": "_2qi9xy9uw",
+					"dataType": 1,
+					"notes": "",
+					"id": "_kwv8crv20",
+					"parentId": "_6rz8x1664",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Volume6_Mute",
+					"siblingId": "_uhv0qkfoi",
+					"dataType": 1,
+					"notes": "",
+					"id": "_0mlxcn63e",
+					"parentId": "_6rz8x1664",
+					"attributeType": 0
 				}
 			],
 			"feedbacks": [
@@ -178,6 +258,86 @@
 					"dataType": 2,
 					"notes": "",
 					"id": "_5fii8bny3",
+					"parentId": "_6rz8x1664",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Footer_Mute_FB",
+					"siblingId": "_75vssqd4g",
+					"dataType": 1,
+					"notes": "",
+					"id": "_brzm0gxih",
+					"parentId": "_6rz8x1664",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Master_Mute_FB",
+					"siblingId": "_7d5h8wawv",
+					"dataType": 1,
+					"notes": "",
+					"id": "_pnfbrexdp",
+					"parentId": "_6rz8x1664",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Volume1_Mute_FB",
+					"siblingId": "_23ihw2fub",
+					"dataType": 1,
+					"notes": "",
+					"id": "_oixxn1ov1",
+					"parentId": "_6rz8x1664",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Volume2_Mute_FB",
+					"siblingId": "_t2k12f7aj",
+					"dataType": 1,
+					"notes": "",
+					"id": "_hc3fa1qae",
+					"parentId": "_6rz8x1664",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Volume3_Mute_FB",
+					"siblingId": "_pzfryt7gl",
+					"dataType": 1,
+					"notes": "",
+					"id": "_fieo6c0uc",
+					"parentId": "_6rz8x1664",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Volume4_Mute_FB",
+					"siblingId": "_iojgjajn3",
+					"dataType": 1,
+					"notes": "",
+					"id": "_9tpvz7s7t",
+					"parentId": "_6rz8x1664",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Volume5_Mute_FB",
+					"siblingId": "_kwv8crv20",
+					"dataType": 1,
+					"notes": "",
+					"id": "_2qi9xy9uw",
+					"parentId": "_6rz8x1664",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Volume6_Mute_FB",
+					"siblingId": "_0mlxcn63e",
+					"dataType": 1,
+					"notes": "",
+					"id": "_uhv0qkfoi",
 					"parentId": "_6rz8x1664",
 					"attributeType": 1
 				}
