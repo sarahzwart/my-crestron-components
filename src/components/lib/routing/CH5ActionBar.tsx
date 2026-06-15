@@ -17,7 +17,7 @@ export function CH5RoutingActionBar({
   destinationCount,
   onRoute,
   commandSignal = "routing.route",
-  feedbackSignal = "routing.route.fb",
+  feedbackSignal = "routing.route_fb",
   routeLabel = "Route Signal",
   emptyLabel = "Select source & destination",
 }: CH5RoutingActionBarProps) {
