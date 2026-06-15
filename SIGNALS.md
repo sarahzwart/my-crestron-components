@@ -37,10 +37,10 @@ Global volume slider and mute button shown in the footer.
 
 | Signal | Type | Direction |
 |---|---|---|
-| `Audio.Footer_Volume` | Analog | → Processor |
-| `Audio.Footer_Volume_FB` | Analog | ← Processor |
-| `Audio.Footer_Mute_Press` | Digital | → Processor |
-| `Audio.Footer_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume` | Analog | → Processor |
+| `Audio.Volume_FB` | Analog | ← Processor |
+| `Audio.Mute_Press` | Digital | → Processor |
+| `Audio.Mute_FB` | Digital | ← Processor |
 
 ---
 
@@ -50,34 +50,31 @@ Per-zone volume sliders and mute buttons on the Audio page (`audio.config.tsx`).
 
 | Signal | Type | Direction |
 |---|---|---|
-| `Audio.Master_Volume` | Analog | → Processor |
-| `Audio.Master_Volume_FB` | Analog | ← Processor |
-| `Audio.Master_Mute` | Digital | → Processor |
-| `Audio.Master_Mute_FB` | Digital | ← Processor |
-| `Audio.Volume1` | Analog | → Processor |
-| `Audio.Volume1_FB` | Analog | ← Processor |
-| `Audio.Volume1_Mute` | Digital | → Processor |
-| `Audio.Volume1_FB` | Digital | ← Processor |
-| `Audio.Volume2` | Analog | → Processor |
-| `Audio.Volume2_FB` | Analog | ← Processor |
-| `Audio.Volume2_Mute` | Digital | → Processor |
-| `Audio.Volume2Mute_FB` | Digital | ← Processor |
-| `Audio.Volume3` | Analog | → Processor |
-| `Audio.Volume3_FB` | Analog | ← Processor |
-| `Audio.Volume3_Mute` | Digital | → Processor |
-| `Audio.Volume3Mute_FB` | Digital | ← Processor |
-| `Audio.Volume4` | Analog | → Processor |
-| `Audio.Volume4_FB` | Analog | ← Processor |
-| `Audio.Volume4_Mute` | Digital | → Processor |
-| `Audio.Volume4Mute_FB` | Digital | ← Processor |
-| `Audio.Volume5` | Analog | → Processor |
-| `Audio.Volume5_FB` | Analog | ← Processor |
-| `Audio.Volume5_Mute` | Digital | → Processor |
-| `Audio.Volume5Mute_FB` | Digital | ← Processor |
-| `Audio.Volume6` | Analog | → Processor |
-| `Audio.Volume6_FB` | Analog | ← Processor |
-| `Audio.Volume6_Mute` | Digital | → Processor |
-| `Audio.Volume6Mute_FB` | Digital | ← Processor |
+| `Audio.MasterVolume` | Analog | → Processor |
+| `Audio.MasterVolume_FB` | Analog | ← Processor |
+| `Audio.MasterMute` | Digital | → Processor |
+| `Audio.MasterMute_FB` | Digital | ← Processor |
+| `Audio.TvVolume` | Analog | → Processor |
+| `Audio.TvVolume_FB` | Analog | ← Processor |
+| `Audio.TvMute` | Digital | → Processor |
+| `Audio.TvMute_FB` | Digital | ← Processor |
+| `Audio.MusicVolume` | Analog | → Processor |
+| `Audio.MusicVolume_FB` | Analog | ← Processor |
+| `Audio.MusicMute` | Digital | → Processor |
+| `Audio.MusicMute_FB` | Digital | ← Processor |
+| `Audio.SpeakersVolume` | Analog | → Processor |
+| `Audio.SpeakersVolume_FB` | Analog | ← Processor |
+| `Audio.SpeakersMute` | Digital | → Processor |
+| `Audio.SpeakersMute_FB` | Digital | ← Processor |
+| `Audio.HeadphonesVolume` | Analog | → Processor |
+| `Audio.HeadphonesVolume_FB` | Analog | ← Processor |
+| `Audio.HeadphonesMute` | Digital | → Processor |
+| `Audio.HeadphonesMute_FB` | Digital | ← Processor |
+| `Audio.MicVolume` | Analog | → Processor |
+| `Audio.MicVolume_FB` | Analog | ← Processor |
+| `Audio.MicMute` | Digital | → Processor |
+| `Audio.MicMute_FB` | Digital | ← Processor |
+
 ---
 
 ## Phone / Call
@@ -191,22 +188,22 @@ Confirm/execute the route (`CH5ActionBar.tsx`).
 
 ## Camera
 
-Camera selection, PTZ controls, auto-focus, and presets (`CameraPage.tsx`). `{n}` = camera number (e.g. `1`, `2`, `3`). `{p}` = preset number.
+Camera selection uses an analog signal — the camera number is sent as the value. PTZ controls, auto-focus, and presets apply to whichever camera is currently selected (`CameraPage.tsx`). `{p}` = preset number.
 
 | Signal | Type | Direction |
 |---|---|---|
-| `Camera.{n}_Press` | Digital | → Processor |
-| `Camera.{n}_FB` | Digital | ← Processor |
-| `Camera.{n}_AutoFocus_Press` | Digital | → Processor |
-| `Camera.{n}_AutoFocus_FB` | Digital | ← Processor |
-| `Camera.{n}_Tilt_Up_Press` | Digital | → Processor |
-| `Camera.{n}_Tilt_Down_Press` | Digital | → Processor |
-| `Camera.{n}_Pan_Left_Press` | Digital | → Processor |
-| `Camera.{n}_Pan_Right_Press` | Digital | → Processor |
-| `Camera.{n}_Zoom_In_Press` | Digital | → Processor |
-| `Camera.{n}_Zoom_Out_Press` | Digital | → Processor |
-| `Camera.{n}_Home_Press` | Digital | → Processor |
-| `Camera.{n}_Preset_{p}` | Digital | → Processor |
+| `Camera.Select` | Analog | → Processor |
+| `Camera.Select_FB` | Analog | ← Processor |
+| `Camera.AutoFocus_Press` | Digital | → Processor |
+| `Camera.AutoFocus_FB` | Digital | ← Processor |
+| `Camera.TiltUp_Press` | Digital | → Processor |
+| `Camera.TiltDown_Press` | Digital | → Processor |
+| `Camera.PanLeft_Press` | Digital | → Processor |
+| `Camera.PanRight_Press` | Digital | → Processor |
+| `Camera.ZoomIn_Press` | Digital | → Processor |
+| `Camera.ZoomOut_Press` | Digital | → Processor |
+| `Camera.Home_Press` | Digital | → Processor |
+| `Camera.Preset_{p}` | Digital | → Processor |
 
 ---
 
