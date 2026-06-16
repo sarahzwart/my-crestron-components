@@ -21,6 +21,7 @@ import {
     ZoomOut,
     Play,
     Pause,
+    ArrowRight,
 } from "lucide-react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
 import ch5Service from "@/services/ch5Service";
@@ -30,6 +31,21 @@ export function OverviewPage() {
 
     const [activeCamera, setActiveCamera] = useState(1);
     const cell = `w-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`;
+
+    const [selectedSource, setSelectedSource] = useState<string | null>(null);
+    const [selectedDestinations, setSelectedDestinations] = useState<string[]>([]);
+
+    const handleSourceSelect = (id: string) => {
+        setSelectedSource((prev) => (prev === id ? null : id));
+    };
+
+    const handleDestinationToggle = (id: string) => {
+        setSelectedDestinations((prev) =>
+            prev.includes(id) ? prev.filter((d) => d !== id) : [...prev, id]
+        );
+    };
+
+    const canRoute = selectedSource !== null && selectedDestinations.length > 0;
 
     useEffect(() => {
         ch5Service.subscribeNumeric("Camera.Selected_FB", (value: number) => {
@@ -138,10 +154,69 @@ export function OverviewPage() {
                     </div>
                 </CardContent>
             </Card>
-            <Card className={`${theme.cardBackground} col-span-2 row-span-2`}>
+            <Card className={`${theme.cardBackground} col-span-2 row-span-2 min-h-0 flex flex-col`}>
                 <CardHeader>
                     <CardTitle className={theme.primaryText}>Routing Controls</CardTitle>
                 </CardHeader>
+                <CardContent className="flex-1 flex flex-col gap-3 min-h-0">
+                    <div className="flex-1 grid grid-cols-2 gap-3 min-h-0">
+                        <div className="flex flex-col gap-2 min-h-0 overflow-auto">
+                            {SOURCES.map((source) => (
+                                <CH5Button
+                                    key={source.id}
+                                    commandSignal={source.commandSignal}
+                                    feedbackSignal={source.feedbackSignal}
+                                    variant="momentary"
+                                    shape="rounded"
+                                    label={source.label}
+                                    textSize={14}
+                                    onClick={() => handleSourceSelect(source.id)}
+                                    offClassName={`${selectedSource === source.id ? theme.cardHighlightBackground : theme.cardBackground} ${selectedSource === source.id ? "ring-2 ring-blue-400" : ""}`}
+                                    onClassName={`${theme.cardHighlightBackground} ring-2 ring-blue-400`}
+                                    className="w-full rounded-lg px-3 py-2 text-left"
+                                />
+                            ))}
+                        </div>
+                        <div className="flex flex-col gap-2 min-h-0 overflow-auto">
+                            {DESTINATIONS.map((destination) => (
+                                <CH5Button
+                                    key={destination.id}
+                                    commandSignal={destination.commandSignal}
+                                    feedbackSignal={destination.feedbackSignal}
+                                    variant="momentary"
+                                    shape="rounded"
+                                    label={destination.label}
+                                    textSize={14}
+                                    onClick={() => handleDestinationToggle(destination.id)}
+                                    offClassName={`${selectedDestinations.includes(destination.id) ? theme.cardHighlightBackground : theme.cardBackground} ${selectedDestinations.includes(destination.id) ? "ring-2 ring-green-400" : ""}`}
+                                    onClassName={`${theme.cardHighlightBackground} ring-2 ring-green-400`}
+                                    className="w-full rounded-lg px-3 py-2 text-left"
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    <CH5Button
+                        commandSignal="Routing.Route"
+                        feedbackSignal="Routing.Route_FB"
+                        variant="momentary"
+                        shape="rounded"
+                        disabled={!canRoute}
+                        icon={
+                            <div className="flex items-center justify-center gap-2 w-full">
+                                <span>
+                                    {canRoute
+                                        ? `Route to ${selectedDestinations.length} destination${selectedDestinations.length !== 1 ? "s" : ""}`
+                                        : "Select source & destination"}
+                                </span>
+                                {canRoute && <ArrowRight size={16} />}
+                            </div>
+                        }
+                        offClassName={canRoute ? theme.cardHighlightBackground : theme.cardBackground}
+                        onClassName={theme.cardHighlightBackground}
+                        className={`w-full rounded-lg px-3 py-2 shrink-0 ${canRoute ? "opacity-100" : "opacity-50 pointer-events-none"}`}
+                    />
+                </CardContent>
             </Card>
 
             <Card className={`${theme.cardBackground} col-span-1 row-span-1 flex flex-col`}>
