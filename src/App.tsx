@@ -18,6 +18,7 @@ import { SOURCES, DESTINATIONS } from "./config/routing.config";
 import { APPS } from "./config/apps.config";
 import { Home, Settings, Power } from "lucide-react";
 import ch5Service from "./services/ch5Service";
+import { OverviewPage } from "./pages/OverviewPage";
 
 type Page =
   | "home"
@@ -44,7 +45,7 @@ const PAGE_FEEDBACK_SIGNALS: Record<Page, string> = {
 };
 
 function useActivePage(): Page {
-  const [activePage, setActivePage] = useState<Page>("camera");
+  const [activePage, setActivePage] = useState<Page>("overview");
 
   useEffect(() => {
     const pages = Object.keys(PAGE_FEEDBACK_SIGNALS) as Page[];
@@ -90,6 +91,8 @@ function AppContent() {
         return <CameraPage />;
       case "appleTV":
         return <AppleTVPage />;
+      case "overview":
+        return <OverviewPage/>;
     }
   };
 
