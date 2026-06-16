@@ -1,6 +1,49 @@
-import { CH5Slider } from "../common/CH5Slider";
+import { CH5Slider, type SliderSize } from "../common/CH5Slider";
 import { CH5MuteButton } from "./CH5MuteButton";
 import { useTheme } from "../../../lib/theme";
+
+export type CH5VolumeSliderSize = "sm" | "md" | "lg";
+
+const SIZE_CONFIG: Record<
+  CH5VolumeSliderSize,
+  {
+    iconBox: string;
+    iconScale: string;
+    titleText: string;
+    muteSize: number;
+    muteIconSize: number;
+    sliderSize: SliderSize;
+    padding: string;
+  }
+> = {
+  sm: {
+    iconBox: "w-9 h-9",
+    iconScale: "scale-90",
+    titleText: "text-sm",
+    muteSize: 36,
+    muteIconSize: 16,
+    sliderSize: "sm",
+    padding: "p-4",
+  },
+  md: {
+    iconBox: "w-12 h-12",
+    iconScale: "",
+    titleText: "text-base",
+    muteSize: 48,
+    muteIconSize: 20,
+    sliderSize: "md",
+    padding: "p-6",
+  },
+  lg: {
+    iconBox: "w-14 h-14",
+    iconScale: "scale-125",
+    titleText: "text-xl",
+    muteSize: 56,
+    muteIconSize: 24,
+    sliderSize: "lg",
+    padding: "p-6",
+  },
+};
 
 export interface CH5VolumeSliderProps {
   id?: string;
@@ -11,6 +54,7 @@ export interface CH5VolumeSliderProps {
   muteCommandSignal: string;
   muteFeedbackSignal: string;
   isMaster?: boolean;
+  size?: CH5VolumeSliderSize;
   showLevelIndicators?: boolean;
   description?: string;
   trackColor?: string;
@@ -25,6 +69,7 @@ export function CH5VolumeSlider({
   muteCommandSignal,
   muteFeedbackSignal,
   isMaster = false,
+  size = isMaster ? "lg" : "md",
   showLevelIndicators = true,
   description,
   trackColor,
@@ -34,6 +79,7 @@ export function CH5VolumeSlider({
 
   const cardBg = isMaster ? theme.cardHighlightBackground : theme.cardBackground;
   const sliderColor = trackColor || theme.sliderTrackColor;
+  const sizeConfig = SIZE_CONFIG[size];
 
   return (
     <div
@@ -41,7 +87,7 @@ export function CH5VolumeSlider({
         ${cardBg}
         ${theme.cardActiveBackground}
         ${customClassName}
-        rounded-2xl p-6 transition-all duration-150
+        rounded-2xl ${sizeConfig.padding} transition-all duration-150
         active:scale-[0.99]
         ${isMaster ? "col-span-full" : ""}
       `}
@@ -50,13 +96,13 @@ export function CH5VolumeSlider({
         <div className="flex items-center gap-3">
           <div
             className={`
-              ${isMaster ? "w-14 h-14" : "w-12 h-12"}
+              ${sizeConfig.iconBox}
               rounded-xl ${theme.iconBackground}
               flex items-center justify-center
               ${theme.iconColor}
             `}
           >
-            <div className={isMaster ? "scale-125" : ""}>
+            <div className={sizeConfig.iconScale}>
               {icon}
             </div>
           </div>
@@ -65,7 +111,7 @@ export function CH5VolumeSlider({
             <h3
               className={`
                 ${theme.primaryText} font-semibold
-                ${isMaster ? "text-xl" : "text-base"}
+                ${sizeConfig.titleText}
               `}
             >
               {label}
@@ -81,9 +127,9 @@ export function CH5VolumeSlider({
         <CH5MuteButton
           commandSignal={muteCommandSignal}
           feedbackSignal={muteFeedbackSignal}
-          width={isMaster ? 56 : 48}
-          height={isMaster ? 56 : 48}
-          iconSize={isMaster ? 24 : 20}
+          width={sizeConfig.muteSize}
+          height={sizeConfig.muteSize}
+          iconSize={sizeConfig.muteIconSize}
         />
       </div>
 
@@ -93,7 +139,7 @@ export function CH5VolumeSlider({
           feedbackSignal={volumeFeedbackSignal}
           trackColor={sliderColor}
           colorSettings={theme.sliderColorSettings}
-          size={isMaster ? "lg" : theme.sliderSize}
+          size={sizeConfig.sliderSize}
           thumbType={theme.sliderThumbType}
         />
       </div>
