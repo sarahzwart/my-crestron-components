@@ -77,8 +77,8 @@ export function CameraPage({
 
         <CH5Button
           variant="toggle"
-          commandSignal="Camera.Autofocus_Press"
-          feedbackSignal="Camera.Autofocus_FB"
+          commandSignal="Camera.AutoFocus_Press"
+          feedbackSignal="Camera.AutoFocus_FB"
           icon={<Focus size={24} />}
           onLabel="AF On"
           offLabel="AF Off"
@@ -107,15 +107,15 @@ export function CameraPage({
       <div className="mx-auto w-[50%] h-[70%] flex flex-col gap-6">
         <div className="grid grid-cols-3 grid-rows-3 gap-3 flex-3 min-h-0">
           <CH5Button variant="momentary" icon={<ZoomIn />}      iconSize={32} commandSignal="Camera.Zoom_In_Press"   className={cell} />
-          <CH5Button variant="momentary" icon={<ChevronUp />}   iconSize={32} commandSignal="Camera.Tilt_Up_Press"   className={cell} />
-          <CH5Button variant="momentary" icon={<ZoomOut />}     iconSize={32} commandSignal="Camera.ZoomOut_Press"  className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronUp />}   iconSize={32} commandSignal="Camera.Pan_Up_Press"   className={cell} />
+          <CH5Button variant="momentary" icon={<ZoomOut />}     iconSize={32} commandSignal="Camera.Zoom_Out_Press"  className={cell} />
 
           <CH5Button variant="momentary" icon={<ChevronLeft />}  iconSize={32} commandSignal="Camera.Pan_Left_Press"  className={cell} />
           <CH5Button variant="momentary" icon={<House />}         iconSize={32} commandSignal="Camera.Home_Press"     className={cell} />
           <CH5Button variant="momentary" icon={<ChevronRight />}  iconSize={32} commandSignal="Camera.Pan_Right_Press" className={cell} />
 
           <span />
-          <CH5Button variant="momentary" icon={<ChevronDown />}  iconSize={32} commandSignal="Camera.Tilt_Down_Press" className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronDown />}  iconSize={32} commandSignal="Camera.Pan_Down_Press" className={cell} />
           <span />
         </div>
 

@@ -159,8 +159,8 @@ export function OverviewPage() {
                     <CardTitle className={theme.primaryText}>Routing Controls</CardTitle>
                 </CardHeader>
                 <CardContent className="flex-1 flex flex-col gap-3 min-h-0">
-                    <div className="flex-1 grid grid-cols-2 gap-3 min-h-0">
-                        <div className="flex flex-col gap-2 min-h-0 overflow-auto">
+                    <div className="flex-1 grid grid-cols-2 gap-1 min-h-0">
+                        <div className="flex flex-col gap-2 min-h-0 overflow-y-auto p-1">
                             {SOURCES.map((source) => (
                                 <CH5Button
                                     key={source.id}
@@ -173,11 +173,12 @@ export function OverviewPage() {
                                     onClick={() => handleSourceSelect(source.id)}
                                     offClassName={`${selectedSource === source.id ? theme.cardHighlightBackground : theme.cardBackground} ${selectedSource === source.id ? "ring-2 ring-blue-400" : ""}`}
                                     onClassName={`${theme.cardHighlightBackground} ring-2 ring-blue-400`}
-                                    className="w-full rounded-lg px-3 py-2 text-left"
+                                    className="w-full rounded-lg shrink-0 text-left"
                                 />
                             ))}
                         </div>
-                        <div className="flex flex-col gap-2 min-h-0 overflow-auto">
+
+                        <div className="flex flex-col gap-2 min-h-0 overflow-y-auto p-1">
                             {DESTINATIONS.map((destination) => (
                                 <CH5Button
                                     key={destination.id}
@@ -190,7 +191,7 @@ export function OverviewPage() {
                                     onClick={() => handleDestinationToggle(destination.id)}
                                     offClassName={`${selectedDestinations.includes(destination.id) ? theme.cardHighlightBackground : theme.cardBackground} ${selectedDestinations.includes(destination.id) ? "ring-2 ring-green-400" : ""}`}
                                     onClassName={`${theme.cardHighlightBackground} ring-2 ring-green-400`}
-                                    className="w-full rounded-lg px-3 py-2 text-left"
+                                    className="w-full rounded-lg shrink-0 text-left"
                                 />
                             ))}
                         </div>
@@ -214,7 +215,7 @@ export function OverviewPage() {
                         }
                         offClassName={canRoute ? theme.cardHighlightBackground : theme.cardBackground}
                         onClassName={theme.cardHighlightBackground}
-                        className={`w-full rounded-lg px-3 py-2 shrink-0 ${canRoute ? "opacity-100" : "opacity-50 pointer-events-none"}`}
+                        className={`w-full  rounded-lg px-3 py-2 shrink-0 ${canRoute ? "opacity-100" : "opacity-50 pointer-events-none"}`}
                     />
                 </CardContent>
             </Card>

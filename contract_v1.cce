@@ -41,7 +41,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume1",
+					"name": "Volume_1",
 					"siblingId": "_cc5apfydv",
 					"dataType": 2,
 					"notes": "",
@@ -51,7 +51,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume2",
+					"name": "Volume_2",
 					"siblingId": "_yq6ikjc60",
 					"dataType": 2,
 					"notes": "",
@@ -61,7 +61,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume3",
+					"name": "Volume_3",
 					"siblingId": "_3p2hhm7do",
 					"dataType": 2,
 					"notes": "",
@@ -71,7 +71,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume4",
+					"name": "Volume_4",
 					"siblingId": "_40xw0tk4m",
 					"dataType": 2,
 					"notes": "",
@@ -81,7 +81,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume5",
+					"name": "Volume_5",
 					"siblingId": "_xm1rwa9v0",
 					"dataType": 2,
 					"notes": "",
@@ -91,7 +91,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume6",
+					"name": "Volume_6",
 					"siblingId": "_5fii8bny3",
 					"dataType": 2,
 					"notes": "",
@@ -121,7 +121,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume1_Mute",
+					"name": "Volume_1_Mute",
 					"siblingId": "_oixxn1ov1",
 					"dataType": 1,
 					"notes": "",
@@ -131,7 +131,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume2_Mute",
+					"name": "Volume_2_Mute",
 					"siblingId": "_hc3fa1qae",
 					"dataType": 1,
 					"notes": "",
@@ -141,7 +141,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume3_Mute",
+					"name": "Volume_3_Mute",
 					"siblingId": "_fieo6c0uc",
 					"dataType": 1,
 					"notes": "",
@@ -151,7 +151,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume4_Mute",
+					"name": "Volume_4_Mute",
 					"siblingId": "_9tpvz7s7t",
 					"dataType": 1,
 					"notes": "",
@@ -161,7 +161,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume5_Mute",
+					"name": "Volume_5_Mute",
 					"siblingId": "_2qi9xy9uw",
 					"dataType": 1,
 					"notes": "",
@@ -171,7 +171,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume6_Mute",
+					"name": "Volume_6_Mute",
 					"siblingId": "_uhv0qkfoi",
 					"dataType": 1,
 					"notes": "",
@@ -193,7 +193,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume2_FB",
+					"name": "Volume_2_FB",
 					"siblingId": "_phun9307k",
 					"dataType": 2,
 					"notes": "",
@@ -213,7 +213,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume1_FB",
+					"name": "Volume_1_FB",
 					"siblingId": "_1cecqwgxm",
 					"dataType": 2,
 					"notes": "",
@@ -223,7 +223,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume3_FB",
+					"name": "Volume_3_FB",
 					"siblingId": "_ntychlssy",
 					"dataType": 2,
 					"notes": "",
@@ -233,7 +233,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume4_FB",
+					"name": "Volume_4_FB",
 					"siblingId": "_stsqa18nw",
 					"dataType": 2,
 					"notes": "",
@@ -243,7 +243,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume5_FB",
+					"name": "Volume_5_FB",
 					"siblingId": "_cj2fug7b4",
 					"dataType": 2,
 					"notes": "",
@@ -253,7 +253,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume6_FB",
+					"name": "Volume_6_FB",
 					"siblingId": "_4whbs86e2",
 					"dataType": 2,
 					"notes": "",
@@ -283,7 +283,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume1_Mute_FB",
+					"name": "Volume_1_Mute_FB",
 					"siblingId": "_23ihw2fub",
 					"dataType": 1,
 					"notes": "",
@@ -293,7 +293,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume2_Mute_FB",
+					"name": "Volume_2_Mute_FB",
 					"siblingId": "_t2k12f7aj",
 					"dataType": 1,
 					"notes": "",
@@ -303,7 +303,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume3_Mute_FB",
+					"name": "Volume_3_Mute_FB",
 					"siblingId": "_pzfryt7gl",
 					"dataType": 1,
 					"notes": "",
@@ -313,7 +313,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume4_Mute_FB",
+					"name": "Volume_4_Mute_FB",
 					"siblingId": "_iojgjajn3",
 					"dataType": 1,
 					"notes": "",
@@ -323,7 +323,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume5_Mute_FB",
+					"name": "Volume_5_Mute_FB",
 					"siblingId": "_kwv8crv20",
 					"dataType": 1,
 					"notes": "",
@@ -333,7 +333,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Volume6_Mute_FB",
+					"name": "Volume_6_Mute_FB",
 					"siblingId": "_0mlxcn63e",
 					"dataType": 1,
 					"notes": "",
@@ -352,7 +352,7 @@
 			"commands": [
 				{
 					"Errors": [],
-					"name": "Select",
+					"name": "Zoom_In_Press",
 					"siblingId": "_2916iure3",
 					"dataType": 1,
 					"notes": "",
@@ -362,7 +362,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Autofocus_Press",
+					"name": "Zoom_Out_Press",
 					"siblingId": "_pqs0j6qh3",
 					"dataType": 1,
 					"notes": "",
@@ -372,11 +372,101 @@
 				},
 				{
 					"Errors": [],
-					"name": "Tilt_Up_Press",
+					"name": "Pan_Up_Press",
 					"siblingId": "_rdr3xc94e",
 					"dataType": 1,
 					"notes": "",
 					"id": "_erjfy8usr",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Pan_Down_Press",
+					"siblingId": "_vlwy1lit3",
+					"dataType": 1,
+					"notes": "",
+					"id": "_h4z2oc16h",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Pan_Left_Press",
+					"siblingId": "_kthrbiljg",
+					"dataType": 1,
+					"notes": "",
+					"id": "_n5hvos6c1",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Pan_Right_Press",
+					"siblingId": "_896ezcz73",
+					"dataType": 1,
+					"notes": "",
+					"id": "_dg2uh8ssx",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Home_Press",
+					"siblingId": "_3v20xnwau",
+					"dataType": 1,
+					"notes": "",
+					"id": "_hlmcstisn",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Preset_1",
+					"siblingId": "_5fhyo6fax",
+					"dataType": 1,
+					"notes": "",
+					"id": "_qc1jycv0p",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Preset_2",
+					"siblingId": "_rmpvxk3j5",
+					"dataType": 1,
+					"notes": "",
+					"id": "_hy2iyeuyh",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Preset_3",
+					"siblingId": "_c258cgtde",
+					"dataType": 1,
+					"notes": "",
+					"id": "_5vab5obww",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "AutoFocus_Press",
+					"siblingId": "_mc4uytg9d",
+					"dataType": 1,
+					"notes": "",
+					"id": "_gxg6ni94z",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Selected",
+					"siblingId": "_wag0dsko2",
+					"dataType": 2,
+					"notes": "",
+					"id": "_htep303rf",
 					"parentId": "_3u63zg01p",
 					"attributeType": 0
 				}
@@ -384,7 +474,7 @@
 			"feedbacks": [
 				{
 					"Errors": [],
-					"name": "Select_FB",
+					"name": "",
 					"siblingId": "_f5ay6xca3",
 					"dataType": 1,
 					"notes": "",
@@ -394,7 +484,7 @@
 				},
 				{
 					"Errors": [],
-					"name": "Autofocus_FB",
+					"name": "",
 					"siblingId": "_7dqlicish",
 					"dataType": 1,
 					"notes": "",
@@ -406,9 +496,99 @@
 					"Errors": [],
 					"name": "",
 					"siblingId": "_erjfy8usr",
-					"dataType": 0,
+					"dataType": 1,
 					"notes": "",
 					"id": "_rdr3xc94e",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_h4z2oc16h",
+					"dataType": 1,
+					"notes": "",
+					"id": "_vlwy1lit3",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_n5hvos6c1",
+					"dataType": 1,
+					"notes": "",
+					"id": "_kthrbiljg",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_dg2uh8ssx",
+					"dataType": 1,
+					"notes": "",
+					"id": "_896ezcz73",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_hlmcstisn",
+					"dataType": 1,
+					"notes": "",
+					"id": "_3v20xnwau",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Preset_1_FB",
+					"siblingId": "_qc1jycv0p",
+					"dataType": 1,
+					"notes": "",
+					"id": "_5fhyo6fax",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Preset_2_FB",
+					"siblingId": "_hy2iyeuyh",
+					"dataType": 1,
+					"notes": "",
+					"id": "_rmpvxk3j5",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Preset_3_FB",
+					"siblingId": "_5vab5obww",
+					"dataType": 1,
+					"notes": "",
+					"id": "_c258cgtde",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "AutoFocus_FB",
+					"siblingId": "_gxg6ni94z",
+					"dataType": 1,
+					"notes": "",
+					"id": "_mc4uytg9d",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Selected_FB",
+					"siblingId": "_htep303rf",
+					"dataType": 2,
+					"notes": "",
+					"id": "_wag0dsko2",
 					"parentId": "_3u63zg01p",
 					"attributeType": 1
 				}
@@ -1263,6 +1443,139 @@
 					"notes": "",
 					"id": "_j83bm7953",
 					"parentId": "_7mg5iv8x9",
+					"attributeType": 1
+				}
+			],
+			"specifications": []
+		},
+		{
+			"Errors": [],
+			"parentId": "_87w9k34ss",
+			"id": "_jrkmc07ta",
+			"name": "System",
+			"commands": [
+				{
+					"Errors": [],
+					"name": "Power",
+					"siblingId": "_fgcqs2yng",
+					"dataType": 1,
+					"notes": "",
+					"id": "_btydvucek",
+					"parentId": "_jrkmc07ta",
+					"attributeType": 0
+				}
+			],
+			"feedbacks": [
+				{
+					"Errors": [],
+					"name": "Power_FB",
+					"siblingId": "_btydvucek",
+					"dataType": 1,
+					"notes": "",
+					"id": "_fgcqs2yng",
+					"parentId": "_jrkmc07ta",
+					"attributeType": 1
+				}
+			],
+			"specifications": []
+		},
+		{
+			"Errors": [],
+			"parentId": "_87w9k34ss",
+			"id": "_h503qsnyw",
+			"name": "Settings",
+			"commands": [
+				{
+					"Errors": [],
+					"name": "Theme",
+					"siblingId": "_vd92qesvo",
+					"dataType": 2,
+					"notes": "",
+					"id": "_yy2oylmlw",
+					"parentId": "_h503qsnyw",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Font",
+					"siblingId": "_dzd1mvtsa",
+					"dataType": 2,
+					"notes": "",
+					"id": "_6tds2a3yu",
+					"parentId": "_h503qsnyw",
+					"attributeType": 0
+				}
+			],
+			"feedbacks": [
+				{
+					"Errors": [],
+					"name": "Theme_FB",
+					"siblingId": "_yy2oylmlw",
+					"dataType": 2,
+					"notes": "",
+					"id": "_vd92qesvo",
+					"parentId": "_h503qsnyw",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Font_FB",
+					"siblingId": "_6tds2a3yu",
+					"dataType": 2,
+					"notes": "",
+					"id": "_dzd1mvtsa",
+					"parentId": "_h503qsnyw",
+					"attributeType": 1
+				}
+			],
+			"specifications": []
+		},
+		{
+			"Errors": [],
+			"parentId": "_87w9k34ss",
+			"id": "_v1bry84te",
+			"name": "Settings_Tab",
+			"commands": [
+				{
+					"Errors": [],
+					"name": "Theme",
+					"siblingId": "_dzlow54fo",
+					"dataType": 1,
+					"notes": "",
+					"id": "_foomxzus5",
+					"parentId": "_v1bry84te",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Font",
+					"siblingId": "_jx2oj2j99",
+					"dataType": 1,
+					"notes": "",
+					"id": "_3ztveh8tq",
+					"parentId": "_v1bry84te",
+					"attributeType": 0
+				}
+			],
+			"feedbacks": [
+				{
+					"Errors": [],
+					"name": "Theme_FB",
+					"siblingId": "_foomxzus5",
+					"dataType": 1,
+					"notes": "",
+					"id": "_dzlow54fo",
+					"parentId": "_v1bry84te",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Font_FB",
+					"siblingId": "_3ztveh8tq",
+					"dataType": 1,
+					"notes": "",
+					"id": "_jx2oj2j99",
+					"parentId": "_v1bry84te",
 					"attributeType": 1
 				}
 			],
