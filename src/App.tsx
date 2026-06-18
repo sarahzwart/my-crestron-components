@@ -45,7 +45,7 @@ const PAGE_FEEDBACK_SIGNALS: Record<Page, string> = {
 };
 
 function useActivePage(): Page {
-  const [activePage, setActivePage] = useState<Page>("call");
+  const [activePage, setActivePage] = useState<Page>("home");
 
   useEffect(() => {
     const pages = Object.keys(PAGE_FEEDBACK_SIGNALS) as Page[];

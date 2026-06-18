@@ -347,6 +347,197 @@
 		{
 			"Errors": [],
 			"parentId": "_87w9k34ss",
+			"id": "_p7a98ysaf",
+			"name": "AppleTV",
+			"commands": [
+				{
+					"Errors": [],
+					"name": "Up",
+					"siblingId": "_ww1x8targ",
+					"dataType": 1,
+					"notes": "",
+					"id": "_8gdor5hud",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Down",
+					"siblingId": "_ii9fx3dsw",
+					"dataType": 1,
+					"notes": "",
+					"id": "_db7z4wvwm",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Left",
+					"siblingId": "_j9dyjpwvv",
+					"dataType": 1,
+					"notes": "",
+					"id": "_26g48eo7k",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Right",
+					"siblingId": "_hj7y1xovz",
+					"dataType": 1,
+					"notes": "",
+					"id": "_2pmqtsbc1",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Enter",
+					"siblingId": "_ifquoo2xb",
+					"dataType": 1,
+					"notes": "",
+					"id": "_nm3j62u63",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Menu",
+					"siblingId": "_6fhj9hpsf",
+					"dataType": 1,
+					"notes": "",
+					"id": "_ui3uj4636",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Home",
+					"siblingId": "_srqtnahqy",
+					"dataType": 1,
+					"notes": "",
+					"id": "_q2mhvgzpi",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Back",
+					"siblingId": "_1asmrni5v",
+					"dataType": 1,
+					"notes": "",
+					"id": "_2eqjv5qnn",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "PlayPause",
+					"siblingId": "_qrirhlunu",
+					"dataType": 1,
+					"notes": "",
+					"id": "_vb0scs1i4",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 0
+				}
+			],
+			"feedbacks": [
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_8gdor5hud",
+					"dataType": 0,
+					"notes": "",
+					"id": "_ww1x8targ",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_db7z4wvwm",
+					"dataType": 0,
+					"notes": "",
+					"id": "_ii9fx3dsw",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_26g48eo7k",
+					"dataType": 0,
+					"notes": "",
+					"id": "_j9dyjpwvv",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_2pmqtsbc1",
+					"dataType": 0,
+					"notes": "",
+					"id": "_hj7y1xovz",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_nm3j62u63",
+					"dataType": 0,
+					"notes": "",
+					"id": "_ifquoo2xb",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_ui3uj4636",
+					"dataType": 0,
+					"notes": "",
+					"id": "_6fhj9hpsf",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_q2mhvgzpi",
+					"dataType": 0,
+					"notes": "",
+					"id": "_srqtnahqy",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_2eqjv5qnn",
+					"dataType": 0,
+					"notes": "",
+					"id": "_1asmrni5v",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "",
+					"siblingId": "_vb0scs1i4",
+					"dataType": 0,
+					"notes": "",
+					"id": "_qrirhlunu",
+					"parentId": "_p7a98ysaf",
+					"attributeType": 1
+				}
+			],
+			"specifications": []
+		},
+		{
+			"Errors": [],
+			"parentId": "_87w9k34ss",
 			"id": "_3u63zg01p",
 			"name": "Camera",
 			"commands": [
@@ -447,6 +638,26 @@
 					"dataType": 1,
 					"notes": "",
 					"id": "_5vab5obww",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Preset_4",
+					"siblingId": "_4yg7my4p3",
+					"dataType": 1,
+					"notes": "",
+					"id": "_ce0pn2whu",
+					"parentId": "_3u63zg01p",
+					"attributeType": 0
+				},
+				{
+					"Errors": [],
+					"name": "Preset_5",
+					"siblingId": "_h65y67nkp",
+					"dataType": 1,
+					"notes": "",
+					"id": "_ikl11wo8a",
 					"parentId": "_3u63zg01p",
 					"attributeType": 0
 				},
@@ -590,6 +801,57 @@
 					"notes": "",
 					"id": "_wag0dsko2",
 					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Preset_4_FB",
+					"siblingId": "_ce0pn2whu",
+					"dataType": 1,
+					"notes": "",
+					"id": "_4yg7my4p3",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				},
+				{
+					"Errors": [],
+					"name": "Preset_5_FB",
+					"siblingId": "_ikl11wo8a",
+					"dataType": 1,
+					"notes": "",
+					"id": "_h65y67nkp",
+					"parentId": "_3u63zg01p",
+					"attributeType": 1
+				}
+			],
+			"specifications": []
+		},
+		{
+			"Errors": [],
+			"parentId": "_87w9k34ss",
+			"id": "_jv02u89y3",
+			"name": "Font",
+			"commands": [
+				{
+					"Errors": [],
+					"name": "Select",
+					"siblingId": "_vk7nna4i3",
+					"dataType": 2,
+					"notes": "",
+					"id": "_dv8f35az1",
+					"parentId": "_jv02u89y3",
+					"attributeType": 0
+				}
+			],
+			"feedbacks": [
+				{
+					"Errors": [],
+					"name": "Select_FB",
+					"siblingId": "_dv8f35az1",
+					"dataType": 2,
+					"notes": "",
+					"id": "_vk7nna4i3",
+					"parentId": "_jv02u89y3",
 					"attributeType": 1
 				}
 			],
@@ -1482,57 +1744,6 @@
 		{
 			"Errors": [],
 			"parentId": "_87w9k34ss",
-			"id": "_h503qsnyw",
-			"name": "Settings",
-			"commands": [
-				{
-					"Errors": [],
-					"name": "Theme",
-					"siblingId": "_vd92qesvo",
-					"dataType": 2,
-					"notes": "",
-					"id": "_yy2oylmlw",
-					"parentId": "_h503qsnyw",
-					"attributeType": 0
-				},
-				{
-					"Errors": [],
-					"name": "Font",
-					"siblingId": "_dzd1mvtsa",
-					"dataType": 2,
-					"notes": "",
-					"id": "_6tds2a3yu",
-					"parentId": "_h503qsnyw",
-					"attributeType": 0
-				}
-			],
-			"feedbacks": [
-				{
-					"Errors": [],
-					"name": "Theme_FB",
-					"siblingId": "_yy2oylmlw",
-					"dataType": 2,
-					"notes": "",
-					"id": "_vd92qesvo",
-					"parentId": "_h503qsnyw",
-					"attributeType": 1
-				},
-				{
-					"Errors": [],
-					"name": "Font_FB",
-					"siblingId": "_6tds2a3yu",
-					"dataType": 2,
-					"notes": "",
-					"id": "_dzd1mvtsa",
-					"parentId": "_h503qsnyw",
-					"attributeType": 1
-				}
-			],
-			"specifications": []
-		},
-		{
-			"Errors": [],
-			"parentId": "_87w9k34ss",
 			"id": "_v1bry84te",
 			"name": "Settings_Tab",
 			"commands": [
@@ -1576,6 +1787,37 @@
 					"notes": "",
 					"id": "_jx2oj2j99",
 					"parentId": "_v1bry84te",
+					"attributeType": 1
+				}
+			],
+			"specifications": []
+		},
+		{
+			"Errors": [],
+			"parentId": "_87w9k34ss",
+			"id": "_f68xsep47",
+			"name": "Theme",
+			"commands": [
+				{
+					"Errors": [],
+					"name": "Select",
+					"siblingId": "_w3h5hsjtc",
+					"dataType": 2,
+					"notes": "",
+					"id": "_1zvezhvj4",
+					"parentId": "_f68xsep47",
+					"attributeType": 0
+				}
+			],
+			"feedbacks": [
+				{
+					"Errors": [],
+					"name": "Select_FB",
+					"siblingId": "_1zvezhvj4",
+					"dataType": 2,
+					"notes": "",
+					"id": "_w3h5hsjtc",
+					"parentId": "_f68xsep47",
 					"attributeType": 1
 				}
 			],
