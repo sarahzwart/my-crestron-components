@@ -98,6 +98,8 @@ function AppContent() {
         return <AppleTVPage />;
       case "overview":
         return <OverviewPage/>;
+      case "settings":
+        return <SettingsPage />;
     }
   };
 
@@ -163,6 +165,7 @@ function AppContent() {
               height={48}
               icon={<Settings />}
               iconSize={20}
+              onClick={() => navigate("settings")}
             />
           </div>
         }
