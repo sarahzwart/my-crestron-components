@@ -88,8 +88,6 @@ function AppContent() {
         return <AudioCallPage />;
       case "routing":
         return <RoutingPage sources={SOURCES} destinations={DESTINATIONS} />;
-      case "settings":
-        return <SettingsPage />;
       case "lights":
         return <LightsPage />;
       case "camera":
