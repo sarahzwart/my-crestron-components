@@ -96,8 +96,6 @@ function AppContent() {
         return <AppleTVPage />;
       case "overview":
         return <OverviewPage/>;
-      case "settings":
-        return <SettingsPage />;
     }
   };
 
