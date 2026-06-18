@@ -44,7 +44,7 @@ const PAGE_FEEDBACK_SIGNALS: Record<Page, string> = {
   overview: "Navpage.Overview_FB",
 };
 
-function useActivePage(): Page {
+function useActivePage(): [Page, (page: Page) => void] {
   const [activePage, setActivePage] = useState<Page>("home");
 
   useEffect(() => {
@@ -66,17 +66,22 @@ function useActivePage(): Page {
     };
   }, []);
 
-  return activePage;
+  return [activePage, setActivePage];
 }
 
 function AppContent() {
   const { theme } = useTheme();
-  const currentPage = useActivePage();
+  const [currentPage, setCurrentPage] = useActivePage();
+
+  const navigate = (page: Page) => {
+    setCurrentPage(page);
+    ch5Service.publishBool(PAGE_FEEDBACK_SIGNALS[page].replace("_FB", ""), true);
+  };
 
   const renderPage = () => {
     switch (currentPage) {
       case "home":
-        return <HomePage apps={APPS} onNavigate={() => {}} />;
+        return <HomePage apps={APPS} onNavigate={(id) => navigate(id as Page)} />;
       case "audio":
         return <AudioPage volumeControls={AUDIO_CONTROLS} />;
       case "call":
@@ -109,6 +114,7 @@ function AppContent() {
             height={48}
             icon={<Home />}
             iconSize={20}
+            onClick={() => navigate("home")}
           />
         }
         backgroundColor={theme.headerBackground}
