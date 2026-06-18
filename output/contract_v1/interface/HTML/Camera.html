@@ -1,0 +1,32 @@
+<template id="contract_v1.Camera.Camera">
+	<div id="Camera.Camera">
+	 		<ch5-button sendEventOnClick="Camera.Zoom_In_Press">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Zoom_Out_Press">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Pan_Up_Press">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Pan_Down_Press">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Pan_Left_Press">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Pan_Right_Press">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Home_Press">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Preset_1" receiveStateSelected="Camera.Preset_1_FB">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Preset_2" receiveStateSelected="Camera.Preset_2_FB">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Preset_3" receiveStateSelected="Camera.Preset_3_FB">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Preset_4" receiveStateSelected="Camera.Preset_4_FB">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.Preset_5" receiveStateSelected="Camera.Preset_5_FB">
+        	</ch5-button>
+	 		<ch5-button sendEventOnClick="Camera.AutoFocus" receiveStateSelected="Camera.AutoFocus_FB">
+        	</ch5-button>
+	 		<ch5-slider sendEventOnChange="Camera.Selected" receiveStateValue="Camera.Selected_FB">
+        	</ch5-slider>
+	 </div>
+</template>

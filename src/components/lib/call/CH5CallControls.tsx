@@ -62,7 +62,6 @@ export function CH5CallControls({
   showHold = true,
   showKeypadButton = true,
   onKeypadToggle,
-  isKeypadVisible = false,
   className = "",
 }: CH5CallControlsProps) {
   return (

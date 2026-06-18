@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import {
     Card,
     CardContent,
-    CardFooter,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
@@ -30,7 +29,6 @@ export function OverviewPage() {
     const { theme } = useTheme();
 
     const [activeCamera, setActiveCamera] = useState(1);
-    const cell = `w-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`;
 
     const [selectedSource, setSelectedSource] = useState<string | null>(null);
     const [selectedDestinations, setSelectedDestinations] = useState<string[]>([]);

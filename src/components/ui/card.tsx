@@ -1,14 +1,12 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { useTheme } from "@/lib/theme";
 
 function Card({
   className,
   size = "default",
   ...props
 }: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
-  const { theme } = useTheme();
   return (
     <div
       data-slot="card"
