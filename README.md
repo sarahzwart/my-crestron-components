@@ -25,23 +25,33 @@ npm run dev
 
 Opens at `http://localhost:5173`. The app is fully navigable without a processor — pages switch locally on tap.
 
-## Steps for deployment
+## Steps for Deployment
 
-### Build 
+### 1. Build the app
 
 ```bash
 npm run build
 ```
 
-### CH5 Contract
+Output goes to `dist/`.
 
-Utilize the CH5-Contract-Editor to create a contract file that will communicate with the touch panel interface. The file will have the extension .cce. 
+### 2. Create the CH5 contract
 
-Build the file into a folder called archive, which will be loaded to the touch panel interface. This will be a file with a .ch5z extension. 
+Use the **CH5 Contract Editor** to define all signal mappings between the touch panel and the control processor. This produces a `.cce` file. When ready, export the interface mapping — this generates a `.cse2j` file (already located at `output/contract_v1/interface/mapping/` in this repo).
 
+### 3. Package into a `.ch5z` archive
+
+Run the CH5 CLI to bundle the built app and contract mapping into a single archive for upload:
+
+```bash
+ch5-cli archive -p project -d dist -o archive -c ./output/contract_v1/interface/mapping/contract_v1.cse2j
 ```
-ch5-cli archive -p project -d dist -o archive -c ./output/contract_v1/interface/mapping/contract_name.csej
-```
+
+This creates a `.ch5z` file in the `archive/` folder.
+
+### 4. Load to the touch panel
+
+Upload the `.ch5z` archive to the Crestron touch panel using **Crestron Toolbox** (Device > CH5 Load Project). The panel will load and display the application automatically.
 
 ---
 
