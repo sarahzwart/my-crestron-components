@@ -41,7 +41,6 @@ export function CameraPage({
     ch5Service.publishNumeric("Camera.Selected", cam);
   };
 
-  const pad = (n: number) => n.toString().padStart(2, "0");
   const cell = `w-full h-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`;
 
   return (
@@ -70,7 +69,7 @@ export function CameraPage({
                 }
               `}
             >
-              {pad(cam)}
+              {cam.toString()}
             </button>
           ))}
         </div>
