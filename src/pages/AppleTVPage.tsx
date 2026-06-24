@@ -1,5 +1,6 @@
 import { useTheme } from "@/lib/theme";
 import { CH5Button } from "@/components/lib/common/CH5Button";
+import { SIGNALS_APPLETV } from "@/config/signals";
 import {
   ChevronUp,
   ChevronDown,
@@ -23,15 +24,15 @@ export interface AppleTVPageProps {
 }
 
 export function AppleTVPage({
-  signalUp = "AppleTV.Up",
-  signalDown = "AppleTV.Down",
-  signalLeft = "AppleTV.Left",
-  signalRight = "AppleTV.Right",
-  signalEnter = "AppleTV.Enter",
-  signalMenu = "AppleTV.Menu",
-  signalHome = "AppleTV.Home",
-  signalBack = "AppleTV.Back",
-  signalPlayPause = "AppleTV.PlayPause",
+  signalUp       = SIGNALS_APPLETV.up.cmd,
+  signalDown     = SIGNALS_APPLETV.down.cmd,
+  signalLeft     = SIGNALS_APPLETV.left.cmd,
+  signalRight    = SIGNALS_APPLETV.right.cmd,
+  signalEnter    = SIGNALS_APPLETV.enter.cmd,
+  signalMenu     = SIGNALS_APPLETV.menu.cmd,
+  signalHome     = SIGNALS_APPLETV.home.cmd,
+  signalBack     = SIGNALS_APPLETV.back.cmd,
+  signalPlayPause = SIGNALS_APPLETV.playPause.cmd,
 }: AppleTVPageProps) {
   const { theme } = useTheme();
 

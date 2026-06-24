@@ -8,6 +8,7 @@ import {
 } from "../lib/theme";
 import { Check, Palette, Type } from "lucide-react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
+import { SIGNALS_SETTINGS } from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 
 type SettingsTab = "theme" | "font";
@@ -20,26 +21,26 @@ export function SettingsPage() {
   const [activeTab, setActiveTab] = useState<SettingsTab>("theme");
 
   useEffect(() => {
-    ch5Service.subscribeBool("Settings_Tab.Theme_FB", (isActive: boolean) => {
+    ch5Service.subscribeBool(SIGNALS_SETTINGS.tabTheme.fb, (isActive: boolean) => {
       if (isActive) setActiveTab("theme");
     });
-    ch5Service.subscribeBool("Settings_Tab.Font_FB", (isActive: boolean) => {
+    ch5Service.subscribeBool(SIGNALS_SETTINGS.tabFont.fb, (isActive: boolean) => {
       if (isActive) setActiveTab("font");
     });
-    ch5Service.subscribeNumeric("Theme.Select_FB", (value: number) => {
+    ch5Service.subscribeNumeric(SIGNALS_SETTINGS.themeSelect.fb, (value: number) => {
       const name = THEME_NAMES[value - 1];
       if (name) setTheme(name);
     });
-    ch5Service.subscribeNumeric("Font.Select_FB", (value: number) => {
+    ch5Service.subscribeNumeric(SIGNALS_SETTINGS.fontSelect.fb, (value: number) => {
       const name = FONT_NAMES[value - 1];
       if (name) setFont(name);
     });
 
     return () => {
-      ch5Service.unsubscribe("Settings_Tab.Theme_FB");
-      ch5Service.unsubscribe("Settings_Tab.Font_FB");
-      ch5Service.unsubscribe("Theme.Select_FB");
-      ch5Service.unsubscribe("Font.Select_FB");
+      ch5Service.unsubscribe(SIGNALS_SETTINGS.tabTheme.fb);
+      ch5Service.unsubscribe(SIGNALS_SETTINGS.tabFont.fb);
+      ch5Service.unsubscribe(SIGNALS_SETTINGS.themeSelect.fb);
+      ch5Service.unsubscribe(SIGNALS_SETTINGS.fontSelect.fb);
     };
   }, []);
 
@@ -56,8 +57,8 @@ export function SettingsPage() {
         </div>
         <div className={`flex gap-1 p-1 rounded-2xl ${theme.cardBackground}`}>
           <CH5Button
-            commandSignal="Settings_Tab.Theme"
-            feedbackSignal="Settings_Tab.Theme_FB"
+            commandSignal={SIGNALS_SETTINGS.tabTheme.cmd}
+            feedbackSignal={SIGNALS_SETTINGS.tabTheme.fb}
             variant="momentary"
             shape="rounded"
             onClick={() => setActiveTab("theme")}
@@ -87,8 +88,8 @@ export function SettingsPage() {
             }
           />
           <CH5Button
-            commandSignal="Settings_Tab.Font"
-            feedbackSignal="Settings_Tab.Font_FB"
+            commandSignal={SIGNALS_SETTINGS.tabFont.cmd}
+            feedbackSignal={SIGNALS_SETTINGS.tabFont.fb}
             variant="momentary"
             shape="rounded"
             onClick={() => setActiveTab("font")}
@@ -137,7 +138,7 @@ export function SettingsPage() {
                   isSelected={themeName === key}
                   onSelect={() => {
                     setTheme(key);
-                    ch5Service.publishNumeric("Theme.Select", i + 1);
+                    ch5Service.publishNumeric(SIGNALS_SETTINGS.themeSelect.cmd, i + 1);
                   }}
                 />
               ))}
@@ -162,7 +163,7 @@ export function SettingsPage() {
                   isSelected={fontName === key}
                   onSelect={() => {
                     setFont(key);
-                    ch5Service.publishNumeric("Font.Select", i + 1);
+                    ch5Service.publishNumeric(SIGNALS_SETTINGS.fontSelect.cmd, i + 1);
                   }}
                 />
               ))}

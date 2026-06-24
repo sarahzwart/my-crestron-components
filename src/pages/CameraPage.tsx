@@ -1,5 +1,6 @@
 import { CH5Button } from "@/components/lib/common/CH5Button";
 import { useTheme } from "../lib/theme";
+import { SIGNALS_CAMERA, getCameraPreset } from "@/config/signals";
 import {
   ChevronLeft,
   ChevronRight,
@@ -27,18 +28,18 @@ export function CameraPage({
   const [autoFocus, setAutoFocus] = useState(true);
 
   useEffect(() => {
-    ch5Service.subscribeNumeric("Camera.Selected_FB", (value: number) => {
+    ch5Service.subscribeNumeric(SIGNALS_CAMERA.selected.fb, (value: number) => {
       if (value >= 1) setActiveCamera(value);
     });
 
     return () => {
-      ch5Service.unsubscribe("Camera.Selected_FB");
+      ch5Service.unsubscribe(SIGNALS_CAMERA.selected.fb);
     };
   }, []);
 
   const selectCamera = (cam: number) => {
     setActiveCamera(cam);
-    ch5Service.publishNumeric("Camera.Selected", cam);
+    ch5Service.publishNumeric(SIGNALS_CAMERA.selected.cmd, cam);
   };
 
   const cell = `w-full h-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`;
@@ -76,8 +77,8 @@ export function CameraPage({
 
         <CH5Button
           variant="toggle"
-          commandSignal="Camera.AutoFocus_Press"
-          feedbackSignal="Camera.AutoFocus_FB"
+          commandSignal={SIGNALS_CAMERA.autoFocus.cmd}
+          feedbackSignal={SIGNALS_CAMERA.autoFocus.fb}
           icon={<Focus size={24} />}
           onLabel="AF On"
           offLabel="AF Off"
