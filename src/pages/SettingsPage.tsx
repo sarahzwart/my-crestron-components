@@ -256,7 +256,6 @@ const THEME_PREVIEWS: Record<
 
 function ThemeCard({
   themeName,
-  index,
   isSelected,
   onSelect,
 }: {
@@ -278,9 +277,6 @@ function ThemeCard({
         ${isSelected ? "ring-2 ring-blue-400" : ""}
       `}
     >
-      <div className="absolute top-3 left-3 w-6 h-6 rounded-full bg-black/30 flex items-center justify-center">
-        <span className="text-white text-xs font-bold">{index}</span>
-      </div>
       {isSelected && (
         <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
           <Check size={14} className="text-white" strokeWidth={3} />
@@ -306,7 +302,6 @@ function ThemeCard({
 
 function FontCard({
   fontName,
-  index,
   isSelected,
   onSelect,
 }: {
@@ -328,9 +323,6 @@ function FontCard({
         ${isSelected ? "ring-2 ring-purple-400" : ""}
       `}
     >
-      <div className="absolute top-3 left-3 w-6 h-6 rounded-full bg-black/30 flex items-center justify-center">
-        <span className="text-white text-xs font-bold">{index}</span>
-      </div>
       {isSelected && (
         <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center">
           <Check size={14} className="text-white" strokeWidth={3} />

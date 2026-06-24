@@ -8,8 +8,11 @@ export interface MusicPlayerPageProps {
   albumName: string;
   imageUrl?: string;
 
-  NextTrackAvailable?: boolean;
-  PreviousTrackAvailable?: boolean;
+  providerName?: string;
+  providerImageUrl?: string;
+
+  nextTrackAvailable?: boolean;
+  previousTrackAvailable?: boolean;
 
   shuffleOn?: boolean;
   shuffleAvailable?: boolean;
@@ -18,20 +21,24 @@ export interface MusicPlayerPageProps {
   repeatAllAvailable?: boolean;
   repeatOneAvailable?: boolean;
 
+  nowPlayingLengthSeconds?: number;
+  nowPlayingPositionSeconds?: number;
+  nowPlayingPositionGauge?: number;
+
+  numberOfFavorites?: number;
+
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
 }
 
 export function MusicPlayerPage({
-  children,
   className = "",
   style = {},
 }: MusicPlayerPageProps) {
   return (
     <div className={`p-8 ${className}`} style={style}>
       <h1 className="text-3xl font-bold text-slate-900 mb-6">Music Player</h1>
-      {children}
     </div>
   );
 }
