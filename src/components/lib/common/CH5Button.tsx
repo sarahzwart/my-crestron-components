@@ -33,8 +33,15 @@ export interface ButtonProps {
    * one of onClick or onPressAndHold will run per press.
    */
   onPressAndHold?: () => void;
-  /** How long the button must be held before onPressAndHold fires. Default 600ms. */
+  /** How long the button must be held before onPressAndHold fires. Default 3000ms (3s). */
   holdTimeMs?: number;
+  /**
+   * Digital (boolean) signal to pulse true→false when the button is held
+   * for `holdTimeMs`. Use this for "hold to save" style behavior. Fires
+   * alongside onPressAndHold, if both are provided. Only applies when
+   * variant="momentary".
+   */
+  saveSignal?: string;
   onClassName?: string;
   offClassName?: string;
   useThemeColors?: boolean;
@@ -84,7 +91,8 @@ export function CH5Button({
   className = "",
   onClick,
   onPressAndHold,
-  holdTimeMs = 600,
+  holdTimeMs = 3000,
+  saveSignal,
   style = {},
   onClassName,
   offClassName,
@@ -95,6 +103,15 @@ export function CH5Button({
   const [isOn, setIsOn] = useCH5Boolean(
     commandSignal,
     feedbackSignal || commandSignal + ".fb",
+    false,
+  );
+
+  // Separate digital signal used to pulse a "save" command when the button
+  // is held. Falls back to a no-op signal name if saveSignal isn't provided;
+  // setSaveSignal is simply never called in that case.
+  const [, setSaveSignal] = useCH5Boolean(
+    saveSignal || commandSignal + ".save",
+    saveSignal ? saveSignal + ".fb" : commandSignal + ".save.fb",
     false,
   );
 
@@ -126,12 +143,17 @@ export function CH5Button({
   };
 
   const handlePointerDown = () => {
-    if (disabled || !onPressAndHold || variant !== "momentary") return;
+    if (disabled || variant !== "momentary") return;
+    if (!onPressAndHold && !saveSignal) return;
     heldRef.current = false;
     clearHoldTimer();
     holdTimerRef.current = setTimeout(() => {
       heldRef.current = true;
-      onPressAndHold();
+      if (saveSignal) {
+        setSaveSignal(true);
+        setTimeout(() => setSaveSignal(false), 200);
+      }
+      onPressAndHold?.();
     }, holdTimeMs);
   };
 

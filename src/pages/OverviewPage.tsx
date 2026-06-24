@@ -23,7 +23,6 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 const PAGE_COUNT = 2; // update if you add or remove pages
 
-
 export function OverviewPage() {
   const { theme } = useTheme();
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -57,6 +56,11 @@ export function OverviewPage() {
   const [selectedDestinations, setSelectedDestinations] = useState<string[]>(
     [],
   );
+
+  const selectCamera = (cam: number) => {
+    setActiveCamera(cam);
+    ch5Service.publishNumeric("Camera.Selected", cam);
+  };
 
   const handleSourceSelect = (id: string) => {
     setSelectedSource((prev) => (prev === id ? null : id));
@@ -141,7 +145,7 @@ export function OverviewPage() {
                   {Array.from({ length: 3 }, (_, i) => i + 1).map((cam) => (
                     <button
                       key={cam}
-                      onClick={() => setActiveCamera(cam)}
+                      onClick={() => selectCamera(cam)}
                       className={`w-16 h-12 rounded text-lg font-mono font-semibold transition-all
                           ${
                             activeCamera === cam
@@ -231,12 +235,8 @@ export function OverviewPage() {
                       label={`${p}`}
                       commandSignal={`Camera.Preset_${p}`}
                       feedbackSignal={`Camera.Preset_${p}_FB`}
+                      saveSignal={`Camera.Preset_${p}_Save`}
                       textSize={20}
-                      onPressAndHold={() => {
-                        // TODO: confirm this is the real save signal name/method
-                        // used elsewhere in the codebase to publish a boolean.
-                        console.log(`Save preset ${p}`);
-                      }}
                       className={`w-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
                     />
                   ))}
@@ -295,7 +295,9 @@ export function OverviewPage() {
                           shape="rounded"
                           label={destination.label}
                           textSize={16}
-                          onClick={() => handleDestinationToggle(destination.id)}
+                          onClick={() =>
+                            handleDestinationToggle(destination.id)
+                          }
                           offClassName={`${selectedDestinations.includes(destination.id) ? theme.cardHighlightBackground : theme.cardBackground} ${selectedDestinations.includes(destination.id) ? "ring-2 ring-green-400" : ""}`}
                           onClassName={`${theme.cardHighlightBackground} ring-2 ring-green-400`}
                           className={`w-full rounded-lg shrink-0 text-left ${theme.primaryText}`}
@@ -323,7 +325,9 @@ export function OverviewPage() {
                   </div>
                 }
                 offClassName={
-                  canRoute ? theme.cardHighlightBackground : theme.cardBackground
+                  canRoute
+                    ? theme.cardHighlightBackground
+                    : theme.cardBackground
                 }
                 onClassName={theme.cardHighlightBackground}
                 className={`w-full  rounded-lg px-3 py-2 shrink-0 ${theme.primaryText} ${canRoute ? "opacity-100" : "opacity-50 pointer-events-none"}`}
@@ -371,9 +375,13 @@ export function OverviewPage() {
           </Card>
         </div>
         <div className="w-full h-full shrink-0 snap-center grid grid-cols-3 grid-rows-4 overflow-hidden gap-4 p-4 pb-10">
-          <Card className={`${theme.cardBackground} col-span-3 row-span-2 min-h-0 flex flex-col`}>
+          <Card
+            className={`${theme.cardBackground} col-span-3 row-span-2 min-h-0 flex flex-col`}
+          >
             <CardHeader>
-              <div className={`text-base ${theme.primaryText} font-bold`}>New Card</div>
+              <div className={`text-base ${theme.primaryText} font-bold`}>
+                New Card
+              </div>
             </CardHeader>
             <CardContent>{/* your new content */}</CardContent>
           </Card>

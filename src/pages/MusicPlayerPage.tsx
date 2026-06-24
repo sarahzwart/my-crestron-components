@@ -8,8 +8,11 @@ export interface MusicPlayerPageProps {
   albumName: string;
   imageUrl?: string;
 
-  NextTrackAvailable?: boolean;
-  PreviousTrackAvailable?: boolean;
+  providerName?: string;
+  providerImageUrl?: string;
+
+  nextTrackAvailable?: boolean;
+  previousTrackAvailable?: boolean;
 
   shuffleOn?: boolean;
   shuffleAvailable?: boolean;
@@ -17,6 +20,12 @@ export interface MusicPlayerPageProps {
   repeatMode?: "off" | "one" | "all";
   repeatAllAvailable?: boolean;
   repeatOneAvailable?: boolean;
+
+  nowPlayingLengthSeconds?: number;
+  nowPlayingPositionSeconds?: number;
+  nowPlayingPositionGauge?: number;
+
+  numberOfFavorites?: number;
 
   children?: React.ReactNode;
   className?: string;
