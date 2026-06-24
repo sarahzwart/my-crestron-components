@@ -23,6 +23,7 @@ import {
     ArrowRight,
 } from "lucide-react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
+import { SIGNALS_CAMERA, SIGNALS_ROUTING, SIGNALS_MUSIC, getCameraPreset } from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 
 export function OverviewPage() {
@@ -46,10 +47,10 @@ export function OverviewPage() {
     const canRoute = selectedSource !== null && selectedDestinations.length > 0;
 
     useEffect(() => {
-        ch5Service.subscribeNumeric("Camera.Selected_FB", (value: number) => {
+        ch5Service.subscribeNumeric(SIGNALS_CAMERA.selected.fb, (value: number) => {
             if (value >= 1) setActiveCamera(value);
         });
-        return () => ch5Service.unsubscribe("Camera.Selected_FB");
+        return () => ch5Service.unsubscribe(SIGNALS_CAMERA.selected.fb);
     }, []);
 
     return (
@@ -119,14 +120,14 @@ export function OverviewPage() {
                             const cell = `w-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`;
                             return (
                                 <>
-                                    <CH5Button variant="momentary" icon={<ZoomIn />} iconSize={20} commandSignal="Camera.Zoom_In_Press" className={cell} />
-                                    <CH5Button variant="momentary" icon={<ChevronUp />} iconSize={20} commandSignal="Camera.Tilt_Up_Press" className={cell} />
-                                    <CH5Button variant="momentary" icon={<ZoomOut />} iconSize={20} commandSignal="Camera.ZoomOut_Press" className={cell} />
-                                    <CH5Button variant="momentary" icon={<ChevronLeft />} iconSize={20} commandSignal="Camera.Pan_Left_Press" className={cell} />
-                                    <CH5Button variant="momentary" icon={<House />} iconSize={20} commandSignal="Camera.Home_Press" className={cell} />
-                                    <CH5Button variant="momentary" icon={<ChevronRight />} iconSize={20} commandSignal="Camera.Pan_Right_Press" className={cell} />
+                                    <CH5Button variant="momentary" icon={<ZoomIn />}       iconSize={20} commandSignal={SIGNALS_CAMERA.zoomIn.cmd}   className={cell} />
+                                    <CH5Button variant="momentary" icon={<ChevronUp />}    iconSize={20} commandSignal={SIGNALS_CAMERA.tiltUp.cmd}   className={cell} />
+                                    <CH5Button variant="momentary" icon={<ZoomOut />}      iconSize={20} commandSignal={SIGNALS_CAMERA.zoomOut.cmd}  className={cell} />
+                                    <CH5Button variant="momentary" icon={<ChevronLeft />}  iconSize={20} commandSignal={SIGNALS_CAMERA.panLeft.cmd}  className={cell} />
+                                    <CH5Button variant="momentary" icon={<House />}         iconSize={20} commandSignal={SIGNALS_CAMERA.home.cmd}     className={cell} />
+                                    <CH5Button variant="momentary" icon={<ChevronRight />}  iconSize={20} commandSignal={SIGNALS_CAMERA.panRight.cmd} className={cell} />
                                     <span />
-                                    <CH5Button variant="momentary" icon={<ChevronDown />} iconSize={20} commandSignal="Camera.Tilt_Down_Press" className={cell} />
+                                    <CH5Button variant="momentary" icon={<ChevronDown />}  iconSize={20} commandSignal={SIGNALS_CAMERA.tiltDown.cmd} className={cell} />
                                     <span />
                                 </>
                             );
@@ -142,8 +143,8 @@ export function OverviewPage() {
                                     key={p}
                                     variant="toggle"
                                     label={`${p}`}
-                                    commandSignal={`Camera.Preset_${p}`}
-                                    feedbackSignal={`Camera.Preset_${p}_FB`}
+                                    commandSignal={getCameraPreset(p).cmd}
+                                    feedbackSignal={getCameraPreset(p).fb}
                                     textSize={16}
                                     className={`w-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
                                 />
@@ -196,8 +197,8 @@ export function OverviewPage() {
                     </div>
 
                     <CH5Button
-                        commandSignal="Routing.Route"
-                        feedbackSignal="Routing.Route_FB"
+                        commandSignal={SIGNALS_ROUTING.route.cmd}
+                        feedbackSignal={SIGNALS_ROUTING.route.fb}
                         variant="momentary"
                         shape="rounded"
                         disabled={!canRoute}
@@ -224,9 +225,9 @@ export function OverviewPage() {
                 </CardHeader>
                 <CardContent className="flex-1 flex items-center justify-center">
                     <div className="grid grid-cols-3 gap-2">
-                        <CH5Button shape="circle" variant="momentary" icon={<ChevronLeft />} iconSize={20} commandSignal="Music.Previous_Press" className={`w-16 h-16 ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`} />
-                        <CH5Button shape="circle" variant="toggle" iconOn={<Play />} iconOff={<Pause />} iconSize={20} commandSignal="Music.PlayPause_Press" className={`w-16 h-16 ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`} />
-                        <CH5Button shape="circle" variant="momentary" icon={<ChevronRight />} iconSize={20} commandSignal="Music.Next_Press" className={`w-16 h-16 ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`} />
+                        <CH5Button shape="circle" variant="momentary" icon={<ChevronLeft />} iconSize={20} commandSignal={SIGNALS_MUSIC.previous.cmd} className={`w-16 h-16 ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`} />
+                        <CH5Button shape="circle" variant="toggle" iconOn={<Play />} iconOff={<Pause />} iconSize={20} commandSignal={SIGNALS_MUSIC.playPause.cmd} className={`w-16 h-16 ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`} />
+                        <CH5Button shape="circle" variant="momentary" icon={<ChevronRight />} iconSize={20} commandSignal={SIGNALS_MUSIC.next.cmd} className={`w-16 h-16 ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`} />
                     </div>
                 </CardContent>
             </Card>

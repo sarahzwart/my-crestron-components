@@ -1,5 +1,6 @@
 import { useTheme } from "@/lib/theme";
 import { CH5Button } from "@/components/lib/common/CH5Button";
+import { SIGNALS_PHONE } from "@/config/signals";
 import { PhoneOff, MicOff, Mic, Pause, Play, Grid3x3 } from "lucide-react";
 
 export interface CH5CallControlsProps {
@@ -57,8 +58,8 @@ export function CH5CallControls({
   onHangup,
   privacyCommandSignal,
   privacyFeedbackSignal,
-  holdCommandSignal = "Phone.Hold",
-  holdFeedbackSignal = "Phone.Hold_FB",
+  holdCommandSignal = SIGNALS_PHONE.hold.cmd,
+  holdFeedbackSignal = SIGNALS_PHONE.hold.fb,
   showHold = true,
   showKeypadButton = true,
   onKeypadToggle,
@@ -76,8 +77,8 @@ export function CH5CallControls({
         />
         {showKeypadButton && onKeypadToggle ? (
           <ControlButton
-            commandSignal="Phone.Keypad_Toggle"
-            feedbackSignal="Phone.Keypad_Toggle_FB"
+            commandSignal={SIGNALS_PHONE.keypadToggle.cmd}
+            feedbackSignal={SIGNALS_PHONE.keypadToggle.fb}
             iconOff={<Grid3x3 size={28} />}
             iconOn={<Grid3x3 size={28} />}
             label="keypad"

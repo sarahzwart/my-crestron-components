@@ -1,5 +1,6 @@
 import { CH5Button } from "@/components/lib/common/CH5Button";
 import { useTheme } from "../lib/theme";
+import { SIGNALS_CAMERA, getCameraPreset } from "@/config/signals";
 import {
   ChevronLeft,
   ChevronRight,
@@ -27,18 +28,18 @@ export function CameraPage({
   const [autoFocus, setAutoFocus] = useState(true);
 
   useEffect(() => {
-    ch5Service.subscribeNumeric("Camera.Selected_FB", (value: number) => {
+    ch5Service.subscribeNumeric(SIGNALS_CAMERA.selected.fb, (value: number) => {
       if (value >= 1) setActiveCamera(value);
     });
 
     return () => {
-      ch5Service.unsubscribe("Camera.Selected_FB");
+      ch5Service.unsubscribe(SIGNALS_CAMERA.selected.fb);
     };
   }, []);
 
   const selectCamera = (cam: number) => {
     setActiveCamera(cam);
-    ch5Service.publishNumeric("Camera.Selected", cam);
+    ch5Service.publishNumeric(SIGNALS_CAMERA.selected.cmd, cam);
   };
 
   const pad = (n: number) => n.toString().padStart(2, "0");
@@ -77,8 +78,8 @@ export function CameraPage({
 
         <CH5Button
           variant="toggle"
-          commandSignal="Camera.AutoFocus_Press"
-          feedbackSignal="Camera.AutoFocus_FB"
+          commandSignal={SIGNALS_CAMERA.autoFocus.cmd}
+          feedbackSignal={SIGNALS_CAMERA.autoFocus.fb}
           icon={<Focus size={24} />}
           onLabel="AF On"
           offLabel="AF Off"
@@ -106,16 +107,16 @@ export function CameraPage({
 
       <div className="mx-auto w-[50%] h-[70%] flex flex-col gap-6">
         <div className="grid grid-cols-3 grid-rows-3 gap-3 flex-3 min-h-0">
-          <CH5Button variant="momentary" icon={<ZoomIn />}      iconSize={32} commandSignal="Camera.Zoom_In_Press"   className={cell} />
-          <CH5Button variant="momentary" icon={<ChevronUp />}   iconSize={32} commandSignal="Camera.Pan_Up_Press"   className={cell} />
-          <CH5Button variant="momentary" icon={<ZoomOut />}     iconSize={32} commandSignal="Camera.Zoom_Out_Press"  className={cell} />
+          <CH5Button variant="momentary" icon={<ZoomIn />}       iconSize={32} commandSignal={SIGNALS_CAMERA.zoomIn.cmd}   className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronUp />}    iconSize={32} commandSignal={SIGNALS_CAMERA.tiltUp.cmd}   className={cell} />
+          <CH5Button variant="momentary" icon={<ZoomOut />}      iconSize={32} commandSignal={SIGNALS_CAMERA.zoomOut.cmd}  className={cell} />
 
-          <CH5Button variant="momentary" icon={<ChevronLeft />}  iconSize={32} commandSignal="Camera.Pan_Left_Press"  className={cell} />
-          <CH5Button variant="momentary" icon={<House />}         iconSize={32} commandSignal="Camera.Home_Press"     className={cell} />
-          <CH5Button variant="momentary" icon={<ChevronRight />}  iconSize={32} commandSignal="Camera.Pan_Right_Press" className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronLeft />}  iconSize={32} commandSignal={SIGNALS_CAMERA.panLeft.cmd}  className={cell} />
+          <CH5Button variant="momentary" icon={<House />}         iconSize={32} commandSignal={SIGNALS_CAMERA.home.cmd}     className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronRight />}  iconSize={32} commandSignal={SIGNALS_CAMERA.panRight.cmd} className={cell} />
 
           <span />
-          <CH5Button variant="momentary" icon={<ChevronDown />}  iconSize={32} commandSignal="Camera.Pan_Down_Press" className={cell} />
+          <CH5Button variant="momentary" icon={<ChevronDown />}  iconSize={32} commandSignal={SIGNALS_CAMERA.tiltDown.cmd} className={cell} />
           <span />
         </div>
 
@@ -125,8 +126,8 @@ export function CameraPage({
               key={p}
               variant="toggle"
               label={`PRESET ${p}`}
-              commandSignal={`Camera.Preset_${p}`}
-              feedbackSignal={`Camera.Preset_${p}_FB`}
+              commandSignal={getCameraPreset(p).cmd}
+              feedbackSignal={getCameraPreset(p).fb}
               textSize={22}
               className={cell}
             />
