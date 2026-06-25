@@ -78,7 +78,10 @@ export function MusicPlayerPage({
   const scrollToPage = (index: number) => {
     const container = scrollRef.current;
     if (!container) return;
-    container.scrollTo({ left: index * container.clientWidth, behavior: "smooth" });
+    container.scrollTo({
+      left: index * container.clientWidth,
+      behavior: "smooth",
+    });
   };
 
   useEffect(() => {
@@ -91,9 +94,10 @@ export function MusicPlayerPage({
     return () => container.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const progress = nowPlayingLengthSeconds > 0
-    ? (nowPlayingPositionSeconds / nowPlayingLengthSeconds) * 100
-    : nowPlayingPositionGauge;
+  const progress =
+    nowPlayingLengthSeconds > 0
+      ? (nowPlayingPositionSeconds / nowPlayingLengthSeconds) * 100
+      : nowPlayingPositionGauge;
 
   return (
     <div className="relative h-full w-full overflow-hidden">
@@ -105,44 +109,65 @@ export function MusicPlayerPage({
           <div className="flex-1 flex items-center justify-center w-full">
             <div
               className={`
-                relative w-56 h-56 rounded-3xl overflow-hidden shadow-2xl
+                relative w-84 h-84 rounded-3xl overflow-hidden shadow-2xl
                 ${theme.cardBackground}
                 ring-1 ring-white/10
               `}
             >
               {imageUrl ? (
-                <img src={imageUrl} alt={albumName} className="w-full h-full object-cover" />
+                <img
+                  src={imageUrl}
+                  alt={albumName}
+                  className="w-full h-full object-cover"
+                />
               ) : (
-                <div className={`w-full h-full flex items-center justify-center ${theme.iconBackground}`}>
-                  <Music2 size={64} className={`${theme.iconColor} opacity-40`} />
+                <div
+                  className={`w-full h-full flex items-center justify-center ${theme.iconBackground}`}
+                >
+                  <Music2
+                    size={64}
+                    className={`${theme.iconColor} opacity-40`}
+                  />
                 </div>
               )}
             </div>
           </div>
 
           <div className="w-full text-center mb-4">
-            <p className={`${theme.primaryText} text-xl font-bold tracking-tight truncate`}>
+            <p
+              className={`${theme.primaryText} text-xl font-bold tracking-tight truncate`}
+            >
               {trackName}
             </p>
             <p className={`${theme.secondaryText} text-sm mt-1 truncate`}>
-              {artistName}{albumName ? ` · ${albumName}` : ""}
+              {artistName}
+              {albumName ? ` · ${albumName}` : ""}
             </p>
           </div>
           <div className="w-full mb-4">
-            <div className={`w-full h-1.5 rounded-full ${theme.buttonBackground} overflow-hidden`}>
+            <div
+              className={`w-full h-1.5 rounded-full ${theme.buttonBackground} overflow-hidden`}
+            >
               <div
                 className={`h-full rounded-full transition-all duration-500 ${
-                  theme.sliderTrackColor === "blue"   ? "bg-blue-400" :
-                  theme.sliderTrackColor === "purple" ? "bg-purple-400" :
-                  theme.sliderTrackColor === "cyan"   ? "bg-cyan-400" :
-                  theme.sliderTrackColor === "orange" ? "bg-orange-400" :
-                  theme.sliderTrackColor === "red"    ? "bg-red-400" :
-                  "bg-white/60"
+                  theme.sliderTrackColor === "blue"
+                    ? "bg-blue-400"
+                    : theme.sliderTrackColor === "purple"
+                      ? "bg-purple-400"
+                      : theme.sliderTrackColor === "cyan"
+                        ? "bg-cyan-400"
+                        : theme.sliderTrackColor === "orange"
+                          ? "bg-orange-400"
+                          : theme.sliderTrackColor === "red"
+                            ? "bg-red-400"
+                            : "bg-white/60"
                 }`}
                 style={{ width: `${Math.min(100, Math.max(0, progress))}%` }}
               />
             </div>
-            <div className={`flex justify-between mt-1.5 ${theme.secondaryText} text-xs`}>
+            <div
+              className={`flex justify-between mt-1.5 ${theme.secondaryText} text-xs`}
+            >
               <span>{formatTime(nowPlayingPositionSeconds)}</span>
               <span>{formatTime(nowPlayingLengthSeconds)}</span>
             </div>
@@ -152,10 +177,18 @@ export function MusicPlayerPage({
               commandSignal={SIGNALS_MUSIC.shuffle.cmd}
               feedbackSignal={SIGNALS_MUSIC.shuffle.fb}
               modes={[
-                { icon: <Shuffle size={20} className={`opacity-40 ${theme.buttonText}`} />, label: "Off" },
-                { icon: <Shuffle size={20} className={theme.buttonActiveText} />, label: "Shuffle" },
+                {
+                  icon: <Shuffle size={24} className="opacity-50" />,
+                  label: "Off",
+                  className: `${theme.buttonBackground} ${theme.buttonText}`,
+                },
+                {
+                  icon: <Shuffle size={24} />,
+                  label: "Shuffle",
+                  className: `${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
+                },
               ]}
-              className={`w-12 h-12 ${theme.buttonBackground}`}
+              className="w-16 h-16"
             />
 
             <CH5Button
@@ -192,11 +225,23 @@ export function MusicPlayerPage({
               commandSignal={SIGNALS_MUSIC.repeat.cmd}
               feedbackSignal={SIGNALS_MUSIC.repeat.fb}
               modes={[
-                { icon: <Repeat size={20} className={`opacity-40 ${theme.buttonText}`} />, label: "Off" },
-                { icon: <Repeat size={20} className={theme.buttonActiveText} />, label: "Repeat" },
-                { icon: <Repeat1 size={20} className={theme.buttonActiveText} />, label: "Repeat 1" },
+                {
+                  icon: <Repeat size={24} className="opacity-50" />,
+                  label: "Off",
+                  className: `${theme.buttonBackground} ${theme.buttonText}`,
+                },
+                {
+                  icon: <Repeat size={24} />,
+                  label: "Repeat",
+                  className: `${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
+                },
+                {
+                  icon: <Repeat1 size={24} />,
+                  label: "Repeat 1",
+                  className: `${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
+                },
               ]}
-              className={`w-12 h-12 ${theme.buttonBackground}`}
+              className="w-16 h-16"
             />
           </div>
         </div>
@@ -205,7 +250,9 @@ export function MusicPlayerPage({
         <div className="w-full h-full shrink-0 snap-center flex flex-col px-4 py-6 overflow-hidden">
           <div className="flex items-center gap-2 mb-5 px-1">
             <Star size={18} className={theme.secondaryText} />
-            <span className={`${theme.primaryText} text-lg font-bold`}>Favorites</span>
+            <span className={`${theme.primaryText} text-lg font-bold`}>
+              Favorites
+            </span>
           </div>
 
           <div className="flex-1 flex flex-col gap-2 overflow-y-auto">
@@ -218,12 +265,20 @@ export function MusicPlayerPage({
                   ${theme.cardBackground} ${theme.cardActiveBackground}
                 `}
               >
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${theme.iconBackground}`}>
+                <div
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${theme.iconBackground}`}
+                >
                   <Heart size={16} className={theme.iconColor} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className={`${theme.primaryText} text-sm font-semibold truncate`}>{fav.title}</p>
-                  <p className={`${theme.secondaryText} text-xs truncate`}>{fav.subtitle}</p>
+                  <p
+                    className={`${theme.primaryText} text-sm font-semibold truncate`}
+                  >
+                    {fav.title}
+                  </p>
+                  <p className={`${theme.secondaryText} text-xs truncate`}>
+                    {fav.subtitle}
+                  </p>
                 </div>
                 <Play size={14} className={`${theme.secondaryText} shrink-0`} />
               </button>
@@ -235,7 +290,12 @@ export function MusicPlayerPage({
       {/* Page indicator dots */}
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {[0, 1].map((i) => (
-          <button key={i} onClick={() => scrollToPage(i)} className="p-2 -m-2" aria-label={`Page ${i + 1}`}>
+          <button
+            key={i}
+            onClick={() => scrollToPage(i)}
+            className="p-2 -m-2"
+            aria-label={`Page ${i + 1}`}
+          >
             <span
               className={`block h-1.5 rounded-full transition-all duration-300 ${
                 activePage === i

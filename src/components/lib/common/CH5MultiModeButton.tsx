@@ -5,18 +5,18 @@ import { useTheme } from "@/lib/theme";
 export interface ModeEntry {
   icon: React.ReactNode;
   label?: string;
+  className?: string; // button background/color for this specific mode
 }
 
 export interface CH5MultiModeButtonProps {
   commandSignal: string;
   feedbackSignal: string;
-  modes: ModeEntry[]; // any number of modes, min 1
+  modes: ModeEntry[];
   width?: number | string;
   height?: number | string;
   iconSize?: number;
   showLabel?: boolean;
   className?: string;
-  onClassName?: string;
   style?: React.CSSProperties;
 }
 
@@ -29,11 +29,9 @@ export function CH5MultiModeButton({
   iconSize = 24,
   showLabel = false,
   className = "",
-  onClassName,
   style = {},
 }: CH5MultiModeButtonProps) {
   const { theme } = useTheme();
-
   const modeCount = modes.length;
 
   const [modeValue, setModeValue] = useCH5Numeric(commandSignal, feedbackSignal, 1);
@@ -73,6 +71,10 @@ export function CH5MultiModeButton({
 
   if (modeCount === 0) return null;
 
+  const buttonClasses = activeMode?.className
+    ? `${activeMode.className} ${className}`
+    : `${theme.buttonBackground} ${theme.buttonText} ${className}`;
+
   return (
     <button
       onClick={handleClick}
@@ -81,13 +83,12 @@ export function CH5MultiModeButton({
         rounded-full
         transition-all duration-200
         active:scale-95
-        ${onClassName ?? `${theme.buttonBackground} ${theme.buttonText}`}
-        ${className}
+        ${buttonClasses}
       `}
       style={customStyle}
     >
       {renderIcon()}
-      {showLabel && activeMode.label && (
+      {showLabel && activeMode?.label && (
         <span className="text-sm font-medium">{activeMode.label}</span>
       )}
     </button>
