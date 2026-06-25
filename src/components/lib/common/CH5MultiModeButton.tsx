@@ -10,7 +10,7 @@ export interface ModeEntry {
 export interface CH5MultiModeButtonProps {
   commandSignal: string;
   feedbackSignal: string;
-  modes: [ModeEntry, ModeEntry, ModeEntry, ModeEntry, ModeEntry];
+  modes: ModeEntry[]; // any number of modes, min 1
   width?: number | string;
   height?: number | string;
   iconSize?: number;
@@ -34,14 +34,16 @@ export function CH5MultiModeButton({
 }: CH5MultiModeButtonProps) {
   const { theme } = useTheme();
 
-  const [modeValue, setModeValue] = useCH5Numeric(commandSignal, feedbackSignal, 1);
+  const modeCount = modes.length;
 
-  // Clamp to 1–5; values outside that range fall back to mode 1
-  const clampedIndex = modeValue >= 1 && modeValue <= 5 ? modeValue - 1 : 0;
+  const [modeValue, setModeValue] = useCH5Numeric(commandSignal, feedbackSignal, 1);
+  const clampedIndex =
+    modeCount > 0 && modeValue >= 1 && modeValue <= modeCount ? modeValue - 1 : 0;
   const activeMode = modes[clampedIndex];
 
   const handleClick = () => {
-    const next = modeValue >= 5 ? 1 : modeValue + 1;
+    if (modeCount === 0) return;
+    const next = modeValue >= modeCount ? 1 : modeValue + 1;
     setModeValue(next);
   };
 
@@ -53,8 +55,8 @@ export function CH5MultiModeButton({
   };
 
   const renderIcon = () => {
-    const el = activeMode.icon;
-    if (!el || !React.isValidElement(el)) return el;
+    const el = activeMode?.icon;
+    if (!el || !React.isValidElement(el)) return el ?? null;
     const cloned = React.cloneElement(
       el as React.ReactElement<{ size?: number; width?: number; height?: number; strokeWidth?: number }>,
       { size: iconSize, width: iconSize, height: iconSize, strokeWidth: 2 },
@@ -68,6 +70,8 @@ export function CH5MultiModeButton({
       </span>
     );
   };
+
+  if (modeCount === 0) return null;
 
   return (
     <button

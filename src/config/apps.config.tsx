@@ -8,6 +8,7 @@ import {
   Camera,
   Apple,
   LayoutGrid,
+  Disc3
 } from "lucide-react";
 
 export const APPS: AppItem[] = [
@@ -58,6 +59,14 @@ export const APPS: AppItem[] = [
     description: "Apple TV control",
     commandSignal: SIGNALS_NAVPAGE.appleTV.cmd,
     feedbackSignal: SIGNALS_NAVPAGE.appleTV.fb,
+  },
+  {
+    id: "music",
+    label: "Music",
+    icon: <Disc3 />,
+    description: "Music Player",
+    commandSignal: SIGNALS_NAVPAGE.music.cmd,
+    feedbackSignal: SIGNALS_NAVPAGE.music.fb,
   },
   {
     id: "overview",

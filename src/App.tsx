@@ -26,6 +26,7 @@ import {
 import { Home, Settings, Power } from "lucide-react";
 import ch5Service from "./services/ch5Service";
 import { OverviewPage } from "./pages/OverviewPage";
+import { MusicPlayerPage } from "./pages/MusicPlayerPage";
 
 type Page =
   | "home"
@@ -36,7 +37,8 @@ type Page =
   | "settings"
   | "lights"
   | "camera"
-  | "appleTV";
+  | "appleTV"
+  | "music";
 
 function useActivePage(): [Page, (page: Page) => void] {
   const [activePage, setActivePage] = useState<Page>("home");
@@ -92,6 +94,8 @@ function AppContent() {
         return <OverviewPage/>;
       case "settings":
         return <SettingsPage />;
+      case "music":
+        return <MusicPlayerPage idle={false} trackName={""} artistName={""} albumName={""}/>
     }
   };
 

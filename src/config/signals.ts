@@ -2,9 +2,7 @@
 // Each entry is { cmd, fb } where cmd is the command signal and fb is the feedback signal.
 // PTZ and one-way signals have fb: undefined — this is intentional, not an omission.
 
-// ---------------------
 // NAVPAGE
-// ---------------------
 export const SIGNALS_NAVPAGE = {
   home:     { cmd: "Navpage.Home",     fb: "Navpage.Home_FB"     },
   audio:    { cmd: "Navpage.Audio",    fb: "Navpage.Audio_FB"    },
@@ -15,6 +13,7 @@ export const SIGNALS_NAVPAGE = {
   camera:   { cmd: "Navpage.Camera",   fb: "Navpage.Camera_FB"   },
   appleTV:  { cmd: "Navpage.AppleTV",  fb: "Navpage.AppleTV_FB"  },
   overview: { cmd: "Navpage.Overview", fb: "Navpage.Overview_FB" },
+  music:    { cmd: "Navpage.Music",    fb: "Navpage.Music_FB"    }
 } as const;
 
 // Flat map of page key → feedback signal (used in App.tsx for subscription loop)
@@ -28,6 +27,7 @@ export const NAVPAGE_FEEDBACK: Record<keyof typeof SIGNALS_NAVPAGE, string> = {
   camera:   SIGNALS_NAVPAGE.camera.fb,
   appleTV:  SIGNALS_NAVPAGE.appleTV.fb,
   overview: SIGNALS_NAVPAGE.overview.fb,
+  music:    SIGNALS_NAVPAGE.music.fb,
 };
 
 // Press signals used for the header/footer nav buttons (carry _Press suffix, distinct from navpage cmd)
@@ -36,9 +36,7 @@ export const SIGNALS_NAV_PRESS = {
   settings: "Navpage.Settings_Press",
 } as const;
 
-// ---------------------
 // AUDIO
-// ---------------------
 export const SIGNALS_AUDIO = {
   footerVolume: { cmd: "Audio.Footer_Volume",     fb: "Audio.Footer_Volume_FB"   },
   footerMute:   { cmd: "Audio.Footer_Mute_Press",  fb: "Audio.Footer_Mute_FB"    },
@@ -58,9 +56,7 @@ export const SIGNALS_AUDIO = {
   zone6Mute:    { cmd: "Audio.Volume_6_Mute",      fb: "Audio.Volume_6_Mute_FB"  },
 } as const;
 
-// ---------------------
 // ROUTING
-// ---------------------
 export const SIGNALS_ROUTING = {
   source1: { cmd: "Routing.Source_1", fb: "Routing.Source_1_FB" },
   source2: { cmd: "Routing.Source_2", fb: "Routing.Source_2_FB" },
@@ -78,9 +74,8 @@ export const SIGNALS_ROUTING = {
   route:   { cmd: "Routing.Route",    fb: "Routing.Route_FB"    },
 } as const;
 
-// ---------------------
+
 // CAMERA
-// ---------------------
 export const SIGNALS_CAMERA = {
   zoomIn:    { cmd: "Camera.Zoom_In_Press",   fb: undefined },
   zoomOut:   { cmd: "Camera.Zoom_Out_Press",  fb: undefined },
@@ -100,9 +95,7 @@ export function getCameraPreset(n: number): { cmd: string; fb: string } {
   return { cmd: `Camera.Preset_${n}`, fb: `Camera.Preset_${n}_FB` };
 }
 
-// ---------------------
 // PHONE
-// ---------------------
 export const SIGNALS_PHONE = {
   keypad:       { cmd: "Phone.Keypad",        fb: "Phone.Keypad_FB"        },
   hangup:       { cmd: "Phone.Hangup",        fb: "Phone.Hangup_FB"        },
@@ -111,18 +104,17 @@ export const SIGNALS_PHONE = {
   keypadToggle: { cmd: "Phone.Keypad_Toggle", fb: "Phone.Keypad_Toggle_FB" },
 } as const;
 
-// ---------------------
+
 // MUSIC
-// ---------------------
 export const SIGNALS_MUSIC = {
-  previous:  { cmd: "Music.Previous_Press",  fb: undefined },
-  playPause: { cmd: "Music.PlayPause_Press",  fb: undefined },
+  previous:  { cmd: "Music.Previous_Press",   fb: undefined },
+  playPause: { cmd: "Music.PlayPause_Press",  fb: "Music.PlayPause_FB" },
   next:      { cmd: "Music.Next_Press",       fb: undefined },
+  shuffle:   { cmd: "Music.Shuffle",          fb: "Music.Shuffle_FB"},
+  repeat:    { cmd: "Music.Repeat",           fb: "Music.Repeat_FB"}
 } as const;
 
-// ---------------------
 // APPLE TV
-// ---------------------
 export const SIGNALS_APPLETV = {
   up:        { cmd: "AppleTV.Up",        fb: undefined },
   down:      { cmd: "AppleTV.Down",      fb: undefined },
@@ -135,9 +127,7 @@ export const SIGNALS_APPLETV = {
   playPause: { cmd: "AppleTV.PlayPause", fb: undefined },
 } as const;
 
-// ---------------------
 // SETTINGS
-// ---------------------
 export const SIGNALS_SETTINGS = {
   tabTheme:    { cmd: "Settings_Tab.Theme", fb: "Settings_Tab.Theme_FB" },
   tabFont:     { cmd: "Settings_Tab.Font",  fb: "Settings_Tab.Font_FB"  },
@@ -145,9 +135,8 @@ export const SIGNALS_SETTINGS = {
   fontSelect:  { cmd: "Font.Select",        fb: "Font.Select_FB"        },
 } as const;
 
-// ---------------------
+
 // SYSTEM
-// ---------------------
 export const SIGNALS_SYSTEM = {
   power: { cmd: "System.Power", fb: "System.Power_FB" },
 } as const;
