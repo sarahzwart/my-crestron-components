@@ -59,14 +59,5 @@ export const AUDIO_CONTROLS: CH5VolumeSliderProps[] = [
     volumeFeedbackSignal: SIGNALS_AUDIO.zone5.fb,
     muteCommandSignal: SIGNALS_AUDIO.zone5Mute.cmd,
     muteFeedbackSignal: SIGNALS_AUDIO.zone5Mute.fb,
-  },
-  {
-    id: "microphone",
-    label: "Microphone",
-    icon: <Mic />,
-    volumeCommandSignal: SIGNALS_AUDIO.zone6.cmd,
-    volumeFeedbackSignal: SIGNALS_AUDIO.zone6.fb,
-    muteCommandSignal: SIGNALS_AUDIO.zone6Mute.cmd,
-    muteFeedbackSignal: SIGNALS_AUDIO.zone6Mute.fb,
-  },
+  }
 ];

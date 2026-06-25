@@ -18,7 +18,12 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
-import { SIGNALS_CAMERA, SIGNALS_ROUTING, SIGNALS_MUSIC, getCameraPreset } from "@/config/signals";
+import {
+  SIGNALS_CAMERA,
+  SIGNALS_ROUTING,
+  SIGNALS_MUSIC,
+  getCameraPreset,
+} from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
@@ -254,85 +259,117 @@ export function OverviewPage() {
               </CardTitle>
             </CardHeader>
             <CardContent className="flex-1 flex flex-col gap-3 min-h-0">
-              <div className="flex-1 grid grid-cols-2 gap-1 min-h-0">
+              <div className="flex-1 grid grid-cols-2 gap-3 min-h-0">
+                {/* Sources */}
                 <div className="flex flex-col min-h-0">
-                  <p className={`${theme.secondaryText} text-sm ml-1 mb-1`}>
-                    {SOURCES.length} Source{SOURCES.length !== 1 ? "s" : ""}{" "}
-                    Available
-                  </p>
-                  <ScrollArea className="min-h-0 flex-1 border border-white/30 rounded-lg">
-                    <div className="flex flex-col gap-2 p-1 ">
-                      {SOURCES.map((source) => (
-                        <CH5Button
-                          key={source.id}
-                          commandSignal={source.commandSignal}
-                          feedbackSignal={source.feedbackSignal}
-                          variant="momentary"
-                          shape="rounded"
-                          label={source.label}
-                          textSize={16}
-                          onClick={() => handleSourceSelect(source.id)}
-                          offClassName={`${selectedSource === source.id ? theme.cardHighlightBackground : theme.cardBackground} ${selectedSource === source.id ? "ring-2 ring-blue-400" : ""}`}
-                          onClassName={`${theme.cardHighlightBackground} ring-2 ring-blue-400`}
-                          className={`w-full rounded-lg shrink-0 text-left ${theme.primaryText}`}
-                        />
-                      ))}
+                  <div className="flex items-center justify-between mb-1.5 px-1">
+                    <p
+                      className={`${theme.secondaryText} text-xs font-semibold uppercase tracking-wider`}
+                    >
+                      Source
+                    </p>
+                    {selectedSource && (
+                      <span className={`${theme.secondaryText} text-xs`}>
+                        1 selected
+                      </span>
+                    )}
+                  </div>
+                  <ScrollArea
+                    className={`min-h-0 flex-1 rounded-lg ${theme.cardBackground}`}
+                  >
+                    <div className="flex flex-col gap-1 p-1">
+                      {SOURCES.map((source) => {
+                        const isSelected = selectedSource === source.id;
+                        return (
+                          <button
+                            key={source.id}
+                            onClick={() => handleSourceSelect(source.id)}
+                            className={`
+                  w-full text-left px-3 py-2 rounded-md text-sm font-medium
+                  transition-all duration-150 active:scale-[0.98]
+                  ${
+                    isSelected
+                      ? `${theme.cardHighlightBackground} ${theme.primaryText} ring-1 ${theme.headerBorder}`
+                      : `${theme.buttonBackground} ${theme.buttonText} opacity-60 hover:opacity-90`
+                  }
+                `}
+                          >
+                            {source.label}
+                          </button>
+                        );
+                      })}
                     </div>
                   </ScrollArea>
                 </div>
+
+                {/* Destinations */}
                 <div className="flex flex-col min-h-0">
-                  <p className={`${theme.secondaryText} text-sm ml-1 mb-1`}>
-                    {DESTINATIONS.length} Destination
-                    {DESTINATIONS.length !== 1 ? "s" : ""} Available
-                  </p>
-                  <ScrollArea className="min-h-0 flex-1 border border-white/30 rounded-lg">
-                    <div className="flex flex-col gap-2 p-1">
-                      {DESTINATIONS.map((destination) => (
-                        <CH5Button
-                          key={destination.id}
-                          commandSignal={destination.commandSignal}
-                          feedbackSignal={destination.feedbackSignal}
-                          variant="momentary"
-                          shape="rounded"
-                          label={destination.label}
-                          textSize={16}
-                          onClick={() =>
-                            handleDestinationToggle(destination.id)
-                          }
-                          offClassName={`${selectedDestinations.includes(destination.id) ? theme.cardHighlightBackground : theme.cardBackground} ${selectedDestinations.includes(destination.id) ? "ring-2 ring-green-400" : ""}`}
-                          onClassName={`${theme.cardHighlightBackground} ring-2 ring-green-400`}
-                          className={`w-full rounded-lg shrink-0 text-left ${theme.primaryText}`}
-                        />
-                      ))}
+                  <div className="flex items-center justify-between mb-1.5 px-1">
+                    <p
+                      className={`${theme.secondaryText} text-xs font-semibold uppercase tracking-wider`}
+                    >
+                      Destination
+                    </p>
+                    {selectedDestinations.length > 0 && (
+                      <span className={`${theme.secondaryText} text-xs`}>
+                        {selectedDestinations.length} selected
+                      </span>
+                    )}
+                  </div>
+                  <ScrollArea
+                    className={`min-h-0 flex-1 rounded-lg ${theme.cardBackground}`}
+                  >
+                    <div className="flex flex-col gap-1 p-1">
+                      {DESTINATIONS.map((destination) => {
+                        const isSelected = selectedDestinations.includes(
+                          destination.id,
+                        );
+                        return (
+                          <button
+                            key={destination.id}
+                            onClick={() =>
+                              handleDestinationToggle(destination.id)
+                            }
+                            className={`
+                  w-full text-left px-3 py-2 rounded-md text-sm font-medium
+                  transition-all duration-150 active:scale-[0.98]
+                  ${
+                    isSelected
+                      ? `${theme.cardHighlightBackground} ${theme.primaryText} ring-1 ${theme.headerBorder}`
+                      : `${theme.buttonBackground} ${theme.buttonText} opacity-60 hover:opacity-90`
+                  }
+                `}
+                          >
+                            {destination.label}
+                          </button>
+                        );
+                      })}
                     </div>
                   </ScrollArea>
                 </div>
               </div>
-              <CH5Button
-                commandSignal="Routing.Route"
-                feedbackSignal="Routing.Route_FB"
-                variant="momentary"
-                shape="rounded"
+
+              {/* Route button */}
+              <button
                 disabled={!canRoute}
-                textSize={16}
-                icon={
-                  <div className="flex items-center justify-center gap-2 w-full">
-                    <span>
-                      {canRoute
-                        ? `Route to ${selectedDestinations.length} destination${selectedDestinations.length !== 1 ? "s" : ""}`
-                        : "Select source & destination"}
-                    </span>
-                    {canRoute && <ArrowRight size={16} />}
-                  </div>
-                }
-                offClassName={
-                  canRoute
-                    ? theme.cardHighlightBackground
-                    : theme.cardBackground
-                }
-                onClassName={theme.cardHighlightBackground}
-                className={`w-full  rounded-lg px-3 py-2 shrink-0 ${theme.primaryText} ${canRoute ? "opacity-100" : "opacity-50 pointer-events-none"}`}
-              />
+                onClick={() => {
+                  /* your route handler */
+                }}
+                className={`
+      w-full rounded-lg px-3 py-2.5 shrink-0 flex items-center justify-center gap-2
+      text-sm font-semibold transition-all duration-200
+      ${
+        canRoute
+          ? `${theme.buttonActiveBackground} ${theme.buttonActiveText} active:scale-[0.99]`
+          : `${theme.buttonBackground} ${theme.secondaryText} opacity-40 cursor-not-allowed`
+      }
+    `}
+              >
+                {canRoute
+                  ? `Route to ${selectedDestinations.length} destination${selectedDestinations.length !== 1 ? "s" : ""}`
+                  : "Select source & destination"}
+                {canRoute && <ArrowRight size={14} />}
+              </button>
             </CardContent>
           </Card>
 
@@ -401,7 +438,7 @@ export function OverviewPage() {
               className={`block h-2 rounded-full transition-all duration-300 ${
                 activePage === i
                   ? `w-6 ${theme.buttonActiveBackground}`
-                  : `w-2 ${theme.buttonBackground} opacity-50`
+                  : `w-2 ${theme.buttonActiveBackground} opacity-50`
               }`}
             />
           </button>

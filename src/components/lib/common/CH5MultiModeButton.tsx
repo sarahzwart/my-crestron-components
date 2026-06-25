@@ -5,7 +5,7 @@ import { useTheme } from "@/lib/theme";
 export interface ModeEntry {
   icon: React.ReactNode;
   label?: string;
-  className?: string; // button background/color for this specific mode
+  className?: string;
 }
 
 export interface CH5MultiModeButtonProps {

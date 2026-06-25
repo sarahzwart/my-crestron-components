@@ -180,12 +180,12 @@ export function MusicPlayerPage({
                 {
                   icon: <Shuffle size={24} className="opacity-50" />,
                   label: "Off",
-                  className: `${theme.buttonBackground} ${theme.buttonText}`,
+                  className: `opacity-80 ${theme.buttonBackground} ${theme.buttonText}`,
                 },
                 {
                   icon: <Shuffle size={24} />,
                   label: "Shuffle",
-                  className: `${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
+                  className: `opacity-80 ${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
                 },
               ]}
               className="w-16 h-16"
@@ -233,12 +233,12 @@ export function MusicPlayerPage({
                 {
                   icon: <Repeat size={24} />,
                   label: "Repeat",
-                  className: `${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
+                  className: `opacity-80 ${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
                 },
                 {
                   icon: <Repeat1 size={24} />,
                   label: "Repeat 1",
-                  className: `${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
+                  className: `opacity-80 ${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
                 },
               ]}
               className="w-16 h-16"
