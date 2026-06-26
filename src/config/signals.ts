@@ -107,11 +107,35 @@ export const SIGNALS_PHONE = {
 
 // MUSIC
 export const SIGNALS_MUSIC = {
+  // digital
   previous:  { cmd: "Music.Previous_Press",   fb: undefined },
   playPause: { cmd: "Music.PlayPause_Press",  fb: "Music.PlayPause_FB" },
   next:      { cmd: "Music.Next_Press",       fb: undefined },
+
+  playing: {},
+  paused: {},
+  nextTrackAvailable: {},
+  previousTrackAvailable: {},
+  shuffleAvailable: {},
+  repeatAllAvailable: {},
+  repeatOneAvailable: {},
+
+  // analog
   shuffle:   { cmd: "Music.Shuffle",          fb: "Music.Shuffle_FB"},
-  repeat:    { cmd: "Music.Repeat",           fb: "Music.Repeat_FB"}
+  repeat:    { cmd: "Music.Repeat",           fb: "Music.Repeat_FB"},
+  nowPlayingLengthSeconds: {},
+  nowPlayingPositionSeconds: {},
+  nowPlayingPositionGauge: {},
+  numberOfFavorites: {},
+
+  // serial
+  trackName: { cmd: "Music.Track_Name",        fb: "Music.Track_Name_FB"},
+  artistName:{ cmd: "Music.Artist_Name",       fb: "Music.Artist_Name_FB"},
+  albumName: { cmd: "Music.Album_Name",        fb: "Music.Album_Name_FB"},
+  imageUrl:  { cmd: "Music.Image_URL",         fb: "Music.Image_URL_FB"},
+  providerName:     { cmd: "Music.Provider_Name",  fb: "Music.Provider_Name_FB"},
+  providerImageUrl: { cmd: "Music.Provider_Image_URL", fb: "Music.Provider_Image_URL_FB"}
+
 } as const;
 
 // APPLE TV

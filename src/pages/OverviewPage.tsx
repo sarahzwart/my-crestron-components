@@ -16,6 +16,11 @@ import {
   Play,
   Pause,
   ArrowRight,
+  Repeat,
+  SkipForwardIcon,
+  Repeat1,
+  SkipBackIcon,
+  Shuffle,
 } from "lucide-react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
 import {
@@ -26,6 +31,7 @@ import {
 } from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { CH5MultiModeButton } from "@/components/lib/common/CH5MultiModeButton";
 
 const PAGE_COUNT = 2; // update if you add or remove pages
 
@@ -382,31 +388,74 @@ export function OverviewPage() {
               </div>
             </CardHeader>
             <CardContent className="flex-1 flex items-center justify-center">
-              <div className="grid grid-cols-3 gap-2">
+              <div className="flex items-center justify-between w-full px-2">
+                <CH5MultiModeButton
+                  commandSignal={SIGNALS_MUSIC.shuffle.cmd}
+                  feedbackSignal={SIGNALS_MUSIC.shuffle.fb}
+                  modes={[
+                    {
+                      icon: <Shuffle size={24} className="opacity-50" />,
+                      label: "Off",
+                      className: `opacity-80 ${theme.buttonBackground} ${theme.buttonText}`,
+                    },
+                    {
+                      icon: <Shuffle size={24} />,
+                      label: "Shuffle",
+                      className: `opacity-80 ${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
+                    },
+                  ]}
+                  className={`w-10 h-10 ${theme.buttonBackground}`}
+                />
                 <CH5Button
                   shape="circle"
                   variant="momentary"
-                  icon={<ChevronLeft />}
+                  icon={<SkipBackIcon />}
                   iconSize={20}
-                  commandSignal="Music.Previous_Press"
-                  className={`w-16 h-16 ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
+                  commandSignal={SIGNALS_MUSIC.previous.cmd}
+                  className={`w-12 h-12 ${theme.buttonBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
                 />
                 <CH5Button
                   shape="circle"
                   variant="toggle"
                   iconOn={<Play />}
                   iconOff={<Pause />}
-                  iconSize={20}
-                  commandSignal="Music.PlayPause_Press"
-                  className={`w-16 h-16 ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
+                  iconSize={22}
+                  commandSignal={SIGNALS_MUSIC.playPause.cmd}
+                  feedbackSignal={SIGNALS_MUSIC.playPause.fb}
+                  width={56}
+                  height={56}
+                  onClassName={`rounded-full ${theme.buttonActiveBackground} ${theme.buttonActiveText}`}
+                  offClassName={`rounded-full ${theme.buttonBackground} ${theme.primaryText}`}
                 />
                 <CH5Button
                   shape="circle"
                   variant="momentary"
-                  icon={<ChevronRight />}
+                  icon={<SkipForwardIcon />}
                   iconSize={20}
-                  commandSignal="Music.Next_Press"
-                  className={`w-16 h-16 ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
+                  commandSignal={SIGNALS_MUSIC.next.cmd}
+                  className={`w-12 h-12 ${theme.buttonBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
+                />
+                <CH5MultiModeButton
+                  commandSignal={SIGNALS_MUSIC.repeat.cmd}
+                  feedbackSignal={SIGNALS_MUSIC.repeat.fb}
+                  modes={[
+                    {
+                      icon: <Repeat size={24} className="opacity-50" />,
+                      label: "Off",
+                      className: `${theme.buttonBackground} ${theme.buttonText}`,
+                    },
+                    {
+                      icon: <Repeat size={24} />,
+                      label: "Repeat",
+                      className: `opacity-80 ${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
+                    },
+                    {
+                      icon: <Repeat1 size={24} />,
+                      label: "Repeat 1",
+                      className: `opacity-80 ${theme.buttonActiveBackground} ${theme.buttonActiveText}`,
+                    },
+                  ]}
+                  className={`w-10 h-10 ${theme.buttonBackground}`}
                 />
               </div>
             </CardContent>

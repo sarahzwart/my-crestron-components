@@ -1,4 +1,3 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useTheme } from "../lib/theme";
 import { useEffect, useRef, useState } from "react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
