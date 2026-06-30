@@ -27,6 +27,7 @@ import { Home, Settings, Power } from "lucide-react";
 import ch5Service from "./services/ch5Service";
 import { OverviewPage } from "./pages/OverviewPage";
 import { MusicPlayerPage } from "./pages/MusicPlayerPage";
+import { LoadingPage } from "./pages/LoadingPage";
 
 type Page =
   | "home"
@@ -38,13 +39,14 @@ type Page =
   | "lights"
   | "camera"
   | "appleTV"
-  | "music";
+  | "music"
+  | "loading";
 
 function useActivePage(): [Page, (page: Page) => void] {
   const [activePage, setActivePage] = useState<Page>("home");
 
   useEffect(() => {
-    const pages = Object.keys(NAVPAGE_FEEDBACK) as Page[];
+    const pages = Object.keys(NAVPAGE_FEEDBACK) as (keyof typeof NAVPAGE_FEEDBACK)[];
 
     pages.forEach((page) => {
       ch5Service.subscribeBool(
@@ -71,7 +73,7 @@ function AppContent() {
 
   const navigate = (page: Page) => {
     setCurrentPage(page);
-    ch5Service.publishBool(SIGNALS_NAVPAGE[page].cmd, true);
+    if (page !== "loading") ch5Service.publishBool(SIGNALS_NAVPAGE[page].cmd, true);
   };
 
   const renderPage = () => {
@@ -95,8 +97,9 @@ function AppContent() {
       case "settings":
         return <SettingsPage />;
       case "music":
-        return <MusicPlayerPage idle={false} trackName={""} artistName={""} albumName={""}/>
-      
+        return <MusicPlayerPage idle={false} trackName={""} artistName={""} albumName={""}/>;
+      case "loading":
+        return <LoadingPage commandSignal={false} feedbackSignal={false} loadingType="" loadingComponentFillColor="" loadingComponentBGColor="" textUnderLoadingComponent="" />;
     }
   };
 
