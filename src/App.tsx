@@ -28,6 +28,16 @@ import ch5Service from "./services/ch5Service";
 import { OverviewPage } from "./pages/OverviewPage";
 import { MusicPlayerPage } from "./pages/MusicPlayerPage";
 import { LoadingPage } from "./pages/LoadingPage";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "./components/ui/dialog";
+import { Button } from "./components/ui/button";
 
 type Page =
   | "home"
@@ -70,6 +80,7 @@ function useActivePage(): [Page, (page: Page) => void] {
 function AppContent() {
   const { theme } = useTheme();
   const [currentPage, setCurrentPage] = useActivePage();
+  const [showPowerDialog, setShowPowerDialog] = useState(false);
 
   const navigate = (page: Page) => {
     setCurrentPage(page);
@@ -126,6 +137,33 @@ function AppContent() {
 
       <main className="flex-1 overflow-hidden">{renderPage()}</main>
 
+      <Dialog open={showPowerDialog} onOpenChange={setShowPowerDialog}>
+        <DialogContent showCloseButton={false} className={`${theme.cardBackground} ${theme.primaryText}`}>
+          <DialogHeader>
+            <DialogTitle className={theme.primaryText}>Shut Down</DialogTitle>
+            <DialogDescription className={theme.secondaryText}>
+              Are you sure you want to shut down the system?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline" className={`${theme.buttonBackground} ${theme.primaryText}`}>
+                Cancel
+              </Button>
+            </DialogClose>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                ch5Service.publishBool(SIGNALS_SYSTEM.power.cmd, true);
+                setShowPowerDialog(false);
+              }}
+            >
+              Shut Down
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       <CH5Footer
         volumeWidth={500}
         volumePosition="left"
@@ -155,7 +193,7 @@ function AppContent() {
               height={48}
               icon={<Power />}
               iconSize={20}
-              onClick={() => navigate("loading")}
+              onClick={() => setShowPowerDialog(true)}
             />
             <CH5Button
               commandSignal={SIGNALS_NAV_PRESS.settings}
