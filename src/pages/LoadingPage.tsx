@@ -1,5 +1,9 @@
 import { Orbit, TailChase, LineSpinner, DotPulse } from 'ldrs/react'
 import 'ldrs/react/Orbit.css'
+import 'ldrs/react/TailChase.css'
+import 'ldrs/react/LineSpinner.css'
+import 'ldrs/react/DotPulse.css'
+import { useTheme } from '@/lib/theme'
 
 export interface LoadingPageProps {
   commandSignal: boolean;
@@ -13,13 +17,14 @@ export interface LoadingPageProps {
 export function LoadingPage({
   loadingType = "orbit",
   loadingComponentFillColor = "white",
-  loadingComponentBGColor = "transparent",
-  textUnderLoadingComponent = "",
+  textUnderLoadingComponent = "Loading...",
 }: LoadingPageProps) {
+  const { theme } = useTheme();
+
   const renderSpinner = () => {
     switch (loadingType) {
       case "tailChase":
-        return <TailChase size="50" speed="1.75" color={loadingComponentFillColor} />;
+        return <TailChase size="50" speed="2" color={loadingComponentFillColor} />;
       case "lineSpinner":
         return <LineSpinner size="50" speed="1" color={loadingComponentFillColor} />;
       case "dotPulse":
@@ -31,16 +36,28 @@ export function LoadingPage({
   };
 
   return (
-    <div
-      className="w-full h-full flex flex-col items-center justify-center gap-8"
-      style={{ backgroundColor: loadingComponentBGColor === "transparent" ? undefined : loadingComponentBGColor }}
-    >
-      {renderSpinner()}
-      {textUnderLoadingComponent && (
-        <p className="text-[2rem] font-medium" style={{ color: loadingComponentFillColor }}>
-          {textUnderLoadingComponent}
-        </p>
-      )}
+    <div className={`w-full h-full flex flex-col items-center justify-center gap-6 ${theme.pageBackground}`}>
+      <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-2">
+          <h1 className={`text-2xl font-bold tracking-widest uppercase ${theme.primaryText}`}>
+            LOGO
+          </h1>
+          <p className={`text-xs tracking-widest uppercase ${theme.secondaryText}`}>
+            Touch Panel
+          </p>
+        </div>
+
+        <div className={`w-px h-8 ${theme.headerBorder} bg-current opacity-20`} />
+
+        <div className="flex flex-col items-center gap-4">
+          {renderSpinner()}
+          {textUnderLoadingComponent && (
+            <p className={`text-xs tracking-widest uppercase ${theme.secondaryText}`}>
+              {textUnderLoadingComponent}
+            </p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

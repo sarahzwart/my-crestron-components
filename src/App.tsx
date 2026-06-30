@@ -99,7 +99,7 @@ function AppContent() {
       case "music":
         return <MusicPlayerPage idle={false} trackName={""} artistName={""} albumName={""}/>;
       case "loading":
-        return <LoadingPage commandSignal={false} feedbackSignal={false} loadingType="orbit" loadingComponentFillColor="white" loadingComponentBGColor="" textUnderLoadingComponent="Starting Up" />;
+        return <LoadingPage commandSignal={false} feedbackSignal={false} loadingType="tailChase" loadingComponentFillColor="white" loadingComponentBGColor="" textUnderLoadingComponent="Starting Up" />;
     }
   };
 
