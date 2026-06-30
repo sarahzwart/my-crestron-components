@@ -160,6 +160,34 @@ When connected to a processor, theme and font selections are sent as **analog si
 
 ---
 
+## Checking Your Component Count & DOM Size in Console
+
+### Total DOM element count (limit: 1500)
+
+```js
+console.log("DOM elements:", document.querySelectorAll("*").length);
+```
+
+### Max nesting depth (limit: 32)
+
+```js
+function maxDepth(el, d = 0) {
+  if (!el.children.length) return d;
+  return Math.max(...[...el.children].map(c => maxDepth(c, d + 1)));
+}
+console.log("Max depth:", maxDepth(document.body));
+```
+
+### Max children on any single element (limit: 60)
+
+```js
+function maxChildren(el) {
+  return Math.max(el.children.length, ...[...el.children].map(maxChildren));
+}
+console.log("Max children:", maxChildren(document.body));
+```
+
+
 ## Tech Stack
 
 | Layer | Technology |
@@ -171,3 +199,5 @@ When connected to a processor, theme and font selections are sent as **analog si
 | Fonts | Quicksand, Roboto Flex (Google Fonts), Inter Variable |
 | Processor comms | `@crestron/ch5-crcomlib` v2.17.4 |
 | Testing | Vitest + Playwright (browser) |
+
+

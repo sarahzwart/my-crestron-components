@@ -107,34 +107,37 @@ export const SIGNALS_PHONE = {
 
 // MUSIC
 export const SIGNALS_MUSIC = {
-  // digital
+  // digital - command + feedback
   previous:  { cmd: "Music.Previous_Press",   fb: undefined },
   playPause: { cmd: "Music.PlayPause_Press",  fb: "Music.PlayPause_FB" },
   next:      { cmd: "Music.Next_Press",       fb: undefined },
 
-  playing: {},
-  paused: {},
-  nextTrackAvailable: {},
-  previousTrackAvailable: {},
-  shuffleAvailable: {},
-  repeatAllAvailable: {},
-  repeatOneAvailable: {},
+  // digital — feedback only
+  playing:                { cmd: undefined, fb: "Music.Playing_FB"              },
+  paused:                 { cmd: undefined, fb: "Music.Paused_FB"               },
+  nextTrackAvailable:     { cmd: undefined, fb: "Music.Next_Available_FB"       },
+  previousTrackAvailable: { cmd: undefined, fb: "Music.Previous_Available_FB"   },
+  shuffleAvailable:       { cmd: undefined, fb: "Music.Shuffle_Available_FB"    },
+  repeatAllAvailable:     { cmd: undefined, fb: "Music.Repeat_All_Available_FB" },
+  repeatOneAvailable:     { cmd: undefined, fb: "Music.Repeat_One_Available_FB" },
 
-  // analog
-  shuffle:   { cmd: "Music.Shuffle",          fb: "Music.Shuffle_FB"},
-  repeat:    { cmd: "Music.Repeat",           fb: "Music.Repeat_FB"},
-  nowPlayingLengthSeconds: {},
-  nowPlayingPositionSeconds: {},
-  nowPlayingPositionGauge: {},
-  numberOfFavorites: {},
+ // analog — command + feedback
+  shuffle: { cmd: "Music.Shuffle", fb: "Music.Shuffle_FB" },
+  repeat:  { cmd: "Music.Repeat",  fb: "Music.Repeat_FB"  },
 
-  // serial
-  trackName: { cmd: "Music.Track_Name",        fb: "Music.Track_Name_FB"},
-  artistName:{ cmd: "Music.Artist_Name",       fb: "Music.Artist_Name_FB"},
-  albumName: { cmd: "Music.Album_Name",        fb: "Music.Album_Name_FB"},
-  imageUrl:  { cmd: "Music.Image_URL",         fb: "Music.Image_URL_FB"},
-  providerName:     { cmd: "Music.Provider_Name",  fb: "Music.Provider_Name_FB"},
-  providerImageUrl: { cmd: "Music.Provider_Image_URL", fb: "Music.Provider_Image_URL_FB"}
+  // analog — feedback only
+  nowPlayingLengthSeconds:   { cmd: undefined, fb: "Music.Now_Playing_Length_FB"   },
+  nowPlayingPositionSeconds: { cmd: undefined, fb: "Music.Now_Playing_Position_FB" },
+  nowPlayingPositionGauge:   { cmd: undefined, fb: "Music.Now_Playing_Gauge_FB"    },
+  numberOfFavorites:         { cmd: undefined, fb: "Music.Number_Of_Favorites_FB"  },
+
+  // serial — feedback only
+  trackName:        { cmd: undefined, fb: "Music.Track_Name_FB"         },
+  artistName:       { cmd: undefined, fb: "Music.Artist_Name_FB"        },
+  albumName:        { cmd: undefined, fb: "Music.Album_Name_FB"         },
+  imageUrl:         { cmd: undefined, fb: "Music.Image_URL_FB"          },
+  providerName:     { cmd: undefined, fb: "Music.Provider_Name_FB"      },
+  providerImageUrl: { cmd: undefined, fb: "Music.Provider_Image_URL_FB" },
 
 } as const;
 
