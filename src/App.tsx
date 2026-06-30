@@ -96,6 +96,7 @@ function AppContent() {
         return <SettingsPage />;
       case "music":
         return <MusicPlayerPage idle={false} trackName={""} artistName={""} albumName={""}/>
+      
     }
   };
 
@@ -151,6 +152,7 @@ function AppContent() {
               height={48}
               icon={<Power />}
               iconSize={20}
+              onClick={() => navigate("loading")}
             />
             <CH5Button
               commandSignal={SIGNALS_NAV_PRESS.settings}

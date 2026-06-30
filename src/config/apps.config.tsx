@@ -8,7 +8,8 @@ import {
   Camera,
   Apple,
   LayoutGrid,
-  Disc3
+  Disc3,
+  Loader
 } from "lucide-react";
 
 export const APPS: AppItem[] = [
