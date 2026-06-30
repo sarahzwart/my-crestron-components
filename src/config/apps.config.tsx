@@ -1,4 +1,5 @@
 import { type AppItem } from "../pages/HomePage";
+import { SIGNALS_NAVPAGE } from "./signals";
 import {
   Music,
   Phone,
@@ -7,6 +8,8 @@ import {
   Camera,
   Apple,
   LayoutGrid,
+  Disc3,
+  Loader
 } from "lucide-react";
 
 export const APPS: AppItem[] = [
@@ -15,55 +18,63 @@ export const APPS: AppItem[] = [
     label: "Audio",
     icon: <Music />,
     description: "Volume & controls",
-    commandSignal: "Navpage.Audio",
-    feedbackSignal: "Navpage.Audio_FB",
+    commandSignal: SIGNALS_NAVPAGE.audio.cmd,
+    feedbackSignal: SIGNALS_NAVPAGE.audio.fb,
   },
   {
     id: "call",
     label: "Phone",
     icon: <Phone />,
     description: "Make a call",
-    commandSignal: "Navpage.Call",
-    feedbackSignal: "Navpage.Call_FB",
+    commandSignal: SIGNALS_NAVPAGE.call.cmd,
+    feedbackSignal: SIGNALS_NAVPAGE.call.fb,
   },
   {
     id: "routing",
     label: "Routing",
     icon: <Shuffle />,
     description: "Route sources",
-    commandSignal: "Navpage.Routing",
-    feedbackSignal: "Navpage.Routing_FB",
+    commandSignal: SIGNALS_NAVPAGE.routing.cmd,
+    feedbackSignal: SIGNALS_NAVPAGE.routing.fb,
   },
   {
     id: "lights",
     label: "Lights",
     icon: <Lightbulb />,
     description: "Lighting control",
-    commandSignal: "Navpage.Lights",
-    feedbackSignal: "Navpage.Lights_FB",
+    commandSignal: SIGNALS_NAVPAGE.lights.cmd,
+    feedbackSignal: SIGNALS_NAVPAGE.lights.fb,
   },
   {
     id: "camera",
     label: "Camera",
     icon: <Camera />,
     description: "Camera control",
-    commandSignal: "Navpage.Camera",
-    feedbackSignal: "Navpage.Camera_FB",
+    commandSignal: SIGNALS_NAVPAGE.camera.cmd,
+    feedbackSignal: SIGNALS_NAVPAGE.camera.fb,
   },
   {
     id: "appleTV",
     label: "Apple TV",
     icon: <Apple />,
     description: "Apple TV control",
-    commandSignal: "Navpage.AppleTV",
-    feedbackSignal: "Navpage.AppleTV_FB",
+    commandSignal: SIGNALS_NAVPAGE.appleTV.cmd,
+    feedbackSignal: SIGNALS_NAVPAGE.appleTV.fb,
+  },
+  {
+    id: "music",
+    label: "Music",
+    icon: <Disc3 />,
+    description: "Music Player",
+    commandSignal: SIGNALS_NAVPAGE.music.cmd,
+    feedbackSignal: SIGNALS_NAVPAGE.music.fb,
   },
   {
     id: "overview",
     label: "Overview",
     icon: <LayoutGrid />,
     description: "All pages",
-    commandSignal: "Navpage.Overview",
-    feedbackSignal: "Navpage.Overview_FB",
+    commandSignal: SIGNALS_NAVPAGE.overview.cmd,
+    feedbackSignal: SIGNALS_NAVPAGE.overview.fb,
   },
 ];

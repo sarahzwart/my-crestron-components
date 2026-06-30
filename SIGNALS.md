@@ -37,10 +37,10 @@ Global volume slider and mute button shown in the footer.
 
 | Signal | Type | Direction |
 |---|---|---|
-| `Audio.Volume` | Analog | → Processor |
-| `Audio.Volume_FB` | Analog | ← Processor |
-| `Audio.Mute_Press` | Digital | → Processor |
-| `Audio.Mute_FB` | Digital | ← Processor |
+| `Audio.Footer_Volume` | Analog | → Processor |
+| `Audio.Footer_Volume_FB` | Analog | ← Processor |
+| `Audio.Footer_Mute_Press` | Digital | → Processor |
+| `Audio.Footer_Mute_FB` | Digital | ← Processor |
 
 ---
 
@@ -54,30 +54,30 @@ Per-zone volume sliders and mute buttons on the Audio page (`audio.config.tsx`).
 | `Audio.Master_Volume_FB` | Analog | ← Processor |
 | `Audio.Master_Mute` | Digital | → Processor |
 | `Audio.Master_Mute_FB` | Digital | ← Processor |
-| `Audio.Volume1` | Analog | → Processor |
-| `Audio.Volume1_FB` | Analog | ← Processor |
-| `Audio.Volume1_Mute` | Digital | → Processor |
-| `Audio.Volume1_Mute_FB` | Digital | ← Processor |
-| `Audio.Volume2` | Analog | → Processor |
-| `Audio.Volume2_FB` | Analog | ← Processor |
-| `Audio.Volume2_Mute` | Digital | → Processor |
-| `Audio.Volume2_Mute_FB` | Digital | ← Processor |
-| `Audio.Volume3` | Analog | → Processor |
-| `Audio.Volume3_FB` | Analog | ← Processor |
-| `Audio.Volume3_Mute` | Digital | → Processor |
-| `Audio.Volume3_Mute_FB` | Digital | ← Processor |
-| `Audio.Volume4` | Analog | → Processor |
-| `Audio.Volume4_FB` | Analog | ← Processor |
-| `Audio.Volume4_Mute` | Digital | → Processor |
-| `Audio.Volume4_Mute_FB` | Digital | ← Processor |
-| `Audio.Volume5` | Analog | → Processor |
-| `Audio.Volume5_FB` | Analog | ← Processor |
-| `Audio.Volume5_Mute` | Digital | → Processor |
-| `Audio.Volume5_Mute_FB` | Digital | ← Processor |
-| `Audio.Volume6` | Analog | → Processor |
-| `Audio.Volume6_FB` | Analog | ← Processor |
-| `Audio.Volume6_Mute` | Digital | → Processor |
-| `Audio.Volume6_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume_1` | Analog | → Processor |
+| `Audio.Volume_1_FB` | Analog | ← Processor |
+| `Audio.Volume_1_Mute` | Digital | → Processor |
+| `Audio.Volume_1_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume_2` | Analog | → Processor |
+| `Audio.Volume_2_FB` | Analog | ← Processor |
+| `Audio.Volume_2_Mute` | Digital | → Processor |
+| `Audio.Volume_2_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume_3` | Analog | → Processor |
+| `Audio.Volume_3_FB` | Analog | ← Processor |
+| `Audio.Volume_3_Mute` | Digital | → Processor |
+| `Audio.Volume_3_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume_4` | Analog | → Processor |
+| `Audio.Volume_4_FB` | Analog | ← Processor |
+| `Audio.Volume_4_Mute` | Digital | → Processor |
+| `Audio.Volume_4_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume_5` | Analog | → Processor |
+| `Audio.Volume_5_FB` | Analog | ← Processor |
+| `Audio.Volume_5_Mute` | Digital | → Processor |
+| `Audio.Volume_5_Mute_FB` | Digital | ← Processor |
+| `Audio.Volume_6` | Analog | → Processor |
+| `Audio.Volume_6_FB` | Analog | ← Processor |
+| `Audio.Volume_6_Mute` | Digital | → Processor |
+| `Audio.Volume_6_Mute_FB` | Digital | ← Processor |
 
 ---
 
@@ -141,20 +141,20 @@ Source selection buttons on the Routing page (`routing.config.tsx`).
 
 | Signal | Type | Direction |
 |---|---|---|
-| `Routing.Source1` | Digital | → Processor |
-| `Routing.Source1_FB` | Digital | ← Processor |
-| `Routing.Source2` | Digital | → Processor |
-| `Routing.Source2_FB` | Digital | ← Processor |
-| `Routing.Source3` | Digital | → Processor |
-| `Routing.Source3_FB` | Digital | ← Processor |
-| `Routing.Source4` | Digital | → Processor |
-| `Routing.Source4_FB` | Digital | ← Processor |
-| `Routing.Source5` | Digital | → Processor |
-| `Routing.Source5_FB` | Digital | ← Processor |
-| `Routing.Source6` | Digital | → Processor |
-| `Routing.Source6_FB` | Digital | ← Processor |
-| `Routing.Source7` | Digital | → Processor |
-| `Routing.Source7_FB` | Digital | ← Processor |
+| `Routing.Source_1` | Digital | → Processor |
+| `Routing.Source_1_FB` | Digital | ← Processor |
+| `Routing.Source_2` | Digital | → Processor |
+| `Routing.Source_2_FB` | Digital | ← Processor |
+| `Routing.Source_3` | Digital | → Processor |
+| `Routing.Source_3_FB` | Digital | ← Processor |
+| `Routing.Source_4` | Digital | → Processor |
+| `Routing.Source_4_FB` | Digital | ← Processor |
+| `Routing.Source_5` | Digital | → Processor |
+| `Routing.Source_5_FB` | Digital | ← Processor |
+| `Routing.Source_6` | Digital | → Processor |
+| `Routing.Source_6_FB` | Digital | ← Processor |
+| `Routing.Source_7` | Digital | → Processor |
+| `Routing.Source_7_FB` | Digital | ← Processor |
 
 ---
 
@@ -164,18 +164,18 @@ Destination selection buttons on the Routing page (`routing.config.tsx`).
 
 | Signal | Type | Direction |
 |---|---|---|
-| `Routing.Dest1` | Digital | → Processor |
-| `Routing.Dest1_FB` | Digital | ← Processor |
-| `Routing.Dest2` | Digital | → Processor |
-| `Routing.Dest2_FB` | Digital | ← Processor |
-| `Routing.Dest3` | Digital | → Processor |
-| `Routing.Dest3_FB` | Digital | ← Processor |
-| `Routing.Dest4` | Digital | → Processor |
-| `Routing.Dest4_FB` | Digital | ← Processor |
-| `Routing.Dest5` | Digital | → Processor |
-| `Routing.Dest5_FB` | Digital | ← Processor |
-| `Routing.Dest6` | Digital | → Processor |
-| `Routing.Dest6_FB` | Digital | ← Processor |
+| `Routing.Dest_1` | Digital | → Processor |
+| `Routing.Dest_1_FB` | Digital | ← Processor |
+| `Routing.Dest_2` | Digital | → Processor |
+| `Routing.Dest_2_FB` | Digital | ← Processor |
+| `Routing.Dest_3` | Digital | → Processor |
+| `Routing.Dest_3_FB` | Digital | ← Processor |
+| `Routing.Dest_4` | Digital | → Processor |
+| `Routing.Dest_4_FB` | Digital | ← Processor |
+| `Routing.Dest_5` | Digital | → Processor |
+| `Routing.Dest_5_FB` | Digital | ← Processor |
+| `Routing.Dest_6` | Digital | → Processor |
+| `Routing.Dest_6_FB` | Digital | ← Processor |
 
 ---
 
@@ -200,12 +200,12 @@ Camera selection uses an analog signal — the camera number is sent as the valu
 | `Camera.Select_FB` | Analog | ← Processor |
 | `Camera.AutoFocus_Press` | Digital | → Processor |
 | `Camera.AutoFocus_FB` | Digital | ← Processor |
-| `Camera.TiltUp_Press` | Digital | → Processor |
-| `Camera.TiltDown_Press` | Digital | → Processor |
-| `Camera.PanLeft_Press` | Digital | → Processor |
-| `Camera.PanRight_Press` | Digital | → Processor |
-| `Camera.ZoomIn_Press` | Digital | → Processor |
-| `Camera.ZoomOut_Press` | Digital | → Processor |
+| `Camera.Pan_Up_Press` | Digital | → Processor |
+| `Camera.Pan_Down_Press` | Digital | → Processor |
+| `Camera.Pan_Left_Press` | Digital | → Processor |
+| `Camera.Pan_Right_Press` | Digital | → Processor |
+| `Camera.Zoom_In_Press` | Digital | → Processor |
+| `Camera.Zoom_Out_Press` | Digital | → Processor |
 | `Camera.Home_Press` | Digital | → Processor |
 | `Camera.Preset_{p}` | Digital | → Processor |
 
@@ -244,23 +244,40 @@ Tab selection for Theme vs Font on the Settings page (`SettingsPage.tsx`).
 
 ## Settings — Themes
 
-One signal per theme. Available theme names: `glassDark`, `neonPurple`, `minimal`, `oceanBlue`, `sunset`, `charcoal`, `crimsonDark`, `studioLight`.
+Themes are numbered 1–8. Selecting a theme sends its number as an analog value; the processor echoes the active theme number back on `_FB`.
+
+| # | Theme |
+|---|---|
+| 1 | `glassDark` |
+| 2 | `neonPurple` |
+| 3 | `minimal` |
+| 4 | `oceanBlue` |
+| 5 | `sunset` |
+| 6 | `charcoal` |
+| 7 | `crimsonDark` |
+| 8 | `studioLight` |
 
 | Signal | Type | Direction |
 |---|---|---|
-| `Theme.{themeName}` | Digital | → Processor |
-| `Theme.{themeName}_FB` | Digital | ← Processor |
+| `Theme.Select` | Analog | → Processor |
+| `Theme.Select_FB` | Analog | ← Processor |
 
 ---
 
 ## Settings — Fonts
 
-One signal per font. Available font names defined in `APP_FONTS` in `src/lib/theme`.
+Fonts are numbered 1–3. Selecting a font sends its number as an analog value; the processor echoes the active font number back on `_FB`.
+
+| # | Font |
+|---|---|
+| 1 | `quicksand` |
+| 2 | `roboto` |
+| 3 | `system` |
 
 | Signal | Type | Direction |
 |---|---|---|
-| `Font.{fontName}` | Digital | → Processor |
-| `Font.{fontName}_FB` | Digital | ← Processor |
+| `Font.Select` | Analog | → Processor |
+| `Font.Select_FB` | Analog | ← Processor |
 
 ---
 

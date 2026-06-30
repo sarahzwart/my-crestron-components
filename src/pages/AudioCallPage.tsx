@@ -4,6 +4,7 @@ import { CH5Keypad } from "@/components/lib/common/CH5Keypad";
 import { CH5DisplayScreen } from "@/components/lib/call/CH5DisplayScreen";
 import { CH5HistoryList, type HistoryItem } from "@/components/lib/call/CH5HistoryList";
 import { CH5CallControls } from "@/components/lib/call/CH5CallControls";
+import { SIGNALS_PHONE } from "@/config/signals";
 import { Phone } from "lucide-react";
 
 export interface AudioCallPageProps {
@@ -25,14 +26,14 @@ export interface AudioCallPageProps {
 export function AudioCallPage({
   title = "Phone",
   subtitle = "Enter a number to call",
-  commandSignal = "Phone.Keypad",
-  feedbackSignal = "Phone.Keypad_FB",
-  hangupCommandSignal = "Phone.Hangup",
-  hangupFeedbackSignal = "Phone.Hangup_FB",
-  privacyCommandSignal = "Phone.Privacy",
-  privacyFeedbackSignal = "Phone.Privacy_FB",
-  holdCommandSignal = "Phone.Hold",
-  holdFeedbackSignal = "Phone.Hold_FB",
+  commandSignal = SIGNALS_PHONE.keypad.cmd,
+  feedbackSignal = SIGNALS_PHONE.keypad.fb,
+  hangupCommandSignal = SIGNALS_PHONE.hangup.cmd,
+  hangupFeedbackSignal = SIGNALS_PHONE.hangup.fb,
+  privacyCommandSignal = SIGNALS_PHONE.privacy.cmd,
+  privacyFeedbackSignal = SIGNALS_PHONE.privacy.fb,
+  holdCommandSignal = SIGNALS_PHONE.hold.cmd,
+  holdFeedbackSignal = SIGNALS_PHONE.hold.fb,
   maxDigits = 15,
   showHistory = true,
   onCall,

@@ -1,5 +1,5 @@
 import { useCH5Boolean } from "../../../hooks/useCH5Boolean";
-import React from "react";
+import React, { useRef } from "react";
 import { useTheme } from "@/lib/theme";
 
 export type ButtonSize = "sm" | "md" | "lg" | "xl";
@@ -25,6 +25,23 @@ export interface ButtonProps {
   iconOn?: React.ReactNode;
   iconOff?: React.ReactNode;
   onClick?: () => void;
+  /**
+   * Fired when the button is pressed and held for at least `holdTimeMs`.
+   * Only applies when variant="momentary" — toggle buttons ignore this prop,
+   * since hold semantics don't make sense for an on/off state.
+   * When this fires, the normal onClick is suppressed for that press — only
+   * one of onClick or onPressAndHold will run per press.
+   */
+  onPressAndHold?: () => void;
+  /** How long the button must be held before onPressAndHold fires. Default 3000ms (3s). */
+  holdTimeMs?: number;
+  /**
+   * Digital (boolean) signal to pulse true→false when the button is held
+   * for `holdTimeMs`. Use this for "hold to save" style behavior. Fires
+   * alongside onPressAndHold, if both are provided. Only applies when
+   * variant="momentary".
+   */
+  saveSignal?: string;
   onClassName?: string;
   offClassName?: string;
   useThemeColors?: boolean;
@@ -73,6 +90,9 @@ export function CH5Button({
   disabled = false,
   className = "",
   onClick,
+  onPressAndHold,
+  holdTimeMs = 3000,
+  saveSignal,
   style = {},
   onClassName,
   offClassName,
@@ -86,8 +106,33 @@ export function CH5Button({
     false,
   );
 
+  // Separate digital signal used to pulse a "save" command when the button
+  // is held. Falls back to a no-op signal name if saveSignal isn't provided;
+  // setSaveSignal is simply never called in that case.
+  const [, setSaveSignal] = useCH5Boolean(
+    saveSignal || commandSignal + ".save",
+    saveSignal ? saveSignal + ".fb" : commandSignal + ".save.fb",
+    false,
+  );
+
+  const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const heldRef = useRef(false);
+
+  const clearHoldTimer = () => {
+    if (holdTimerRef.current) {
+      clearTimeout(holdTimerRef.current);
+      holdTimerRef.current = null;
+    }
+  };
+
   const handleClick = () => {
     if (disabled) return;
+    // If this press was already consumed by onPressAndHold, skip the
+    // normal click behavior entirely.
+    if (heldRef.current) {
+      heldRef.current = false;
+      return;
+    }
     if (variant === "toggle") {
       setIsOn(!isOn);
     } else {
@@ -95,6 +140,32 @@ export function CH5Button({
       setTimeout(() => setIsOn(false), 200);
     }
     onClick?.();
+  };
+
+  const handlePointerDown = () => {
+    if (disabled || variant !== "momentary") return;
+    if (!onPressAndHold && !saveSignal) return;
+    heldRef.current = false;
+    clearHoldTimer();
+    holdTimerRef.current = setTimeout(() => {
+      heldRef.current = true;
+      if (saveSignal) {
+        setSaveSignal(true);
+        setTimeout(() => setSaveSignal(false), 200);
+      }
+      onPressAndHold?.();
+    }, holdTimeMs);
+  };
+
+  const handlePointerUp = () => {
+    clearHoldTimer();
+  };
+
+  const handlePointerLeave = () => {
+    // Pointer dragged off the button before release: cancel the hold,
+    // and don't treat it as a consumed press either.
+    clearHoldTimer();
+    heldRef.current = false;
   };
 
   const buttonText = (onLabel || offLabel)
@@ -157,6 +228,9 @@ export function CH5Button({
   return (
     <button
       onClick={handleClick}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerLeave={handlePointerLeave}
       disabled={disabled}
       className={`
         ${getSizeClass()}

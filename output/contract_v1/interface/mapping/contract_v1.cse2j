@@ -1,0 +1,452 @@
+{
+	"name": "contract_v1",
+	"timestamp": "2026-06-18 09:39:02.096",
+	"version": "1.0.0.0",
+	"schema_version": 1,
+	"extra_value": "",
+	"signals": {
+		"states": {
+			"boolean": {
+				"1": {
+					"1": "Audio.Footer_Mute_FB",
+					"2": "Audio.Master_Mute_FB",
+					"3": "Audio.Volume_1_Mute_FB",
+					"4": "Audio.Volume_2_Mute_FB",
+					"5": "Audio.Volume_3_Mute_FB",
+					"6": "Audio.Volume_4_Mute_FB",
+					"7": "Audio.Volume_5_Mute_FB",
+					"8": "Audio.Volume_6_Mute_FB"
+				},
+				"3": {
+					"8": "Camera.Preset_1_FB",
+					"9": "Camera.Preset_2_FB",
+					"10": "Camera.Preset_3_FB",
+					"11": "Camera.Preset_4_FB",
+					"12": "Camera.Preset_5_FB",
+					"13": "Camera.AutoFocus_FB"
+				},
+				"5": {
+					"1": "Navpage.Home_FB",
+					"2": "Navpage.Audio_FB",
+					"3": "Navpage.Call_FB",
+					"4": "Navpage.Routing_FB",
+					"5": "Navpage.Lights_FB",
+					"6": "Navpage.Camera_FB",
+					"7": "Navpage.AppleTV_FB",
+					"8": "Navpage.Overview_FB",
+					"9": "Navpage.Settings_FB"
+				},
+				"6": {
+					"1": "Phone.Hangup_FB",
+					"2": "Phone.Privacy_FB",
+					"3": "Phone.Hold_FB",
+					"4": "Phone.Keypad_Toggle_FB",
+					"5": "Phone.Keypad_1_FB",
+					"6": "Phone.Keypad_2_FB",
+					"7": "Phone.Keypad_3_FB",
+					"8": "Phone.Keypad_4_FB",
+					"9": "Phone.Keypad_5_FB",
+					"10": "Phone.Keypad_6_FB",
+					"11": "Phone.Keypad_7_FB",
+					"12": "Phone.Keypad_8_FB",
+					"13": "Phone.Keypad_9_FB",
+					"14": "Phone.Keypad_0_FB",
+					"15": "Phone.Keypad_Star_FB",
+					"16": "Phone.Keypad_Pound_FB",
+					"17": "Phone.Keypad_Dial_FB",
+					"18": "Phone.Keypad_Backspace_FB"
+				},
+				"7": {
+					"1": "Routing.Source_1_FB",
+					"2": "Routing.Source_2_FB",
+					"3": "Routing.Source_3_FB",
+					"4": "Routing.Source_4_FB",
+					"5": "Routing.Source_5_FB",
+					"6": "Routing.Source_6_FB",
+					"7": "Routing.Source_7_FB",
+					"8": "Routing.Dest_1_FB",
+					"9": "Routing.Dest_2_FB",
+					"10": "Routing.Dest_3_FB",
+					"11": "Routing.Dest_4_FB",
+					"12": "Routing.Dest_5_FB",
+					"13": "Routing.Dest_6_FB",
+					"14": "Routing.Route_FB"
+				},
+				"8": {
+					"1": "System.Power_FB"
+				},
+				"9": {
+					"1": "Settings_Tab.Theme_FB",
+					"2": "Settings_Tab.Font_FB"
+				}
+			},
+			"numeric": {
+				"1": {
+					"1": "Audio.Footer_Volume_FB",
+					"2": "Audio.Master_Volume_FB",
+					"3": "Audio.Volume_1_FB",
+					"4": "Audio.Volume_2_FB",
+					"5": "Audio.Volume_3_FB",
+					"6": "Audio.Volume_4_FB",
+					"7": "Audio.Volume_5_FB",
+					"8": "Audio.Volume_6_FB"
+				},
+				"3": {
+					"1": "Camera.Selected_FB"
+				},
+				"4": {
+					"1": "Font.Select_FB"
+				},
+				"10": {
+					"1": "Theme.Select_FB"
+				}
+			}
+		},
+		"events": {
+			"boolean": {
+				"Audio.Footer_Mute": {
+					"joinId": 1,
+					"smartObjectId": 1
+				},
+				"Audio.Master_Mute": {
+					"joinId": 2,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_1_Mute": {
+					"joinId": 3,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_2_Mute": {
+					"joinId": 4,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_3_Mute": {
+					"joinId": 5,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_4_Mute": {
+					"joinId": 6,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_5_Mute": {
+					"joinId": 7,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_6_Mute": {
+					"joinId": 8,
+					"smartObjectId": 1
+				},
+				"AppleTV.Up": {
+					"joinId": 1,
+					"smartObjectId": 2
+				},
+				"AppleTV.Down": {
+					"joinId": 2,
+					"smartObjectId": 2
+				},
+				"AppleTV.Left": {
+					"joinId": 3,
+					"smartObjectId": 2
+				},
+				"AppleTV.Right": {
+					"joinId": 4,
+					"smartObjectId": 2
+				},
+				"AppleTV.Enter": {
+					"joinId": 5,
+					"smartObjectId": 2
+				},
+				"AppleTV.Menu": {
+					"joinId": 6,
+					"smartObjectId": 2
+				},
+				"AppleTV.Home": {
+					"joinId": 7,
+					"smartObjectId": 2
+				},
+				"AppleTV.Back": {
+					"joinId": 8,
+					"smartObjectId": 2
+				},
+				"AppleTV.PlayPause": {
+					"joinId": 9,
+					"smartObjectId": 2
+				},
+				"Camera.Zoom_In_Press": {
+					"joinId": 1,
+					"smartObjectId": 3
+				},
+				"Camera.Zoom_Out_Press": {
+					"joinId": 2,
+					"smartObjectId": 3
+				},
+				"Camera.Pan_Up_Press": {
+					"joinId": 3,
+					"smartObjectId": 3
+				},
+				"Camera.Pan_Down_Press": {
+					"joinId": 4,
+					"smartObjectId": 3
+				},
+				"Camera.Pan_Left_Press": {
+					"joinId": 5,
+					"smartObjectId": 3
+				},
+				"Camera.Pan_Right_Press": {
+					"joinId": 6,
+					"smartObjectId": 3
+				},
+				"Camera.Home_Press": {
+					"joinId": 7,
+					"smartObjectId": 3
+				},
+				"Camera.Preset_1": {
+					"joinId": 8,
+					"smartObjectId": 3
+				},
+				"Camera.Preset_2": {
+					"joinId": 9,
+					"smartObjectId": 3
+				},
+				"Camera.Preset_3": {
+					"joinId": 10,
+					"smartObjectId": 3
+				},
+				"Camera.AutoFocus": {
+					"joinId": 11,
+					"smartObjectId": 3
+				},
+				"Camera.Preset_4": {
+					"joinId": 12,
+					"smartObjectId": 3
+				},
+				"Camera.Preset_5": {
+					"joinId": 13,
+					"smartObjectId": 3
+				},
+				"Navpage.Home_Press": {
+					"joinId": 1,
+					"smartObjectId": 5
+				},
+				"Navpage.Audio": {
+					"joinId": 2,
+					"smartObjectId": 5
+				},
+				"Navpage.Call": {
+					"joinId": 3,
+					"smartObjectId": 5
+				},
+				"Navpage.Routing": {
+					"joinId": 4,
+					"smartObjectId": 5
+				},
+				"Navpage.Lights": {
+					"joinId": 5,
+					"smartObjectId": 5
+				},
+				"Navpage.Camera": {
+					"joinId": 6,
+					"smartObjectId": 5
+				},
+				"Navpage.AppleTV": {
+					"joinId": 7,
+					"smartObjectId": 5
+				},
+				"Navpage.Overview": {
+					"joinId": 8,
+					"smartObjectId": 5
+				},
+				"Navpage.Settings": {
+					"joinId": 9,
+					"smartObjectId": 5
+				},
+				"Phone.Hangup": {
+					"joinId": 1,
+					"smartObjectId": 6
+				},
+				"Phone.Privacy": {
+					"joinId": 2,
+					"smartObjectId": 6
+				},
+				"Phone.Hold": {
+					"joinId": 3,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_Toggle": {
+					"joinId": 4,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_1": {
+					"joinId": 5,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_2": {
+					"joinId": 6,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_3": {
+					"joinId": 7,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_4": {
+					"joinId": 8,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_5": {
+					"joinId": 9,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_6": {
+					"joinId": 10,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_7": {
+					"joinId": 11,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_8": {
+					"joinId": 12,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_9": {
+					"joinId": 13,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_0": {
+					"joinId": 14,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_Star": {
+					"joinId": 15,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_Pound": {
+					"joinId": 16,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_Dial": {
+					"joinId": 17,
+					"smartObjectId": 6
+				},
+				"Phone.Keypad_Backspace": {
+					"joinId": 18,
+					"smartObjectId": 6
+				},
+				"Routing.Source_1": {
+					"joinId": 1,
+					"smartObjectId": 7
+				},
+				"Routing.Source_2": {
+					"joinId": 2,
+					"smartObjectId": 7
+				},
+				"Routing.Source_3": {
+					"joinId": 3,
+					"smartObjectId": 7
+				},
+				"Routing.Source_4": {
+					"joinId": 4,
+					"smartObjectId": 7
+				},
+				"Routing.Source_5": {
+					"joinId": 5,
+					"smartObjectId": 7
+				},
+				"Routing.Source_6": {
+					"joinId": 6,
+					"smartObjectId": 7
+				},
+				"Routing.Source_7": {
+					"joinId": 7,
+					"smartObjectId": 7
+				},
+				"Routing.Dest_1": {
+					"joinId": 8,
+					"smartObjectId": 7
+				},
+				"Routing.Dest_2": {
+					"joinId": 9,
+					"smartObjectId": 7
+				},
+				"Routing.Dest_3": {
+					"joinId": 10,
+					"smartObjectId": 7
+				},
+				"Routing.Dest_4": {
+					"joinId": 11,
+					"smartObjectId": 7
+				},
+				"Routing.Dest_5": {
+					"joinId": 12,
+					"smartObjectId": 7
+				},
+				"Routing.Dest_6": {
+					"joinId": 13,
+					"smartObjectId": 7
+				},
+				"Routing.Route": {
+					"joinId": 14,
+					"smartObjectId": 7
+				},
+				"System.Power": {
+					"joinId": 1,
+					"smartObjectId": 8
+				},
+				"Settings_Tab.Theme": {
+					"joinId": 1,
+					"smartObjectId": 9
+				},
+				"Settings_Tab.Font": {
+					"joinId": 2,
+					"smartObjectId": 9
+				}
+			},
+			"numeric": {
+				"Audio.Footer_Volume": {
+					"joinId": 1,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_2": {
+					"joinId": 2,
+					"smartObjectId": 1
+				},
+				"Audio.Master_Volume": {
+					"joinId": 3,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_1": {
+					"joinId": 4,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_3": {
+					"joinId": 5,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_4": {
+					"joinId": 6,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_5": {
+					"joinId": 7,
+					"smartObjectId": 1
+				},
+				"Audio.Volume_6": {
+					"joinId": 8,
+					"smartObjectId": 1
+				},
+				"Camera.Selected": {
+					"joinId": 1,
+					"smartObjectId": 3
+				},
+				"Font.Select": {
+					"joinId": 1,
+					"smartObjectId": 4
+				},
+				"Theme.Select": {
+					"joinId": 1,
+					"smartObjectId": 10
+				}
+			}
+		}
+	}
+}

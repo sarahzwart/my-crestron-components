@@ -8,25 +8,39 @@ import {
 } from "../lib/theme";
 import { Check, Palette, Type } from "lucide-react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
+import { SIGNALS_SETTINGS } from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 
 type SettingsTab = "theme" | "font";
+
+const THEME_NAMES = Object.keys(APP_THEMES) as ThemeName[];
+const FONT_NAMES = Object.keys(APP_FONTS) as FontName[];
 
 export function SettingsPage() {
   const { theme, themeName, setTheme, fontName, setFont } = useTheme();
   const [activeTab, setActiveTab] = useState<SettingsTab>("theme");
 
   useEffect(() => {
-    ch5Service.subscribeBool("Settings_Tab.Theme_FB", (isActive: boolean) => {
+    ch5Service.subscribeBool(SIGNALS_SETTINGS.tabTheme.fb, (isActive: boolean) => {
       if (isActive) setActiveTab("theme");
     });
-    ch5Service.subscribeBool("Settings_Tab.Font_FB", (isActive: boolean) => {
+    ch5Service.subscribeBool(SIGNALS_SETTINGS.tabFont.fb, (isActive: boolean) => {
       if (isActive) setActiveTab("font");
+    });
+    ch5Service.subscribeNumeric(SIGNALS_SETTINGS.themeSelect.fb, (value: number) => {
+      const name = THEME_NAMES[value - 1];
+      if (name) setTheme(name);
+    });
+    ch5Service.subscribeNumeric(SIGNALS_SETTINGS.fontSelect.fb, (value: number) => {
+      const name = FONT_NAMES[value - 1];
+      if (name) setFont(name);
     });
 
     return () => {
-      ch5Service.unsubscribe("Settings_Tab.Theme_FB");
-      ch5Service.unsubscribe("Settings_Tab.Font_FB");
+      ch5Service.unsubscribe(SIGNALS_SETTINGS.tabTheme.fb);
+      ch5Service.unsubscribe(SIGNALS_SETTINGS.tabFont.fb);
+      ch5Service.unsubscribe(SIGNALS_SETTINGS.themeSelect.fb);
+      ch5Service.unsubscribe(SIGNALS_SETTINGS.fontSelect.fb);
     };
   }, []);
 
@@ -43,8 +57,8 @@ export function SettingsPage() {
         </div>
         <div className={`flex gap-1 p-1 rounded-2xl ${theme.cardBackground}`}>
           <CH5Button
-            commandSignal="Settings_Tab.Theme"
-            feedbackSignal="Settings_Tab.Theme_FB"
+            commandSignal={SIGNALS_SETTINGS.tabTheme.cmd}
+            feedbackSignal={SIGNALS_SETTINGS.tabTheme.fb}
             variant="momentary"
             shape="rounded"
             onClick={() => setActiveTab("theme")}
@@ -74,8 +88,8 @@ export function SettingsPage() {
             }
           />
           <CH5Button
-            commandSignal="Settings_Tab.Font"
-            feedbackSignal="Settings_Tab.Font_FB"
+            commandSignal={SIGNALS_SETTINGS.tabFont.cmd}
+            feedbackSignal={SIGNALS_SETTINGS.tabFont.fb}
             variant="momentary"
             shape="rounded"
             onClick={() => setActiveTab("font")}
@@ -116,12 +130,16 @@ export function SettingsPage() {
               theme={theme}
             />
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-2">
-              {(Object.keys(APP_THEMES) as ThemeName[]).map((key) => (
+              {THEME_NAMES.map((key, i) => (
                 <ThemeCard
                   key={key}
                   themeName={key}
+                  index={i + 1}
                   isSelected={themeName === key}
-                  onSelect={() => setTheme(key)}
+                  onSelect={() => {
+                    setTheme(key);
+                    ch5Service.publishNumeric(SIGNALS_SETTINGS.themeSelect.cmd, i + 1);
+                  }}
                 />
               ))}
             </div>
@@ -137,12 +155,16 @@ export function SettingsPage() {
               theme={theme}
             />
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-2">
-              {(Object.keys(APP_FONTS) as FontName[]).map((key) => (
+              {FONT_NAMES.map((key, i) => (
                 <FontCard
                   key={key}
                   fontName={key}
+                  index={i + 1}
                   isSelected={fontName === key}
-                  onSelect={() => setFont(key)}
+                  onSelect={() => {
+                    setFont(key);
+                    ch5Service.publishNumeric(SIGNALS_SETTINGS.fontSelect.cmd, i + 1);
+                  }}
                 />
               ))}
             </div>
@@ -238,6 +260,7 @@ function ThemeCard({
   onSelect,
 }: {
   themeName: ThemeName;
+  index: number;
   isSelected: boolean;
   onSelect: () => void;
 }) {
@@ -245,41 +268,35 @@ function ThemeCard({
   const preview = THEME_PREVIEWS[themeName];
 
   return (
-    <CH5Button
-      commandSignal={`Theme.${themeName}`}
-      feedbackSignal={`Theme.${themeName}_FB`}
-      variant="momentary"
-      shape="rounded"
+    <button
       onClick={onSelect}
-      offClassName={`${theme.cardBackground} ${theme.cardActiveBackground} ${isSelected ? "ring-2 ring-blue-400" : ""}`}
-      onClassName={`${theme.cardBackground} ring-2 ring-blue-400`}
-      className="rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200 active:scale-[0.97] relative overflow-hidden w-full text-left"
-      icon={
-        <div className="flex flex-col gap-3 w-full">
-          {isSelected && (
-            <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
-              <Check size={14} className="text-white" strokeWidth={3} />
-            </div>
-          )}
-          <div
-            className={`${preview.bg} rounded-xl h-20 p-3 flex flex-col justify-between`}
-          >
-            <div className="flex items-center gap-1.5">
-              <div className="w-8 h-1.5 rounded-full bg-white/30" />
-              <div className="w-12 h-1.5 rounded-full bg-white/20" />
-            </div>
-            <div className="flex gap-1.5">
-              <div className={`flex-1 h-6 rounded-lg ${preview.card}`} />
-              <div className={`flex-1 h-6 rounded-lg ${preview.card}`} />
-            </div>
-            <div className={`w-8 h-1.5 rounded-full ${preview.accent}`} />
-          </div>
-          <p className={`${theme.primaryText} font-semibold text-sm`}>
-            {THEME_LABELS[themeName]}
-          </p>
+      className={`
+        rounded-2xl p-4 flex flex-col gap-3 transition-all duration-200
+        active:scale-[0.97] relative overflow-hidden w-full text-left
+        ${theme.cardBackground} ${theme.cardActiveBackground}
+        ${isSelected ? "ring-2 ring-blue-400" : ""}
+      `}
+    >
+      {isSelected && (
+        <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-blue-500 flex items-center justify-center">
+          <Check size={14} className="text-white" strokeWidth={3} />
         </div>
-      }
-    />
+      )}
+      <div className={`${preview.bg} rounded-xl h-20 p-3 flex flex-col justify-between`}>
+        <div className="flex items-center gap-1.5">
+          <div className="w-8 h-1.5 rounded-full bg-white/30" />
+          <div className="w-12 h-1.5 rounded-full bg-white/20" />
+        </div>
+        <div className="flex gap-1.5">
+          <div className={`flex-1 h-6 rounded-lg ${preview.card}`} />
+          <div className={`flex-1 h-6 rounded-lg ${preview.card}`} />
+        </div>
+        <div className={`w-8 h-1.5 rounded-full ${preview.accent}`} />
+      </div>
+      <p className={`${theme.primaryText} font-semibold text-sm`}>
+        {THEME_LABELS[themeName]}
+      </p>
+    </button>
   );
 }
 
@@ -289,6 +306,7 @@ function FontCard({
   onSelect,
 }: {
   fontName: FontName;
+  index: number;
   isSelected: boolean;
   onSelect: () => void;
 }) {
@@ -296,28 +314,24 @@ function FontCard({
   const fontInfo = APP_FONTS[fontName];
 
   return (
-    <CH5Button
-      commandSignal={`Font.${fontName}`}
-      feedbackSignal={`Font.${fontName}_FB`}
-      variant="momentary"
-      shape="rounded"
+    <button
       onClick={onSelect}
-      offClassName={`${theme.cardBackground} ${theme.cardActiveBackground} ${isSelected ? "ring-2 ring-purple-400" : ""}`}
-      onClassName={`${theme.cardBackground} ring-2 ring-purple-400`}
-      className="rounded-2xl p-5 flex flex-col gap-3 transition-all duration-200 active:scale-[0.97] relative text-left w-full"
-      icon={
-        <div
-          className="flex flex-col gap-3 w-full"
-          style={{ fontFamily: fontInfo.variable }}
-        >
-          {isSelected && (
-            <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center">
-              <Check size={14} className="text-white" strokeWidth={3} />
-            </div>
-          )}
-          <p className={`${theme.primaryText} text-4xl font-light`}>Aa</p>
+      className={`
+        rounded-2xl p-5 flex flex-col gap-3 transition-all duration-200
+        active:scale-[0.97] relative text-left w-full
+        ${theme.cardBackground} ${theme.cardActiveBackground}
+        ${isSelected ? "ring-2 ring-purple-400" : ""}
+      `}
+    >
+      {isSelected && (
+        <div className="absolute top-3 right-3 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center">
+          <Check size={14} className="text-white" strokeWidth={3} />
         </div>
-      }
-    />
+      )}
+      <div className="flex flex-col gap-3 w-full" style={{ fontFamily: fontInfo.variable }}>
+        <p className={`${theme.primaryText} text-4xl font-light`}>Aa</p>
+        <p className={`${theme.secondaryText} text-sm`}>{fontInfo.label}</p>
+      </div>
+    </button>
   );
 }

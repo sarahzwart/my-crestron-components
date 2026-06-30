@@ -16,8 +16,17 @@ import { AppleTVPage } from "./pages/AppleTVPage";
 import { AUDIO_CONTROLS } from "./config/audio.config";
 import { SOURCES, DESTINATIONS } from "./config/routing.config";
 import { APPS } from "./config/apps.config";
+import {
+  NAVPAGE_FEEDBACK,
+  SIGNALS_NAVPAGE,
+  SIGNALS_NAV_PRESS,
+  SIGNALS_AUDIO,
+  SIGNALS_SYSTEM,
+} from "./config/signals";
 import { Home, Settings, Power } from "lucide-react";
 import ch5Service from "./services/ch5Service";
+import { OverviewPage } from "./pages/OverviewPage";
+import { MusicPlayerPage } from "./pages/MusicPlayerPage";
 
 type Page =
   | "home"
@@ -28,30 +37,18 @@ type Page =
   | "settings"
   | "lights"
   | "camera"
-  | "appleTV";
+  | "appleTV"
+  | "music";
 
-// One feedback signal per page — processor sets exactly one true at a time
-const PAGE_FEEDBACK_SIGNALS: Record<Page, string> = {
-  home: "Navpage.Home_FB",
-  audio: "Navpage.Audio_FB",
-  call: "Navpage.Call_FB",
-  routing: "Navpage.Routing_FB",
-  settings: "Navpage.Settings_FB",
-  lights: "Navpage.Lights_FB",
-  camera: "Navpage.Camera_FB",
-  appleTV: "Navpage.AppleTV_FB",
-  overview: "Navpage.Overview_FB",
-};
-
-function useActivePage(): Page {
-  const [activePage, setActivePage] = useState<Page>("call");
+function useActivePage(): [Page, (page: Page) => void] {
+  const [activePage, setActivePage] = useState<Page>("home");
 
   useEffect(() => {
-    const pages = Object.keys(PAGE_FEEDBACK_SIGNALS) as Page[];
+    const pages = Object.keys(NAVPAGE_FEEDBACK) as Page[];
 
     pages.forEach((page) => {
       ch5Service.subscribeBool(
-        PAGE_FEEDBACK_SIGNALS[page],
+        NAVPAGE_FEEDBACK[page],
         (isActive: boolean) => {
           if (isActive) setActivePage(page);
         },
@@ -60,36 +57,46 @@ function useActivePage(): Page {
 
     return () => {
       pages.forEach((page) => {
-        ch5Service.unsubscribe(PAGE_FEEDBACK_SIGNALS[page]);
+        ch5Service.unsubscribe(NAVPAGE_FEEDBACK[page]);
       });
     };
   }, []);
 
-  return activePage;
+  return [activePage, setActivePage];
 }
 
 function AppContent() {
   const { theme } = useTheme();
-  const currentPage = useActivePage();
+  const [currentPage, setCurrentPage] = useActivePage();
+
+  const navigate = (page: Page) => {
+    setCurrentPage(page);
+    ch5Service.publishBool(SIGNALS_NAVPAGE[page].cmd, true);
+  };
 
   const renderPage = () => {
     switch (currentPage) {
       case "home":
-        return <HomePage apps={APPS} onNavigate={() => {}} />;
+        return <HomePage apps={APPS} onNavigate={(id) => navigate(id as Page)} />;
       case "audio":
         return <AudioPage volumeControls={AUDIO_CONTROLS} />;
       case "call":
         return <AudioCallPage />;
       case "routing":
         return <RoutingPage sources={SOURCES} destinations={DESTINATIONS} />;
-      case "settings":
-        return <SettingsPage />;
       case "lights":
         return <LightsPage />;
       case "camera":
         return <CameraPage />;
       case "appleTV":
         return <AppleTVPage />;
+      case "overview":
+        return <OverviewPage/>;
+      case "settings":
+        return <SettingsPage />;
+      case "music":
+        return <MusicPlayerPage idle={false} trackName={""} artistName={""} albumName={""}/>
+      
     }
   };
 
@@ -98,14 +105,15 @@ function AppContent() {
       <CH5Header
         leftButtons={
           <CH5Button
-            commandSignal="Navpage.Home_Press"
-            feedbackSignal="Navpage.Home_FB"
+            commandSignal={SIGNALS_NAV_PRESS.home}
+            feedbackSignal={SIGNALS_NAVPAGE.home.fb}
             variant="momentary"
             shape="circle"
             width={48}
             height={48}
             icon={<Home />}
             iconSize={20}
+            onClick={() => navigate("home")}
           />
         }
         backgroundColor={theme.headerBackground}
@@ -125,8 +133,8 @@ function AppContent() {
         page={currentPage}
         muteButton={
           <CH5MuteButton
-            commandSignal="Audio.Footer_Mute_Press"
-            feedbackSignal="Audio.Footer_Mute_FB"
+            commandSignal={SIGNALS_AUDIO.footerMute.cmd}
+            feedbackSignal={SIGNALS_AUDIO.footerMute.fb}
             width={48}
             height={48}
             iconSize={20}
@@ -136,24 +144,26 @@ function AppContent() {
         rightButtons={
           <div className="flex items-center gap-3">
             <CH5Button
-              commandSignal="System.Power"
-              feedbackSignal="System.Power_FB"
+              commandSignal={SIGNALS_SYSTEM.power.cmd}
+              feedbackSignal={SIGNALS_SYSTEM.power.fb}
               variant="momentary"
               shape="circle"
               width={48}
               height={48}
               icon={<Power />}
               iconSize={20}
+              onClick={() => navigate("loading")}
             />
             <CH5Button
-              commandSignal="Navpage.Settings_Press"
-              feedbackSignal="Navpage.Settings_FB"
+              commandSignal={SIGNALS_NAV_PRESS.settings}
+              feedbackSignal={SIGNALS_NAVPAGE.settings.fb}
               variant="momentary"
               shape="circle"
               width={48}
               height={48}
               icon={<Settings />}
               iconSize={20}
+              onClick={() => navigate("settings")}
             />
           </div>
         }

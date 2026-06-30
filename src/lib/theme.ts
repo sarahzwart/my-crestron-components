@@ -10,12 +10,12 @@ export const APP_FONTS: Record<string, AppFont> = {
   quicksand: {
     name: "Quicksand",
     label: "Quicksand",
-    variable: "var(--font-quicksand)",
+    variable: "'Quicksand', sans-serif",
   },
   roboto: {
     name: "Roboto Flex",
     label: "Roboto Flex",
-    variable: "var(--font-roboto)",
+    variable: "'Roboto Flex', sans-serif",
   },
   system: {
     name: "system-ui",

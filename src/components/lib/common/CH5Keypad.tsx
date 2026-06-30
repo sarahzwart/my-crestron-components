@@ -5,6 +5,7 @@ import { CH5Button } from "./CH5Button";
 export interface KeypadKey {
   number: string;
   letters?: string;
+  friendlyName?: string;
 }
 
 export interface CH5KeypadProps {
@@ -30,14 +31,15 @@ const KEYS: KeypadKey[] = [
   { number: "7", letters: "P Q R S" },
   { number: "8", letters: "T U V" },
   { number: "9", letters: "W X Y Z" },
-  { number: "*", letters: "" },
+  { number: "*", letters: "", friendlyName: "Star" },
   { number: "0", letters: "+" },
-  { number: "#", letters: "" },
+  { number: "#", letters: "", friendlyName: "Pound" },
 ];
 
 interface KeypadKeyButtonProps {
   number: string;
   letters?: string;
+  friendlyName?: string;
   commandSignal: string;
   feedbackSignal: string;
   onPress: () => void;
@@ -94,8 +96,8 @@ export function CH5Keypad({
             key={key.number}
             number={key.number}
             letters={key.letters}
-            commandSignal={`${commandSignal}_${key.number}`}
-            feedbackSignal={`${feedbackSignal}_${key.number}`}
+            commandSignal={key.friendlyName ? `${commandSignal}_${key.friendlyName}` : `${commandSignal}_${key.number}`}
+            feedbackSignal={key.friendlyName ? `${feedbackSignal}_${key.friendlyName}_FB` : `${feedbackSignal}_${key.number}_FB`}
             onPress={() => onKeyPress?.(key.number)}
           />
         ))}
@@ -108,7 +110,7 @@ export function CH5Keypad({
           {showCallButton ? (
             <CH5Button
               commandSignal={`${commandSignal}_Dial`}
-              feedbackSignal={`${feedbackSignal}_Dial`}
+              feedbackSignal={`${feedbackSignal}_Dial_FB`}
               variant="momentary"
               shape="circle"
               icon={<Phone size={32} fill="currentColor" />}
@@ -126,7 +128,7 @@ export function CH5Keypad({
           {showBackspace ? (
             <CH5Button
               commandSignal={`${commandSignal}_Backspace`}
-              feedbackSignal={`${feedbackSignal}_Backspace`}
+              feedbackSignal={`${feedbackSignal}_Backspace_FB`}
               variant="momentary"
               shape="circle"
               icon={<Delete size={32} className={`${theme.iconColor} opacity-60`} />}
