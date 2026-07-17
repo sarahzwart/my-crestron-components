@@ -11,18 +11,11 @@ import { AudioCallPage } from "./pages/AudioCallPage";
 import { RoutingPage } from "./pages/RoutingPage";
 import { SettingsPage } from "./pages/SettingsPage";
 import { LightsPage } from "./pages/LightsPage";
-import { CameraPage } from "./pages/CameraPage";
 import { AppleTVPage } from "./pages/AppleTVPage";
 import { AUDIO_CONTROLS } from "./config/audio.config";
 import { SOURCES, DESTINATIONS } from "./config/routing.config";
 import { APPS } from "./config/apps.config";
-import {
-  NAVPAGE_FEEDBACK,
-  SIGNALS_NAVPAGE,
-  SIGNALS_NAV_PRESS,
-  SIGNALS_AUDIO,
-  SIGNALS_SYSTEM,
-} from "./config/signals";
+import {signals} from "./config/signals";
 import { Home, Settings, Power } from "lucide-react";
 import ch5Service from "./services/ch5Service";
 import { OverviewPage } from "./pages/OverviewPage";
@@ -39,36 +32,34 @@ import {
 } from "./components/ui/dialog";
 import { Button } from "./components/ui/button";
 
-type Page =
-  | "home"
-  | "overview"
-  | "audio"
-  | "call"
-  | "routing"
-  | "settings"
-  | "lights"
-  | "camera"
-  | "appleTV"
-  | "music"
-  | "loading";
+type Page = "page0"
+  | "page1"
+  | "page2"
+  | "page3"
+  | "page4"
+  | "page5"
+  | "page6"
+  | "page7"
+  | "page8"
+  | "page9";
 
 function useActivePage(): [Page, (page: Page) => void] {
-  const [activePage, setActivePage] = useState<Page>("home");
+  const [activePage, setActivePage] = useState<Page>("page0");
 
   useEffect(() => {
     const pages = Object.keys(
-      NAVPAGE_FEEDBACK,
-    ) as (keyof typeof NAVPAGE_FEEDBACK)[];
+      signals.navigation,
+    ) as (keyof typeof signals.navigation)[];
 
     pages.forEach((page) => {
-      ch5Service.subscribeBool(NAVPAGE_FEEDBACK[page], (isActive: boolean) => {
+      ch5Service.subscribeBool(signals.navigation[page].cmd, (isActive: boolean) => {
         if (isActive) setActivePage(page);
       });
     });
 
     return () => {
       pages.forEach((page) => {
-        ch5Service.unsubscribe(NAVPAGE_FEEDBACK[page]);
+        ch5Service.unsubscribe(signals.navigation[page].fb);
       });
     };
   }, []);
@@ -76,40 +67,38 @@ function useActivePage(): [Page, (page: Page) => void] {
   return [activePage, setActivePage];
 }
 
-function AppContent() {
+const AppContent = () => {
   const { theme } = useTheme();
   const [currentPage, setCurrentPage] = useActivePage();
   const [showPowerDialog, setShowPowerDialog] = useState(false);
 
   const navigate = (page: Page) => {
     setCurrentPage(page);
-    if (page !== "loading")
-      ch5Service.publishBool(SIGNALS_NAVPAGE[page].cmd, true);
+    if (page !== "page9")
+      ch5Service.publishBool(signals.navigation[page].cmd, true);
   };
 
   const renderPage = () => {
     switch (currentPage) {
-      case "home":
+      case "page0":
         return (
           <HomePage apps={APPS} onNavigate={(id) => navigate(id as Page)} />
         );
-      case "audio":
+      case "page1":
         return <AudioPage volumeControls={AUDIO_CONTROLS} />;
-      case "call":
+      case "page2":
         return <AudioCallPage />;
-      case "routing":
+      case "page3":
         return <RoutingPage sources={SOURCES} destinations={DESTINATIONS} />;
-      case "lights":
+      case "page4":
         return <LightsPage />;
-      case "camera":
-        return <CameraPage />;
-      case "appleTV":
+      case "page5":
         return <AppleTVPage />;
-      case "overview":
+      case "page6":
         return <OverviewPage />;
-      case "settings":
+      case "page7":
         return <SettingsPage />;
-      case "music":
+      case "page8":
         return (
           <MusicPlayerPage
             idle={false}
@@ -118,14 +107,13 @@ function AppContent() {
             albumName={""}
           />
         );
-      case "loading":
+      case "page9":
         return (
           <LoadingPage
             commandSignal={false}
             feedbackSignal={false}
             loadingType="tailChase"
             loadingComponentFillColor="white"
-            loadingComponentBGColor=""
             textUnderLoadingComponent="Starting Up"
           />
         );
@@ -137,15 +125,15 @@ function AppContent() {
       <CH5Header
         leftButtons={
           <CH5Button
-            commandSignal={SIGNALS_NAV_PRESS.home}
-            feedbackSignal={SIGNALS_NAVPAGE.home.fb}
+            commandSignal={signals.navigation.page0.cmd}
+            feedbackSignal={signals.navigation.page0.fb}
             variant="momentary"
             shape="circle"
             width={48}
             height={48}
             icon={<Home />}
             iconSize={20}
-            onClick={() => navigate("home")}
+            onClick={() => navigate("page0")}
           />
         }
         backgroundColor={theme.headerBackground}
@@ -182,7 +170,7 @@ function AppContent() {
               variant="destructive"
               size="lg"
               onClick={() => {
-                ch5Service.publishBool(SIGNALS_SYSTEM.power.cmd, true);
+                ch5Service.publishBool(signals.system.power.cmd, true);
                 setShowPowerDialog(false);
               }}
             >
@@ -202,8 +190,8 @@ function AppContent() {
         page={currentPage}
         muteButton={
           <CH5MuteButton
-            commandSignal={SIGNALS_AUDIO.footerMute.cmd}
-            feedbackSignal={SIGNALS_AUDIO.footerMute.fb}
+            commandSignal={signals.audio.volume0.mute.cmd}
+            feedbackSignal={signals.audio.volume0.mute.fb}
             width={48}
             height={48}
             iconSize={20}
@@ -213,8 +201,8 @@ function AppContent() {
         rightButtons={
           <div className="flex items-center gap-3">
             <CH5Button
-              commandSignal={SIGNALS_SYSTEM.power.cmd}
-              feedbackSignal={SIGNALS_SYSTEM.power.fb}
+              commandSignal={signals.system.power.cmd}
+              feedbackSignal={signals.system.power.fb}
               variant="momentary"
               shape="circle"
               width={48}
@@ -224,15 +212,15 @@ function AppContent() {
               onClick={() => setShowPowerDialog(true)}
             />
             <CH5Button
-              commandSignal={SIGNALS_NAV_PRESS.settings}
-              feedbackSignal={SIGNALS_NAVPAGE.settings.fb}
+              commandSignal={signals.navigation.page8.cmd}
+              feedbackSignal={signals.navigation.page8.fb}
               variant="momentary"
               shape="circle"
               width={48}
               height={48}
               icon={<Settings />}
               iconSize={20}
-              onClick={() => navigate("settings")}
+              onClick={() => navigate("page7")}
             />
           </div>
         }
@@ -242,7 +230,7 @@ function AppContent() {
   );
 }
 
-function App() {
+const App = () => {
   return (
     <CH5Provider>
       <ThemeProvider defaultTheme="glassDark" defaultFont="quicksand">

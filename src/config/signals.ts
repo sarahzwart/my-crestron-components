@@ -72,6 +72,8 @@ export const signals = {
 
   camera: {
 
+    selected: { cmd: "Camera_Selected.Press", fb: "Camera.FB" },
+
     camera0: {
       zoomIn: { cmd: "Camera[0].Zoom_In_Press", fb: undefined }, 
       zoomOut: { cmd: "Camera[0].Zoom_Out_Press", fb: undefined }, 
@@ -139,7 +141,7 @@ export const signals = {
     shuffleAvailable: { cmd: undefined, fb: "Music.Shuffle_Available_FB" }, 
     repeatAllAvailable: { cmd: undefined, fb: "Music.Repeat_All_Available_FB" }, 
     repeatOneAvailable: { cmd: undefined, fb: "Music.Repeat_One_Available_FB" }, 
-    
+
     // analog — command + feedback 
     shuffle: { cmd: "Music.Shuffle", fb: "Music.Shuffle_FB" }, 
     repeat: { cmd: "Music.Repeat", fb: "Music.Repeat_FB" }, 

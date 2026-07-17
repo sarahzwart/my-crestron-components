@@ -24,10 +24,7 @@ import {
 } from "lucide-react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
 import {
-  SIGNALS_CAMERA,
-  SIGNALS_ROUTING,
-  SIGNALS_MUSIC,
-  getCameraPreset,
+  signals
 } from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";

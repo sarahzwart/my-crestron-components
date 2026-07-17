@@ -1,6 +1,6 @@
 import { CH5Button } from "@/components/lib/common/CH5Button";
 import { useTheme } from "../lib/theme";
-import { SIGNALS_CAMERA, getCameraPreset } from "@/config/signals";
+import { signals } from "@/config/signals";
 import {
   ChevronLeft,
   ChevronRight,
@@ -28,18 +28,18 @@ export function CameraPage({
   const [autoFocus, setAutoFocus] = useState(true);
 
   useEffect(() => {
-    ch5Service.subscribeNumeric(SIGNALS_CAMERA.selected.fb, (value: number) => {
+    ch5Service.subscribeNumeric(signals.camera.selected.fb, (value: number) => {
       if (value >= 1) setActiveCamera(value);
     });
 
     return () => {
-      ch5Service.unsubscribe(SIGNALS_CAMERA.selected.fb);
+      ch5Service.unsubscribe(signals.camera.selected.fb);
     };
   }, []);
 
   const selectCamera = (cam: number) => {
     setActiveCamera(cam);
-    ch5Service.publishNumeric(SIGNALS_CAMERA.selected.cmd, cam);
+    ch5Service.publishNumeric(signals.camera.selected.cmd, cam);
   };
 
   const cell = `w-full h-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`;

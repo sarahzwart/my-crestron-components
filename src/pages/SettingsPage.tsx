@@ -8,7 +8,7 @@ import {
 } from "../lib/theme";
 import { Check, Palette, Type } from "lucide-react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
-import { SIGNALS_SETTINGS } from "@/config/signals";
+import { signals } from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 
 type SettingsTab = "theme" | "font";

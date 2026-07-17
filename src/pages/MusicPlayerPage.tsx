@@ -13,7 +13,7 @@ import {
   Heart,
   Star,
 } from "lucide-react";
-import { SIGNALS_MUSIC } from "@/config/signals";
+import { signals } from "@/config/signals";
 import { CH5MultiModeButton } from "@/components/lib/common/CH5MultiModeButton";
 
 export interface MusicPlayerPageProps {
