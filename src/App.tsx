@@ -56,15 +56,14 @@ function useActivePage(): [Page, (page: Page) => void] {
   const [activePage, setActivePage] = useState<Page>("home");
 
   useEffect(() => {
-    const pages = Object.keys(NAVPAGE_FEEDBACK) as (keyof typeof NAVPAGE_FEEDBACK)[];
+    const pages = Object.keys(
+      NAVPAGE_FEEDBACK,
+    ) as (keyof typeof NAVPAGE_FEEDBACK)[];
 
     pages.forEach((page) => {
-      ch5Service.subscribeBool(
-        NAVPAGE_FEEDBACK[page],
-        (isActive: boolean) => {
-          if (isActive) setActivePage(page);
-        },
-      );
+      ch5Service.subscribeBool(NAVPAGE_FEEDBACK[page], (isActive: boolean) => {
+        if (isActive) setActivePage(page);
+      });
     });
 
     return () => {
@@ -84,13 +83,16 @@ function AppContent() {
 
   const navigate = (page: Page) => {
     setCurrentPage(page);
-    if (page !== "loading") ch5Service.publishBool(SIGNALS_NAVPAGE[page].cmd, true);
+    if (page !== "loading")
+      ch5Service.publishBool(SIGNALS_NAVPAGE[page].cmd, true);
   };
 
   const renderPage = () => {
     switch (currentPage) {
       case "home":
-        return <HomePage apps={APPS} onNavigate={(id) => navigate(id as Page)} />;
+        return (
+          <HomePage apps={APPS} onNavigate={(id) => navigate(id as Page)} />
+        );
       case "audio":
         return <AudioPage volumeControls={AUDIO_CONTROLS} />;
       case "call":
@@ -104,13 +106,29 @@ function AppContent() {
       case "appleTV":
         return <AppleTVPage />;
       case "overview":
-        return <OverviewPage/>;
+        return <OverviewPage />;
       case "settings":
         return <SettingsPage />;
       case "music":
-        return <MusicPlayerPage idle={false} trackName={""} artistName={""} albumName={""}/>;
+        return (
+          <MusicPlayerPage
+            idle={false}
+            trackName={""}
+            artistName={""}
+            albumName={""}
+          />
+        );
       case "loading":
-        return <LoadingPage commandSignal={false} feedbackSignal={false} loadingType="tailChase" loadingComponentFillColor="white" loadingComponentBGColor="" textUnderLoadingComponent="Starting Up" />;
+        return (
+          <LoadingPage
+            commandSignal={false}
+            feedbackSignal={false}
+            loadingType="tailChase"
+            loadingComponentFillColor="white"
+            loadingComponentBGColor=""
+            textUnderLoadingComponent="Starting Up"
+          />
+        );
     }
   };
 
@@ -138,21 +156,31 @@ function AppContent() {
       <main className="flex-1 overflow-hidden">{renderPage()}</main>
 
       <Dialog open={showPowerDialog} onOpenChange={setShowPowerDialog}>
-        <DialogContent showCloseButton={false} className={`${theme.cardBackground} ${theme.primaryText}`}>
+        <DialogContent
+          showCloseButton={false}
+          className={`${theme.cardBackground} ${theme.primaryText} sm:max-w-md p-6`}
+        >
           <DialogHeader>
-            <DialogTitle className={theme.primaryText}>Shut Down</DialogTitle>
-            <DialogDescription className={theme.secondaryText}>
+            <DialogTitle className={`${theme.primaryText} text-lg`}>
+              Shut Down
+            </DialogTitle>
+            <DialogDescription className={`${theme.secondaryText} text-base`}>
               Are you sure you want to shut down the system?
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="outline" className={`${theme.buttonBackground} ${theme.primaryText}`}>
+              <Button
+                variant="outline"
+                size="lg"
+                className={`${theme.buttonBackground} ${theme.primaryText}`}
+              >
                 Cancel
               </Button>
             </DialogClose>
             <Button
               variant="destructive"
+              size="lg"
               onClick={() => {
                 ch5Service.publishBool(SIGNALS_SYSTEM.power.cmd, true);
                 setShowPowerDialog(false);
