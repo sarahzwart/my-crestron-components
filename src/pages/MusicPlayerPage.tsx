@@ -173,8 +173,8 @@ export function MusicPlayerPage({
           </div>
           <div className="w-full flex items-center justify-between px-2 mb-2">
             <CH5MultiModeButton
-              commandSignal={SIGNALS_MUSIC.shuffle.cmd}
-              feedbackSignal={SIGNALS_MUSIC.shuffle.fb}
+              commandSignal={signals.music.shuffle.cmd}
+              feedbackSignal={signals.music.shuffle.fb}
               modes={[
                 {
                   icon: <Shuffle size={24} className="opacity-50" />,
@@ -195,7 +195,7 @@ export function MusicPlayerPage({
               variant="momentary"
               icon={<SkipBackIcon />}
               iconSize={22}
-              commandSignal={SIGNALS_MUSIC.previous.cmd}
+              commandSignal={signals.music.previous.cmd}
               className={`w-14 h-14 ${theme.buttonBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
             />
             <CH5Button
@@ -204,8 +204,8 @@ export function MusicPlayerPage({
               iconOn={<Play />}
               iconOff={<Pause />}
               iconSize={26}
-              commandSignal={SIGNALS_MUSIC.playPause.cmd}
-              feedbackSignal={SIGNALS_MUSIC.playPause.fb}
+              commandSignal={signals.music.playPause.cmd}
+              feedbackSignal={signals.music.playPause.fb}
               width={64}
               height={64}
               onClassName={`rounded-full ${theme.buttonActiveBackground} ${theme.buttonActiveText}`}
@@ -217,12 +217,12 @@ export function MusicPlayerPage({
               variant="momentary"
               icon={<SkipForwardIcon />}
               iconSize={22}
-              commandSignal={SIGNALS_MUSIC.next.cmd}
+              commandSignal={signals.music.next.cmd}
               className={`w-14 h-14 ${theme.buttonBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
             />
             <CH5MultiModeButton
-              commandSignal={SIGNALS_MUSIC.repeat.cmd}
-              feedbackSignal={SIGNALS_MUSIC.repeat.fb}
+              commandSignal={signals.music.repeat.cmd}
+              feedbackSignal={signals.music.repeat.fb}
               modes={[
                 {
                   icon: <Repeat size={24} className="opacity-50" />,

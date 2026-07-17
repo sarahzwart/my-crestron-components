@@ -71,54 +71,18 @@ export const signals = {
   },
 
   camera: {
-
-    selected: { cmd: "Camera_Selected.Press", fb: "Camera.FB" },
-
-    camera0: {
-      zoomIn: { cmd: "Camera[0].Zoom_In_Press", fb: undefined }, 
-      zoomOut: { cmd: "Camera[0].Zoom_Out_Press", fb: undefined }, 
-      panLeft: { cmd: "Camera[0].Pan_Left_Press", fb: undefined }, 
-      panRight: { cmd: "Camera[0].Pan_Right_Press", fb: undefined }, 
-      tiltUp: { cmd: "Camera[0].Tilt_Up_Press", fb: undefined }, 
-      tiltDown: { cmd: "Camera[0].Tilt_Down_Press", fb: undefined }, 
-      home: { cmd: "Camera[0].Home_Press", fb: undefined }, 
-      autoFocus: { cmd: "Camera[0].AutoFocus_Press", fb: "Camera[0].AutoFocus_FB" }, 
-      selected: { cmd: "Camera[0].Selected", fb: "Camera[0].Selected_FB" }, 
-      preset1: { cmd: "Camera[0].Preset_1", fb: "Camera[0].Preset_1_FB" }, 
-      preset2: { cmd: "Camera[0].Preset_2", fb: "Camera[0].Preset_2_FB" }, 
-      preset3: { cmd: "Camera[0].Preset_3", fb: "Camera[0].Preset_3_FB" },
-    },
-
-    camera1: {
-      zoomIn: { cmd: "Camera[1].Zoom_In_Press", fb: undefined }, 
-      zoomOut: { cmd: "Camera[1].Zoom_Out_Press", fb: undefined }, 
-      panLeft: { cmd: "Camera[1].Pan_Left_Press", fb: undefined }, 
-      panRight: { cmd: "Camera[1].Pan_Right_Press", fb: undefined }, 
-      tiltUp: { cmd: "Camera[1].Tilt_Up_Press", fb: undefined }, 
-      tiltDown: { cmd: "Camera[1].Tilt_Down_Press", fb: undefined }, 
-      home: { cmd: "Camera[1].Home_Press", fb: undefined }, 
-      autoFocus: { cmd: "Camera[1].AutoFocus_Press", fb: "Camera[1].AutoFocus_FB" }, 
-      selected: { cmd: "Camera[1].Selected", fb: "Camera[1].Selected_FB" }, 
-      preset1: { cmd: "Camera[1].Preset_1", fb: "Camera[1].Preset_1_FB" }, 
-      preset2: { cmd: "Camera[1].Preset_2", fb: "Camera[1].Preset_2_FB" }, 
-      preset3: { cmd: "Camera[1].Preset_3", fb: "Camera[1].Preset_3_FB" },
-
-    },
-
-    camera2: {
-      zoomIn: { cmd: "Camera[2].Zoom_In_Press", fb: undefined }, 
-      zoomOut: { cmd: "Camera[2].Zoom_Out_Press", fb: undefined }, 
-      panLeft: { cmd: "Camera[2].Pan_Left_Press", fb: undefined }, 
-      panRight: { cmd: "Camera[2].Pan_Right_Press", fb: undefined }, 
-      tiltUp: { cmd: "Camera[2].Tilt_Up_Press", fb: undefined }, 
-      tiltDown: { cmd: "Camera[2].Tilt_Down_Press", fb: undefined }, 
-      home: { cmd: "Camera[2].Home_Press", fb: undefined }, 
-      autoFocus: { cmd: "Camera[2].AutoFocus_Press", fb: "Camera[2].AutoFocus_FB" }, 
-      selected: { cmd: "Camera[2].Selected", fb: "Camera[2].Selected_FB" }, 
-      preset1: { cmd: "Camera[2].Preset_1", fb: "Camera[2].Preset_1_FB" }, 
-      preset2: { cmd: "Camera[2].Preset_2", fb: "Camera[2].Preset_2_FB" }, 
-      preset3: { cmd: "Camera[2].Preset_3", fb: "Camera[2].Preset_3_FB" },
-    }
+    zoomIn: { cmd: "Camera.Zoom_In_Press", fb: undefined }, 
+    zoomOut: { cmd: "Camera.Zoom_Out_Press", fb: undefined }, 
+    panLeft: { cmd: "Camera.Pan_Left_Press", fb: undefined }, 
+    panRight: { cmd: "Camera.Pan_Right_Press", fb: undefined }, 
+    tiltUp: { cmd: "Camera.Tilt_Up_Press", fb: undefined }, 
+    tiltDown: { cmd: "Camera.Tilt_Down_Press", fb: undefined }, 
+    home: { cmd: "Camera.Home_Press", fb: undefined }, 
+    autoFocus: { cmd: "Camera.AutoFocus_Press", fb: "Camera.AutoFocus_FB" }, 
+    selected: { cmd: "Camera.Selected", fb: "Camera.Selected_FB" }, 
+    'preset1': { cmd: "Camera.Preset_1", fb: "Camera.Preset_1_FB" }, 
+    'preset2': { cmd: "Camera.Preset_2", fb: "Camera.Preset_2_FB" }, 
+    'preset3': { cmd: "Camera.Preset_3", fb: "Camera.Preset_3_FB" },
   },
 
   audioCall: {

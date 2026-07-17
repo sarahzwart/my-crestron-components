@@ -68,7 +68,7 @@ export function OverviewPage() {
 
   const selectCamera = (cam: number) => {
     setActiveCamera(cam);
-    ch5Service.publishNumeric(SIGNALS_CAMERA.selected.cmd, cam);
+    ch5Service.publishNumeric(signals.camera.selected.cmd, cam);
   };
 
   const handleSourceSelect = (id: string) => {
@@ -84,10 +84,10 @@ export function OverviewPage() {
   const canRoute = selectedSource !== null && selectedDestinations.length > 0;
 
   useEffect(() => {
-    ch5Service.subscribeNumeric(SIGNALS_CAMERA.selected.fb, (value: number) => {
+    ch5Service.subscribeNumeric(signals.camera.selected.fb, (value: number) => {
       if (value >= 1) setActiveCamera(value);
     });
-    return () => ch5Service.unsubscribe(SIGNALS_CAMERA.selected.fb);
+    return () => ch5Service.unsubscribe(signals.camera.selected.fb);
   }, []);
 
   return (
@@ -178,42 +178,42 @@ export function OverviewPage() {
                         variant="momentary"
                         icon={<ZoomIn />}
                         iconSize={28}
-                        commandSignal={SIGNALS_CAMERA.zoomIn.cmd}
+                        commandSignal={signals.camera.zoomIn.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ChevronUp />}
                         iconSize={28}
-                        commandSignal={SIGNALS_CAMERA.tiltUp.cmd}
+                        commandSignal={signals.camera.tiltUp.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ZoomOut />}
                         iconSize={28}
-                        commandSignal={SIGNALS_CAMERA.zoomOut.cmd}
+                        commandSignal={signals.camera.zoomOut.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ChevronLeft />}
                         iconSize={28}
-                        commandSignal={SIGNALS_CAMERA.panLeft.cmd}
+                        commandSignal={signals.camera.panLeft.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<House />}
                         iconSize={28}
-                        commandSignal={SIGNALS_CAMERA.home.cmd}
+                        commandSignal={signals.camera.home.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ChevronRight />}
                         iconSize={28}
-                        commandSignal={SIGNALS_CAMERA.panRight.cmd}
+                        commandSignal={signals.camera.panRight.cmd}
                         className={cell}
                       />
                       <span />
@@ -221,7 +221,7 @@ export function OverviewPage() {
                         variant="momentary"
                         icon={<ChevronDown />}
                         iconSize={28}
-                        commandSignal={SIGNALS_CAMERA.tiltDown.cmd}
+                        commandSignal={signals.camera.tiltDown.cmd}
                         className={cell}
                       />
                       <span />
@@ -242,8 +242,8 @@ export function OverviewPage() {
                       key={p}
                       variant="momentary"
                       label={`${p}`}
-                      commandSignal={getCameraPreset(p).cmd}
-                      feedbackSignal={getCameraPreset(p).fb}
+                      commandSignal={signals.camera[`preset${p}` as CameraPresetKey].cmd}
+                      feedbackSignal={signals.camera[`preset${p}` as CameraPresetKey].fb}
                       textSize={20}
                       className={`w-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
                     />
@@ -386,8 +386,8 @@ export function OverviewPage() {
             <CardContent className="flex-1 flex items-center justify-center">
               <div className="flex items-center justify-between w-full px-2">
                 <CH5MultiModeButton
-                  commandSignal={SIGNALS_MUSIC.shuffle.cmd}
-                  feedbackSignal={SIGNALS_MUSIC.shuffle.fb}
+                  commandSignal={signals.music.shuffle.cmd}
+                  feedbackSignal={signals.music.shuffle.fb}
                   modes={[
                     {
                       icon: <Shuffle size={24} className="opacity-50" />,
@@ -407,7 +407,7 @@ export function OverviewPage() {
                   variant="momentary"
                   icon={<SkipBackIcon />}
                   iconSize={20}
-                  commandSignal={SIGNALS_MUSIC.previous.cmd}
+                  commandSignal={signals.music.previous.cmd}
                   className={`w-12 h-12 ${theme.buttonBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
                 />
                 <CH5Button
@@ -416,8 +416,8 @@ export function OverviewPage() {
                   iconOn={<Play />}
                   iconOff={<Pause />}
                   iconSize={22}
-                  commandSignal={SIGNALS_MUSIC.playPause.cmd}
-                  feedbackSignal={SIGNALS_MUSIC.playPause.fb}
+                  commandSignal={signals.music.playPause.cmd}
+                  feedbackSignal={signals.music.playPause.fb}
                   width={56}
                   height={56}
                   onClassName={`rounded-full ${theme.buttonActiveBackground} ${theme.buttonActiveText}`}
@@ -428,12 +428,12 @@ export function OverviewPage() {
                   variant="momentary"
                   icon={<SkipForwardIcon />}
                   iconSize={20}
-                  commandSignal={SIGNALS_MUSIC.next.cmd}
+                  commandSignal={signals.music.next.cmd}
                   className={`w-12 h-12 ${theme.buttonBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
                 />
                 <CH5MultiModeButton
-                  commandSignal={SIGNALS_MUSIC.repeat.cmd}
-                  feedbackSignal={SIGNALS_MUSIC.repeat.fb}
+                  commandSignal={signals.music.repeat.cmd}
+                  feedbackSignal={signals.music.repeat.fb}
                   modes={[
                     {
                       icon: <Repeat size={24} className="opacity-50" />,

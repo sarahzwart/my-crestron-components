@@ -19,6 +19,8 @@ export interface CameraPageProps {
   presetCount?: number;
 }
 
+type CameraPresetKey = `preset${1 | 2 | 3}`;
+
 export function CameraPage({
   cameraCount = 3,
   presetCount = 3,
@@ -77,8 +79,8 @@ export function CameraPage({
 
         <CH5Button
           variant="toggle"
-          commandSignal={SIGNALS_CAMERA.autoFocus.cmd}
-          feedbackSignal={SIGNALS_CAMERA.autoFocus.fb}
+          commandSignal={signals.camera.autoFocus.cmd}
+          feedbackSignal={signals.camera.autoFocus.fb}
           icon={<Focus size={24} />}
           onLabel="AF On"
           offLabel="AF Off"
@@ -110,21 +112,21 @@ export function CameraPage({
             variant="momentary"
             icon={<ZoomIn />}
             iconSize={32}
-            commandSignal={SIGNALS_CAMERA.zoomIn.cmd}
+            commandSignal={signals.camera.zoomIn.cmd}
             className={cell}
           />
           <CH5Button
             variant="momentary"
             icon={<ChevronUp />}
             iconSize={32}
-            commandSignal={SIGNALS_CAMERA.tiltUp.cmd}
+            commandSignal={signals.camera.tiltUp.cmd}
             className={cell}
           />
           <CH5Button
             variant="momentary"
             icon={<ZoomOut />}
             iconSize={32}
-            commandSignal={SIGNALS_CAMERA.zoomOut.cmd}
+            commandSignal={signals.camera.zoomOut.cmd}
             className={cell}
           />
 
@@ -132,21 +134,21 @@ export function CameraPage({
             variant="momentary"
             icon={<ChevronLeft />}
             iconSize={32}
-            commandSignal={SIGNALS_CAMERA.panLeft.cmd}
+            commandSignal={signals.camera.panLeft.cmd}
             className={cell}
           />
           <CH5Button
             variant="momentary"
             icon={<House />}
             iconSize={32}
-            commandSignal={SIGNALS_CAMERA.home.cmd}
+            commandSignal={signals.camera.home.cmd}
             className={cell}
           />
           <CH5Button
             variant="momentary"
             icon={<ChevronRight />}
             iconSize={32}
-            commandSignal={SIGNALS_CAMERA.panRight.cmd}
+            commandSignal={signals.camera.panRight.cmd}
             className={cell}
           />
 
@@ -155,7 +157,7 @@ export function CameraPage({
             variant="momentary"
             icon={<ChevronDown />}
             iconSize={32}
-            commandSignal={SIGNALS_CAMERA.tiltDown.cmd}
+            commandSignal={signals.camera.tiltDown.cmd}
             className={cell}
           />
           <span />
@@ -167,8 +169,8 @@ export function CameraPage({
               key={p}
               variant="momentary"
               label={`${p}`}
-              commandSignal={getCameraPreset(p).cmd}
-              feedbackSignal={getCameraPreset(p).fb}
+              commandSignal={signals.camera[`preset${p}` as CameraPresetKey].cmd}
+              feedbackSignal={signals.camera[`preset${p}` as CameraPresetKey].fb}
               textSize={22}
               className={cell}
             />

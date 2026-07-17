@@ -21,26 +21,26 @@ export function SettingsPage() {
   const [activeTab, setActiveTab] = useState<SettingsTab>("theme");
 
   useEffect(() => {
-    ch5Service.subscribeBool(SIGNALS_SETTINGS.tabTheme.fb, (isActive: boolean) => {
+    ch5Service.subscribeBool(signals.settings.tabTheme.fb, (isActive: boolean) => {
       if (isActive) setActiveTab("theme");
     });
-    ch5Service.subscribeBool(SIGNALS_SETTINGS.tabFont.fb, (isActive: boolean) => {
+    ch5Service.subscribeBool(signals.settings.tabFont.fb, (isActive: boolean) => {
       if (isActive) setActiveTab("font");
     });
-    ch5Service.subscribeNumeric(SIGNALS_SETTINGS.themeSelect.fb, (value: number) => {
+    ch5Service.subscribeNumeric(signals.settings.themeSelect.fb, (value: number) => {
       const name = THEME_NAMES[value - 1];
       if (name) setTheme(name);
     });
-    ch5Service.subscribeNumeric(SIGNALS_SETTINGS.fontSelect.fb, (value: number) => {
+    ch5Service.subscribeNumeric(signals.settings.fontSelect.fb, (value: number) => {
       const name = FONT_NAMES[value - 1];
       if (name) setFont(name);
     });
 
     return () => {
-      ch5Service.unsubscribe(SIGNALS_SETTINGS.tabTheme.fb);
-      ch5Service.unsubscribe(SIGNALS_SETTINGS.tabFont.fb);
-      ch5Service.unsubscribe(SIGNALS_SETTINGS.themeSelect.fb);
-      ch5Service.unsubscribe(SIGNALS_SETTINGS.fontSelect.fb);
+      ch5Service.unsubscribe(signals.settings.tabTheme.fb);
+      ch5Service.unsubscribe(signals.settings.tabFont.fb);
+      ch5Service.unsubscribe(signals.settings.theme.fb);
+      ch5Service.unsubscribe(signals.settings.font.fb);
     };
   }, []);
 
@@ -57,8 +57,8 @@ export function SettingsPage() {
         </div>
         <div className={`flex gap-1 p-1 rounded-2xl ${theme.cardBackground}`}>
           <CH5Button
-            commandSignal={SIGNALS_SETTINGS.tabTheme.cmd}
-            feedbackSignal={SIGNALS_SETTINGS.tabTheme.fb}
+            commandSignal={signals.settings.tabTheme.cmd}
+            feedbackSignal={signals.settings.tabTheme.fb}
             variant="momentary"
             shape="rounded"
             onClick={() => setActiveTab("theme")}
