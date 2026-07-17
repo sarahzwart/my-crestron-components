@@ -110,21 +110,21 @@ export function CameraPage({
             variant="momentary"
             icon={<ZoomIn />}
             iconSize={32}
-            commandSignal="Camera.Zoom_In_Press"
+            commandSignal={SIGNALS_CAMERA.zoomIn.cmd}
             className={cell}
           />
           <CH5Button
             variant="momentary"
             icon={<ChevronUp />}
             iconSize={32}
-            commandSignal="Camera.Pan_Up_Press"
+            commandSignal={SIGNALS_CAMERA.tiltUp.cmd}
             className={cell}
           />
           <CH5Button
             variant="momentary"
             icon={<ZoomOut />}
             iconSize={32}
-            commandSignal="Camera.Zoom_Out_Press"
+            commandSignal={SIGNALS_CAMERA.zoomOut.cmd}
             className={cell}
           />
 
@@ -132,21 +132,21 @@ export function CameraPage({
             variant="momentary"
             icon={<ChevronLeft />}
             iconSize={32}
-            commandSignal="Camera.Pan_Left_Press"
+            commandSignal={SIGNALS_CAMERA.panLeft.cmd}
             className={cell}
           />
           <CH5Button
             variant="momentary"
             icon={<House />}
             iconSize={32}
-            commandSignal="Camera.Home_Press"
+            commandSignal={SIGNALS_CAMERA.home.cmd}
             className={cell}
           />
           <CH5Button
             variant="momentary"
             icon={<ChevronRight />}
             iconSize={32}
-            commandSignal="Camera.Pan_Right_Press"
+            commandSignal={SIGNALS_CAMERA.panRight.cmd}
             className={cell}
           />
 
@@ -155,7 +155,7 @@ export function CameraPage({
             variant="momentary"
             icon={<ChevronDown />}
             iconSize={32}
-            commandSignal="Camera.Pan_Down_Press"
+            commandSignal={SIGNALS_CAMERA.tiltDown.cmd}
             className={cell}
           />
           <span />
@@ -167,9 +167,8 @@ export function CameraPage({
               key={p}
               variant="momentary"
               label={`${p}`}
-              commandSignal={`Camera.Preset_${p}`}
-              feedbackSignal={`Camera.Preset_${p}_FB`}
-              saveSignal={`Camera.Preset_${p}_Save`}
+              commandSignal={getCameraPreset(p).cmd}
+              feedbackSignal={getCameraPreset(p).fb}
               textSize={22}
               className={cell}
             />

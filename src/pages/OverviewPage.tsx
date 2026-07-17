@@ -71,7 +71,7 @@ export function OverviewPage() {
 
   const selectCamera = (cam: number) => {
     setActiveCamera(cam);
-    ch5Service.publishNumeric("Camera.Selected", cam);
+    ch5Service.publishNumeric(SIGNALS_CAMERA.selected.cmd, cam);
   };
 
   const handleSourceSelect = (id: string) => {
@@ -87,10 +87,10 @@ export function OverviewPage() {
   const canRoute = selectedSource !== null && selectedDestinations.length > 0;
 
   useEffect(() => {
-    ch5Service.subscribeNumeric("Camera.Selected_FB", (value: number) => {
+    ch5Service.subscribeNumeric(SIGNALS_CAMERA.selected.fb, (value: number) => {
       if (value >= 1) setActiveCamera(value);
     });
-    return () => ch5Service.unsubscribe("Camera.Selected_FB");
+    return () => ch5Service.unsubscribe(SIGNALS_CAMERA.selected.fb);
   }, []);
 
   return (
@@ -181,42 +181,42 @@ export function OverviewPage() {
                         variant="momentary"
                         icon={<ZoomIn />}
                         iconSize={28}
-                        commandSignal="Camera.Zoom_In_Press"
+                        commandSignal={SIGNALS_CAMERA.zoomIn.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ChevronUp />}
                         iconSize={28}
-                        commandSignal="Camera.Tilt_Up_Press"
+                        commandSignal={SIGNALS_CAMERA.tiltUp.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ZoomOut />}
                         iconSize={28}
-                        commandSignal="Camera.ZoomOut_Press"
+                        commandSignal={SIGNALS_CAMERA.zoomOut.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ChevronLeft />}
                         iconSize={28}
-                        commandSignal="Camera.Pan_Left_Press"
+                        commandSignal={SIGNALS_CAMERA.panLeft.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<House />}
                         iconSize={28}
-                        commandSignal="Camera.Home_Press"
+                        commandSignal={SIGNALS_CAMERA.home.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ChevronRight />}
                         iconSize={28}
-                        commandSignal="Camera.Pan_Right_Press"
+                        commandSignal={SIGNALS_CAMERA.panRight.cmd}
                         className={cell}
                       />
                       <span />
@@ -224,7 +224,7 @@ export function OverviewPage() {
                         variant="momentary"
                         icon={<ChevronDown />}
                         iconSize={28}
-                        commandSignal="Camera.Tilt_Down_Press"
+                        commandSignal={SIGNALS_CAMERA.tiltDown.cmd}
                         className={cell}
                       />
                       <span />
@@ -245,9 +245,8 @@ export function OverviewPage() {
                       key={p}
                       variant="momentary"
                       label={`${p}`}
-                      commandSignal={`Camera.Preset_${p}`}
-                      feedbackSignal={`Camera.Preset_${p}_FB`}
-                      saveSignal={`Camera.Preset_${p}_Save`}
+                      commandSignal={getCameraPreset(p).cmd}
+                      feedbackSignal={getCameraPreset(p).fb}
                       textSize={20}
                       className={`w-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
                     />
