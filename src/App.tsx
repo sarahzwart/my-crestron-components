@@ -58,18 +58,18 @@ function useActivePage(): [Page, (page: Page) => void] {
   useEffect(() => {
     const pages = Object.keys(NAVPAGE_FEEDBACK) as (keyof typeof NAVPAGE_FEEDBACK)[];
 
-    pages.forEach((page) => {
+    const subscriptionIds = pages.map((page) =>
       ch5Service.subscribeBool(
         NAVPAGE_FEEDBACK[page],
         (isActive: boolean) => {
           if (isActive) setActivePage(page);
         },
-      );
-    });
+      ),
+    );
 
     return () => {
-      pages.forEach((page) => {
-        ch5Service.unsubscribe(NAVPAGE_FEEDBACK[page]);
+      pages.forEach((page, i) => {
+        ch5Service.unsubscribe(NAVPAGE_FEEDBACK[page], subscriptionIds[i]);
       });
     };
   }, []);

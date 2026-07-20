@@ -25,12 +25,12 @@ export const useCH5String = (
       }
     }
 
-    ch5Service.subscribeString(signalName, (newValue: string) => {
+    const subscriptionId = ch5Service.subscribeString(signalName, (newValue: string) => {
       setValue(newValue);
     });
 
     return () => {
-      ch5Service.unsubscribe(signalName);
+      ch5Service.unsubscribe(signalName, subscriptionId);
     };
   }, [signalName, isConnected, ch5Service]);
 

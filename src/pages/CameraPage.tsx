@@ -28,12 +28,12 @@ export function CameraPage({
   const [autoFocus, setAutoFocus] = useState(true);
 
   useEffect(() => {
-    ch5Service.subscribeNumeric(SIGNALS_CAMERA.selected.fb, (value: number) => {
+    const subscriptionId = ch5Service.subscribeNumeric(SIGNALS_CAMERA.selected.fb, (value: number) => {
       if (value >= 1) setActiveCamera(value);
     });
 
     return () => {
-      ch5Service.unsubscribe(SIGNALS_CAMERA.selected.fb);
+      ch5Service.unsubscribe(SIGNALS_CAMERA.selected.fb, subscriptionId);
     };
   }, []);
 

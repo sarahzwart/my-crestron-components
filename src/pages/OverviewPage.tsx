@@ -87,10 +87,10 @@ export function OverviewPage() {
   const canRoute = selectedSource !== null && selectedDestinations.length > 0;
 
   useEffect(() => {
-    ch5Service.subscribeNumeric("Camera.Selected_FB", (value: number) => {
+    const subscriptionId = ch5Service.subscribeNumeric("Camera.Selected_FB", (value: number) => {
       if (value >= 1) setActiveCamera(value);
     });
-    return () => ch5Service.unsubscribe("Camera.Selected_FB");
+    return () => ch5Service.unsubscribe("Camera.Selected_FB", subscriptionId);
   }, []);
 
   return (
