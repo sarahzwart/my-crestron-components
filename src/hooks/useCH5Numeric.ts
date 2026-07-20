@@ -22,12 +22,12 @@ export const useCH5Numeric = (
       setValue(current);
     }
 
-    ch5Service.subscribeNumeric(feedbackSignal, (newValue: number) => {
+    const subscriptionId = ch5Service.subscribeNumeric(feedbackSignal, (newValue: number) => {
       setValue(newValue);
     });
 
     return () => {
-      ch5Service.unsubscribe(feedbackSignal);
+      ch5Service.unsubscribe(feedbackSignal, subscriptionId);
     };
   }, [commandSignal, feedbackSignal, isConnected]);
 

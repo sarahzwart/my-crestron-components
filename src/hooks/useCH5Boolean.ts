@@ -24,12 +24,12 @@ export const useCH5Boolean = (
     }
 
     // Subscribe to FEEDBACK signal
-    ch5Service.subscribeBool(feedbackSignal, (newValue: boolean) => {
+    const subscriptionId = ch5Service.subscribeBool(feedbackSignal, (newValue: boolean) => {
       setValue(newValue);
     });
 
     return () => {
-      ch5Service.unsubscribe(feedbackSignal);
+      ch5Service.unsubscribe(feedbackSignal, subscriptionId);
     };
   }, [commandSignal, feedbackSignal, isConnected]);
 

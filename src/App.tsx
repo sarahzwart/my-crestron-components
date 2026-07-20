@@ -54,15 +54,18 @@ function useActivePage(): [Page, (page: Page) => void] {
       signals.navigation,
     ) as (keyof typeof signals.navigation)[];
 
-    pages.forEach((page) => {
-      ch5Service.subscribeBool(signals.navigation[page].cmd, (isActive: boolean) => {
-        if (isActive) setActivePage(page);
-      });
-    });
+    const subscriptionIds = pages.map((page) =>
+      ch5Service.subscribeBool(
+        NAVPAGE_FEEDBACK[page],
+        (isActive: boolean) => {
+          if (isActive) setActivePage(page);
+        },
+      ),
+    );
 
     return () => {
-      pages.forEach((page) => {
-        ch5Service.unsubscribe(signals.navigation[page].fb);
+      pages.forEach((page, i) => {
+        ch5Service.unsubscribe(NAVPAGE_FEEDBACK[page], subscriptionIds[i]);
       });
     };
   }, []);
