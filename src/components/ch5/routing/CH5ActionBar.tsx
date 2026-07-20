@@ -17,8 +17,8 @@ export const CH5RoutingActionBar = ({
   canRoute,
   destinationCount,
   onRoute,
-  commandSignal = SIGNALS_ROUTING.route.cmd,
-  feedbackSignal = SIGNALS_ROUTING.route.fb,
+  commandSignal = signals.routing.route.cmd,
+  feedbackSignal = signals.routing.route.fb,
   routeLabel = "Route Signal",
   emptyLabel = "Select source & destination",
 }: CH5RoutingActionBarProps) => {

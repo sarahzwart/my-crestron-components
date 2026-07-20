@@ -54,8 +54,15 @@ export const signals = {
       mute:   { cmd: "Audio[4].Mute_Press", fb: "Audio[4].Mute_FB" },
       volumeUp:   { cmd: "Audio[4].Volume_Up_Press", fb: "Audio[4].Volume_Up_FB" },
       volumeDown: { cmd: "Audio[4].Volume_Down_Press", fb: "Audio[4].Volume_Down_FB" },
+    },
+
+    volume5: {
+      volume: { cmd: "Audio[5].Volume", fb: "Audio[5].Volume_FB" },
+      mute:   { cmd: "Audio[5].Mute_Press", fb: "Audio[5].Mute_FB" },
+      volumeUp:   { cmd: "Audio[5].Volume_Up_Press", fb: "Audio[5].Volume_Up_FB" },
+      volumeDown: { cmd: "Audio[5].Volume_Down_Press", fb: "Audio[5].Volume_Down_FB" },
     }
-   
+
   },
 
   routing: {
@@ -65,12 +72,18 @@ export const signals = {
     source2: { cmd: "Routing[2].Source_Press", fb: "Routing[2].Source_FB" },
     source3: { cmd: "Routing[3].Source_Press", fb: "Routing[3].Source_FB" },
     source4: { cmd: "Routing[4].Source_Press", fb: "Routing[4].Source_FB" },
+    source5: { cmd: "Routing[5].Source_Press", fb: "Routing[5].Source_FB" },
+    source6: { cmd: "Routing[6].Source_Press", fb: "Routing[6].Source_FB" },
 
     destination0: { cmd: "Routing[0].Destination_Press", fb: "Routing[0].Destination_FB" },
     destination1: { cmd: "Routing[1].Destination_Press", fb: "Routing[1].Destination_FB" },
     destination2: { cmd: "Routing[2].Destination_Press", fb: "Routing[2].Destination_FB" },
     destination3: { cmd: "Routing[3].Destination_Press", fb: "Routing[3].Destination_FB" },
-    destination4: { cmd: "Routing[4].Destination_Press", fb: "Routing[4].Destination_FB" }
+    destination4: { cmd: "Routing[4].Destination_Press", fb: "Routing[4].Destination_FB" },
+    destination5: { cmd: "Routing[5].Destination_Press", fb: "Routing[5].Destination_FB" },
+
+    // Take/execute the currently selected source+destination pairing
+    route: { cmd: "Routing.Route_Press", fb: "Routing.Route_FB" },
   },
 
   camera: {
@@ -94,6 +107,7 @@ export const signals = {
     answer: { cmd: "AudioCall.Answer", fb: "AudioCall.Answer_FB" },
     privacy: { cmd: "AudioCall.Privacy", fb: "AudioCall.Privacy_FB" },
     hold: { cmd: "AudioCall.Hold", fb: "AudioCall.Hold_FB" },
+    keypadToggle: { cmd: "AudioCall.Keypad_Toggle_Press", fb: "AudioCall.Keypad_Toggle_FB" },
   },
 
   music: {

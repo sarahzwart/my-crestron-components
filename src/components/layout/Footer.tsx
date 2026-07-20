@@ -1,6 +1,6 @@
 import React from "react";
 import { CH5Slider } from "../ch5/common/CH5Slider";
-import { SIGNALS_AUDIO } from "@/config/signals";
+import { signals } from "@/config/signals";
 
 export interface FooterProps {
   // Volume
@@ -34,8 +34,8 @@ export interface FooterProps {
 }
 
 export const CH5Footer = ({
-  volumeCommandSignal = SIGNALS_AUDIO.footerVolume.cmd,
-  volumeFeedbackSignal = SIGNALS_AUDIO.footerVolume.fb,
+  volumeCommandSignal = signals.audio.volume0.volume.cmd,
+  volumeFeedbackSignal = signals.audio.volume0.volume.fb,
   volumeColor = "blue",
   volumeBackgroundColor = "white",
   volumeWidth = "auto", // defaults to flex-1 behavior

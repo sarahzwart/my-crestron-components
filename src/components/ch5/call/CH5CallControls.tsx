@@ -77,8 +77,8 @@ export const CH5CallControls = ({
         />
         {showKeypadButton && onKeypadToggle ? (
           <ControlButton
-            commandSignal={SIGNALS_PHONE.keypadToggle.cmd}
-            feedbackSignal={SIGNALS_PHONE.keypadToggle.fb}
+            commandSignal={signals.audioCall.keypadToggle.cmd}
+            feedbackSignal={signals.audioCall.keypadToggle.fb}
             iconOff={<Grid3x3 size={28} />}
             iconOn={<Grid3x3 size={28} />}
             label="keypad"
