@@ -61,7 +61,7 @@ export interface CH5VolumeSliderProps {
   customClassName?: string;
 }
 
-export function CH5VolumeSlider({
+export const CH5VolumeSlider = ({
   label,
   icon,
   volumeCommandSignal,
@@ -74,7 +74,7 @@ export function CH5VolumeSlider({
   description,
   trackColor,
   customClassName = "",
-}: CH5VolumeSliderProps) {
+}: CH5VolumeSliderProps) => {
   const { theme } = useTheme();
 
   const cardBg = isMaster ? theme.cardHighlightBackground : theme.cardBackground;
@@ -153,4 +153,4 @@ export function CH5VolumeSlider({
       )}
     </div>
   );
-}
+};

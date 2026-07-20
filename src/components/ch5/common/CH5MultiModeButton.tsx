@@ -20,7 +20,7 @@ export interface CH5MultiModeButtonProps {
   style?: React.CSSProperties;
 }
 
-export function CH5MultiModeButton({
+export const CH5MultiModeButton = ({
   commandSignal,
   feedbackSignal,
   modes,
@@ -30,7 +30,7 @@ export function CH5MultiModeButton({
   showLabel = false,
   className = "",
   style = {},
-}: CH5MultiModeButtonProps) {
+}: CH5MultiModeButtonProps) => {
   const { theme } = useTheme();
   const modeCount = modes.length;
 
@@ -93,4 +93,4 @@ export function CH5MultiModeButton({
       )}
     </button>
   );
-}
+};

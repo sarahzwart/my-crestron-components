@@ -10,14 +10,14 @@ export interface HeaderProps {
   style?: React.CSSProperties;
 }
 
-export function CH5Header({
+export const CH5Header = ({
   leftButtons,
   backgroundColor = "bg-slate-800",
   textColor = "text-white",
   height = 80,
   className = "",
   style = {},
-}: HeaderProps) {
+}: HeaderProps) => {
   const [currentTime, setCurrentTime] = React.useState(new Date());
 
   React.useEffect(() => {
@@ -59,4 +59,4 @@ export function CH5Header({
       </div>
     </header>
   );
-}
+};

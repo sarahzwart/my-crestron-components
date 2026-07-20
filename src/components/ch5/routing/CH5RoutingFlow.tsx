@@ -5,7 +5,7 @@ export interface CH5RoutingFlowProps {
   isActive: boolean;
 }
 
-export function CH5RoutingFlow({ isActive }: CH5RoutingFlowProps) {
+export const CH5RoutingFlow = ({ isActive }: CH5RoutingFlowProps) => {
   const { theme } = useTheme();
 
   return (
@@ -33,4 +33,4 @@ export function CH5RoutingFlow({ isActive }: CH5RoutingFlowProps) {
       </div>
     </div>
   );
-}
+};

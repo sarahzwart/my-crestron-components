@@ -70,7 +70,7 @@ const ICON_POSITION_CLASSES: Record<string, string> = {
   bottom: "flex-col-reverse",
 };
 
-export function CH5Button({
+export const CH5Button = ({
   commandSignal,
   feedbackSignal,
   variant = "toggle",
@@ -97,7 +97,7 @@ export function CH5Button({
   onClassName,
   offClassName,
   useThemeColors = false,
-}: ButtonProps) {
+}: ButtonProps) => {
   const { theme } = useTheme();
 
   const [isOn, setIsOn] = useCH5Boolean(
@@ -249,4 +249,4 @@ export function CH5Button({
       {buttonText && <span>{buttonText}</span>}
     </button>
   );
-}
+};

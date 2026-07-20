@@ -1,4 +1,4 @@
-import { CH5Button } from "@/components/lib/common/CH5Button";
+import { CH5Button } from "@/components/ch5/common/CH5Button";
 import { useTheme } from "../lib/theme";
 import { signals } from "@/config/signals";
 import {
@@ -21,21 +21,21 @@ export interface CameraPageProps {
 
 type CameraPresetKey = `preset${1 | 2 | 3}`;
 
-export function CameraPage({
+export const CameraPage = ({
   cameraCount = 3,
   presetCount = 3,
-}: CameraPageProps) {
+}: CameraPageProps) => {
   const { theme } = useTheme();
   const [activeCamera, setActiveCamera] = useState(1);
   const [autoFocus, setAutoFocus] = useState(true);
 
   useEffect(() => {
-    const subscriptionId = ch5Service.subscribeNumeric(SIGNALS_CAMERA.selected.fb, (value: number) => {
+    const subscriptionId = ch5Service.subscribeNumeric(signals.camera.selected.fb, (value: number) => {
       if (value >= 1) setActiveCamera(value);
     });
 
     return () => {
-      ch5Service.unsubscribe(SIGNALS_CAMERA.selected.fb, subscriptionId);
+      ch5Service.unsubscribe(signals.camera.selected.fb, subscriptionId);
     };
   }, []);
 
@@ -179,4 +179,4 @@ export function CameraPage({
       </div>
     </div>
   );
-}
+};

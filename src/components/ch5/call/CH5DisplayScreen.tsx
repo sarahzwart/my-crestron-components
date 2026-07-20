@@ -7,12 +7,12 @@ export interface CH5DisplayScreenProps {
   className?: string;
 }
 
-export function CH5DisplayScreen({
+export const CH5DisplayScreen = ({
   value,
   placeholder = "Enter a number",
   formatValue,
   className = "",
-}: CH5DisplayScreenProps) {
+}: CH5DisplayScreenProps) => {
   const { theme } = useTheme();
   const defaultFormatter = (val: string) => {
     if (!val) return "";
@@ -68,4 +68,4 @@ export function CH5DisplayScreen({
       )}
     </div>
   );
-}
+};

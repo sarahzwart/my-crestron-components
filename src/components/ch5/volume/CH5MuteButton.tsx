@@ -1,5 +1,5 @@
 import { Volume2, VolumeX } from "lucide-react";
-import { CH5Button } from "@/components/lib/common/CH5Button";
+import { CH5Button } from "@/components/ch5/common/CH5Button";
 
 export interface CH5MuteButtonProps {
   commandSignal: string;
@@ -10,14 +10,14 @@ export interface CH5MuteButtonProps {
   onClick?: () => void;
 }
 
-export function CH5MuteButton({
+export const CH5MuteButton = ({
   commandSignal,
   feedbackSignal,
   width = 40,
   height = 40,
   iconSize = 20,
   onClick,
-}: CH5MuteButtonProps) {
+}: CH5MuteButtonProps) => {
   return (
     <CH5Button
       commandSignal={commandSignal}
@@ -31,4 +31,4 @@ export function CH5MuteButton({
       onClick={onClick}
     />
   );
-}
+};

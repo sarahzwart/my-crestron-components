@@ -1,5 +1,5 @@
 import { useTheme } from "@/lib/theme";
-import { CH5Button } from "@/components/lib/common/CH5Button";
+import { CH5Button } from "@/components/ch5/common/CH5Button";
 import { signals } from "@/config/signals";
 import { PhoneOff, MicOff, Mic, Pause, Play, Grid3x3 } from "lucide-react";
 
@@ -28,7 +28,7 @@ interface ControlButtonProps {
   onClick?: () => void;
 }
 
-function ControlButton({ commandSignal, feedbackSignal, iconOff, iconOn, label, variant = "toggle", onClick }: ControlButtonProps) {
+const ControlButton = ({ commandSignal, feedbackSignal, iconOff, iconOn, label, variant = "toggle", onClick }: ControlButtonProps) => {
   const { theme } = useTheme();
 
   return (
@@ -50,9 +50,9 @@ function ControlButton({ commandSignal, feedbackSignal, iconOff, iconOn, label, 
       <span className={`${theme.primaryText} text-xs font-medium`}>{label}</span>
     </div>
   );
-}
+};
 
-export function CH5CallControls({
+export const CH5CallControls = ({
   hangupCommandSignal,
   hangupFeedbackSignal,
   onHangup,
@@ -64,7 +64,7 @@ export function CH5CallControls({
   showKeypadButton = true,
   onKeypadToggle,
   className = "",
-}: CH5CallControlsProps) {
+}: CH5CallControlsProps) => {
   return (
     <div className={`flex flex-col items-center gap-8 ${className}`}>
       <div className="grid grid-cols-3 gap-6 w-full max-w-xs">
@@ -110,4 +110,4 @@ export function CH5CallControls({
       />
     </div>
   );
-}
+};

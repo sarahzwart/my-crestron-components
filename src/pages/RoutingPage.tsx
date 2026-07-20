@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useTheme } from "../lib/theme";
-import { CH5RoutingSection } from "@/components/lib/routing/CH5RoutingSection";
-import { CH5RoutingFlow } from "@/components/lib/routing/CH5RoutingFlow";
-import { CH5RoutingActionBar } from "@/components/lib/routing/CH5ActionBar";
-import { type RoutingItem } from "@/components/lib/routing/CH5RoutingButton";
+import { CH5RoutingSection } from "@/components/ch5/routing/CH5RoutingSection";
+import { CH5RoutingFlow } from "@/components/ch5/routing/CH5RoutingFlow";
+import { CH5RoutingActionBar } from "@/components/ch5/routing/CH5ActionBar";
+import { type RoutingItem } from "@/components/ch5/routing/CH5RoutingButton";
 
 export interface RoutingPageProps {
   sources: RoutingItem[];
@@ -14,13 +14,13 @@ export interface RoutingPageProps {
   destinationColumns?: 2 | 3 | 4;
 }
 
-export function RoutingPage({
+export const RoutingPage = ({
   sources,
   destinations,
   title = "Routing",
   subtitle = "Select a source and choose where to send it",
 
-}: RoutingPageProps) {
+}: RoutingPageProps) => {
   const { theme } = useTheme();
   
   const [selectedSource, setSelectedSource] = useState<string | null>(null);
@@ -84,6 +84,6 @@ export function RoutingPage({
       />
     </div>
   );
-}
+};
 
 export type { RoutingItem };

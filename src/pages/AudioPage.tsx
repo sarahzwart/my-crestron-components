@@ -1,4 +1,4 @@
-import { CH5VolumeSlider, type CH5VolumeSliderProps } from "@/components/lib/volume/CH5Volume";
+import { CH5VolumeSlider, type CH5VolumeSliderProps } from "@/components/ch5/volume/CH5Volume";
 import { useTheme } from "../lib/theme";
 
 export interface AudioPageProps {
@@ -9,13 +9,13 @@ export interface AudioPageProps {
   columns?: 1 | 2 | 3 | 4;
 }
 
-export function AudioPage({
+export const AudioPage = ({
   volumeControls,
   showMaster = true,
   title = "Audio",
   subtitle = "Adjust volume levels for each zone",
   columns = 3,
-}: AudioPageProps) {
+}: AudioPageProps) => {
   const { theme } = useTheme();
 
   const masterControl = showMaster ? volumeControls[0] : null;
@@ -49,4 +49,4 @@ export function AudioPage({
 
     </div>
   );
-}
+};

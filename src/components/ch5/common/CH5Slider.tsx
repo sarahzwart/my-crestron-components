@@ -68,7 +68,7 @@ const BUTTON_SHAPE_CLASSES: Record<SliderButtonType, string> = {
   icon: "rounded-full",
 };
 
-export function CH5Slider({
+export const CH5Slider = ({
   commandSignal,
   feedbackSignal,
   touchSettable = true,
@@ -87,7 +87,7 @@ export function CH5Slider({
   disabled = false,
   className = "",
   style = {},
-}: SliderProps) {
+}: SliderProps) => {
   const [value, setValue] = useCH5Numeric(commandSignal, feedbackSignal, min);
 
   const handleChange = (newValue: number[]) => {
@@ -190,4 +190,4 @@ export function CH5Slider({
       )}
     </div>
   );
-}
+};

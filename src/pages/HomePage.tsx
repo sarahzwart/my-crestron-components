@@ -1,5 +1,5 @@
 import { useTheme } from "../lib/theme";
-import { CH5Button } from "@/components/lib/common/CH5Button";
+import { CH5Button } from "@/components/ch5/common/CH5Button";
 
 export interface AppItem {
   id: string;
@@ -16,7 +16,7 @@ export interface HomePageProps {
   title?: string;
 }
 
-export function HomePage({ apps, onNavigate, title = "Home" }: HomePageProps) {
+export const HomePage = ({ apps, onNavigate, title = "Home" }: HomePageProps) => {
   const { theme } = useTheme();
 
   return (
@@ -56,4 +56,4 @@ export function HomePage({ apps, onNavigate, title = "Home" }: HomePageProps) {
       </div>
     </div>
   );
-}
+};

@@ -45,7 +45,7 @@ interface KeypadKeyButtonProps {
   onPress: () => void;
 }
 
-function KeypadKeyButton({ number, letters, commandSignal, feedbackSignal, onPress }: KeypadKeyButtonProps) {
+const KeypadKeyButton = ({ number, letters, commandSignal, feedbackSignal, onPress }: KeypadKeyButtonProps) => {
   const { theme } = useTheme();
 
   const keyContent = (
@@ -72,9 +72,9 @@ function KeypadKeyButton({ number, letters, commandSignal, feedbackSignal, onPre
       className="aspect-square w-full transition-all duration-100"
     />
   );
-}
+};
 
-export function CH5Keypad({
+export const CH5Keypad = ({
   commandSignal,
   feedbackSignal,
   onKeyPress,
@@ -85,7 +85,7 @@ export function CH5Keypad({
   callButtonDisabled = false,
   gap = 4,
   className = "",
-}: CH5KeypadProps) {
+}: CH5KeypadProps) => {
   const { theme } = useTheme();
 
   return (
@@ -142,4 +142,4 @@ export function CH5Keypad({
       )}
     </div>
   );
-}
+};

@@ -1,5 +1,5 @@
 import React from "react";
-import { CH5Slider } from "../lib/common/CH5Slider";
+import { CH5Slider } from "../ch5/common/CH5Slider";
 import { SIGNALS_AUDIO } from "@/config/signals";
 
 export interface FooterProps {
@@ -33,7 +33,7 @@ export interface FooterProps {
   style?: React.CSSProperties;
 }
 
-export function CH5Footer({
+export const CH5Footer = ({
   volumeCommandSignal = SIGNALS_AUDIO.footerVolume.cmd,
   volumeFeedbackSignal = SIGNALS_AUDIO.footerVolume.fb,
   volumeColor = "blue",
@@ -52,7 +52,7 @@ export function CH5Footer({
   className = "",
   page, 
   style = {},
-}: FooterProps) {
+}: FooterProps) => {
   const footerStyle: React.CSSProperties = {
     ...style,
     height: typeof height === "number" ? `${height}px` : height,
@@ -141,4 +141,4 @@ export function CH5Footer({
       )}
     </footer>
   );
-}
+};
