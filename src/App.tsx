@@ -56,7 +56,7 @@ function useActivePage(): [Page, (page: Page) => void] {
 
     const subscriptionIds = pages.map((page) =>
       ch5Service.subscribeBool(
-        NAVPAGE_FEEDBACK[page],
+        signals.navigation[page].fb,
         (isActive: boolean) => {
           if (isActive) setActivePage(page);
         },
@@ -65,7 +65,7 @@ function useActivePage(): [Page, (page: Page) => void] {
 
     return () => {
       pages.forEach((page, i) => {
-        ch5Service.unsubscribe(NAVPAGE_FEEDBACK[page], subscriptionIds[i]);
+        ch5Service.unsubscribe(signals.navigation[page].fb, subscriptionIds[i]);
       });
     };
   }, []);

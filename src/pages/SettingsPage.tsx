@@ -21,26 +21,26 @@ export const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState<SettingsTab>("theme");
 
   useEffect(() => {
-    const tabThemeId = ch5Service.subscribeBool(SIGNALS_SETTINGS.tabTheme.fb, (isActive: boolean) => {
+    const tabThemeId = ch5Service.subscribeBool(signals.navigation.tab0.fb, (isActive: boolean) => {
       if (isActive) setActiveTab("theme");
     });
-    const tabFontId = ch5Service.subscribeBool(SIGNALS_SETTINGS.tabFont.fb, (isActive: boolean) => {
+    const tabFontId = ch5Service.subscribeBool(signals.navigation.tab1.fb, (isActive: boolean) => {
       if (isActive) setActiveTab("font");
     });
-    const themeSelectId = ch5Service.subscribeNumeric(SIGNALS_SETTINGS.themeSelect.fb, (value: number) => {
+    const themeSelectId = ch5Service.subscribeNumeric(signals.settings.theme.fb, (value: number) => {
       const name = THEME_NAMES[value - 1];
       if (name) setTheme(name);
     });
-    const fontSelectId = ch5Service.subscribeNumeric(SIGNALS_SETTINGS.fontSelect.fb, (value: number) => {
+    const fontSelectId = ch5Service.subscribeNumeric(signals.settings.font.fb, (value: number) => {
       const name = FONT_NAMES[value - 1];
       if (name) setFont(name);
     });
 
     return () => {
-      ch5Service.unsubscribe(SIGNALS_SETTINGS.tabTheme.fb, tabThemeId);
-      ch5Service.unsubscribe(SIGNALS_SETTINGS.tabFont.fb, tabFontId);
-      ch5Service.unsubscribe(SIGNALS_SETTINGS.themeSelect.fb, themeSelectId);
-      ch5Service.unsubscribe(SIGNALS_SETTINGS.fontSelect.fb, fontSelectId);
+      ch5Service.unsubscribe(signals.navigation.tab0.fb, tabThemeId);
+      ch5Service.unsubscribe(signals.navigation.tab1.fb, tabFontId);
+      ch5Service.unsubscribe(signals.settings.theme.fb, themeSelectId);
+      ch5Service.unsubscribe(signals.settings.font.fb, fontSelectId);
     };
   }, []);
 
