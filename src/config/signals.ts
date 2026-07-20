@@ -11,7 +11,10 @@ export const signals = {
     page6: { cmd: "Page[6].Press", fb: "Page[6].FB" },
     page7: { cmd: "Page[7].Press", fb: "Page[7].FB" },
     page8: { cmd: "Page[8].Press", fb: "Page[8].FB" },
-    page9: { cmd: "Page[9].Press", fb: "Page[9].FB" }
+    page9: { cmd: "Page[9].Press", fb: "Page[9].FB" },
+    tab0: { cmd: "Tab[0].Press", fb: "Tab[0].FB" },
+    tab1: { cmd: "Tab[1].Press", fb: "Tab[1].FB" },
+    tab2: { cmd: "Tab[2].Press", fb: "Tab[2].FB" },
   },
 
   audio: {

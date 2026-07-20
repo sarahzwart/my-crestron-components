@@ -41,7 +41,10 @@ type Page = "page0"
   | "page6"
   | "page7"
   | "page8"
-  | "page9";
+  | "page9"
+  | "tab0"
+  | "tab1"
+  | "tab2";
 
 function useActivePage(): [Page, (page: Page) => void] {
   const [activePage, setActivePage] = useState<Page>("page0");
