@@ -8,7 +8,7 @@ import {
 } from "../lib/theme";
 import { Check, Palette, Type } from "lucide-react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
-import { SIGNALS_SETTINGS } from "@/config/signals";
+import { signals } from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 
 type SettingsTab = "theme" | "font";
@@ -57,8 +57,8 @@ export function SettingsPage() {
         </div>
         <div className={`flex gap-1 p-1 rounded-2xl ${theme.cardBackground}`}>
           <CH5Button
-            commandSignal={SIGNALS_SETTINGS.tabTheme.cmd}
-            feedbackSignal={SIGNALS_SETTINGS.tabTheme.fb}
+            commandSignal={signals.navigation.tab0.cmd}
+            feedbackSignal={signals.navigation.tab0.fb}
             variant="momentary"
             shape="rounded"
             onClick={() => setActiveTab("theme")}
@@ -88,8 +88,8 @@ export function SettingsPage() {
             }
           />
           <CH5Button
-            commandSignal={SIGNALS_SETTINGS.tabFont.cmd}
-            feedbackSignal={SIGNALS_SETTINGS.tabFont.fb}
+            commandSignal={signals.navigation.tab1.cmd}
+            feedbackSignal={signals.navigation.tab1.fb}
             variant="momentary"
             shape="rounded"
             onClick={() => setActiveTab("font")}
@@ -138,7 +138,7 @@ export function SettingsPage() {
                   isSelected={themeName === key}
                   onSelect={() => {
                     setTheme(key);
-                    ch5Service.publishNumeric(SIGNALS_SETTINGS.themeSelect.cmd, i + 1);
+                    ch5Service.publishNumeric(signals.settings.theme.cmd, i + 1);
                   }}
                 />
               ))}
@@ -163,7 +163,7 @@ export function SettingsPage() {
                   isSelected={fontName === key}
                   onSelect={() => {
                     setFont(key);
-                    ch5Service.publishNumeric(SIGNALS_SETTINGS.fontSelect.cmd, i + 1);
+                    ch5Service.publishNumeric(signals.settings.font.cmd, i + 1);
                   }}
                 />
               ))}

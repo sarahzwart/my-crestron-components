@@ -24,10 +24,7 @@ import {
 } from "lucide-react";
 import { CH5Button } from "@/components/lib/common/CH5Button";
 import {
-  SIGNALS_CAMERA,
-  SIGNALS_ROUTING,
-  SIGNALS_MUSIC,
-  getCameraPreset,
+  signals
 } from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -71,7 +68,7 @@ export function OverviewPage() {
 
   const selectCamera = (cam: number) => {
     setActiveCamera(cam);
-    ch5Service.publishNumeric("Camera.Selected", cam);
+    ch5Service.publishNumeric(signals.camera.selected.cmd, cam);
   };
 
   const handleSourceSelect = (id: string) => {
@@ -181,42 +178,42 @@ export function OverviewPage() {
                         variant="momentary"
                         icon={<ZoomIn />}
                         iconSize={28}
-                        commandSignal="Camera.Zoom_In_Press"
+                        commandSignal={signals.camera.zoomIn.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ChevronUp />}
                         iconSize={28}
-                        commandSignal="Camera.Tilt_Up_Press"
+                        commandSignal={signals.camera.tiltUp.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ZoomOut />}
                         iconSize={28}
-                        commandSignal="Camera.ZoomOut_Press"
+                        commandSignal={signals.camera.zoomOut.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ChevronLeft />}
                         iconSize={28}
-                        commandSignal="Camera.Pan_Left_Press"
+                        commandSignal={signals.camera.panLeft.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<House />}
                         iconSize={28}
-                        commandSignal="Camera.Home_Press"
+                        commandSignal={signals.camera.home.cmd}
                         className={cell}
                       />
                       <CH5Button
                         variant="momentary"
                         icon={<ChevronRight />}
                         iconSize={28}
-                        commandSignal="Camera.Pan_Right_Press"
+                        commandSignal={signals.camera.panRight.cmd}
                         className={cell}
                       />
                       <span />
@@ -224,7 +221,7 @@ export function OverviewPage() {
                         variant="momentary"
                         icon={<ChevronDown />}
                         iconSize={28}
-                        commandSignal="Camera.Tilt_Down_Press"
+                        commandSignal={signals.camera.tiltDown.cmd}
                         className={cell}
                       />
                       <span />
@@ -245,9 +242,8 @@ export function OverviewPage() {
                       key={p}
                       variant="momentary"
                       label={`${p}`}
-                      commandSignal={`Camera.Preset_${p}`}
-                      feedbackSignal={`Camera.Preset_${p}_FB`}
-                      saveSignal={`Camera.Preset_${p}_Save`}
+                      commandSignal={signals.camera[`preset${p}` as CameraPresetKey].cmd}
+                      feedbackSignal={signals.camera[`preset${p}` as CameraPresetKey].fb}
                       textSize={20}
                       className={`w-full rounded-md ${theme.cardBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
                     />
@@ -390,8 +386,8 @@ export function OverviewPage() {
             <CardContent className="flex-1 flex items-center justify-center">
               <div className="flex items-center justify-between w-full px-2">
                 <CH5MultiModeButton
-                  commandSignal={SIGNALS_MUSIC.shuffle.cmd}
-                  feedbackSignal={SIGNALS_MUSIC.shuffle.fb}
+                  commandSignal={signals.music.shuffle.cmd}
+                  feedbackSignal={signals.music.shuffle.fb}
                   modes={[
                     {
                       icon: <Shuffle size={24} className="opacity-50" />,
@@ -411,7 +407,7 @@ export function OverviewPage() {
                   variant="momentary"
                   icon={<SkipBackIcon />}
                   iconSize={20}
-                  commandSignal={SIGNALS_MUSIC.previous.cmd}
+                  commandSignal={signals.music.previous.cmd}
                   className={`w-12 h-12 ${theme.buttonBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
                 />
                 <CH5Button
@@ -420,8 +416,8 @@ export function OverviewPage() {
                   iconOn={<Play />}
                   iconOff={<Pause />}
                   iconSize={22}
-                  commandSignal={SIGNALS_MUSIC.playPause.cmd}
-                  feedbackSignal={SIGNALS_MUSIC.playPause.fb}
+                  commandSignal={signals.music.playPause.cmd}
+                  feedbackSignal={signals.music.playPause.fb}
                   width={56}
                   height={56}
                   onClassName={`rounded-full ${theme.buttonActiveBackground} ${theme.buttonActiveText}`}
@@ -432,12 +428,12 @@ export function OverviewPage() {
                   variant="momentary"
                   icon={<SkipForwardIcon />}
                   iconSize={20}
-                  commandSignal={SIGNALS_MUSIC.next.cmd}
+                  commandSignal={signals.music.next.cmd}
                   className={`w-12 h-12 ${theme.buttonBackground} ${theme.primaryText} ${theme.cardActiveBackground}`}
                 />
                 <CH5MultiModeButton
-                  commandSignal={SIGNALS_MUSIC.repeat.cmd}
-                  feedbackSignal={SIGNALS_MUSIC.repeat.fb}
+                  commandSignal={signals.music.repeat.cmd}
+                  feedbackSignal={signals.music.repeat.fb}
                   modes={[
                     {
                       icon: <Repeat size={24} className="opacity-50" />,
