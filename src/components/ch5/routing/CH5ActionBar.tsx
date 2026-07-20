@@ -1,7 +1,7 @@
 import { useTheme } from "@/lib/theme";
 import { ArrowRight, Cast } from "lucide-react";
 import { CH5Button } from "@/components/ch5/common/CH5Button";
-import { SIGNALS_ROUTING } from "@/config/signals";
+import { signals } from "@/config/signals";
 
 export interface CH5RoutingActionBarProps {
   canRoute: boolean;
@@ -17,8 +17,8 @@ export const CH5RoutingActionBar = ({
   canRoute,
   destinationCount,
   onRoute,
-  commandSignal = SIGNALS_ROUTING.route.cmd,
-  feedbackSignal = SIGNALS_ROUTING.route.fb,
+  commandSignal = signals.routing.route.cmd,
+  feedbackSignal = signals.routing.route.fb,
   routeLabel = "Route Signal",
   emptyLabel = "Select source & destination",
 }: CH5RoutingActionBarProps) => {
