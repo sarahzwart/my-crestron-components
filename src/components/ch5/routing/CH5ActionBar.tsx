@@ -1,7 +1,7 @@
 import { useTheme } from "@/lib/theme";
 import { ArrowRight, Cast } from "lucide-react";
 import { CH5Button } from "@/components/ch5/common/CH5Button";
-import { SIGNALS_ROUTING } from "@/config/signals";
+import { signals } from "@/config/signals";
 
 export interface CH5RoutingActionBarProps {
   canRoute: boolean;
