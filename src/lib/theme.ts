@@ -293,11 +293,11 @@ interface ThemeProviderProps {
   defaultFont?: FontName;
 }
 
-export function ThemeProvider({
+export const ThemeProvider = ({
   children,
   defaultTheme = "glassDark",
   defaultFont = "quicksand",
-}: ThemeProviderProps) {
+}: ThemeProviderProps) => {
   const [themeName, setThemeName] = useState<ThemeName>(defaultTheme);
   const [customTheme, setCustomThemeState] = useState<AppTheme | null>(null);
   const [fontName, setFontName] = useState<FontName>(defaultFont);
@@ -328,7 +328,7 @@ export function ThemeProvider({
     { value: { theme, themeName, setTheme, setCustomTheme, font, fontName, setFont } },
     children
   );
-}
+};
 
 export function useTheme() {
   const context = useContext(ThemeContext);

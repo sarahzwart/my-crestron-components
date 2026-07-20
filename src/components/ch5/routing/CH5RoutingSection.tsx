@@ -11,14 +11,14 @@ export interface CH5RoutingSectionProps {
   accentColor?: string;
 }
 
-export function CH5RoutingSection({
+export const CH5RoutingSection = ({
   label,
   items,
   selectedIds,
   onItemClick,
   type,
   accentColor,
-}: CH5RoutingSectionProps) {
+}: CH5RoutingSectionProps) => {
   const { theme } = useTheme();
 
   const defaultAccent = type === "source" ? "bg-blue-500" : "bg-green-500";
@@ -83,4 +83,4 @@ export function CH5RoutingSection({
       </div>
     </section>
   );
-}
+};

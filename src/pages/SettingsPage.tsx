@@ -7,7 +7,7 @@ import {
   type FontName,
 } from "../lib/theme";
 import { Check, Palette, Type } from "lucide-react";
-import { CH5Button } from "@/components/lib/common/CH5Button";
+import { CH5Button } from "@/components/ch5/common/CH5Button";
 import { signals } from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 
@@ -16,7 +16,7 @@ type SettingsTab = "theme" | "font";
 const THEME_NAMES = Object.keys(APP_THEMES) as ThemeName[];
 const FONT_NAMES = Object.keys(APP_FONTS) as FontName[];
 
-export function SettingsPage() {
+export const SettingsPage = () => {
   const { theme, themeName, setTheme, fontName, setFont } = useTheme();
   const [activeTab, setActiveTab] = useState<SettingsTab>("theme");
 
@@ -173,9 +173,9 @@ export function SettingsPage() {
       </div>
     </div>
   );
-}
+};
 
-function SectionHeader({
+const SectionHeader = ({
   color,
   title,
   subtitle,
@@ -185,7 +185,7 @@ function SectionHeader({
   title: string;
   subtitle: string;
   theme: any;
-}) {
+}) => {
   return (
     <div className="flex items-center gap-3 mb-5 px-1">
       <div className={`w-1.5 h-10 rounded-full ${color}`} />
@@ -195,7 +195,7 @@ function SectionHeader({
       </div>
     </div>
   );
-}
+};
 
 const THEME_LABELS: Record<ThemeName, string> = {
   glassDark: "Glass Dark",
@@ -254,7 +254,7 @@ const THEME_PREVIEWS: Record<
   },
 };
 
-function ThemeCard({
+const ThemeCard = ({
   themeName,
   isSelected,
   onSelect,
@@ -263,7 +263,7 @@ function ThemeCard({
   index: number;
   isSelected: boolean;
   onSelect: () => void;
-}) {
+}) => {
   const { theme } = useTheme();
   const preview = THEME_PREVIEWS[themeName];
 
@@ -298,9 +298,9 @@ function ThemeCard({
       </p>
     </button>
   );
-}
+};
 
-function FontCard({
+const FontCard = ({
   fontName,
   isSelected,
   onSelect,
@@ -309,7 +309,7 @@ function FontCard({
   index: number;
   isSelected: boolean;
   onSelect: () => void;
-}) {
+}) => {
   const { theme } = useTheme();
   const fontInfo = APP_FONTS[fontName];
 
@@ -334,4 +334,4 @@ function FontCard({
       </div>
     </button>
   );
-}
+};

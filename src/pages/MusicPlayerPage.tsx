@@ -1,6 +1,6 @@
 import { useTheme } from "../lib/theme";
 import { useEffect, useRef, useState } from "react";
-import { CH5Button } from "@/components/lib/common/CH5Button";
+import { CH5Button } from "@/components/ch5/common/CH5Button";
 import {
   Pause,
   Play,
@@ -14,7 +14,7 @@ import {
   Star,
 } from "lucide-react";
 import { signals } from "@/config/signals";
-import { CH5MultiModeButton } from "@/components/lib/common/CH5MultiModeButton";
+import { CH5MultiModeButton } from "@/components/ch5/common/CH5MultiModeButton";
 
 export interface MusicPlayerPageProps {
   idle?: boolean;
@@ -61,7 +61,7 @@ function formatTime(seconds: number) {
   return `${m}:${s.toString().padStart(2, "0")}`;
 }
 
-export function MusicPlayerPage({
+export const MusicPlayerPage = ({
   trackName = "Nothing Playing",
   artistName = "—",
   albumName = "",
@@ -69,7 +69,7 @@ export function MusicPlayerPage({
   nowPlayingPositionSeconds = 0,
   nowPlayingLengthSeconds = 0,
   nowPlayingPositionGauge = 0,
-}: MusicPlayerPageProps) {
+}: MusicPlayerPageProps) => {
   const { theme } = useTheme();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activePage, setActivePage] = useState(0);
@@ -307,4 +307,4 @@ export function MusicPlayerPage({
       </div>
     </div>
   );
-}
+};

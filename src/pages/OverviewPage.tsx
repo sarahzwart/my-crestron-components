@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { AUDIO_CONTROLS } from "../config/audio.config";
 import { SOURCES, DESTINATIONS } from "../config/routing.config";
-import { CH5Slider } from "@/components/lib/common/CH5Slider";
-import { CH5MuteButton } from "@/components/lib/volume/CH5MuteButton";
+import { CH5Slider } from "@/components/ch5/common/CH5Slider";
+import { CH5MuteButton } from "@/components/ch5/volume/CH5MuteButton";
 import {
   ChevronLeft,
   ChevronRight,
@@ -22,17 +22,17 @@ import {
   SkipBackIcon,
   Shuffle,
 } from "lucide-react";
-import { CH5Button } from "@/components/lib/common/CH5Button";
+import { CH5Button } from "@/components/ch5/common/CH5Button";
 import {
   signals
 } from "@/config/signals";
 import ch5Service from "@/services/ch5Service";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { CH5MultiModeButton } from "@/components/lib/common/CH5MultiModeButton";
+import { CH5MultiModeButton } from "@/components/ch5/common/CH5MultiModeButton";
 
 const PAGE_COUNT = 2; // update if you add or remove pages
 
-export function OverviewPage() {
+export const OverviewPage = () => {
   const { theme } = useTheme();
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activePage, setActivePage] = useState(0);
@@ -491,4 +491,4 @@ export function OverviewPage() {
       </div>
     </div>
   );
-}
+};

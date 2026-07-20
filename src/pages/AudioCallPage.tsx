@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "../lib/theme";
-import { CH5Keypad } from "@/components/lib/common/CH5Keypad";
-import { CH5DisplayScreen } from "@/components/lib/call/CH5DisplayScreen";
-import { CH5HistoryList, type HistoryItem } from "@/components/lib/call/CH5HistoryList";
-import { CH5CallControls } from "@/components/lib/call/CH5CallControls";
+import { CH5Keypad } from "@/components/ch5/common/CH5Keypad";
+import { CH5DisplayScreen } from "@/components/ch5/call/CH5DisplayScreen";
+import { CH5HistoryList, type HistoryItem } from "@/components/ch5/call/CH5HistoryList";
+import { CH5CallControls } from "@/components/ch5/call/CH5CallControls";
 import { signals } from "@/config/signals";
 import { Phone } from "lucide-react";
 
@@ -23,7 +23,7 @@ export interface AudioCallPageProps {
   onCall?: (number: string) => void;
 }
 
-export function AudioCallPage({
+export const AudioCallPage = ({
   title = "Phone",
   subtitle = "Enter a number to call",
   commandSignal = signals.audioCall.keypad.cmd,
@@ -37,7 +37,7 @@ export function AudioCallPage({
   maxDigits = 15,
   showHistory = true,
   onCall,
-}: AudioCallPageProps) {
+}: AudioCallPageProps) => {
   const { theme } = useTheme();
   const [displayValue, setDisplayValue] = useState<string>("");
   const [history, setHistory] = useState<HistoryItem[]>([]);
@@ -195,4 +195,4 @@ export function AudioCallPage({
       </div>
     </div>
   );
-}
+};

@@ -20,7 +20,7 @@ export interface CH5HistoryListProps {
   className?: string;
 }
 
-export function CH5HistoryList({
+export const CH5HistoryList = ({
   items,
   title = "Recents",
   itemIcon,
@@ -31,7 +31,7 @@ export function CH5HistoryList({
   onClear,
   showClearButton = true,
   className = "",
-}: CH5HistoryListProps) {
+}: CH5HistoryListProps) => {
   const { theme } = useTheme();
 
   const defaultFormatter = (val: string) => {
@@ -153,4 +153,4 @@ export function CH5HistoryList({
       </div>
     </div>
   );
-}
+};

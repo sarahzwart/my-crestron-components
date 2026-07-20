@@ -1,5 +1,5 @@
 import { useTheme } from "@/lib/theme";
-import { CH5Button } from "@/components/lib/common/CH5Button";
+import { CH5Button } from "@/components/ch5/common/CH5Button";
 import { signals } from "@/config/signals";
 import {
   ChevronUp,
@@ -23,7 +23,7 @@ export interface AppleTVPageProps {
   signalPlayPause?: string;
 }
 
-export function AppleTVPage({
+export const AppleTVPage = ({
   signalUp       = signals.appleTV.up.cmd,
   signalDown     = signals.appleTV.down.cmd,
   signalLeft     = signals.appleTV.left.cmd,
@@ -33,7 +33,7 @@ export function AppleTVPage({
   signalHome     = signals.appleTV.home.cmd,
   signalBack     = signals.appleTV.back.cmd,
   signalPlayPause = signals.appleTV.playPause.cmd,
-}: AppleTVPageProps) {
+}: AppleTVPageProps) => {
   const { theme } = useTheme();
 
   const wedgeOff = `bg-transparent ${theme.primaryText}`;
@@ -164,4 +164,4 @@ export function AppleTVPage({
       </div>
     </div>
   );
-}
+};

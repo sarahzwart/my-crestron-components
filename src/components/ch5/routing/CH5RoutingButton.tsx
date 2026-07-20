@@ -1,6 +1,6 @@
 import { useTheme } from "@/lib/theme";
 import { Check } from "lucide-react";
-import { CH5Button } from "@/components/lib/common/CH5Button";
+import { CH5Button } from "@/components/ch5/common/CH5Button";
 
 export interface RoutingItem {
   id: string;
@@ -18,7 +18,7 @@ export interface CH5RoutingButtonProps {
   type: "source" | "destination";
 }
 
-export function CH5RoutingButton({ item, isSelected, onClick, type }: CH5RoutingButtonProps) {
+export const CH5RoutingButton = ({ item, isSelected, onClick, type }: CH5RoutingButtonProps) => {
   const { theme } = useTheme();
 
   const ringColor  = type === "source" ? "ring-blue-400" : "ring-green-400";
@@ -51,4 +51,4 @@ export function CH5RoutingButton({ item, isSelected, onClick, type }: CH5Routing
       }
     />
   );
-}
+};

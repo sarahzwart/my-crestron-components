@@ -5,11 +5,11 @@ export interface LightsPageProps {
   style?: React.CSSProperties;
 }
 
-export function LightsPage({
+export const LightsPage = ({
   children,
   className = "",
   style = {},
-}: LightsPageProps) {
+}: LightsPageProps) => {
   const { theme } = useTheme();
   return (
     <div className={`p-8 ${className}`} style={style}>
@@ -19,4 +19,4 @@ export function LightsPage({
       
     </div>
   );
-}
+};

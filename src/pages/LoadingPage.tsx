@@ -14,11 +14,11 @@ export interface LoadingPageProps {
   textUnderLoadingComponent?: string;
 }
 
-export function LoadingPage({
+export const LoadingPage = ({
   loadingType = "orbit",
   loadingComponentFillColor = "white",
   textUnderLoadingComponent = "Loading...",
-}: LoadingPageProps) {
+}: LoadingPageProps) => {
   const { theme } = useTheme();
 
   const renderSpinner = () => {
@@ -60,4 +60,4 @@ export function LoadingPage({
       </div>
     </div>
   );
-}
+};

@@ -3,8 +3,8 @@ import { CH5Provider } from "./contexts/CH5Context";
 import { ThemeProvider, useTheme } from "./lib/theme";
 import { CH5Header } from "./components/layout/Header";
 import { CH5Footer } from "./components/layout/Footer";
-import { CH5Button } from "./components/lib/common/CH5Button";
-import { CH5MuteButton } from "./components/lib/volume/CH5MuteButton";
+import { CH5Button } from "./components/ch5/common/CH5Button";
+import { CH5MuteButton } from "./components/ch5/volume/CH5MuteButton";
 import { HomePage } from "./pages/HomePage";
 import { AudioPage } from "./pages/AudioPage";
 import { AudioCallPage } from "./pages/AudioCallPage";
@@ -234,7 +234,7 @@ const AppContent = () => {
       />
     </div>
   );
-}
+};
 
 const App = () => {
   return (
@@ -244,6 +244,6 @@ const App = () => {
       </ThemeProvider>
     </CH5Provider>
   );
-}
+};
 
 export default App;

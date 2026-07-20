@@ -1,4 +1,4 @@
-import { CH5Button } from "@/components/lib/common/CH5Button";
+import { CH5Button } from "@/components/ch5/common/CH5Button";
 import { useTheme } from "../lib/theme";
 import { signals } from "@/config/signals";
 import {
@@ -21,10 +21,10 @@ export interface CameraPageProps {
 
 type CameraPresetKey = `preset${1 | 2 | 3}`;
 
-export function CameraPage({
+export const CameraPage = ({
   cameraCount = 3,
   presetCount = 3,
-}: CameraPageProps) {
+}: CameraPageProps) => {
   const { theme } = useTheme();
   const [activeCamera, setActiveCamera] = useState(1);
   const [autoFocus, setAutoFocus] = useState(true);
@@ -179,4 +179,4 @@ export function CameraPage({
       </div>
     </div>
   );
-}
+};

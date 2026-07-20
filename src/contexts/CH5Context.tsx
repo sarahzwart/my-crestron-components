@@ -13,7 +13,7 @@ interface CH5ProviderProps {
     children: React.ReactNode;
 }
 
-export function CH5Provider({ children }: CH5ProviderProps) {
+export const CH5Provider = ({ children }: CH5ProviderProps) => {
     const [isConnected, setIsConnected] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -43,7 +43,7 @@ export function CH5Provider({ children }: CH5ProviderProps) {
             {children}
         </CH5Context.Provider>
     );
-}
+};
 
 export function useCH5() : CH5ContextType {
     const context = useContext(CH5Context);

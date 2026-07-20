@@ -52,7 +52,7 @@ const SIZE_CLASSES: Record<
   },
 };
 
-export function CH5Gauge({
+export const CH5Gauge = ({
   commandSignal,
   feedbackSignal,
   min = 0,
@@ -68,7 +68,7 @@ export function CH5Gauge({
   unit = "",
   className = "",
   style = {},
-}: GaugeProps) {
+}: GaugeProps) => {
   const [value] = useCH5Numeric(commandSignal, feedbackSignal, min);
 
   const percentage = ((value - min) / (max - min)) * 100;
@@ -140,4 +140,4 @@ export function CH5Gauge({
       )}
     </div>
   );
-}
+};
