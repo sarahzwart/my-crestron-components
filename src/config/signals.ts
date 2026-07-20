@@ -93,6 +93,7 @@ export const signals = {
     hangup: { cmd: "AudioCall.Hangup", fb: "AudioCall.Hangup_FB" },
     answer: { cmd: "AudioCall.Answer", fb: "AudioCall.Answer_FB" },
     privacy: { cmd: "AudioCall.Privacy", fb: "AudioCall.Privacy_FB" },
+    hold: { cmd: "AudioCall.Hold", fb: "AudioCall.Hold_FB" },
   },
 
   music: {

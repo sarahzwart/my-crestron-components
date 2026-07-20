@@ -1,6 +1,6 @@
 import { useTheme } from "@/lib/theme";
 import { CH5Button } from "@/components/lib/common/CH5Button";
-import { SIGNALS_PHONE } from "@/config/signals";
+import { signals } from "@/config/signals";
 import { PhoneOff, MicOff, Mic, Pause, Play, Grid3x3 } from "lucide-react";
 
 export interface CH5CallControlsProps {
@@ -58,8 +58,8 @@ export function CH5CallControls({
   onHangup,
   privacyCommandSignal,
   privacyFeedbackSignal,
-  holdCommandSignal = SIGNALS_PHONE.hold.cmd,
-  holdFeedbackSignal = SIGNALS_PHONE.hold.fb,
+  holdCommandSignal = signals.audioCall.hold.cmd,
+  holdFeedbackSignal = signals.audioCall.hold.fb,
   showHold = true,
   showKeypadButton = true,
   onKeypadToggle,
