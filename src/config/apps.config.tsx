@@ -14,7 +14,7 @@ import {
 
 export const APPS: AppItem[] = [
   {
-    id: "audio",
+    id: "page0",
     label: "Audio",
     icon: <Music />,
     description: "Volume & controls",
@@ -22,7 +22,7 @@ export const APPS: AppItem[] = [
     feedbackSignal: signals.navigation.page0.fb,
   },
   {
-    id: "call",
+    id: "page1",
     label: "Phone",
     icon: <Phone />,
     description: "Make a call",
@@ -30,7 +30,7 @@ export const APPS: AppItem[] = [
     feedbackSignal: signals.navigation.page1.fb,
   },
   {
-    id: "routing",
+    id: "page2",
     label: "Routing",
     icon: <Shuffle />,
     description: "Route sources",
@@ -38,7 +38,7 @@ export const APPS: AppItem[] = [
     feedbackSignal: signals.navigation.page2.fb,
   },
   {
-    id: "lights",
+    id: "page3",
     label: "Lights",
     icon: <Lightbulb />,
     description: "Lighting control",
@@ -46,7 +46,7 @@ export const APPS: AppItem[] = [
     feedbackSignal: signals.navigation.page3.fb,
   },
   {
-    id: "camera",
+    id: "page4",
     label: "Camera",
     icon: <Camera />,
     description: "Camera control",
@@ -54,7 +54,7 @@ export const APPS: AppItem[] = [
     feedbackSignal: signals.navigation.page4.fb,
   },
   {
-    id: "appleTV",
+    id: "page5",
     label: "Apple TV",
     icon: <Apple />,
     description: "Apple TV control",
@@ -62,7 +62,7 @@ export const APPS: AppItem[] = [
     feedbackSignal: signals.navigation.page5.fb,
   },
   {
-    id: "music",
+    id: "page6",
     label: "Music",
     icon: <Disc3 />,
     description: "Music Player",
@@ -70,7 +70,7 @@ export const APPS: AppItem[] = [
     feedbackSignal: signals.navigation.page6.fb,
   },
   {
-    id: "overview",
+    id: "page7",
     label: "Overview",
     icon: <LayoutGrid />,
     description: "All pages",

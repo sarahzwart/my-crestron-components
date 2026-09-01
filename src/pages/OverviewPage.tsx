@@ -31,6 +31,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { CH5MultiModeButton } from "@/components/ch5/common/CH5MultiModeButton";
 
 const PAGE_COUNT = 2; // update if you add or remove pages
+type CameraPresetKey = `preset${1 | 2 | 3}`;
 
 export const OverviewPage = () => {
   const { theme } = useTheme();

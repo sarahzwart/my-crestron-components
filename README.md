@@ -14,7 +14,7 @@ A custom Crestron CH5 touch panel interface built with React, TypeScript, and Ta
 ### Install dependencies
 
 ```bash
-npm install @crestron/ch5-cromlib
+npm install @crestron/ch5-crcomlib
 ```
 
 ### Run in development

@@ -1,8 +1,8 @@
 import { useCH5Boolean } from "../../../hooks/useCH5Boolean";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useTheme } from "@/lib/theme";
 
-export type ButtonSize = "sm" | "md" | "lg" | "xl";
+export type ButtonSize = "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
 export type ButtonShape = "rounded" | "square" | "pill" | "circle";
 export type ButtonVariant = "toggle" | "momentary" | "glass";
 
@@ -25,23 +25,19 @@ export interface ButtonProps {
   iconOn?: React.ReactNode;
   iconOff?: React.ReactNode;
   onClick?: () => void;
-  /**
-   * Fired when the button is pressed and held for at least `holdTimeMs`.
-   * Only applies when variant="momentary" — toggle buttons ignore this prop,
-   * since hold semantics don't make sense for an on/off state.
-   * When this fires, the normal onClick is suppressed for that press — only
-   * one of onClick or onPressAndHold will run per press.
-   */
+  // Fires when held for holdTimeMs (variant="momentary" only) and suppresses the normal onClick for that press.
   onPressAndHold?: () => void;
-  /** How long the button must be held before onPressAndHold fires. Default 3000ms (3s). */
+  // How long the button must be held before onPressAndHold fires 
   holdTimeMs?: number;
-  /**
-   * Digital (boolean) signal to pulse true→false when the button is held
-   * for `holdTimeMs`. Use this for "hold to save" style behavior. Fires
-   * alongside onPressAndHold, if both are provided. Only applies when
-   * variant="momentary".
-   */
+  // Pulses true→false when held for holdTimeMs
   saveSignal?: string;
+  // Momentary only: hold the command true for the whole press instead of a fixed 200ms pulse
+  continuousWhileHeld?: boolean;
+  /**
+   * Wait for the real feedbackSignal instead of flipping on/off
+   * optimistically on press locally 
+   */
+  waitForFeedback?: boolean;
   onClassName?: string;
   offClassName?: string;
   useThemeColors?: boolean;
@@ -50,17 +46,19 @@ export interface ButtonProps {
 }
 
 const SIZE_CLASSES: Record<ButtonSize, string> = {
-  sm: "px-3 py-2 text-sm",
-  md: "px-6 py-3 text-base",
-  lg: "px-8 py-4 text-lg",
-  xl: "px-10 py-5 text-xl",
+  "sm": "px-3 py-2 text-sm",
+  "md": "px-6 py-3 text-base",
+  "lg": "px-8 py-4 text-lg",
+  "xl": "px-10 py-5 text-xl",
+  "2xl": "px-12 py-6 text-2xl",
+  "3xl": "px-14 py-7 text-3xl",
 };
 
 const SHAPE_CLASSES: Record<ButtonShape, string> = {
-  rounded: "rounded-lg",
-  square:  "rounded-none",
-  pill:    "rounded-full",
-  circle:  "rounded-full",
+  "rounded": "rounded-lg",
+  "square":  "rounded-none",
+  "pill":    "rounded-full",
+  "circle":  "rounded-full",
 };
 
 const ICON_POSITION_CLASSES: Record<string, string> = {
@@ -70,7 +68,7 @@ const ICON_POSITION_CLASSES: Record<string, string> = {
   bottom: "flex-col-reverse",
 };
 
-export const CH5Button = ({
+export function CH5Button({
   commandSignal,
   feedbackSignal,
   variant = "toggle",
@@ -93,27 +91,37 @@ export const CH5Button = ({
   onPressAndHold,
   holdTimeMs = 3000,
   saveSignal,
+  continuousWhileHeld = false,
+  waitForFeedback = false,
   style = {},
   onClassName,
   offClassName,
   useThemeColors = false,
-}: ButtonProps) => {
+}: ButtonProps) {
   const { theme } = useTheme();
 
   const [isOn, setIsOn] = useCH5Boolean(
     commandSignal,
-    feedbackSignal || commandSignal + ".fb",
+    feedbackSignal,
+    false,
+    !waitForFeedback,
+  );
+
+  // Only subscribes/publishes when saveSignal is actually provided.
+  const [, setSaveSignal] = useCH5Boolean(
+    saveSignal ?? "",
+    saveSignal,
     false,
   );
 
-  // Separate digital signal used to pulse a "save" command when the button
-  // is held. Falls back to a no-op signal name if saveSignal isn't provided;
-  // setSaveSignal is simply never called in that case.
-  const [, setSaveSignal] = useCH5Boolean(
-    saveSignal || commandSignal + ".save",
-    saveSignal ? saveSignal + ".fb" : commandSignal + ".save.fb",
-    false,
-  );
+  // With waitForFeedback, isOn only moves once FB confirms it — if that's
+  // slow, !isOn would keep recomputing from the same stale value and every
+  // press would send the same command. This ref tracks the last value we
+  // actually requested so presses reliably alternate.
+  const lastRequestedRef = useRef(isOn);
+  useEffect(() => {
+    lastRequestedRef.current = isOn;
+  }, [isOn]);
 
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const heldRef = useRef(false);
@@ -127,14 +135,20 @@ export const CH5Button = ({
 
   const handleClick = () => {
     if (disabled) return;
-    // If this press was already consumed by onPressAndHold, skip the
-    // normal click behavior entirely.
     if (heldRef.current) {
       heldRef.current = false;
       return;
     }
+    // Continuous-while-held buttons already sent true/false from
+    // pointerdown/pointerup — the click just fires the callback.
+    if (variant === "momentary" && continuousWhileHeld) {
+      onClick?.();
+      return;
+    }
     if (variant === "toggle") {
-      setIsOn(!isOn);
+      const nextValue = !lastRequestedRef.current;
+      lastRequestedRef.current = nextValue;
+      setIsOn(nextValue);
     } else {
       setIsOn(true);
       setTimeout(() => setIsOn(false), 200);
@@ -144,6 +158,10 @@ export const CH5Button = ({
 
   const handlePointerDown = () => {
     if (disabled || variant !== "momentary") return;
+    if (continuousWhileHeld) {
+      setIsOn(true);
+      return;
+    }
     if (!onPressAndHold && !saveSignal) return;
     heldRef.current = false;
     clearHoldTimer();
@@ -159,13 +177,17 @@ export const CH5Button = ({
 
   const handlePointerUp = () => {
     clearHoldTimer();
+    if (variant === "momentary" && continuousWhileHeld) {
+      setIsOn(false);
+    }
   };
 
   const handlePointerLeave = () => {
-    // Pointer dragged off the button before release: cancel the hold,
-    // and don't treat it as a consumed press either.
     clearHoldTimer();
     heldRef.current = false;
+    if (variant === "momentary" && continuousWhileHeld) {
+      setIsOn(false);
+    }
   };
 
   const buttonText = (onLabel || offLabel)
@@ -203,7 +225,7 @@ export const CH5Button = ({
 
   const renderIcon = () => {
     let iconToRender = icon;
-    if (variant === "toggle" && (iconOn || iconOff)) {
+    if (iconOn || iconOff) {
       iconToRender = isOn ? (iconOn || icon) : (iconOff || icon);
     }
     if (!iconToRender) return null;
@@ -249,4 +271,4 @@ export const CH5Button = ({
       {buttonText && <span>{buttonText}</span>}
     </button>
   );
-};
+}

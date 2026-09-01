@@ -20,7 +20,6 @@ import { Home, Settings, Power } from "lucide-react";
 import ch5Service from "./services/ch5Service";
 import { OverviewPage } from "./pages/OverviewPage";
 import { MusicPlayerPage } from "./pages/MusicPlayerPage";
-import { LoadingPage } from "./pages/LoadingPage";
 import {
   Dialog,
   DialogContent,
@@ -31,6 +30,7 @@ import {
   DialogClose,
 } from "./components/ui/dialog";
 import { Button } from "./components/ui/button";
+import { CameraPage } from "./pages/CameraPage";
 
 type Page = "page0"
   | "page1"
@@ -47,7 +47,7 @@ type Page = "page0"
   | "tab2";
 
 function useActivePage(): [Page, (page: Page) => void] {
-  const [activePage, setActivePage] = useState<Page>("page0");
+  const [activePage, setActivePage] = useState<Page>("page7");
 
   useEffect(() => {
     const pages = Object.keys(
@@ -88,24 +88,20 @@ const AppContent = () => {
     switch (currentPage) {
       case "page0":
         return (
-          <HomePage apps={APPS} onNavigate={(id) => navigate(id as Page)} />
+          <AudioPage volumeControls={AUDIO_CONTROLS} />
         );
       case "page1":
-        return <AudioPage volumeControls={AUDIO_CONTROLS} />;
+        return <AudioCallPage />;;
       case "page2":
-        return <AudioCallPage />;
-      case "page3":
         return <RoutingPage sources={SOURCES} destinations={DESTINATIONS} />;
-      case "page4":
+      case "page3":
         return <LightsPage />;
+      case "page4":
+        return <CameraPage />;
       case "page5":
         return <AppleTVPage />;
       case "page6":
-        return <OverviewPage />;
-      case "page7":
-        return <SettingsPage />;
-      case "page8":
-        return (
+        return  (
           <MusicPlayerPage
             idle={false}
             trackName={""}
@@ -113,15 +109,13 @@ const AppContent = () => {
             albumName={""}
           />
         );
+      case "page7":
+        return <OverviewPage />;
+      case "page8":
+        return <SettingsPage/>
       case "page9":
         return (
-          <LoadingPage
-            commandSignal={false}
-            feedbackSignal={false}
-            loadingType="tailChase"
-            loadingComponentFillColor="white"
-            textUnderLoadingComponent="Starting Up"
-          />
+          <HomePage apps={APPS} onNavigate={(id) => navigate(id as Page)} />
         );
     }
   };
@@ -139,7 +133,7 @@ const AppContent = () => {
             height={48}
             icon={<Home />}
             iconSize={20}
-            onClick={() => navigate("page0")}
+            onClick={() => navigate("page9")}
           />
         }
         backgroundColor={theme.headerBackground}
@@ -226,7 +220,7 @@ const AppContent = () => {
               height={48}
               icon={<Settings />}
               iconSize={20}
-              onClick={() => navigate("page7")}
+              onClick={() => navigate("page8")}
             />
           </div>
         }

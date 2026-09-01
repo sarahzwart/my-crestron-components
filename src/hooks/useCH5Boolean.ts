@@ -2,28 +2,31 @@ import { useState, useEffect } from "react";
 import { useCH5 } from "../contexts/CH5Context";
 import ch5Service from "../services/ch5Service";
 
+// feedbackSignal is optional (local-only state otherwise). When optimistic
+// is false, only the real feedbackSignal flips the value, not the press —
+// for controls like mute where the guessed state would be misleading.
 export const useCH5Boolean = (
-  commandSignal: string,   // Event signal (e.g., "lights.MainLights_On")
-  feedbackSignal: string,  // State signal (e.g., "lights.MainLights_Fb")
-  initialValue: boolean = false
+  commandSignal: string,
+  feedbackSignal?: string,
+  initialValue: boolean = false,
+  optimistic: boolean = true
 ): [boolean, (value: boolean) => void] => {
   const { isConnected } = useCH5();
-  
+
   const [value, setValue] = useState<boolean>(() => {
+    if (!feedbackSignal) return initialValue;
     const current = ch5Service.getBoolState(feedbackSignal);
     return current !== null ? current : initialValue;
   });
 
   useEffect(() => {
-    if (!isConnected) return;
+    if (!feedbackSignal || !isConnected) return;
 
-    // Get initial state from FEEDBACK signal
     const current = ch5Service.getBoolState(feedbackSignal);
     if (current !== null) {
       setValue(current);
     }
 
-    // Subscribe to FEEDBACK signal
     const subscriptionId = ch5Service.subscribeBool(feedbackSignal, (newValue: boolean) => {
       setValue(newValue);
     });
@@ -34,10 +37,8 @@ export const useCH5Boolean = (
   }, [commandSignal, feedbackSignal, isConnected]);
 
   const publish = (newValue: boolean): void => {
-    // Publish to COMMAND/EVENT signal
     ch5Service.publishBool(commandSignal, newValue);
-    // Optimistically update UI
-    setValue(newValue);
+    if (optimistic) setValue(newValue);
   };
 
   return [value, publish];
